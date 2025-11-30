@@ -285,7 +285,9 @@ export default function Home() {
 
             {/* CTA Button */}
             <a 
-              href="#contact" 
+              href="https://wa.me/+923224071299" 
+              target="_blank"
+              rel="noopener noreferrer"
               className="hidden lg:flex items-center gap-2 px-6 py-3 bg-gradient-to-r from-red-600 to-red-700 text-white text-sm uppercase tracking-wider rounded-full hover:from-red-500 hover:to-red-600 transition-all hover:scale-105 hover:shadow-lg hover:shadow-red-900/30"
             >
               <span>Book Now</span>
@@ -329,7 +331,9 @@ export default function Home() {
               
               <div className="flex flex-wrap gap-4">
                 <a 
-                  href="#music" 
+                  href="https://wa.me/+923224071299" 
+                  target="_blank"
+                  rel="noopener noreferrer"
                   className="group flex items-center gap-3 px-8 py-4 bg-white text-black rounded-full font-medium hover:bg-red-500 hover:text-white transition-all duration-300"
                 >
                   <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
