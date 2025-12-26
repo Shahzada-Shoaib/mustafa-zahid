@@ -219,37 +219,6 @@ export default function GuitarClassesPage() {
         </div>
       </SectionContainer>
 
-      <SectionContainer background="gradient">
-        <div className={`grid lg:grid-cols-2 ${SPACING.gap.large} items-center`}>
-          <div>
-            <span className="text-red-500 uppercase tracking-[0.3em] text-xs font-medium">
-              Benefits
-            </span>
-            <h2 className="font-display text-3xl md:text-4xl lg:text-5xl font-bold mt-3 mb-8">
-              Why Learn <span className="text-gradient">Guitar?</span>
-            </h2>
-            <div className="space-y-5">
-              {benefits.map((benefit, index) => (
-                <BenefitCard
-                  key={index}
-                  icon={benefit.icon}
-                  title={benefit.title}
-                  description={benefit.description}
-                />
-              ))}
-            </div>
-          </div>
-          <div className="relative aspect-[4/5] rounded-2xl overflow-hidden">
-            <Image
-              src="/mz-pic-11.jpg"
-              alt="Guitar Learning Benefits"
-              fill
-              className="object-cover"
-            />
-            <div className="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent" />
-          </div>
-        </div>
-      </SectionContainer>
 
       <SectionContainer>
         <div className={`grid lg:grid-cols-2 ${SPACING.gap.large} items-center`}>

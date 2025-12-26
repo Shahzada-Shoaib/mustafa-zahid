@@ -298,11 +298,11 @@ export default async function QawwalPage({
         <Header />
         
         {/* Hero Section with Booking CTA */}
-        <section className="relative py-20 lg:py-32 overflow-hidden">
+        <section className="relative py-20 lg:pt-32 pb-8 overflow-hidden">
           <div className="absolute inset-0 bg-gradient-to-br from-red-950/20 via-transparent to-transparent"></div>
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-12 relative z-10">
             <div className="grid lg:grid-cols-2 gap-8 lg:gap-12 items-center">
-              <div className="relative aspect-[4/5] rounded-3xl overflow-hidden group">
+              <div className="relative aspect-[2/2] rounded-3xl overflow-hidden group">
                 <Image
                   src={qawwal.image}
                   alt={`${qawwal.name} - Qawwali Artist available for booking`}
@@ -403,7 +403,7 @@ export default async function QawwalPage({
         </section>
 
         {/* Biography Section */}
-        <section className="py-16 lg:py-20 bg-gradient-to-b from-transparent via-red-950/10 to-transparent">
+        <section className="py-4 lg:py-8 bg-gradient-to-b from-transparent via-red-950/10 to-transparent">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-12">
             <div className="glass-card rounded-3xl p-8 lg:p-12">
               <div className="mb-8">
@@ -422,25 +422,7 @@ export default async function QawwalPage({
                 ))}
               </div>
               
-              {/* Career Timeline */}
-              <div className="mt-12 pt-12 border-t border-white/10">
-                <h3 className="text-2xl md:text-3xl font-semibold mb-8">Career Milestones</h3>
-                <div className="space-y-6">
-                  {qawwal.milestones.map((milestone, index) => (
-                    <div key={index} className="flex gap-6 group">
-                      <div className="flex-shrink-0">
-                        <div className="w-20 h-20 rounded-xl bg-gradient-to-br from-red-600 to-red-700 flex items-center justify-center text-white font-bold text-lg group-hover:scale-110 transition-transform">
-                          {milestone.year}
-                        </div>
-                      </div>
-                      <div className="flex-1 pt-2">
-                        <div className="h-2 w-2 rounded-full bg-red-500 mb-2"></div>
-                        <p className="text-white/90 text-lg">{milestone.event}</p>
-                      </div>
-                    </div>
-                  ))}
-                </div>
-              </div>
+             
 
               {/* Key Achievements */}
               <div className="mt-12 pt-12 border-t border-white/10">
@@ -461,7 +443,7 @@ export default async function QawwalPage({
         </section>
 
         {/* Popular Performances Section */}
-        <section className="py-16 lg:py-20 bg-gradient-to-b from-transparent via-red-950/10 to-transparent">
+        <section className="py-4 lg:py-8 bg-gradient-to-b from-transparent via-red-950/10 to-transparent">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-12">
             <div className="mb-12 text-center">
               <span className="text-red-500 uppercase tracking-[0.3em] text-sm font-medium">
@@ -500,70 +482,6 @@ export default async function QawwalPage({
           </div>
         </section>
 
-        {/* Awards Section */}
-        <section className="py-16 lg:py-20">
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-12">
-            <div className="glass-card rounded-3xl p-8 lg:p-12">
-              <div className="mb-10 text-center">
-                <span className="text-red-500 uppercase tracking-[0.3em] text-sm font-medium">
-                  Recognition
-                </span>
-                <h2 className="font-display text-3xl md:text-4xl lg:text-5xl font-bold mt-4">
-                  Awards & <span className="text-gradient">Achievements</span>
-                </h2>
-              </div>
-              <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
-                {qawwal.awards.map((award, index) => (
-                  <div key={index} className="text-center p-6 rounded-2xl bg-white/5 hover:bg-white/10 transition-colors">
-                    <div className="flex justify-center mb-4">
-                      <div className="w-16 h-16 rounded-2xl bg-gradient-to-br from-red-500/20 to-red-600/20 flex items-center justify-center text-red-400">
-                        <svg className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M9 12l2 2 4-4M7.835 4.697a3.42 3.42 0 001.946-.806 3.42 3.42 0 014.438 0 3.42 3.42 0 001.946.806 3.42 3.42 0 013.138 3.138 3.42 3.42 0 00.806 1.946 3.42 3.42 0 010 4.438 3.42 3.42 0 00-.806 1.946 3.42 3.42 0 01-3.138 3.138 3.42 3.42 0 00-1.946.806 3.42 3.42 0 01-4.438 0 3.42 3.42 0 00-1.946-.806 3.42 3.42 0 01-3.138-3.138 3.42 3.42 0 00-.806-1.946 3.42 3.42 0 010-4.438 3.42 3.42 0 00.806-1.946 3.42 3.42 0 013.138-3.138z" />
-                        </svg>
-                      </div>
-                    </div>
-                    <h3 className="text-lg font-semibold text-white mb-1">{award.name}</h3>
-                    <p className="text-white/70 text-sm mb-2">{award.category}</p>
-                    <p className="text-red-400 text-sm font-medium">{award.year}</p>
-                  </div>
-                ))}
-              </div>
-            </div>
-          </div>
-        </section>
-
-        {/* Collaborations Section */}
-        {qawwal.collaborations.length > 0 && (
-          <section className="py-16 lg:py-20 bg-gradient-to-b from-transparent via-red-950/10 to-transparent">
-            <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-12">
-              <div className="mb-12 text-center">
-                <span className="text-red-500 uppercase tracking-[0.3em] text-sm font-medium">
-                  Collaborations
-                </span>
-                <h2 className="font-display text-3xl md:text-4xl lg:text-5xl font-bold mt-4">
-                  Featured <span className="text-gradient">Artists</span>
-                </h2>
-              </div>
-              <div className="grid md:grid-cols-3 gap-6">
-                {qawwal.collaborations.map((collab, index) => (
-                  <div key={index} className="glass-card rounded-2xl p-6 hover-lift">
-                    <div className="flex items-center gap-4 mb-4">
-                      <div className="w-14 h-14 bg-gradient-to-br from-red-600/20 to-red-700/20 rounded-xl flex items-center justify-center text-red-400">
-                        <svg className="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z" />
-                        </svg>
-                      </div>
-                      <div>
-                        <h3 className="text-lg font-semibold text-white">{collab.artist}</h3>
-                        <p className="text-white/70 text-sm">{collab.performance}</p>
-                      </div>
-                    </div>
-                  </div>
-                ))}
-              </div>
-            </div>
-          </section>
-        )}
 
         {/* Photo Gallery */}
         {qawwal.gallery.length > 0 && (
@@ -595,7 +513,7 @@ export default async function QawwalPage({
         )}
 
         {/* Booking Section - Prominent CTA */}
-        <section className="py-20 lg:py-24 bg-gradient-to-b from-transparent via-red-950/30 to-transparent relative overflow-hidden">
+        <section className="py-6 lg:py-8 bg-gradient-to-b from-transparent via-red-950/30 to-transparent relative overflow-hidden">
           <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_50%,rgba(220,38,38,0.1),transparent)]"></div>
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-12 relative z-10">
             <div className="glass-card rounded-3xl p-8 lg:p-16 text-center border-2 border-red-500/20">

@@ -79,27 +79,8 @@ export default function SingersPage() {
         </div>
       </section>
 
-      {/* Stats Section */}
-      <section className="py-12 lg:py-16">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-12">
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-6 lg:gap-8">
-            {[
-              { value: "50+", label: "Artists" },
-              { value: "500+", label: "Songs" },
-              { value: "100M+", label: "Streams" },
-              { value: "20+", label: "Years" },
-            ].map((stat, i) => (
-              <div key={i} className="glass-card rounded-2xl p-6 text-center hover-lift">
-                <div className="text-3xl md:text-4xl font-display font-bold text-gradient mb-2">{stat.value}</div>
-                <div className="text-sm text-white/70 uppercase tracking-wider">{stat.label}</div>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
       {/* Singers Grid */}
-      <section className="py-12 lg:py-16">
+      <section className="">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-12">
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8">
             {singers.map((singer) => (

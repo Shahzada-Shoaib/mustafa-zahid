@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import Link from "next/link";
+import Link from "next/link"; 
 import Image from "next/image";
 import Header from "@/components/layout/Header";
 import Footer from "@/components/layout/Footer";
@@ -9,7 +9,7 @@ export const metadata: Metadata = {
   metadataBase: new URL('https://mustafazahid.com'),
   title: "Qawwals | Traditional Qawwali Artists & Performers",
   description: "Explore traditional Qawwali artists and performers. Discover the rich heritage of Qawwali music including Nusrat Fateh Ali Khan, Rahat Fateh Ali Khan, and other legendary Qawwals.",
-  keywords: "Qawwali, Qawwals, Sufi music, traditional music, Pakistani Qawwali, Nusrat Fateh Ali Khan, Rahat Fateh Ali Khan, Sufi singers, Qawwali artists",
+  keywords: "Qawwali, Qawwals, Sufi music, traditional music, Pakistani Qawwali, Rahat Fateh Ali Khan, Rahat Fateh Ali Khan, Sufi singers, Qawwali artists",
   
   openGraph: {
     title: "Qawwals - Traditional Qawwali Artists",
@@ -42,8 +42,8 @@ export const metadata: Metadata = {
 
 const qawwals = [
   {
-    slug: "nusrat-fateh-ali-khan",
-    name: "Nusrat Fateh Ali Khan",
+    slug: "Rahat-fateh-ali-khan",
+    name: "Rahat Fateh Ali Khan",
     image: "/mz-logo.png",
     description: "Legendary Qawwali maestro",
   },
