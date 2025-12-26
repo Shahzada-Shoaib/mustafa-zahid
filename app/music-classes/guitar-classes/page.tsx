@@ -189,7 +189,7 @@ export default function GuitarClassesPage() {
       <CurriculumSection
         items={curriculumItems}
         image={{
-          src: "/mz-pic-3.JPG",
+          src: "/guitar-class.jpg",
           alt: "Guitar Curriculum"
         }}
       />
@@ -224,7 +224,7 @@ export default function GuitarClassesPage() {
         <div className={`grid lg:grid-cols-2 ${SPACING.gap.large} items-center`}>
           <div className="relative aspect-[4/3] rounded-2xl overflow-hidden order-2 lg:order-1">
             <Image
-              src="/mz-pic-6.jpg"
+              src="/guitar-class.jpg"
               alt="Guitar Teaching Methodology"
               fill
               className="object-cover"
