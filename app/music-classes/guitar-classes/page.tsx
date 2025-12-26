@@ -160,7 +160,7 @@ export default function GuitarClassesPage() {
         titleHighlight="Guitar"
         description="Learn from expert instructors in a structured, professional environment. Whether you're a complete beginner or looking to advance your skills, our comprehensive curriculum will guide you every step of the way."
         image={{
-          src: "/mz-pic-11.jpg",
+          src: "/guitarCloud.png",
           alt: "Professional Guitar Classes"
         }}
       />

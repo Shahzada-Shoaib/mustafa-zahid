@@ -60,10 +60,11 @@ export const metadata: Metadata = {
   },
   icons: {
     icon: [
+      { url: "/icon.png", type: "image/png" },
       { url: "/mz-logo.png", type: "image/png" },
     ],
-    shortcut: "/mz-logo.png",
-    apple: "/mz-logo.png",
+    shortcut: "/icon.png",
+    apple: "/icon.png",
   },
 };
 
