@@ -224,7 +224,7 @@ export default function SingingClassesPage() {
       <CurriculumSection
         items={curriculumItems}
         image={{
-          src: "/piano-notes.JPG",
+          src: "/piano-notes.jpg",
           alt: "Singing Curriculum",
         }}
       />
