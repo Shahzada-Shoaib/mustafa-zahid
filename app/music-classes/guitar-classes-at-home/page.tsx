@@ -103,7 +103,7 @@ export default function GuitarClassesAtHomePage() {
       </section>
 
       {/* Benefits Section */}
-      <section className="py-12 lg:py-16">
+      <section >
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-12">
           <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6 lg:gap-8">
             {benefits.map((benefit, index) => (
@@ -130,7 +130,7 @@ export default function GuitarClassesAtHomePage() {
           <div className="grid lg:grid-cols-2 gap-8 lg:gap-12 items-center">
             <div className="relative aspect-[4/3] rounded-3xl overflow-hidden">
               <Image
-                src="/mz-pic-9.jpg"
+                src="/guitarCloud.png"
                 alt="Guitar Classes at Home"
                 fill
                 className="object-cover"
@@ -205,7 +205,7 @@ export default function GuitarClassesAtHomePage() {
             </div>
             <div className="relative aspect-[4/3] rounded-3xl overflow-hidden">
               <Image
-                src="/mz-pic-6.jpg"
+                src="/guitar-class1.jpg"
                 alt="Home Guitar Learning Experience"
                 fill
                 className="object-cover"

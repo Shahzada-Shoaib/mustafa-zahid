@@ -86,7 +86,7 @@ export default function SingingClassesAtHomePage() {
       <Header />
       
       {/* Hero Section */}
-      <section className="relative py-20 lg:py-32">
+      <section className="relative pt -24 lg:pt-32 lg:pb-12">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-12">
           <div className="text-center space-y-6">
             <span className="text-red-500 uppercase tracking-[0.3em] text-sm font-medium">
@@ -163,7 +163,7 @@ export default function SingingClassesAtHomePage() {
             </div>
             <div className="relative aspect-[4/3] rounded-3xl overflow-hidden">
               <Image
-                src="/mz-pic-10.jpg"
+                src="/music-listening1.png"
                 alt="Singing Classes at Home"
                 fill
                 className="object-cover"
@@ -180,7 +180,7 @@ export default function SingingClassesAtHomePage() {
           <div className="grid lg:grid-cols-2 gap-8 lg:gap-12 items-center">
             <div className="relative aspect-[4/3] rounded-3xl overflow-hidden order-2 lg:order-1">
               <Image
-                src="/mz-pic-7.jpg"
+                src="/music-notes.jpg"
                 alt="Home Singing Learning Experience"
                 fill
                 className="object-cover"

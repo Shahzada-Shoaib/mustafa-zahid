@@ -77,7 +77,7 @@ export default function PianoClassesPage() {
             </div>
             <div className="relative aspect-[4/3] rounded-2xl overflow-hidden">
               <Image
-                src="/mz-pic-12.jpg"
+                src="/piano.jpg"
                 alt="Professional Piano Classes"
                 fill
                 className="object-cover"
@@ -161,7 +161,7 @@ export default function PianoClassesPage() {
           <div className="grid lg:grid-cols-2 gap-10 lg:gap-16 items-center">
             <div className="relative aspect-[4/3] rounded-2xl overflow-hidden order-2 lg:order-1">
               <Image
-                src="/mz-pic-5.jpg"
+                src="/notes.jpg"
                 alt="Piano Curriculum"
                 fill
                 className="object-cover"
@@ -175,34 +175,47 @@ export default function PianoClassesPage() {
               <h2 className="font-display text-3xl md:text-4xl lg:text-5xl font-bold mt-3 mb-8">
                 What You&apos;ll <span className="text-gradient">Learn</span>
               </h2>
-              <div className="space-y-3">
-                {[
-                  "Proper piano posture, hand position, and finger technique",
-                  "Reading sheet music: notes, rhythms, and musical notation",
-                  "Basic scales, chords, and arpeggios",
-                  "Music theory fundamentals: keys, intervals, and harmony",
-                  "Classical repertoire from beginner to advanced levels",
-                  "Contemporary styles: pop, jazz, blues, and film music",
-                  "Chord progressions and accompaniment techniques",
-                  "Improvisation and creative expression",
-                  "Performance skills and stage presence",
-                  "Composition and songwriting on piano",
-                  "Piano maintenance and care",
-                  "Recording and production techniques"
-                ].map((item, index) => (
-                  <div
-                    key={index}
-                    className="flex items-start gap-3 glass-card rounded-xl p-4 hover-lift"
-                  >
-                    <div className="flex-shrink-0 w-5 h-5 rounded-full bg-red-500/20 flex items-center justify-center mt-0.5">
-                      <svg className="w-3 h-3 text-red-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
-                      </svg>
-                    </div>
-                    <span className="text-white/80 text-sm leading-relaxed">{item}</span>
-                  </div>
-                ))}
-              </div>
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+  {[
+    "Proper piano posture, hand position, and finger technique",
+    "Reading sheet music: notes, rhythms, and musical notation",
+    "Basic scales, chords, and arpeggios",
+    "Music theory fundamentals: keys, intervals, and harmony",
+    "Classical repertoire from beginner to advanced levels",
+    "Contemporary styles: pop, jazz, blues, and film music",
+    "Chord progressions and accompaniment techniques",
+    "Improvisation and creative expression",
+    "Performance skills and stage presence",
+    "Composition and songwriting on piano",
+    "Piano maintenance and care",
+    "Recording and production techniques"
+  ].map((item, index) => (
+    <div
+      key={index}
+      className="flex items-start gap-3 glass-card rounded-xl p-4 hover-lift"
+    >
+      <div className="flex-shrink-0 w-5 h-5 rounded-full bg-red-500/20 flex items-center justify-center mt-0.5">
+        <svg
+          className="w-3 h-3 text-red-500"
+          fill="none"
+          stroke="currentColor"
+          viewBox="0 0 24 24"
+        >
+          <path
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            strokeWidth={2}
+            d="M5 13l4 4L19 7"
+          />
+        </svg>
+      </div>
+      <span className="text-white/80 text-sm leading-relaxed">
+        {item}
+      </span>
+    </div>
+  ))}
+</div>
+
             </div>
           </div>
         </div>
@@ -277,7 +290,7 @@ export default function PianoClassesPage() {
           <div className="grid lg:grid-cols-2 gap-10 lg:gap-16 items-center">
             <div className="relative aspect-[4/3] rounded-2xl overflow-hidden order-2 lg:order-1">
               <Image
-                src="/mz-pic-5.jpg"
+                src="/piano1.jpg"
                 alt="Piano Teaching Methodology"
                 fill
                 className="object-cover"

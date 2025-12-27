@@ -189,7 +189,7 @@ export default function GuitarClassesPage() {
       <CurriculumSection
         items={curriculumItems}
         image={{
-          src: "/guitar-class.jpg",
+          src: "/guitar-class1.jpg",
           alt: "Guitar Curriculum"
         }}
       />
