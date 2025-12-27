@@ -193,7 +193,7 @@ export default function SingingClassesPage() {
         titleHighlight="Singing"
         description="Learn from expert vocal instructors in a structured, professional environment. Whether you're a complete beginner or looking to refine your skills, our comprehensive curriculum will guide you every step of the way."
         image={{
-          src: "/music-listening1.png",
+          src: "/music-listening.png",
           alt: "Professional Singing Classes",
         }}
       />
