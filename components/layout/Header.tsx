@@ -66,19 +66,22 @@ export default function Header() {
   }, [musicClassesDropdownOpen]);
 
   const musicClasses = [
-    { href: "/music-classes/guitar-classes", label: "Guitar Classes" },
-    { href: "/music-classes/singing-classes", label: "Singing Classes" },
-    { href: "/music-classes/piano-classes", label: "Piano Classes" },
     {
-      href: "/music-classes/guitar-classes-at-home",
+      href: "/music-classes/guitar-classes-in-lahore",
+      label: "Guitar Classes",
+    },
+    { href: "/music-classes/singing-classes-in-lahore", label: "Singing Classes" },
+    { href: "/music-classes/piano-classes-in-lahore", label: "Piano Classes" },
+    {
+      href: "/music-classes/guitar-classes-at-home-in-lahore",
       label: "Guitar Classes at Home",
     },
     {
-      href: "/music-classes/singing-classes-at-home",
+      href: "/music-classes/singing-classes-at-home-in-lahore",
       label: "Singing Classes at Home",
     },
     {
-      href: "/music-classes/piano-classes-at-home",
+      href: "/music-classes/piano-classes-at-home-in-lahore",
       label: "Piano Classes at Home",
     },
   ];
