@@ -6,13 +6,13 @@ import AnimatedBackground from "@/components/shared/AnimatedBackground";
 
 export const metadata: Metadata = {
   metadataBase: new URL('https://mustafazahid.com'),
-  title: "Guitar Classes at Home | Private Guitar Lessons | Home Guitar Training",
-  description: "Get private guitar classes at your home. One-on-one guitar lessons with expert instructors. Convenient home-based guitar training for all levels. Book now for guitar lessons at home in Pakistan.",
-  keywords: "guitar classes at home, private guitar lessons, home guitar training, guitar tutor at home, guitar lessons at home, home guitar classes Karachi, private guitar instructor, guitar classes at home Lahore, home guitar lessons Pakistan",
-  
+  title: "Guitar Classes at Home in Lahore | Private Guitar Lessons & Training",
+  description: "Get private guitar classes at your home in Lahore. One-on-one guitar lessons with expert instructors for beginners to advanced players. Convenient home-based guitar training. Book now for guitar lessons in Lahore.",
+  keywords: "guitar classes at home Lahore, private guitar lessons Lahore, home guitar training Lahore, guitar tutor at home Lahore, guitar lessons at home Lahore, private guitar instructor Lahore, home guitar classes Lahore, home guitar lessons Lahore",
+
   openGraph: {
-    title: "Guitar Classes at Home - Private Guitar Lessons",
-    description: "Get private guitar classes at your home. One-on-one lessons with expert instructors.",
+    title: "Guitar Classes at Home in Lahore | Private Lessons",
+    description: "Book private guitar classes at your home in Lahore. One-on-one lessons with expert instructors for all levels.",
     url: "https://mustafazahid.com/music-classes/guitar-classes-at-home",
     siteName: "Music Classes",
     images: [
@@ -20,24 +20,25 @@ export const metadata: Metadata = {
         url: "/mz-logo.png",
         width: 1200,
         height: 630,
-        alt: "Guitar Classes at Home",
+        alt: "Guitar Classes at Home in Lahore",
       },
     ],
     locale: "en_US",
     type: "website",
   },
-  
+
   twitter: {
     card: "summary_large_image",
-    title: "Guitar Classes at Home - Private Lessons",
-    description: "Get private guitar classes at your home",
+    title: "Guitar Classes at Home in Lahore | Private Lessons",
+    description: "Get one-on-one private guitar lessons at your home in Lahore. Learn acoustic and electric guitar with expert instructors.",
     images: ["/mz-logo.png"],
   },
-  
+
   alternates: {
     canonical: "https://mustafazahid.com/music-classes/guitar-classes-at-home",
   },
 };
+
 
 export default function GuitarClassesAtHomePage() {
   const benefits = [

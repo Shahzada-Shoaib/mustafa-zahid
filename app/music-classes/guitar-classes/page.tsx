@@ -24,13 +24,13 @@ import { SPACING } from "@/lib/utils/spacing";
 
 export const metadata: Metadata = {
   metadataBase: new URL('https://mustafazahid.com'),
-  title: "Guitar Classes | Learn Guitar Online & Offline | Professional Guitar Lessons",
-  description: "Join professional guitar classes. Learn acoustic and electric guitar from expert instructors. Beginner to advanced level guitar lessons available. Enroll now for guitar training in Pakistan.",
-  keywords: "guitar classes, guitar lessons, learn guitar, guitar training, acoustic guitar, electric guitar, guitar instructor, guitar classes Karachi, guitar lessons Lahore, guitar classes Pakistan, beginner guitar lessons",
-  
+  title: "Guitar Classes in Lahore | Learn Acoustic & Electric Guitar Online & Offline",
+  description: "Join professional guitar classes and lessons. Learn acoustic and electric guitar from expert instructors. Beginner to advanced level guitar training available. Enroll now to start your guitar journey and improve your skills.",
+  keywords: "guitar classes, guitar lessons, learn guitar, guitar training, acoustic guitar lessons, electric guitar classes, guitar instructor, online guitar lessons, beginner guitar lessons, advanced guitar training, professional guitar classes",
+
   openGraph: {
-    title: "Guitar Classes - Professional Guitar Lessons",
-    description: "Learn guitar from expert instructors. Beginner to advanced level guitar classes available.",
+    title: "Guitar Classes in Lahore | Learn Acoustic & Electric Guitar",
+    description: "Join professional guitar classes and learn acoustic and electric guitar from expert instructors. Beginner to advanced level guitar training available.",
     url: "https://mustafazahid.com/music-classes/guitar-classes",
     siteName: "Music Classes",
     images: [
@@ -38,24 +38,25 @@ export const metadata: Metadata = {
         url: "/mz-logo.png",
         width: 1200,
         height: 630,
-        alt: "Guitar Classes",
+        alt: "Professional Guitar Classes & Lessons",
       },
     ],
     locale: "en_US",
     type: "website",
   },
-  
+
   twitter: {
     card: "summary_large_image",
-    title: "Guitar Classes - Professional Guitar Lessons",
-    description: "Learn guitar from expert instructors",
+    title: "Guitar Classes & Lessons | Learn Acoustic & Electric Guitar",
+    description: "Join professional guitar classes and lessons. Beginner to advanced training available. Start your guitar journey today.",
     images: ["/mz-logo.png"],
   },
-  
+
   alternates: {
     canonical: "https://mustafazahid.com/music-classes/guitar-classes",
   },
 };
+
 
 export default function GuitarClassesPage() {
   const features = [

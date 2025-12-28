@@ -40,9 +40,9 @@ interface Singer {
 async function getSinger(slug: string): Promise<Singer | undefined> {
   const singers: Singer[] = [
     {
-      slug: "atif-aslam",
+      slug: "hire-atif-aslam-for-concert",
       name: "Atif Aslam",
-      image: "/mz-logo.png",
+      image: "/atif-aslam.jpg",
       genre: "Pop, Rock",
       bio: "Atif Aslam is a renowned Pakistani singer, songwriter, and actor known for his soulful voice and hit songs that have captivated millions worldwide.",
       fullBio: [
@@ -190,156 +190,126 @@ async function getSinger(slug: string): Promise<Singer | undefined> {
         "Successfully bridged Pakistani and Indian music industries",
       ],
     },
+  {
+  slug: "book-rdb-for-wedding",
+  name: "RDB (Surj)",
+  image: "/RDB-surj.jpg",
+  genre: "Punjabi, Bhangra, Urban, Live Performance",
+  bio: "RDB (Surj) is a legendary Punjabi music act known for electrifying live performances. A top choice for clients looking to book RDB for weddings, private events, and high-energy celebrations.",
+  fullBio: [
+    "RDB, short for Rhythm Dhol Bass, is a globally respected British Asian music brand now represented by Surj. Over the years, RDB has become one of the most searched Punjabi acts for people looking to book RDB for weddings and live events.",
+    "RDB’s music is deeply rooted in Punjabi culture while blending modern urban sounds, making it a perfect fit for weddings, mehndi nights, sangeet ceremonies, and private parties. Surj’s live performances focus on crowd engagement, powerful dhol rhythms, and a dance-floor-ready playlist.",
+    "Clients who hire RDB for wedding performances often look for energy, professionalism, and a proven track record. With decades of stage experience, RDB delivers all three, ensuring every event feels special and memorable.",
+    "From intimate private celebrations to large-scale destination weddings, RDB tailors each performance to match the audience and event flow. This personalized approach is why event planners and families consistently choose RDB for wedding bookings.",
+    "Today, RDB (Surj) continues to perform internationally and remains a trusted name for those searching to hire a Punjabi singer for weddings who can deliver both nostalgia and modern vibes."
+  ],
+  birthDate: "N/A",
+  birthplace: "United Kingdom",
+  careerStart: 1999,
+  albums: [
     {
-      slug: "ali-zafar",
-      name: "Ali Zafar",
-      image: "/mz-logo.png",
-      genre: "Pop, Rock",
-      bio: "Ali Zafar is a multi-talented Pakistani singer, songwriter, actor, and painter who has made significant contributions to Pakistani music and entertainment industry.",
-      fullBio: [
-        "Ali Zafar, born on May 18, 1980, in Lahore, Pakistan, is a multi-talented artist who has excelled as a singer, songwriter, actor, and painter. His diverse talents and charismatic personality have made him one of Pakistan's most beloved entertainers, known for his unique style that blends traditional Pakistani music with contemporary pop elements.",
-        "Ali began his music career in the early 2000s, quickly gaining recognition for his distinctive voice and innovative approach to music. His debut album 'Huqa Pani' released in 2003, featured the hit single 'Channo', which became an instant classic and established him as a major force in Pakistani music. The song's catchy melody and Ali's energetic performance made it a national anthem that continues to be loved by fans across generations.",
-        "Beyond his musical achievements, Ali Zafar has also made a significant impact in the entertainment industry as an actor, appearing in both Pakistani and Bollywood films. His versatility as an artist has allowed him to build a strong international fanbase. Whether performing on stage or acting on screen, Ali brings a unique energy and charm that captivates audiences.",
-        "Known for his energetic live performances and ability to connect with audiences, Ali Zafar is frequently booked for concerts, corporate events, and private performances. His professional approach and dedication to his craft have made him a preferred choice for event organizers across Pakistan and beyond. Booking Ali Zafar for your event guarantees an unforgettable experience filled with music, energy, and entertainment.",
-        "Throughout his career, Ali has maintained his artistic integrity while evolving with the times. His commitment to quality music and memorable performances has earned him numerous awards and the respect of his peers. Today, Ali Zafar continues to be one of the most sought-after performers in Pakistan, with his booking in high demand for various events and occasions.",
-      ],
-      birthDate: "May 18, 1980",
-      birthplace: "Lahore, Pakistan",
-      careerStart: 2003,
-      albums: [
-        {
-          name: "Huqa Pani",
-          year: 2003,
-          description:
-            "Debut album featuring the iconic track Channo that became a national sensation",
-        },
-        {
-          name: "Masty",
-          year: 2006,
-          description:
-            "Second album showcasing Ali's musical evolution and versatility",
-        },
-        {
-          name: "Jhoom",
-          year: 2011,
-          description:
-            "Third studio album with hit singles that demonstrated his artistic growth",
-        },
-        {
-          name: "Balo Batiyan",
-          year: 2016,
-          description:
-            "Latest album demonstrating his continued innovation in music",
-        },
-      ],
-      songs: [
-        {
-          name: "Channo",
-          description:
-            "Iconic debut single that became a national anthem and launched Ali's career",
-          year: 2003,
-        },
-        {
-          name: "Jhoom",
-          description:
-            "Energetic track that showcases Ali's dynamic vocal style and stage presence",
-          year: 2011,
-        },
-        {
-          name: "Rockstar",
-          description:
-            "Popular song from his acting debut film that became a massive hit",
-          year: 2011,
-        },
-        {
-          name: "Rangeen",
-          description:
-            "Colorful and vibrant track loved by fans for its upbeat energy",
-          year: 2013,
-        },
-        {
-          name: "Sajni",
-          description:
-            "Romantic ballad that highlights Ali's vocal versatility and emotional depth",
-          year: 2006,
-        },
-        {
-          name: "Dekha",
-          description:
-            "Melodic track that became a fan favorite and showcased his songwriting skills",
-          year: 2011,
-        },
-      ],
-      awards: [
-        {
-          name: "Lux Style Award",
-          year: 2004,
-          category: "Best Album - Huqa Pani",
-        },
-        {
-          name: "Pakistani Music Award",
-          year: 2007,
-          category: "Best Male Singer",
-        },
-        { name: "Filmfare Award", year: 2011, category: "Best Male Debut" },
-        {
-          name: "International Music Award",
-          year: 2014,
-          category: "Excellence in Music",
-        },
-      ],
-      collaborations: [
-        { artist: "Shreya Ghoshal", song: "Madhubala" },
-        { artist: "Sunidhi Chauhan", song: "Jab Tak" },
-        { artist: "Harshdeep Kaur", song: "Allah Hu" },
-      ],
-      stats: {
-        albums: 4,
-        songs: 45,
-        awards: 12,
-        views: "1.8B+",
-        streams: "350M+",
-        followers: "8M+",
-      },
-      gallery: [
-        "/mz-pic-8.jpg",
-        "/mz-pic-9.jpg",
-        "/mz-pic-10.jpg",
-        "/mz-pic-11.jpg",
-        "/mz-pic-12.jpg",
-        "/Mz-pic.jpg",
-      ],
-      milestones: [
-        {
-          year: 2003,
-          event: "Released debut album 'Huqa Pani' with hit single Channo",
-        },
-        {
-          year: 2006,
-          event: "Acting debut in Pakistani cinema with 'Chalay Thay Saath'",
-        },
-        {
-          year: 2011,
-          event:
-            "Bollywood debut in 'Tere Bin Laden' and 'Mere Brother Ki Dulhan'",
-        },
-        {
-          year: 2014,
-          event: "Received International Music Award for excellence",
-        },
-        {
-          year: 2016,
-          event:
-            "Released latest album 'Balo Batiyan' showcasing artistic growth",
-        },
-      ],
-      achievements: [
-        "First Pakistani artist to achieve mainstream success in Bollywood",
-        "Multi-talented artist excelling in music, acting, and painting",
-        "Known for his energetic and engaging live performances",
-        "Successfully maintained artistic integrity while achieving commercial success",
-      ],
+      name: "Rhythm Dhol Bass",
+      year: 2001,
+      description:
+        "Debut album that introduced RDB’s signature Punjabi bhangra and urban fusion sound.",
     },
+    {
+      name: "Dangerous",
+      year: 2003,
+      description:
+        "Breakthrough album that made RDB a household name in the UK Asian music scene.",
+    },
+    {
+      name: "Sounds of the Underground",
+      year: 2005,
+      description:
+        "An evolution of RDB’s sound with club, hip-hop, and live performance energy.",
+    },
+  ],
+  songs: [
+    {
+      name: "Aaja Nachle",
+      description:
+        "Iconic Punjabi party track that remains a favorite at weddings and live events.",
+      year: 2003,
+    },
+    {
+      name: "Dil Karda",
+      description:
+        "High-energy club anthem widely requested in RDB live wedding performances.",
+      year: 2004,
+    },
+    {
+      name: "Sadi Gali",
+      description:
+        "Crowd-favorite bhangra track known for instant dance-floor energy.",
+      year: 2005,
+    },
+    {
+      name: "Lak 28 Kudi Da",
+      description:
+        "Global Punjabi hit that later gained massive popularity through Bollywood.",
+      year: 2009,
+    },
+  ],
+  awards: [
+    {
+      name: "UK Asian Music Award",
+      year: 2004,
+      category: "Best Bhangra Act",
+    },
+    {
+      name: "Brit Asia Award",
+      year: 2006,
+      category: "Outstanding Contribution to Punjabi Music",
+    },
+  ],
+  collaborations: [
+    { artist: "Manj Musik", song: "Classic RDB Catalog" },
+    { artist: "Punjabi MC", song: "Live Shows & Stage Collaborations" },
+    { artist: "UK Asian Artists", song: "Various Punjabi Fusion Projects" },
+  ],
+  stats: {
+    albums: 3,
+    songs: 30,
+    awards: 6,
+    views: "500M+",
+    streams: "200M+",
+    followers: "2M+",
+  },
+  gallery: [
+    "/rdb-live-1.jpg",
+    "/rdb-live-2.jpg",
+    "/rdb-live-3.jpg",
+    "/rdb-live-4.jpg",
+  ],
+  milestones: [
+    {
+      year: 1999,
+      event: "Formation of RDB in the United Kingdom",
+    },
+    {
+      year: 2003,
+      event: "International breakthrough with Punjabi club and wedding anthems",
+    },
+    {
+      year: 2009,
+      event: "Global recognition through Bollywood Punjabi collaborations",
+    },
+    {
+      year: 2015,
+      event: "Surj continues RDB as the official live-performing artist",
+    },
+  ],
+  achievements: [
+    "One of the most searched Punjabi acts to book for weddings",
+    "Pioneers of modern Punjabi bhangra and urban fusion music",
+    "Highly trusted for wedding, private, and corporate event bookings",
+    "Renowned for energetic, crowd-focused live performances",
+  ],
+},
+
+
   ];
 
   return singers.find((s) => s.slug === slug);
@@ -721,7 +691,7 @@ export default async function SingerPage({
         </section>
 
         {/* Photo Gallery */}
-        {singer.gallery.length > 0 && (
+        {/* {singer.gallery.length > 0 && (
           <section className="py-16 lg:py-20">
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-12">
               <div className="mb-12 text-center">
@@ -750,7 +720,7 @@ export default async function SingerPage({
               </div>
             </div>
           </section>
-        )}
+        )} */}
 
         {/* Booking Section - Prominent CTA */}
         <section className="py-6 lg:py-10 bg-gradient-to-b from-transparent via-red-950/30 to-transparent relative overflow-hidden">
@@ -868,54 +838,58 @@ export default async function SingerPage({
 
         {/* FAQ Section */}
         <section className="py-16 lg:py-20">
-          <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-12">
-            <div className="mb-12 text-center">
-              <span className="text-red-500 uppercase tracking-[0.3em] text-sm font-medium">
-                Frequently Asked Questions
-              </span>
-              <h2 className="font-display text-3xl md:text-4xl lg:text-5xl font-bold mt-4">
-                Booking <span className="text-gradient">Questions</span>
-              </h2>
-            </div>
-            <div className="space-y-4">
-              {[
-                {
-                  q: `How to book ${singer.name} for an event?`,
-                  a: `To book ${singer.name} for your event, concert, or wedding, contact us via WhatsApp at +92 322 407 1299. We handle bookings for ${singer.name} for various events including concerts, weddings, corporate events, and private performances across Pakistan and internationally. Our team will assist you with all booking details and requirements.`,
-                },
-                {
-                  q: `What is the booking price for ${singer.name}?`,
-                  a: `The booking price for ${singer.name} varies depending on the type of event, location, duration, and specific requirements. For detailed pricing information and availability, please contact us directly via WhatsApp at +92 322 407 1299. We provide transparent pricing and will work with you to create a package that fits your budget.`,
-                },
-                {
-                  q: `Can I book ${singer.name} for a wedding?`,
-                  a: `Yes, ${singer.name} is available for wedding bookings. ${singer.name} performs at weddings and special events, making your special day even more memorable. Contact us via WhatsApp to discuss your wedding event requirements, preferred dates, and availability. We ensure that ${singer.name}'s performance adds magic to your celebration.`,
-                },
-                {
-                  q: `Is ${singer.name} available for corporate events?`,
-                  a: `Yes, ${singer.name} is available for corporate events, product launches, and business functions. For corporate event booking inquiries, please contact us via WhatsApp at +92 322 407 1299. ${singer.name} brings professionalism and entertainment to corporate gatherings, making them memorable for your clients and employees.`,
-                },
-                {
-                  q: `How can I contact ${singer.name} for booking?`,
-                  a: `You can contact us to book ${singer.name} by sending a WhatsApp message to +92 322 407 1299. Our team will assist you with booking ${singer.name} for concerts, events, weddings, or corporate functions. We respond quickly and will help you with all the details you need for your event.`,
-                },
-              ].map((faq, index) => (
-                <div
-                  key={index}
-                  className="glass-card rounded-2xl p-6 hover-lift"
-                >
-                  <h3 className="text-lg font-semibold text-white mb-3 flex items-start gap-3">
-                    <span className="text-red-400 flex-shrink-0">
-                      Q{index + 1}.
-                    </span>
-                    <span>{faq.q}</span>
-                  </h3>
-                  <p className="text-white/80 leading-relaxed pl-8">{faq.a}</p>
-                </div>
-              ))}
-            </div>
-          </div>
-        </section>
+  <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-12">
+    <div className="mb-12 text-center">
+      <span className="text-red-500 uppercase tracking-[0.3em] text-sm font-medium">
+        Frequently Asked Questions
+      </span>
+      <h2 className="font-display text-3xl md:text-4xl lg:text-5xl font-bold mt-4">
+        Booking <span className="text-gradient">Questions</span>
+      </h2>
+    </div>
+
+    <div className="space-y-4">
+      {[
+        {
+          q: `How can I book ${singer.name} for an event?`,
+          a: `If you’re looking to book ${singer.name} for a wedding, private event, or live performance, you can contact us directly via WhatsApp at +92 322 407 1299. Our team manages official bookings for ${singer.name} and will guide you through availability, performance details, and next steps in a simple and transparent way.`,
+        },
+        {
+          q: `What is the booking price for ${singer.name}?`,
+          a: `The cost to hire ${singer.name} depends on factors such as event type, location, performance duration, and technical requirements. To get an accurate booking quote for ${singer.name}, please message us on WhatsApp at +92 322 407 1299. We’ll help you find the best option based on your event and budget.`,
+        },
+        {
+          q: `Can I book ${singer.name} for a wedding or mehndi event?`,
+          a: `Yes, ${singer.name} is frequently booked for weddings, mehndi nights, sangeet ceremonies, and private celebrations. If you’re planning to book ${singer.name} for a wedding, simply reach out on WhatsApp to check date availability and performance details. Live performances are customized to match the energy of your celebration.`,
+        },
+        {
+          q: `Is ${singer.name} available for corporate events and private shows?`,
+          a: `Absolutely. ${singer.name} is available for corporate events, brand launches, private parties, and large-scale functions. Clients who hire ${singer.name} for corporate events appreciate the professional setup, engaging performance, and crowd-friendly music selection.`,
+        },
+        {
+          q: `How early should I contact you to book ${singer.name}?`,
+          a: `We recommend contacting us as early as possible, especially for wedding season dates. ${singer.name} is in high demand for weddings and live events, so early booking helps secure your preferred date and allows smooth planning of the performance.`,
+        },
+      ].map((faq, index) => (
+        <div
+          key={index}
+          className="glass-card rounded-2xl p-6 hover-lift"
+        >
+          <h3 className="text-lg font-semibold text-white mb-3 flex items-start gap-3">
+            <span className="text-red-400 flex-shrink-0">
+              Q{index + 1}.
+            </span>
+            <span>{faq.q}</span>
+          </h3>
+          <p className="text-white/80 leading-relaxed pl-8">
+            {faq.a}
+          </p>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>
+
 
         <Footer />
       </div>

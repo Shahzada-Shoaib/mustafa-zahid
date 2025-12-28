@@ -7,54 +7,55 @@ import AnimatedBackground from "@/components/shared/AnimatedBackground";
 
 export const metadata: Metadata = {
   metadataBase: new URL('https://mustafazahid.com'),
-  title: "Pakistani Singers | Top Music Artists & Vocalists",
-  description: "Discover talented Pakistani singers and music artists. Explore profiles, songs, albums, and biographies of top Pakistani singers including Atif Aslam, Ali Zafar, and more.",
-  keywords: "Pakistani singers, music artists, singers list, Pakistani music, top singers Pakistan, Atif Aslam, Ali Zafar, Pakistani vocalists, Pakistani musicians",
-  
+  title: "Book Singers & Music Artists | Hire Vocalists for Events",
+  description: "Hire professional singers, music artists, and vocalists for weddings, mehndi nights, corporate events, and private celebrations. Book live performances by talented artists to make your event unforgettable.",
+  keywords: "book singers, hire singers, live music performance, vocalists for weddings, music artists booking, hire artists for events, singers for mehndi, live event singers, wedding music performers",
+
   openGraph: {
-    title: "Pakistani Singers - Top Music Artists",
-    description: "Discover talented Pakistani singers and music artists. Explore profiles and songs.",
+    title: "Book Singers & Music Artists | Hire Vocalists for Events",
+    description: "Hire professional singers and music artists for weddings, mehndi nights, corporate events, and private celebrations. Book live performances to make your events memorable.",
     url: "https://mustafazahid.com/singers",
-    siteName: "Pakistani Music",
+    siteName: "Music Artists Booking",
     images: [
       {
         url: "/mz-logo.png",
         width: 1200,
         height: 630,
-        alt: "Pakistani Singers",
+        alt: "Book Singers & Music Artists for Weddings & Events",
       },
     ],
     locale: "en_US",
     type: "website",
   },
-  
+
   twitter: {
     card: "summary_large_image",
-    title: "Pakistani Singers - Top Music Artists",
-    description: "Discover talented Pakistani singers and music artists",
+    title: "Book Singers & Music Artists | Hire Vocalists for Events",
+    description: "Hire professional singers and music artists for weddings, corporate events, and private celebrations. Book live performances for unforgettable events.",
     images: ["/mz-logo.png"],
   },
-  
+
   alternates: {
     canonical: "https://mustafazahid.com/singers",
   },
 };
 
+
 // This would typically come from a database or API
 const singers = [
   {
-    slug: "atif-aslam",
+    slug: "hire-atif-aslam-for-concert",
     name: "Atif Aslam",
-    image: "/mz-logo.png", // Replace with actual singer images
+    image: "/atif-aslam.jpg", // Replace with actual singer images
     genre: "Pop, Rock",
     description: "Renowned Pakistani singer and actor",
   },
   {
-    slug: "ali-zafar",
-    name: "Ali Zafar",
-    image: "/mz-logo.png",
-    genre: "Pop, Rock",
-    description: "Pakistani singer, songwriter, and actor",
+    slug: "book-rdb-for-wedding",
+    name: "RDB",
+    image: "/RDB-surj.jpg",
+    genre: "Rhythm, Dhol, Bass",
+    description: "Bollywood singer and song writer",
   },
 ];
 

@@ -6,13 +6,13 @@ import AnimatedBackground from "@/components/shared/AnimatedBackground";
 
 export const metadata: Metadata = {
   metadataBase: new URL('https://mustafazahid.com'),
-  title: "Singing Classes at Home | Private Vocal Training | Home Singing Lessons",
-  description: "Get private singing classes at your home. One-on-one vocal training with expert instructors. Convenient home-based singing lessons for all levels. Book now for singing classes at home in Pakistan.",
-  keywords: "singing classes at home, private singing lessons, home vocal training, singing tutor at home, voice lessons at home, home singing classes Karachi, private vocal instructor, singing classes at home Lahore, home singing lessons Pakistan",
-  
+  title: "Singing Classes at Home in Lahore | Private Vocal Lessons & Training",
+  description: "Get private singing classes at your home in Lahore. One-on-one vocal training with expert instructors for beginners to advanced singers. Convenient home-based singing lessons. Book now for private singing classes in Lahore.",
+  keywords: "singing classes at home Lahore, private singing lessons Lahore, home vocal training Lahore, singing tutor at home Lahore, voice lessons at home Lahore, home singing classes Lahore, private vocal instructor Lahore, one-on-one singing lessons Lahore, home singing training Lahore",
+
   openGraph: {
-    title: "Singing Classes at Home - Private Vocal Training",
-    description: "Get private singing classes at your home. One-on-one vocal training with expert instructors.",
+    title: "Singing Classes at Home in Lahore | Private Vocal Lessons",
+    description: "Book private singing classes at your home in Lahore. One-on-one vocal training with expert instructors for beginners to advanced singers.",
     url: "https://mustafazahid.com/music-classes/singing-classes-at-home",
     siteName: "Music Classes",
     images: [
@@ -20,24 +20,25 @@ export const metadata: Metadata = {
         url: "/mz-logo.png",
         width: 1200,
         height: 630,
-        alt: "Singing Classes at Home",
+        alt: "Singing Classes at Home in Lahore",
       },
     ],
     locale: "en_US",
     type: "website",
   },
-  
+
   twitter: {
     card: "summary_large_image",
-    title: "Singing Classes at Home - Private Lessons",
-    description: "Get private singing classes at your home",
+    title: "Singing Classes at Home in Lahore | Private Vocal Lessons",
+    description: "Get one-on-one private singing lessons at your home in Lahore. Learn vocal techniques and performance skills with expert instructors.",
     images: ["/mz-logo.png"],
   },
-  
+
   alternates: {
     canonical: "https://mustafazahid.com/music-classes/singing-classes-at-home",
   },
 };
+
 
 export default function SingingClassesAtHomePage() {
   const benefits = [

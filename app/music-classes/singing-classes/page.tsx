@@ -25,16 +25,16 @@ import { SPACING } from "@/lib/utils/spacing";
 export const metadata: Metadata = {
   metadataBase: new URL("https://mustafazahid.com"),
   title:
-    "Singing Classes | Vocal Training & Singing Lessons | Professional Voice Training",
+    "Singing Classes in Lahore | Vocal Training & Professional Singing Lessons",
   description:
-    "Join professional singing classes. Learn vocal techniques, breathing exercises, and performance skills. Expert voice training for beginners to advanced singers. Enroll now for singing lessons in Pakistan.",
+    "Join professional singing classes in Lahore. Learn vocal techniques, breathing exercises, and performance skills with expert instructors. Beginner to advanced voice training available. Enroll now for singing lessons in Lahore.",
   keywords:
-    "singing classes, vocal training, singing lessons, voice training, vocal techniques, singing instructor, singing classes Karachi, vocal training Lahore, singing lessons Pakistan, learn to sing, voice coaching",
+    "singing classes Lahore, vocal training Lahore, singing lessons Lahore, voice training Lahore, vocal techniques Lahore, singing instructor Lahore, learn to sing Lahore, professional singing lessons Lahore, voice coaching Lahore",
 
   openGraph: {
-    title: "Singing Classes - Professional Vocal Training",
+    title: "Singing Classes in Lahore | Professional Vocal Training",
     description:
-      "Learn singing and vocal techniques from expert instructors. Professional voice training available.",
+      "Book professional singing classes in Lahore. Learn vocal techniques, breathing exercises, and performance skills with expert instructors.",
     url: "https://mustafazahid.com/music-classes/singing-classes",
     siteName: "Music Classes",
     images: [
@@ -42,7 +42,7 @@ export const metadata: Metadata = {
         url: "/mz-logo.png",
         width: 1200,
         height: 630,
-        alt: "Singing Classes",
+        alt: "Singing Classes in Lahore",
       },
     ],
     locale: "en_US",
@@ -51,8 +51,9 @@ export const metadata: Metadata = {
 
   twitter: {
     card: "summary_large_image",
-    title: "Singing Classes - Professional Vocal Training",
-    description: "Learn singing and vocal techniques from expert instructors",
+    title: "Singing Classes in Lahore | Vocal Training & Lessons",
+    description:
+      "Learn singing and vocal techniques from expert instructors in Lahore. Beginner to advanced voice training available.",
     images: ["/mz-logo.png"],
   },
 
@@ -60,6 +61,7 @@ export const metadata: Metadata = {
     canonical: "https://mustafazahid.com/music-classes/singing-classes",
   },
 };
+
 
 export default function SingingClassesPage() {
   const features = [
