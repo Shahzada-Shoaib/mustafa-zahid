@@ -1,13 +1,81 @@
 "use client";
 
 import Link from "next/link";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Header from "@/components/layout/Header";
 import Footer from "@/components/layout/Footer";
 import AnimatedBackground from "@/components/shared/AnimatedBackground";
 
 export default function MusicClassesPage() {
   const [dropdownOpen, setDropdownOpen] = useState(false);
+
+  // Add structured data (JSON-LD) for SEO
+  useEffect(() => {
+    const structuredData = {
+      "@context": "https://schema.org",
+      "@type": "EducationalOrganization",
+      "name": "Music Classes in Lahore",
+      "description": "Professional music classes in Lahore - Guitar, Singing, and Piano. Available at studio or at home. Learn from expert instructors.",
+      "url": "https://mustafazahid.com/music-classes",
+      "image": "https://mustafazahid.com/mz-logo.png",
+      "address": {
+        "@type": "PostalAddress",
+        "addressLocality": "Lahore",
+        "addressCountry": "PK"
+      },
+      "offers": [
+        {
+          "@type": "Offer",
+          "itemOffered": {
+            "@type": "Service",
+            "name": "Guitar Classes",
+            "description": "Learn guitar from professional instructors"
+          }
+        },
+        {
+          "@type": "Offer",
+          "itemOffered": {
+            "@type": "Service",
+            "name": "Singing Classes",
+            "description": "Master vocal techniques and singing"
+          }
+        },
+        {
+          "@type": "Offer",
+          "itemOffered": {
+            "@type": "Service",
+            "name": "Piano Classes",
+            "description": "Learn piano and keyboard skills"
+          }
+        }
+      ],
+      "telephone": "+923224071299"
+    };
+
+    const script = document.createElement('script');
+    script.type = 'application/ld+json';
+    script.text = JSON.stringify(structuredData);
+    script.id = 'music-classes-structured-data';
+    document.head.appendChild(script);
+
+    return () => {
+      const existingScript = document.getElementById('music-classes-structured-data');
+      if (existingScript) {
+        document.head.removeChild(existingScript);
+      }
+    };
+  }, []);
+
+  // Add canonical link for music classes page
+  useEffect(() => {
+    let canonicalLink = document.querySelector('link[rel="canonical"]');
+    if (!canonicalLink) {
+      canonicalLink = document.createElement('link');
+      canonicalLink.setAttribute('rel', 'canonical');
+      document.head.appendChild(canonicalLink);
+    }
+    canonicalLink.setAttribute('href', 'https://mustafazahid.com/music-classes');
+  }, []);
 
   const classes = [
     {

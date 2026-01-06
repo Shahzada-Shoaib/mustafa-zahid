@@ -3,7 +3,6 @@ import Footer from "@/components/layout/Footer";
 import Header from "@/components/layout/Header";
 import Image from "next/image";
 import { useEffect, useState } from "react";
-import { Metadata } from "next";
 
 
 export default function Home() {
@@ -69,6 +68,54 @@ export default function Home() {
     };
     document.addEventListener("click", handleAnchorClick);
     return () => document.removeEventListener("click", handleAnchorClick);
+  }, []);
+
+  // Add structured data (JSON-LD) for SEO
+  useEffect(() => {
+    const structuredData = {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "name": "Mustafa Zahid",
+      "jobTitle": "Singer, Songwriter",
+      "description": "Pakistani singer, songwriter, and lead vocalist of Roxen",
+      "url": "https://mustafazahid.com",
+      "image": "https://mustafazahid.com/mz-logo.png",
+      "sameAs": [
+        "https://www.facebook.com/OfficialMustafaZahid/",
+        "https://www.instagram.com/mustafazahids/",
+        "https://www.youtube.com/channel/UCLdxVW6ThAB8k5YwiF7MD9w",
+        "https://x.com/Mustafology"
+      ],
+      "knowsAbout": ["Music", "Singing", "Songwriting"],
+      "memberOf": {
+        "@type": "MusicGroup",
+        "name": "Roxen"
+      }
+    };
+
+    const script = document.createElement('script');
+    script.type = 'application/ld+json';
+    script.text = JSON.stringify(structuredData);
+    script.id = 'mustafa-zahid-structured-data';
+    document.head.appendChild(script);
+
+    return () => {
+      const existingScript = document.getElementById('mustafa-zahid-structured-data');
+      if (existingScript) {
+        document.head.removeChild(existingScript);
+      }
+    };
+  }, []);
+
+  // Add canonical link for home page
+  useEffect(() => {
+    let canonicalLink = document.querySelector('link[rel="canonical"]');
+    if (!canonicalLink) {
+      canonicalLink = document.createElement('link');
+      canonicalLink.setAttribute('rel', 'canonical');
+      document.head.appendChild(canonicalLink);
+    }
+    canonicalLink.setAttribute('href', 'https://mustafazahid.com');
   }, []);
 
   const songs = [

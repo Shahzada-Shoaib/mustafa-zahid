@@ -69,6 +69,20 @@ export const metadata: Metadata = {
     shortcut: "/icon.png",
     apple: "/icon.png",
   },
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      'max-video-preview': -1,
+      'max-image-preview': 'large',
+      'max-snippet': -1,
+    },
+  },
+  alternates: {
+    canonical: "https://mustafazahid.com",
+  },
 };
 
 export default function RootLayout({

@@ -62,13 +62,13 @@ export default function sitemap(): MetadataRoute.Sitemap {
       priority: 0.9,
     },
     {
-      url: `${baseUrl}/singers/atif-aslam`,
+      url: `${baseUrl}/singers/hire-atif-aslam-for-concert`,
       lastModified: new Date(),
       changeFrequency: "monthly",
       priority: 0.7,
     },
     {
-      url: `${baseUrl}/singers/ali-zafar`,
+      url: `${baseUrl}/singers/book-rdb-for-wedding`,
       lastModified: new Date(),
       changeFrequency: "monthly",
       priority: 0.7,
@@ -87,7 +87,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
       priority: 0.7,
     },
     {
-      url: `${baseUrl}/qawwals/rahat-fateh-ali-khan`,
+      url: `${baseUrl}/qawwals/book-rahat-fateh-ali-khan-for-wedding-event`,
       lastModified: new Date(),
       changeFrequency: "monthly",
       priority: 0.7,
