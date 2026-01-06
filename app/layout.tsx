@@ -94,6 +94,10 @@ export default function RootLayout({
     <html lang="ur">
       <head>
         <meta name="google-site-verification" content="oW0clPdrm9yaRdckWdVlmCtY9EQQ0UFI6PtZUpbu9eU" />
+        {/* AI Crawler Friendly Meta Tags */}
+        <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" />
+        <meta name="googlebot" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" />
+        <meta name="ai-crawler" content="allow" />
       </head>
       <body
         className={`${geistSans.variable} ${geistMono.variable} ${playfairDisplay.variable} ${outfit.variable} antialiased`}
