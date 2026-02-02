@@ -105,6 +105,37 @@ export async function generateMetadata({
   };
 }
 
+function generateArticleSchema(post: Awaited<ReturnType<typeof getBlogPost>>) {
+  if (!post) return null;
+  
+  return {
+    "@context": "https://schema.org",
+    "@type": "Article",
+    "headline": post.title,
+    "description": post.excerpt,
+    "image": `https://mustafazahid.com${post.image}`,
+    "datePublished": post.date,
+    "dateModified": post.date,
+    "author": {
+      "@type": "Person",
+      "name": post.author
+    },
+    "publisher": {
+      "@type": "Organization",
+      "name": "Mustafa Zahid",
+      "logo": {
+        "@type": "ImageObject",
+        "url": "https://mustafazahid.com/mz-logo.png"
+      }
+    },
+    "mainEntityOfPage": {
+      "@type": "WebPage",
+      "@id": `https://mustafazahid.com/blog/${post.slug}`
+    },
+    "articleBody": post.content.replace(/<[^>]*>/g, '').substring(0, 500) + "..."
+  };
+}
+
 export default async function BlogPostPage({ 
   params 
 }: { 
@@ -117,8 +148,18 @@ export default async function BlogPostPage({
     notFound();
   }
 
+  const articleSchema = generateArticleSchema(post);
+
   return (
     <div className="min-h-screen bg-[#0a0a0a] text-white">
+      {articleSchema && (
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify(articleSchema),
+          }}
+        />
+      )}
       <AnimatedBackground />
       <Header />
       
@@ -143,6 +184,8 @@ export default async function BlogPostPage({
             alt={post.title}
             fill
             className="object-cover"
+            priority
+            sizes="(max-width: 768px) 100vw, 800px"
           />
         </div>
 

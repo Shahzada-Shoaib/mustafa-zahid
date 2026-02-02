@@ -70,42 +70,7 @@ export default function Home() {
     return () => document.removeEventListener("click", handleAnchorClick);
   }, []);
 
-  // Add structured data (JSON-LD) for SEO
-  useEffect(() => {
-    const structuredData = {
-      "@context": "https://schema.org",
-      "@type": "Person",
-      "name": "Mustafa Zahid",
-      "jobTitle": "Singer, Songwriter",
-      "description": "Pakistani singer, songwriter, and lead vocalist of Roxen",
-      "url": "https://mustafazahid.com",
-      "image": "https://mustafazahid.com/mz-logo.png",
-      "sameAs": [
-        "https://www.facebook.com/OfficialMustafaZahid/",
-        "https://www.instagram.com/mustafazahids/",
-        "https://www.youtube.com/channel/UCLdxVW6ThAB8k5YwiF7MD9w",
-        "https://x.com/Mustafology"
-      ],
-      "knowsAbout": ["Music", "Singing", "Songwriting"],
-      "memberOf": {
-        "@type": "MusicGroup",
-        "name": "Roxen"
-      }
-    };
-
-    const script = document.createElement('script');
-    script.type = 'application/ld+json';
-    script.text = JSON.stringify(structuredData);
-    script.id = 'mustafa-zahid-structured-data';
-    document.head.appendChild(script);
-
-    return () => {
-      const existingScript = document.getElementById('mustafa-zahid-structured-data');
-      if (existingScript) {
-        document.head.removeChild(existingScript);
-      }
-    };
-  }, []);
+  // Structured data moved to server-side (in JSX below)
 
 
   const songs = [
@@ -192,8 +157,35 @@ export default function Home() {
     },
   ];
 
+  const structuredData = {
+    "@context": "https://schema.org",
+    "@type": "Person",
+    "name": "Mustafa Zahid",
+    "jobTitle": "Singer, Songwriter",
+    "description": "Pakistani singer, songwriter, and lead vocalist of Roxen",
+    "url": "https://mustafazahid.com",
+    "image": "https://mustafazahid.com/mz-logo.png",
+    "sameAs": [
+      "https://www.facebook.com/OfficialMustafaZahid/",
+      "https://www.instagram.com/mustafazahids/",
+      "https://www.youtube.com/channel/UCLdxVW6ThAB8k5YwiF7MD9w",
+      "https://x.com/Mustafology"
+    ],
+    "knowsAbout": ["Music", "Singing", "Songwriting"],
+    "memberOf": {
+      "@type": "MusicGroup",
+      "name": "Roxen"
+    }
+  };
+
   return (
     <div className="min-h-screen bg-[#0a0a0a] text-white overflow-x-hidden">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify(structuredData),
+        }}
+      />
       {/* Custom Cursor Effect - Hidden on mobile */}
       <style jsx global>{`
         :root {
@@ -905,11 +897,12 @@ export default function Home() {
             {songs.map((song, index) => (
               <a
                 key={index}
-                href={song.youtubeUrl || "#"}
+                href={song.youtubeUrl || undefined}
                 target={song.youtubeUrl ? "_blank" : undefined}
                 rel={song.youtubeUrl ? "noopener noreferrer" : undefined}
                 className="group glass-card rounded-2xl overflow-hidden hover-lift cursor-pointer block animate-bounce-in"
                 style={{ animationDelay: `${index * 0.1}s` }}
+                onClick={!song.youtubeUrl ? (e) => e.preventDefault() : undefined}
               >
                 <div className="relative aspect-[4/3] overflow-hidden">
                   <Image
@@ -917,6 +910,8 @@ export default function Home() {
                     alt={`${song.title} by Mustafa Zahid`}
                     fill
                     className="object-cover transition-transform duration-700 group-hover:scale-110"
+                    loading="lazy"
+                    sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-black via-black/20 to-transparent opacity-60 group-hover:opacity-80 transition-opacity"></div>
 
@@ -1028,6 +1023,8 @@ export default function Home() {
                     alt={img.alt}
                     fill
                     className="object-cover transition-transform duration-700 group-hover:scale-105 rounded-2xl"
+                    loading="lazy"
+                    sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-2xl"></div>
 
@@ -1192,7 +1189,10 @@ export default function Home() {
 
               {/* Contact Info */}
               <div className="space-y-4 lg:space-y-6">
-                {/* <a href="mailto:contact@mustafazahid.com" className="flex items-center gap-4 p-4 lg:p-6 glass-card rounded-xl hover:bg-white/10 transition-all group">
+                <a 
+                  href="mailto:contact@mustafazahid.com" 
+                  className="flex items-center gap-4 p-4 lg:p-6 glass-card rounded-xl hover:bg-white/10 transition-all group"
+                >
                   <div className="w-12 h-12 bg-red-600/20 rounded-full flex items-center justify-center group-hover:bg-red-600 transition-colors">
                     <svg className="w-5 h-5 text-red-500 group-hover:text-white transition-colors" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
@@ -1202,7 +1202,7 @@ export default function Home() {
                     <div className="text-sm text-white/70">Email</div>
                     <div className="text-white font-medium">contact@mustafazahid.com</div>
                   </div>
-                </a> */}
+                </a>
 
                 <a
                   href="tel:+923224071299"
@@ -1317,14 +1317,33 @@ export default function Home() {
                   Subscribe for Updates
                 </h4>
                 <form
-                  onSubmit={(e) => {
+                  onSubmit={async (e) => {
                     e.preventDefault();
                     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-                    if (emailRegex.test(email)) {
-                      setEmailStatus("success");
-                      setEmail("");
-                      setTimeout(() => setEmailStatus("idle"), 3000);
-                    } else {
+                    if (!emailRegex.test(email)) {
+                      setEmailStatus("error");
+                      return;
+                    }
+
+                    try {
+                      setEmailStatus("idle");
+                      const response = await fetch('/api/newsletter', {
+                        method: 'POST',
+                        headers: {
+                          'Content-Type': 'application/json',
+                        },
+                        body: JSON.stringify({ email }),
+                      });
+
+                      if (response.ok) {
+                        setEmailStatus("success");
+                        setEmail("");
+                        setTimeout(() => setEmailStatus("idle"), 5000);
+                      } else {
+                        setEmailStatus("error");
+                      }
+                    } catch (error) {
+                      console.error('Newsletter subscription error:', error);
                       setEmailStatus("error");
                     }
                   }}

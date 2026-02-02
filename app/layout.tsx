@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono, Playfair_Display, Outfit } from "next/font/google";
 import "./globals.css";
+import { ErrorBoundary } from "@/components/ErrorBoundary";
 // import {metadata} from './metadata.ts';
 
 
@@ -91,7 +92,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="ur">
+    <html lang="en">
       <head>
         <meta name="google-site-verification" content="oW0clPdrm9yaRdckWdVlmCtY9EQQ0UFI6PtZUpbu9eU" />
         {/* AI Crawler Friendly Meta Tags */}
@@ -103,7 +104,9 @@ export default function RootLayout({
         className={`${geistSans.variable} ${geistMono.variable} ${playfairDisplay.variable} ${outfit.variable} antialiased`}
         suppressHydrationWarning
       >
-        {children}
+        <ErrorBoundary>
+          {children}
+        </ErrorBoundary>
       </body>
     </html>
   );

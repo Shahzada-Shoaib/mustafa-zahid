@@ -9,62 +9,7 @@ import AnimatedBackground from "@/components/shared/AnimatedBackground";
 export default function MusicClassesPage() {
   const [dropdownOpen, setDropdownOpen] = useState(false);
 
-  // Add structured data (JSON-LD) for SEO
-  useEffect(() => {
-    const structuredData = {
-      "@context": "https://schema.org",
-      "@type": "EducationalOrganization",
-      "name": "Music Classes in Lahore",
-      "description": "Professional music classes in Lahore - Guitar, Singing, and Piano. Available at studio or at home. Learn from expert instructors.",
-      "url": "https://mustafazahid.com/music-classes",
-      "image": "https://mustafazahid.com/mz-logo.png",
-      "address": {
-        "@type": "PostalAddress",
-        "addressLocality": "Lahore",
-        "addressCountry": "PK"
-      },
-      "offers": [
-        {
-          "@type": "Offer",
-          "itemOffered": {
-            "@type": "Service",
-            "name": "Guitar Classes",
-            "description": "Learn guitar from professional instructors"
-          }
-        },
-        {
-          "@type": "Offer",
-          "itemOffered": {
-            "@type": "Service",
-            "name": "Singing Classes",
-            "description": "Master vocal techniques and singing"
-          }
-        },
-        {
-          "@type": "Offer",
-          "itemOffered": {
-            "@type": "Service",
-            "name": "Piano Classes",
-            "description": "Learn piano and keyboard skills"
-          }
-        }
-      ],
-      "telephone": "+923224071299"
-    };
-
-    const script = document.createElement('script');
-    script.type = 'application/ld+json';
-    script.text = JSON.stringify(structuredData);
-    script.id = 'music-classes-structured-data';
-    document.head.appendChild(script);
-
-    return () => {
-      const existingScript = document.getElementById('music-classes-structured-data');
-      if (existingScript) {
-        document.head.removeChild(existingScript);
-      }
-    };
-  }, []);
+  // Structured data moved to server-side (in JSX below)
 
 
   const classes = [
@@ -100,8 +45,55 @@ export default function MusicClassesPage() {
     },
   ];
 
+  const structuredData = {
+    "@context": "https://schema.org",
+    "@type": "EducationalOrganization",
+    "name": "Music Classes in Lahore",
+    "description": "Professional music classes in Lahore - Guitar, Singing, and Piano. Available at studio or at home. Learn from expert instructors.",
+    "url": "https://mustafazahid.com/music-classes",
+    "image": "https://mustafazahid.com/mz-logo.png",
+    "address": {
+      "@type": "PostalAddress",
+      "addressLocality": "Lahore",
+      "addressCountry": "PK"
+    },
+    "offers": [
+      {
+        "@type": "Offer",
+        "itemOffered": {
+          "@type": "Service",
+          "name": "Guitar Classes",
+          "description": "Learn guitar from professional instructors"
+        }
+      },
+      {
+        "@type": "Offer",
+        "itemOffered": {
+          "@type": "Service",
+          "name": "Singing Classes",
+          "description": "Master vocal techniques and singing"
+        }
+      },
+      {
+        "@type": "Offer",
+        "itemOffered": {
+          "@type": "Service",
+          "name": "Piano Classes",
+          "description": "Learn piano and keyboard skills"
+        }
+      }
+    ],
+    "telephone": "+923224071299"
+  };
+
   return (
     <div className="min-h-screen bg-[#0a0a0a] text-white">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify(structuredData),
+        }}
+      />
       <AnimatedBackground />
       <Header />
       {/* Hero Section */}
