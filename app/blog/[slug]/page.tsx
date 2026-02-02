@@ -33,12 +33,24 @@ async function getBlogPost(slug: string) {
   return posts.find((p) => p.slug === slug);
 }
 
+export async function generateStaticParams() {
+  const posts = [
+    { slug: "history-of-pakistani-music" },
+    { slug: "vocal-techniques" },
+  ];
+  
+  return posts.map((post) => ({
+    slug: post.slug,
+  }));
+}
+
 export async function generateMetadata({ 
   params 
 }: { 
-  params: { slug: string } 
+  params: Promise<{ slug: string }> 
 }): Promise<Metadata> {
-  const post = await getBlogPost(params.slug);
+  const { slug } = await params;
+  const post = await getBlogPost(slug);
   
   if (!post) {
     return { title: "Post Not Found" };
@@ -53,7 +65,7 @@ export async function generateMetadata({
     openGraph: {
       title: post.title,
       description: post.excerpt || post.content.substring(0, 160),
-      url: `https://mustafazahid.com/blog/${params.slug}`,
+      url: `https://mustafazahid.com/blog/${slug}`,
       siteName: "Music Blog",
       images: [
         {
@@ -76,8 +88,19 @@ export async function generateMetadata({
       images: [post.image],
     },
     
+    robots: {
+      index: true,
+      follow: true,
+      googleBot: {
+        index: true,
+        follow: true,
+        'max-image-preview': 'large',
+        'max-snippet': -1,
+      },
+    },
+    
     alternates: {
-      canonical: `https://mustafazahid.com/blog/${params.slug}`,
+      canonical: `https://mustafazahid.com/blog/${slug}`,
     },
   };
 }
@@ -85,9 +108,10 @@ export async function generateMetadata({
 export default async function BlogPostPage({ 
   params 
 }: { 
-  params: { slug: string } 
+  params: Promise<{ slug: string }> 
 }) {
-  const post = await getBlogPost(params.slug);
+  const { slug } = await params;
+  const post = await getBlogPost(slug);
 
   if (!post) {
     notFound();

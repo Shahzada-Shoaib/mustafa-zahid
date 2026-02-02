@@ -315,6 +315,17 @@ async function getSinger(slug: string): Promise<Singer | undefined> {
   return singers.find((s) => s.slug === slug);
 }
 
+export async function generateStaticParams() {
+  const singers = [
+    { slug: "hire-atif-aslam-for-concert" },
+    { slug: "book-rdb-for-wedding" },
+  ];
+  
+  return singers.map((singer) => ({
+    slug: singer.slug,
+  }));
+}
+
 function generateStructuredData(singer: Singer) {
   return {
     "@context": "https://schema.org",
@@ -425,6 +436,17 @@ export async function generateMetadata({
       title: `Book ${singer.name} for Event | ${singer.name} Booking`,
       description: `Book ${singer.name} for concerts, weddings, and corporate events. Contact +92 322 407 1299 for booking.`,
       images: [singer.image],
+    },
+
+    robots: {
+      index: true,
+      follow: true,
+      googleBot: {
+        index: true,
+        follow: true,
+        'max-image-preview': 'large',
+        'max-snippet': -1,
+      },
     },
 
     alternates: {

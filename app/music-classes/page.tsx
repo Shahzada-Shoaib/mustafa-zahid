@@ -66,16 +66,6 @@ export default function MusicClassesPage() {
     };
   }, []);
 
-  // Add canonical link for music classes page
-  useEffect(() => {
-    let canonicalLink = document.querySelector('link[rel="canonical"]');
-    if (!canonicalLink) {
-      canonicalLink = document.createElement('link');
-      canonicalLink.setAttribute('rel', 'canonical');
-      document.head.appendChild(canonicalLink);
-    }
-    canonicalLink.setAttribute('href', 'https://mustafazahid.com/music-classes');
-  }, []);
 
   const classes = [
     {

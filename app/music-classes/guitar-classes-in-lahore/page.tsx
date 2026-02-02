@@ -52,8 +52,19 @@ export const metadata: Metadata = {
     images: ["/mz-logo.png"],
   },
 
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      'max-image-preview': 'large',
+      'max-snippet': -1,
+    },
+  },
+
   alternates: {
-    canonical: "https://mustafazahid.com/music-classes/guitar-classes",
+    canonical: "https://mustafazahid.com/music-classes/guitar-classes-in-lahore",
   },
 };
 

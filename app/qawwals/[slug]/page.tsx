@@ -287,6 +287,17 @@ async function getQawwal(slug: string): Promise<Qawwal | undefined> {
   return qawwals.find((q) => q.slug === slug);
 }
 
+export async function generateStaticParams() {
+  const qawwals = [
+    { slug: "nusrat-fateh-ali-khan" },
+    { slug: "book-rahat-fateh-ali-khan-for-wedding-event" },
+  ];
+  
+  return qawwals.map((qawwal) => ({
+    slug: qawwal.slug,
+  }));
+}
+
 function generateStructuredData(qawwal: Qawwal) {
   return {
     "@context": "https://schema.org",
@@ -409,6 +420,17 @@ export async function generateMetadata({
       title: `Book ${qawwal.name} for Event | ${qawwal.name} Qawwali Booking`,
       description: `Book ${qawwal.name} for Qawwali performances, concerts, and weddings. Contact +92 322 407 1299 for booking.`,
       images: [qawwal.image],
+    },
+
+    robots: {
+      index: true,
+      follow: true,
+      googleBot: {
+        index: true,
+        follow: true,
+        'max-image-preview': 'large',
+        'max-snippet': -1,
+      },
     },
 
     alternates: {
