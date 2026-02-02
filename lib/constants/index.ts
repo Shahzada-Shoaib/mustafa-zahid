@@ -3,5 +3,4 @@
  */
 
 export * from './site';
-export { SPACING } from './spacing';
 
