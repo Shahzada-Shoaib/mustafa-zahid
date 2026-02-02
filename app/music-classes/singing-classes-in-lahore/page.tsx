@@ -27,14 +27,14 @@ export const metadata: Metadata = {
   title:
     "Singing Classes in Lahore | Vocal Training & Professional Singing Lessons",
   description:
-    "Join professional singing classes in Lahore. Learn vocal techniques, breathing exercises, and performance skills with expert instructors. Beginner to advanced voice training available. Enroll now for singing lessons in Lahore.",
+    "Professional singing classes in Lahore. Learn vocal techniques, breathing & performance skills. Expert instructors. Book now: +92 322 407 1299. Studio & home classes available.",
   keywords:
     "singing classes Lahore, vocal training Lahore, singing lessons Lahore, voice training Lahore, vocal techniques Lahore, singing instructor Lahore, learn to sing Lahore, professional singing lessons Lahore, voice coaching Lahore",
 
   openGraph: {
     title: "Singing Classes in Lahore | Professional Vocal Training",
     description:
-      "Book professional singing classes in Lahore. Learn vocal techniques, breathing exercises, and performance skills with expert instructors.",
+      "Professional singing classes in Lahore. Learn vocal techniques & performance skills. Expert instructors. Book now: +92 322 407 1299",
     url: "https://mustafazahid.com/music-classes/singing-classes",
     siteName: "Music Classes",
     images: [

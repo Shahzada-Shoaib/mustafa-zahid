@@ -7,12 +7,12 @@ import AnimatedBackground from "@/components/shared/AnimatedBackground";
 export const metadata: Metadata = {
   metadataBase: new URL('https://mustafazahid.com'),
   title: "Singing Classes at Home in Lahore | Private Vocal Lessons & Training",
-  description: "Get private singing classes at your home in Lahore. One-on-one vocal training with expert instructors for beginners to advanced singers. Convenient home-based singing lessons. Book now for private singing classes in Lahore.",
+  description: "Private singing classes at home in Lahore. One-on-one vocal training with expert instructors. All levels. Book now: +92 322 407 1299. Convenient home-based lessons.",
   keywords: "singing classes at home Lahore, private singing lessons Lahore, home vocal training Lahore, singing tutor at home Lahore, voice lessons at home Lahore, home singing classes Lahore, private vocal instructor Lahore, one-on-one singing lessons Lahore, home singing training Lahore",
 
   openGraph: {
     title: "Singing Classes at Home in Lahore | Private Vocal Lessons",
-    description: "Book private singing classes at your home in Lahore. One-on-one vocal training with expert instructors for beginners to advanced singers.",
+    description: "Private singing classes at home in Lahore. One-on-one vocal training. Expert instructors. Book now: +92 322 407 1299",
     url: "https://mustafazahid.com/music-classes/singing-classes-at-home",
     siteName: "Music Classes",
     images: [

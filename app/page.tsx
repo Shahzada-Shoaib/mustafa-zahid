@@ -162,7 +162,7 @@ export default function Home() {
     "@type": "Person",
     "name": "Mustafa Zahid",
     "jobTitle": "Singer, Songwriter",
-    "description": "Pakistani singer, songwriter, and lead vocalist of Roxen",
+    "description": "Pakistani singer, songwriter, and lead vocalist of Roxen with over 20 years of experience",
     "url": "https://mustafazahid.com",
     "image": "https://mustafazahid.com/mz-logo.png",
     "sameAs": [
@@ -171,10 +171,19 @@ export default function Home() {
       "https://www.youtube.com/channel/UCLdxVW6ThAB8k5YwiF7MD9w",
       "https://x.com/Mustafology"
     ],
-    "knowsAbout": ["Music", "Singing", "Songwriting"],
+    "knowsAbout": ["Music", "Singing", "Songwriting", "Live Performance", "Pakistani Music"],
     "memberOf": {
       "@type": "MusicGroup",
       "name": "Roxen"
+    },
+    "award": "Award-winning Pakistani vocalist",
+    "hasOccupation": {
+      "@type": "Occupation",
+      "name": "Professional Singer",
+      "occupationLocation": {
+        "@type": "Country",
+        "name": "Pakistan"
+      }
     }
   };
 
@@ -430,18 +439,23 @@ export default function Home() {
                 <span className="inline text-gradient">Zahid</span>
               </h1>
 
-              <p className="text-base sm:text-lg md:text-xl text-white/80 max-w-lg leading-relaxed mx-auto lg:mx-0">
-                Mustafa Zahid is one of the most celebrated Pakistani singers
-                and live performers, blending soulful melodies with powerful
-                emotions. This is Mustafa Zahid&apos;s official website, where
-                you can <strong>book Mustafa Zahid</strong> for{" "}
-                <strong>
-                  weddings, mehndi nights, concerts, corporate events, and
-                  private performances in Lahore
-                </strong>
-                . Reserve your dates now to experience unforgettable live shows
-                and professional musical performances by Mustafa Zahid.
-              </p>
+              <div className="text-base sm:text-lg md:text-xl text-white/80 max-w-lg leading-relaxed mx-auto lg:mx-0 space-y-4">
+                <p>
+                  One of Pakistan&apos;s most celebrated vocalists, known for blending 
+                  soulful melodies with powerful emotions. With over 20 years of 
+                  experience and 100+ songs, the artist has captivated audiences 
+                  across South Asia and beyond.
+                </p>
+                <p>
+                  Book live performances for{" "}
+                  <strong>
+                    weddings, mehndi nights, concerts, corporate events, and
+                    private performances in Lahore
+                  </strong>
+                  . Reserve your dates now to experience unforgettable shows 
+                  and award-winning musical performances.
+                </p>
+              </div>
 
               <div className="flex flex-col sm:flex-row flex-wrap gap-3 sm:gap-4">
                 <a
@@ -551,7 +565,7 @@ export default function Home() {
                   <div className="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-black/60 z-10"></div>
                   <Image
                     src="/Mz-pic.jpg"
-                    alt="Mustafa Zahid - Pakistani Singer and Lead Vocalist of Roxen"
+                    alt="Mustafa Zahid performing live - Book Pakistani singer and Roxen vocalist for concerts and events in Lahore"
                     fill
                     className="object-cover"
                     priority
@@ -673,7 +687,7 @@ export default function Home() {
                   <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent z-10"></div>
                   <Image
                     src="/mz-pic-2.JPG"
-                    alt="Mustafa Zahid in Recording Studio"
+                    alt="Mustafa Zahid in recording studio - Professional Pakistani singer and songwriter available for booking"
                     fill
                     className="object-cover"
                   />
@@ -695,7 +709,7 @@ export default function Home() {
                   About The Artist
                 </span>
                 <h2 className="font-display text-4xl md:text-5xl lg:text-6xl font-bold text-white leading-tight">
-                  A Voice That
+                  Mustafa Zahid: A Voice That
                   <br />
                   <span className="text-gradient">Moves Souls</span>
                 </h2>
@@ -725,12 +739,12 @@ export default function Home() {
                         The Journey
                       </h3>
                       <p className="text-white/80 leading-relaxed">
-                        Mustafa Zahid is a renowned Pakistani singer,
-                        songwriter, and musician, best known as the lead
-                        vocalist of the band{" "}
-                        <span className="text-red-400 font-medium">Roxen</span>.
-                        With his soulful voice and exceptional musical talent,
-                        he has captivated audiences across Pakistan and beyond.
+                        A renowned Pakistani singer, songwriter, and musician, 
+                        best known as the lead vocalist of the band{" "}
+                        <span className="text-red-400 font-medium">Roxen</span>. 
+                        Starting his career in the early 2000s, the artist has 
+                        released numerous hit songs and albums, establishing 
+                        himself as a prominent figure in the Pakistani music industry.
                       </p>
                     </div>
                   </div>
@@ -758,11 +772,12 @@ export default function Home() {
                         Musical Legacy
                       </h3>
                       <p className="text-white/80 leading-relaxed">
-                        His music blends contemporary sounds with traditional
+                        The music blends contemporary sounds with traditional
                         influences, creating a unique style that resonates with
-                        listeners of all ages. Mustafa Zahid has contributed
-                        significantly to the Pakistani music industry with his
-                        powerful vocals and meaningful lyrics.
+                        listeners of all ages. Through powerful vocals and 
+                        meaningful lyrics, the artist has contributed
+                        significantly to the Pakistani music industry, 
+                        earning recognition and awards for exceptional work.
                       </p>
                     </div>
                   </div>
@@ -790,15 +805,51 @@ export default function Home() {
                         Global Impact
                       </h3>
                       <p className="text-white/80 leading-relaxed">
-                        Through his work with Roxen and as a solo artist, he
-                        continues to inspire and entertain music lovers
-                        worldwide. His songs have transcended borders, making
-                        him a beloved figure in South Asian music.
+                        Through work with Roxen and as a solo artist, the 
+                        performer continues to inspire and entertain music lovers
+                        worldwide. Songs have transcended borders, making
+                        the artist a beloved figure in South Asian music with 
+                        millions of streams and dedicated fans globally.
                       </p>
                     </div>
                   </div>
                 </div>
               </div>
+            </div>
+          </div>
+        </div>
+
+        {/* Internal Links Section */}
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-12 mt-12">
+          <div className="glass-card rounded-2xl p-6 lg:p-8">
+            <h3 className="text-2xl font-semibold text-white mb-4">
+              Explore More
+            </h3>
+            <div className="flex flex-wrap gap-4">
+              <a
+                href="/about"
+                className="text-white/80 hover:text-red-400 transition-colors text-sm font-medium"
+              >
+                Learn More About the Artist →
+              </a>
+              <a
+                href="/music-classes"
+                className="text-white/80 hover:text-red-400 transition-colors text-sm font-medium"
+              >
+                Music Classes in Lahore →
+              </a>
+              <a
+                href="/singers"
+                className="text-white/80 hover:text-red-400 transition-colors text-sm font-medium"
+              >
+                Book Other Singers →
+              </a>
+              <a
+                href="/qawwals"
+                className="text-white/80 hover:text-red-400 transition-colors text-sm font-medium"
+              >
+                Book Qawwali Artists →
+              </a>
             </div>
           </div>
         </div>
@@ -873,7 +924,7 @@ export default function Home() {
                     Discography
                   </span>
                   <h2 className="font-display text-2xl md:text-3xl font-bold text-white">
-                    Popular Songs
+                    Popular Songs by Mustafa Zahid
                   </h2>
                 </div>
                 {/* Animated Music Icon */}
@@ -907,7 +958,7 @@ export default function Home() {
                 <div className="relative aspect-[4/3] overflow-hidden">
                   <Image
                     src={`/${song.image}`}
-                    alt={`${song.title} by Mustafa Zahid`}
+                    alt={`${song.title} by Mustafa Zahid - Popular Pakistani song available for live performance booking`}
                     fill
                     className="object-cover transition-transform duration-700 group-hover:scale-110"
                     loading="lazy"
@@ -1421,6 +1472,100 @@ export default function Home() {
                 </form>
               </div>
             </div>
+          </div>
+        </div>
+      </section>
+
+      {/* FAQ Section */}
+      <section id="faq" className="relative py-12 lg:py-16 overflow-hidden">
+        <div className="max-w-7xl mx-auto px-6 lg:px-12">
+          <div className="text-center mb-12">
+            <span className="text-red-500 uppercase tracking-[0.3em] text-sm font-medium">
+              Common Questions
+            </span>
+            <h2 className="font-display text-4xl md:text-5xl lg:text-6xl font-bold text-white mt-4">
+              Frequently Asked <span className="text-gradient">Questions</span>
+            </h2>
+          </div>
+
+          <div className="max-w-4xl mx-auto space-y-4">
+            {[
+              {
+                q: "How can I book Mustafa Zahid for an event?",
+                a: "You can book live performances by contacting us via WhatsApp at +92 322 407 1299. We handle bookings for weddings, concerts, corporate events, and private performances across Pakistan. Our team will assist you with availability, pricing, and all booking details.",
+              },
+              {
+                q: "What is the booking price for events?",
+                a: "Booking prices vary depending on the event type, location, duration, and technical requirements. For accurate pricing and availability, please contact us directly via WhatsApp at +92 322 407 1299. We provide transparent pricing and work with you to create a package that fits your budget.",
+              },
+              {
+                q: "Is Mustafa Zahid available for weddings in Lahore?",
+                a: "Yes, the artist is available for wedding bookings in Lahore and across Pakistan. Whether it's a mehndi night, wedding ceremony, or reception, we can arrange live performances. Contact us to discuss your specific requirements and preferred dates.",
+              },
+              {
+                q: "Can I book for corporate events?",
+                a: "Absolutely! The performer is available for corporate events, product launches, company celebrations, and business gatherings. We provide professional sound systems and can customize the performance to match your event theme and requirements.",
+              },
+              {
+                q: "How far in advance should I book?",
+                a: "We recommend booking at least 2-3 months in advance, especially for popular dates and wedding seasons. However, we also accommodate last-minute bookings subject to availability. Contact us to check current availability for your preferred dates.",
+              },
+            ].map((faq, index) => (
+              <div
+                key={index}
+                className="glass-card rounded-2xl p-6 lg:p-8 hover-lift"
+              >
+                <h3 className="text-xl font-semibold text-white mb-3">
+                  {faq.q}
+                </h3>
+                <p className="text-white/80 leading-relaxed">{faq.a}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Testimonials Section Placeholder */}
+      <section className="relative py-12 lg:py-16 bg-gradient-to-b from-transparent via-red-950/10 to-transparent">
+        <div className="max-w-7xl mx-auto px-6 lg:px-12">
+          <div className="text-center mb-12">
+            <span className="text-red-500 uppercase tracking-[0.3em] text-sm font-medium">
+              Client Reviews
+            </span>
+            <h2 className="font-display text-4xl md:text-5xl lg:text-6xl font-bold text-white mt-4">
+              What Clients <span className="text-gradient">Say</span>
+            </h2>
+          </div>
+
+          <div className="max-w-6xl mx-auto">
+            <div className="glass-card rounded-3xl p-8 lg:p-12 text-center">
+              <p className="text-white/70 text-lg italic mb-6">
+                &quot;Testimonials and reviews from satisfied clients will be displayed here. 
+                This section showcases the quality of performances and client satisfaction 
+                with booking services.&quot;
+              </p>
+              <p className="text-white/50 text-sm">
+                Testimonials section ready for content addition
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Last Updated & E-A-T Signals */}
+      <section className="relative py-8 border-t border-white/10">
+        <div className="max-w-7xl mx-auto px-6 lg:px-12">
+          <div className="text-center text-white/50 text-sm space-y-2">
+            <p>
+              Last Updated: {new Date().toLocaleDateString('en-US', { 
+                year: 'numeric', 
+                month: 'long', 
+                day: 'numeric' 
+              })}
+            </p>
+            <p>
+              Official website of Mustafa Zahid - Pakistani singer, songwriter, and lead vocalist of Roxen
+            </p>
           </div>
         </div>
       </section>

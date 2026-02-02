@@ -8,7 +8,7 @@ import AnimatedBackground from "@/components/shared/AnimatedBackground";
 export const metadata: Metadata = {
   metadataBase: new URL('https://mustafazahid.com'),
   title: "Music Blog | Articles, News & Tutorials",
-  description: "Read articles, news, and insights about music, Pakistani music industry, vocal techniques, and music education. Latest music news and tutorials.",
+  description: "Read articles, news & insights about Pakistani music industry, vocal techniques & music education. Latest music news, tutorials & artist features.",
   keywords: "music blog, Pakistani music news, music articles, music tutorials, vocal techniques, music industry news, Pakistani music history, music education",
   
   openGraph: {

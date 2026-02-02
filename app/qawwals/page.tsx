@@ -8,8 +8,7 @@ import AnimatedBackground from "@/components/shared/AnimatedBackground";
 export const metadata: Metadata = {
   metadataBase: new URL("https://mustafazahid.com"),
   title: "Book Qawwali Artists | Hire Qawwals for Weddings & Live Events",
-  description: `Hire professional Qawwali artists and groups for weddings, mehndi nights, corporate events, and private celebrations. 
-Book live Qawwali performances with authentic Sufi music and soulful vocals to make your event unforgettable.`,
+  description: `Book professional Qawwali artists for weddings, mehndi nights, corporate events in Lahore. Authentic Sufi music & live performances. Contact: +92 322 407 1299`,
   keywords:
     "book Qawwali artists, hire Qawwals, Qawwali for wedding, live Qawwali performance, Qawwali group booking, Sufi singers, traditional Qawwali artists, Pakistani Qawwali",
 

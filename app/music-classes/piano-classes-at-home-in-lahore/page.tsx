@@ -7,12 +7,12 @@ import AnimatedBackground from "@/components/shared/AnimatedBackground";
 export const metadata: Metadata = {
   metadataBase: new URL('https://mustafazahid.com'),
   title: "Piano Classes at Home | Private Piano Lessons | Home Piano Training",
-  description: "Get private piano classes at your home. One-on-one piano lessons with expert instructors. Convenient home-based piano training for all levels. Book now for piano lessons at home in Pakistan.",
+  description: "Private piano classes at home in Lahore. One-on-one lessons with expert instructors. All levels. Book now: +92 322 407 1299. Convenient home-based training.",
   keywords: "piano classes at home, private piano lessons, home piano training, piano tutor at home, keyboard lessons at home, home piano classes Karachi, private piano instructor, piano classes at home Lahore, home piano lessons Pakistan",
   
   openGraph: {
     title: "Piano Classes at Home - Private Piano Lessons",
-    description: "Get private piano classes at your home. One-on-one lessons with expert instructors.",
+    description: "Private piano classes at home in Lahore. One-on-one lessons. Expert instructors. Book now: +92 322 407 1299",
     url: "https://mustafazahid.com/music-classes/piano-classes-at-home",
     siteName: "Music Classes",
     images: [

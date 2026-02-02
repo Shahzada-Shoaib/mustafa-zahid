@@ -8,7 +8,7 @@ import AnimatedBackground from "@/components/shared/AnimatedBackground";
 export const metadata: Metadata = {
   metadataBase: new URL('https://mustafazahid.com'),
   title: "Book Singers & Music Artists | Hire Vocalists for Events",
-  description: "Hire professional singers, music artists, and vocalists for weddings, mehndi nights, corporate events, and private celebrations. Book live performances by talented artists to make your event unforgettable.",
+  description: "Book professional singers & music artists for weddings, mehndi nights, corporate events in Lahore. Live performances available. Contact: +92 322 407 1299",
   keywords: "book singers, hire singers, live music performance, vocalists for weddings, music artists booking, hire artists for events, singers for mehndi, live event singers, wedding music performers",
 
   openGraph: {

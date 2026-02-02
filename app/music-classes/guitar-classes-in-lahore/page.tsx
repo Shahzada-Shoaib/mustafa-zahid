@@ -25,12 +25,12 @@ import { SPACING } from "@/lib/utils/spacing";
 export const metadata: Metadata = {
   metadataBase: new URL('https://mustafazahid.com'),
   title: "Guitar Classes in Lahore | Learn Acoustic & Electric Guitar Online & Offline",
-  description: "Join professional guitar classes and lessons. Learn acoustic and electric guitar from expert instructors. Beginner to advanced level guitar training available. Enroll now to start your guitar journey and improve your skills.",
+  description: "Professional guitar classes in Lahore. Learn acoustic & electric guitar from expert instructors. Beginner to advanced training. Book now: +92 322 407 1299. Studio & home classes available.",
   keywords: "guitar classes, guitar lessons, learn guitar, guitar training, acoustic guitar lessons, electric guitar classes, guitar instructor, online guitar lessons, beginner guitar lessons, advanced guitar training, professional guitar classes",
 
   openGraph: {
     title: "Guitar Classes in Lahore | Learn Acoustic & Electric Guitar",
-    description: "Join professional guitar classes and learn acoustic and electric guitar from expert instructors. Beginner to advanced level guitar training available.",
+    description: "Professional guitar classes in Lahore. Learn acoustic & electric guitar. Expert instructors. Book now: +92 322 407 1299",
     url: "https://mustafazahid.com/music-classes/guitar-classes",
     siteName: "Music Classes",
     images: [

@@ -7,12 +7,12 @@ import AnimatedBackground from "@/components/shared/AnimatedBackground";
 export const metadata: Metadata = {
   metadataBase: new URL('https://mustafazahid.com'),
   title: "Guitar Classes at Home in Lahore | Private Guitar Lessons & Training",
-  description: "Get private guitar classes at your home in Lahore. One-on-one guitar lessons with expert instructors for beginners to advanced players. Convenient home-based guitar training. Book now for guitar lessons in Lahore.",
+  description: "Private guitar classes at home in Lahore. One-on-one lessons with expert instructors. All levels. Book now: +92 322 407 1299. Convenient home-based training.",
   keywords: "guitar classes at home Lahore, private guitar lessons Lahore, home guitar training Lahore, guitar tutor at home Lahore, guitar lessons at home Lahore, private guitar instructor Lahore, home guitar classes Lahore, home guitar lessons Lahore",
 
   openGraph: {
     title: "Guitar Classes at Home in Lahore | Private Lessons",
-    description: "Book private guitar classes at your home in Lahore. One-on-one lessons with expert instructors for all levels.",
+    description: "Private guitar classes at home in Lahore. One-on-one lessons. Expert instructors. Book now: +92 322 407 1299",
     url: "https://mustafazahid.com/music-classes/guitar-classes-at-home",
     siteName: "Music Classes",
     images: [
