@@ -1,9 +1,21 @@
 import { MetadataRoute } from "next";
+import { getAllSingerSlugs } from "@/lib/data/singers";
+import { getAllQawwalSlugs } from "@/lib/data/qawwals";
+import { getAllBlogSlugs } from "@/lib/data/blog";
+import { SITE_URL } from "@/lib/constants/site";
 
-export default function sitemap(): MetadataRoute.Sitemap {
-  const baseUrl = "https://mustafazahid.com";
+export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
+  const baseUrl = SITE_URL;
 
-  return [
+  // Fetch all dynamic route slugs in parallel
+  const [singerSlugs, qawwalSlugs, blogSlugs] = await Promise.all([
+    getAllSingerSlugs(),
+    getAllQawwalSlugs(),
+    getAllBlogSlugs(),
+  ]);
+
+  // Static pages
+  const staticPages: MetadataRoute.Sitemap = [
     // Home page
     {
       url: baseUrl,
@@ -61,62 +73,52 @@ export default function sitemap(): MetadataRoute.Sitemap {
       changeFrequency: "monthly",
       priority: 0.8,
     },
-    // Singers Pages
+    // Singers listing page
     {
       url: `${baseUrl}/singers`,
       lastModified: new Date(),
       changeFrequency: "weekly",
       priority: 0.9,
     },
-    {
-      url: `${baseUrl}/singers/hire-atif-aslam-for-concert`,
-      lastModified: new Date(),
-      changeFrequency: "monthly",
-      priority: 0.7,
-    },
-    {
-      url: `${baseUrl}/singers/book-rdb-for-wedding`,
-      lastModified: new Date(),
-      changeFrequency: "monthly",
-      priority: 0.7,
-    },
-    // Qawwals Pages
+    // Qawwals listing page
     {
       url: `${baseUrl}/qawwals`,
       lastModified: new Date(),
       changeFrequency: "weekly",
       priority: 0.9,
     },
-    {
-      url: `${baseUrl}/qawwals/nusrat-fateh-ali-khan`,
-      lastModified: new Date(),
-      changeFrequency: "monthly",
-      priority: 0.7,
-    },
-    {
-      url: `${baseUrl}/qawwals/book-rahat-fateh-ali-khan-for-wedding-event`,
-      lastModified: new Date(),
-      changeFrequency: "monthly",
-      priority: 0.7,
-    },
-    // Blog Pages
+    // Blog listing page
     {
       url: `${baseUrl}/blog`,
       lastModified: new Date(),
       changeFrequency: "daily",
       priority: 0.9,
     },
-    {
-      url: `${baseUrl}/blog/history-of-pakistani-music`,
-      lastModified: new Date(),
-      changeFrequency: "weekly",
-      priority: 0.8,
-    },
-    {
-      url: `${baseUrl}/blog/vocal-techniques`,
-      lastModified: new Date(),
-      changeFrequency: "weekly",
-      priority: 0.8,
-    },
   ];
+
+  // Dynamic singer pages
+  const singerPages: MetadataRoute.Sitemap = singerSlugs.map((slug) => ({
+    url: `${baseUrl}/singers/${slug}`,
+    lastModified: new Date(),
+    changeFrequency: "monthly" as const,
+    priority: 0.7,
+  }));
+
+  // Dynamic qawwal pages
+  const qawwalPages: MetadataRoute.Sitemap = qawwalSlugs.map((slug) => ({
+    url: `${baseUrl}/qawwals/${slug}`,
+    lastModified: new Date(),
+    changeFrequency: "monthly" as const,
+    priority: 0.7,
+  }));
+
+  // Dynamic blog pages
+  const blogPages: MetadataRoute.Sitemap = blogSlugs.map((slug) => ({
+    url: `${baseUrl}/blog/${slug}`,
+    lastModified: new Date(),
+    changeFrequency: "weekly" as const,
+    priority: 0.8,
+  }));
+
+  return [...staticPages, ...singerPages, ...qawwalPages, ...blogPages];
 }

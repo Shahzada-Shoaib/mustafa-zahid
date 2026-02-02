@@ -13,17 +13,16 @@ export async function POST(request: NextRequest) {
       );
     }
 
-    // TODO: Integrate with your email service (Mailchimp, ConvertKit, etc.)
-    // For now, we'll just log it and return success
-    // You can add your email service integration here
-    console.log('Newsletter subscription:', email);
-
-    // Example: Send to external service
-    // await fetch('https://your-email-service.com/api/subscribe', {
-    //   method: 'POST',
-    //   headers: { 'Content-Type': 'application/json' },
-    //   body: JSON.stringify({ email }),
-    // });
+    /**
+     * TODO: Integrate with your email service (Mailchimp, ConvertKit, etc.)
+     * 
+     * Example implementation:
+     * await fetch('https://your-email-service.com/api/subscribe', {
+     *   method: 'POST',
+     *   headers: { 'Content-Type': 'application/json' },
+     *   body: JSON.stringify({ email }),
+     * });
+     */
 
     return NextResponse.json(
       { message: 'Successfully subscribed to newsletter' },
