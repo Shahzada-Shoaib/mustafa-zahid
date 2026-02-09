@@ -1,6 +1,7 @@
 'use client';
 import Footer from "@/components/layout/Footer";
 import Header from "@/components/layout/Header";
+import ClientReviews from "@/components/sections/ClientReviews";
 import Image from "next/image";
 import { useEffect, useState } from "react";
 
@@ -320,6 +321,14 @@ export default function Home() {
           100% {
             transform: scale(1);
           }
+        }
+
+        .scrollbar-hide {
+          -ms-overflow-style: none;
+          scrollbar-width: none;
+        }
+        .scrollbar-hide::-webkit-scrollbar {
+          display: none;
         }
       `}</style>
 
@@ -1525,32 +1534,8 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Testimonials Section Placeholder */}
-      <section className="relative py-12 lg:py-16 bg-gradient-to-b from-transparent via-red-950/10 to-transparent">
-        <div className="max-w-7xl mx-auto px-6 lg:px-12">
-          <div className="text-center mb-12">
-            <span className="text-red-500 uppercase tracking-[0.3em] text-sm font-medium">
-              Client Reviews
-            </span>
-            <h2 className="font-display text-4xl md:text-5xl lg:text-6xl font-bold text-white mt-4">
-              What Clients <span className="text-gradient">Say</span>
-            </h2>
-          </div>
-
-          <div className="max-w-6xl mx-auto">
-            <div className="glass-card rounded-3xl p-8 lg:p-12 text-center">
-              <p className="text-white/70 text-lg italic mb-6">
-                &quot;Testimonials and reviews from satisfied clients will be displayed here. 
-                This section showcases the quality of performances and client satisfaction 
-                with booking services.&quot;
-              </p>
-              <p className="text-white/50 text-sm">
-                Testimonials section ready for content addition
-              </p>
-            </div>
-          </div>
-        </div>
-      </section>
+      {/* Testimonials Section */}
+      <ClientReviews />
 
       {/* Last Updated & E-A-T Signals */}
       <section className="relative py-8 border-t border-white/10">
