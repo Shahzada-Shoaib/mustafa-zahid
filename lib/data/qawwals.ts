@@ -21,6 +21,25 @@ export interface Qawwal {
   gallery: string[];
   milestones: Array<{ year: number; event: string }>;
   achievements: string[];
+  metadata: {
+    title: string;
+    description: string;
+    keywords: string;
+    ogTitle: string;
+    ogDescription: string;
+    twitterTitle: string;
+    twitterDescription: string;
+  };
+  seo?: {
+    structuredData?: {
+      jobTitle?: string;
+      knowsAbout?: string[];
+    };
+    faqs?: Array<{
+      question: string;
+      answer: string;
+    }>;
+  };
 }
 
 async function getAllQawwals(): Promise<Qawwal[]> {
@@ -151,6 +170,39 @@ async function getAllQawwals(): Promise<Qawwal[]> {
         "Recorded over 125 albums, preserving traditional Qawwali for future generations",
         "Recognized as one of the greatest voices in music history",
       ],
+      metadata: {
+        title: "Book Nusrat Fateh Ali Khan | Nusrat Fateh Ali Khan Qawwali Booking - Concerts, Weddings & Events",
+        description: "Book Nusrat Fateh Ali Khan for your event, concert, or wedding. Nusrat Fateh Ali Khan Qawwali booking available for concerts, weddings, corporate events, and spiritual gatherings across Pakistan. Contact us via WhatsApp at +92 322 407 1299 to book Nusrat Fateh Ali Khan for your event. Professional booking services for Nusrat Fateh Ali Khan Qawwali performances.",
+        keywords: "book nusrat fateh ali khan for event, nusrat fateh ali khan booking, hire nusrat fateh ali khan for qawwali, nusrat fateh ali khan event booking, book nusrat fateh ali khan pakistan, nusrat fateh ali khan qawwali booking, book nusrat fateh ali khan for wedding, nusrat fateh ali khan sufi music booking, nusrat fateh ali khan booking price, how to book nusrat fateh ali khan, nusrat fateh ali khan contact for booking, nusrat fateh ali khan qawwali, nusrat fateh ali khan sufi music, nusrat fateh ali khan biography, nusrat fateh ali khan performances, traditional qawwali artist nusrat fateh ali khan",
+        ogTitle: "Book Nusrat Fateh Ali Khan | Nusrat Fateh Ali Khan Qawwali Booking",
+        ogDescription: "Book Nusrat Fateh Ali Khan for Qawwali performances, concerts, weddings, and corporate events. Nusrat Fateh Ali Khan booking available across Pakistan. Contact +92 322 407 1299 for Nusrat Fateh Ali Khan event booking.",
+        twitterTitle: "Book Nusrat Fateh Ali Khan | Nusrat Fateh Ali Khan Qawwali Booking",
+        twitterDescription: "Book Nusrat Fateh Ali Khan for Qawwali performances, concerts, and weddings. Contact +92 322 407 1299 for booking.",
+      },
+      seo: {
+        structuredData: {
+          jobTitle: "Qawwali Singer",
+          knowsAbout: ["Qawwali", "Sufi Music", "Traditional Music", "Pakistani Music", "Spiritual Music"],
+        },
+        faqs: [
+          {
+            question: "How can I book Nusrat Fateh Ali Khan for a wedding or live event?",
+            answer: "If you are looking to book Nusrat Fateh Ali Khan for a wedding, Qawwali night, or live performance, you can contact us directly via WhatsApp at +92 322 407 1299. We manage official bookings for Nusrat Fateh Ali Khan for weddings, corporate events, concerts, and private functions in Pakistan and internationally.",
+          },
+          {
+            question: "What is the booking price of Nusrat Fateh Ali Khan?",
+            answer: "The booking price of Nusrat Fateh Ali Khan depends on the event type, city, performance duration, and technical requirements. For the latest Nusrat Fateh Ali Khan booking charges and availability, please contact us on WhatsApp at +92 322 407 1299 for an accurate quote.",
+          },
+          {
+            question: "Can I hire Nusrat Fateh Ali Khan for a wedding Qawwali performance?",
+            answer: "Yes, Nusrat Fateh Ali Khan is available to hire for wedding Qawwali performances, mehndi nights, and spiritual gatherings. Clients frequently book Nusrat Fateh Ali Khan for weddings to create a soulful and unforgettable atmosphere. Contact us on WhatsApp to check date availability and performance details.",
+          },
+          {
+            question: "Is Nusrat Fateh Ali Khan available for corporate events and Qawwali nights?",
+            answer: "Nusrat Fateh Ali Khan is available for corporate events, Sufi nights, cultural festivals, and private Qawwali gatherings. If you are planning to hire Nusrat Fateh Ali Khan for a corporate event or spiritual evening, reach out via WhatsApp at +92 322 407 1299 for booking details.",
+          },
+        ],
+      },
     },
     {
       slug: "book-rahat-fateh-ali-khan-for-wedding-event",
@@ -278,6 +330,39 @@ async function getAllQawwals(): Promise<Qawwal[]> {
         "Global recognition in Qawwali and Bollywood playback singing",
         "Highly respected for soulful and spiritually uplifting live performances",
       ],
+      metadata: {
+        title: "Book Rahat Fateh Ali Khan for Wedding | Rahat Fateh Ali Khan Qawwali Booking - Concerts, Weddings & Events",
+        description: "Book Rahat Fateh Ali Khan for your event, concert, or wedding. Rahat Fateh Ali Khan Qawwali booking available for concerts, weddings, corporate events, and spiritual gatherings across Pakistan. Contact us via WhatsApp at +92 322 407 1299 to book Rahat Fateh Ali Khan for your event. Professional booking services for Rahat Fateh Ali Khan Qawwali performances.",
+        keywords: "book rahat fateh ali khan for event, rahat fateh ali khan booking, hire rahat fateh ali khan for qawwali, rahat fateh ali khan event booking, book rahat fateh ali khan pakistan, rahat fateh ali khan qawwali booking, book rahat fateh ali khan for wedding, rahat fateh ali khan sufi music booking, rahat fateh ali khan booking price, how to book rahat fateh ali khan, rahat fateh ali khan contact for booking, rahat fateh ali khan qawwali, rahat fateh ali khan sufi music, rahat fateh ali khan biography, rahat fateh ali khan performances, traditional qawwali artist rahat fateh ali khan",
+        ogTitle: "Book Rahat Fateh Ali Khan for Wedding | Rahat Fateh Ali Khan Qawwali Booking",
+        ogDescription: "Book Rahat Fateh Ali Khan for Qawwali performances, concerts, weddings, and corporate events. Rahat Fateh Ali Khan booking available across Pakistan. Contact +92 322 407 1299 for Rahat Fateh Ali Khan event booking.",
+        twitterTitle: "Book Rahat Fateh Ali Khan for Wedding | Rahat Fateh Ali Khan Qawwali Booking",
+        twitterDescription: "Book Rahat Fateh Ali Khan for Qawwali performances, concerts, and weddings. Contact +92 322 407 1299 for booking.",
+      },
+      seo: {
+        structuredData: {
+          jobTitle: "Qawwali Singer",
+          knowsAbout: ["Qawwali", "Sufi Music", "Traditional Music", "Pakistani Music", "Bollywood Playback Singing"],
+        },
+        faqs: [
+          {
+            question: "How can I book Rahat Fateh Ali Khan for a wedding or live event?",
+            answer: "If you are looking to book Rahat Fateh Ali Khan for a wedding, Qawwali night, or live performance, you can contact us directly via WhatsApp at +92 322 407 1299. We manage official bookings for Rahat Fateh Ali Khan for weddings, corporate events, concerts, and private functions in Pakistan and internationally.",
+          },
+          {
+            question: "What is the booking price of Rahat Fateh Ali Khan?",
+            answer: "The booking price of Rahat Fateh Ali Khan depends on the event type, city, performance duration, and technical requirements. For the latest Rahat Fateh Ali Khan booking charges and availability, please contact us on WhatsApp at +92 322 407 1299 for an accurate quote.",
+          },
+          {
+            question: "Can I hire Rahat Fateh Ali Khan for a wedding Qawwali performance?",
+            answer: "Yes, Rahat Fateh Ali Khan is available to hire for wedding Qawwali performances, mehndi nights, and spiritual gatherings. Clients frequently book Rahat Fateh Ali Khan for weddings to create a soulful and unforgettable atmosphere. Contact us on WhatsApp to check date availability and performance details.",
+          },
+          {
+            question: "Is Rahat Fateh Ali Khan available for corporate events and Qawwali nights?",
+            answer: "Rahat Fateh Ali Khan is available for corporate events, Sufi nights, cultural festivals, and private Qawwali gatherings. If you are planning to hire Rahat Fateh Ali Khan for a corporate event or spiritual evening, reach out via WhatsApp at +92 322 407 1299 for booking details.",
+          },
+        ],
+      },
     },
   ];
 }

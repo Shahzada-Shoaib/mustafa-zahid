@@ -19,7 +19,7 @@ function generateStructuredData(singer: Singer) {
     "@context": "https://schema.org",
     "@type": "Person",
     name: singer.name,
-    jobTitle: "Singer",
+    jobTitle: singer.seo?.structuredData?.jobTitle || "Singer",
     description: singer.bio,
     birthDate: singer.birthDate,
     birthPlace: {
@@ -28,41 +28,39 @@ function generateStructuredData(singer: Singer) {
     },
     url: `https://mustafazahid.com/singers/${singer.slug}`,
     image: `https://mustafazahid.com${singer.image}`,
-    knowsAbout: ["Pakistani Music", "Pop Music", "Rock Music", "Singing"],
+    knowsAbout: singer.seo?.structuredData?.knowsAbout || ["Pakistani Music", "Pop Music", "Rock Music", "Singing"],
     award: singer.awards.map((award) => `${award.name} - ${award.year}`),
   };
 }
 
 function generateFAQSchema(singer: Singer) {
+  // Use custom FAQs if available, otherwise use default template
+  const faqs = singer.seo?.faqs || [
+    {
+      question: `How to book ${singer.name} for an event?`,
+      answer: `To book ${singer.name} for your event, concert, or wedding, contact us via WhatsApp at +92 322 407 1299. We handle bookings for ${singer.name} for various events including concerts, weddings, corporate events, and private performances across Pakistan and internationally.`,
+    },
+    {
+      question: `What is the booking price for ${singer.name}?`,
+      answer: `The booking price for ${singer.name} varies depending on the type of event, location, and duration. For detailed pricing information and availability, please contact us directly via WhatsApp at +92 322 407 1299.`,
+    },
+    {
+      question: `Can I book ${singer.name} for a wedding?`,
+      answer: `Yes, ${singer.name} is available for wedding bookings. ${singer.name} performs at weddings and special events, making your special day even more memorable. Contact us via WhatsApp to discuss your wedding event requirements and availability.`,
+    },
+  ];
+
   return {
     "@context": "https://schema.org",
     "@type": "FAQPage",
-    mainEntity: [
-      {
-        "@type": "Question",
-        name: `How to book ${singer.name} for an event?`,
-        acceptedAnswer: {
-          "@type": "Answer",
-          text: `To book ${singer.name} for your event, concert, or wedding, contact us via WhatsApp at +92 322 407 1299. We handle bookings for ${singer.name} for various events including concerts, weddings, corporate events, and private performances across Pakistan and internationally.`,
-        },
+    mainEntity: faqs.map((faq) => ({
+      "@type": "Question",
+      name: faq.question,
+      acceptedAnswer: {
+        "@type": "Answer",
+        text: faq.answer,
       },
-      {
-        "@type": "Question",
-        name: `What is the booking price for ${singer.name}?`,
-        acceptedAnswer: {
-          "@type": "Answer",
-          text: `The booking price for ${singer.name} varies depending on the type of event, location, and duration. For detailed pricing information and availability, please contact us directly via WhatsApp at +92 322 407 1299.`,
-        },
-      },
-      {
-        "@type": "Question",
-        name: `Can I book ${singer.name} for a wedding?`,
-        acceptedAnswer: {
-          "@type": "Answer",
-          text: `Yes, ${singer.name} is available for wedding bookings. ${singer.name} performs at weddings and special events, making your special day even more memorable. Contact us via WhatsApp to discuss your wedding event requirements and availability.`,
-        },
-      },
-    ],
+    })),
   };
 }
 
@@ -81,30 +79,15 @@ export async function generateMetadata({
     };
   }
 
-  const bookingKeywords = [
-    `book ${singer.name} for event`,
-    `${singer.name} booking`,
-    `hire ${singer.name} for concert`,
-    `${singer.name} event booking`,
-    `book ${singer.name} pakistan`,
-    `${singer.name} concert booking`,
-    `${singer.name} live performance booking`,
-    `book ${singer.name} for wedding`,
-    `${singer.name} corporate event booking`,
-    `${singer.name} booking price`,
-    `how to book ${singer.name}`,
-    `${singer.name} contact for booking`,
-  ].join(", ");
-
   return {
     metadataBase: new URL("https://mustafazahid.com"),
-    title: `Book ${singer.name} for Event | ${singer.name} Booking - Concerts, Weddings & Corporate Events`,
-    description: `Book ${singer.name} for your event, concert, or wedding. ${singer.name} booking available for concerts, weddings, corporate events, and live performances across Pakistan. Contact us via WhatsApp at +92 322 407 1299 to book ${singer.name} for your event. Professional booking services for ${singer.name} concerts and events.`,
-    keywords: `${bookingKeywords}, ${singer.name} pakistani singer, ${singer.name} biography, ${singer.name} songs, ${singer.name} albums, pakistani music artist ${singer.name}`,
+    title: singer.metadata.title,
+    description: singer.metadata.description,
+    keywords: singer.metadata.keywords,
 
     openGraph: {
-      title: `Book ${singer.name} for Event | ${singer.name} Booking`,
-      description: `Book ${singer.name} for concerts, weddings, and corporate events. ${singer.name} booking available across Pakistan. Contact +92 322 407 1299 for ${singer.name} event booking.`,
+      title: singer.metadata.ogTitle,
+      description: singer.metadata.ogDescription,
       url: `https://mustafazahid.com/singers/${slug}`,
       siteName: "Mustafa Zahid - Music & Events",
       images: [
@@ -121,8 +104,8 @@ export async function generateMetadata({
 
     twitter: {
       card: "summary_large_image",
-      title: `Book ${singer.name} for Event | ${singer.name} Booking`,
-      description: `Book ${singer.name} for concerts, weddings, and corporate events. Contact +92 322 407 1299 for booking.`,
+      title: singer.metadata.twitterTitle,
+      description: singer.metadata.twitterDescription,
       images: [singer.image],
     },
 

@@ -7,6 +7,15 @@ export interface BlogPost {
   author: string;
   category: string;
   excerpt: string;
+  metadata: {
+    title: string;
+    description: string;
+    keywords: string;
+    ogTitle: string;
+    ogDescription: string;
+    twitterTitle: string;
+    twitterDescription: string;
+  };
 }
 
 async function getAllBlogPosts(): Promise<BlogPost[]> {
@@ -25,6 +34,15 @@ async function getAllBlogPosts(): Promise<BlogPost[]> {
       author: "Music Editor",
       category: "Music History",
       excerpt: "Explore the rich history and evolution of Pakistani music from traditional to contemporary styles.",
+      metadata: {
+        title: "The History of Pakistani Music | Music Blog",
+        description: "Explore the rich history and evolution of Pakistani music from traditional to contemporary styles. Learn about the cultural heritage and musical traditions of Pakistan.",
+        keywords: "Music History, pakistani music, music blog, history of pakistani music, traditional music, contemporary music, pakistani music industry, music culture",
+        ogTitle: "The History of Pakistani Music",
+        ogDescription: "Explore the rich history and evolution of Pakistani music from traditional to contemporary styles.",
+        twitterTitle: "The History of Pakistani Music",
+        twitterDescription: "Explore the rich history and evolution of Pakistani music from traditional to contemporary styles.",
+      },
     },
     {
       slug: "vocal-techniques",
@@ -35,6 +53,15 @@ async function getAllBlogPosts(): Promise<BlogPost[]> {
       author: "Music Editor",
       category: "Tutorial",
       excerpt: "Learn professional vocal techniques used by industry experts to improve your singing.",
+      metadata: {
+        title: "Essential Vocal Techniques for Singers | Music Blog",
+        description: "Learn professional vocal techniques used by industry experts to improve your singing. Master breathing, pitch control, and vocal health for better performance.",
+        keywords: "Tutorial, vocal techniques, singing tips, music blog, vocal training, singing lessons, vocal health, singing techniques, professional singing",
+        ogTitle: "Essential Vocal Techniques for Singers",
+        ogDescription: "Learn professional vocal techniques used by industry experts to improve your singing.",
+        twitterTitle: "Essential Vocal Techniques for Singers",
+        twitterDescription: "Learn professional vocal techniques used by industry experts to improve your singing.",
+      },
     },
   ];
 }

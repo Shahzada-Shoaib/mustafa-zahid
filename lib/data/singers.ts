@@ -28,6 +28,25 @@ export interface Singer {
   gallery: string[];
   milestones: Array<{ year: number; event: string }>;
   achievements: string[];
+  metadata: {
+    title: string;
+    description: string;
+    keywords: string;
+    ogTitle: string;
+    ogDescription: string;
+    twitterTitle: string;
+    twitterDescription: string;
+  };
+  seo?: {
+    structuredData?: {
+      jobTitle?: string;
+      knowsAbout?: string[];
+    };
+    faqs?: Array<{
+      question: string;
+      answer: string;
+    }>;
+  };
 }
 
 async function getAllSingers(): Promise<Singer[]> {
@@ -187,6 +206,35 @@ async function getAllSingers(): Promise<Singer[]> {
         "Recognized as one of the most influential voices in South Asian music",
         "Successfully bridged Pakistani and Indian music industries",
       ],
+      metadata: {
+        title: "Book Atif Aslam for Event | Atif Aslam Booking - Concerts, Weddings & Corporate Events",
+        description: "Book Atif Aslam for your event, concert, or wedding. Atif Aslam booking available for concerts, weddings, corporate events, and live performances across Pakistan. Contact us via WhatsApp at +92 322 407 1299 to book Atif Aslam for your event. Professional booking services for Atif Aslam concerts and events.",
+        keywords: "book atif aslam for event, atif aslam booking, hire atif aslam for concert, atif aslam event booking, book atif aslam pakistan, atif aslam concert booking, atif aslam live performance booking, book atif aslam for wedding, atif aslam corporate event booking, atif aslam booking price, how to book atif aslam, atif aslam contact for booking, atif aslam pakistani singer, atif aslam biography, atif aslam songs, atif aslam albums, pakistani music artist atif aslam",
+        ogTitle: "Book Atif Aslam for Event | Atif Aslam Booking",
+        ogDescription: "Book Atif Aslam for concerts, weddings, and corporate events. Atif Aslam booking available across Pakistan. Contact +92 322 407 1299 for Atif Aslam event booking.",
+        twitterTitle: "Book Atif Aslam for Event | Atif Aslam Booking",
+        twitterDescription: "Book Atif Aslam for concerts, weddings, and corporate events. Contact +92 322 407 1299 for booking.",
+      },
+      seo: {
+        structuredData: {
+          jobTitle: "Singer",
+          knowsAbout: ["Pakistani Music", "Pop Music", "Rock Music", "Singing", "Bollywood Music"],
+        },
+        faqs: [
+          {
+            question: "How to book Atif Aslam for an event?",
+            answer: "To book Atif Aslam for your event, concert, or wedding, contact us via WhatsApp at +92 322 407 1299. We handle bookings for Atif Aslam for various events including concerts, weddings, corporate events, and private performances across Pakistan and internationally.",
+          },
+          {
+            question: "What is the booking price for Atif Aslam?",
+            answer: "The booking price for Atif Aslam varies depending on the type of event, location, and duration. For detailed pricing information and availability, please contact us directly via WhatsApp at +92 322 407 1299.",
+          },
+          {
+            question: "Can I book Atif Aslam for a wedding?",
+            answer: "Yes, Atif Aslam is available for wedding bookings. Atif Aslam performs at weddings and special events, making your special day even more memorable. Contact us via WhatsApp to discuss your wedding event requirements and availability.",
+          },
+        ],
+      },
     },
     {
       slug: "book-rdb-for-wedding",
@@ -305,6 +353,35 @@ async function getAllSingers(): Promise<Singer[]> {
         "Highly trusted for wedding, private, and corporate event bookings",
         "Renowned for energetic, crowd-focused live performances",
       ],
+      metadata: {
+        title: "Book RDB (Surj) for Wedding | RDB Booking - Punjabi Music Events & Live Performances",
+        description: "Book RDB (Surj) for your wedding, mehndi night, or private event. RDB booking available for weddings, Punjabi music events, and high-energy live performances across Pakistan. Contact us via WhatsApp at +92 322 407 1299 to book RDB for your event. Professional booking services for RDB concerts and Punjabi music events.",
+        keywords: "book rdb for wedding, rdb booking, hire rdb for event, rdb wedding booking, book rdb pakistan, rdb concert booking, rdb live performance booking, book rdb for mehndi, rdb corporate event booking, rdb booking price, how to book rdb, rdb contact for booking, rdb punjabi singer, rdb biography, rdb songs, rdb albums, punjabi music artist rdb, book surj for wedding",
+        ogTitle: "Book RDB (Surj) for Wedding | RDB Booking",
+        ogDescription: "Book RDB (Surj) for weddings, mehndi nights, and Punjabi music events. RDB booking available across Pakistan. Contact +92 322 407 1299 for RDB event booking.",
+        twitterTitle: "Book RDB (Surj) for Wedding | RDB Booking",
+        twitterDescription: "Book RDB (Surj) for weddings, mehndi nights, and Punjabi music events. Contact +92 322 407 1299 for booking.",
+      },
+      seo: {
+        structuredData: {
+          jobTitle: "Punjabi Singer",
+          knowsAbout: ["Punjabi Music", "Bhangra", "Urban Music", "Live Performance", "Wedding Entertainment"],
+        },
+        faqs: [
+          {
+            question: "How to book RDB (Surj) for an event?",
+            answer: "To book RDB (Surj) for your wedding, mehndi night, or private event, contact us via WhatsApp at +92 322 407 1299. We handle bookings for RDB for various events including weddings, mehndi nights, sangeet ceremonies, and private parties across Pakistan and internationally.",
+          },
+          {
+            question: "What is the booking price for RDB (Surj)?",
+            answer: "The booking price for RDB (Surj) varies depending on the type of event, location, and duration. For detailed pricing information and availability, please contact us directly via WhatsApp at +92 322 407 1299.",
+          },
+          {
+            question: "Can I book RDB (Surj) for a wedding?",
+            answer: "Yes, RDB (Surj) is available for wedding bookings. RDB performs at weddings, mehndi nights, and special events, making your celebration even more memorable. Contact us via WhatsApp to discuss your wedding event requirements and availability.",
+          },
+        ],
+      },
     },
   ];
 }

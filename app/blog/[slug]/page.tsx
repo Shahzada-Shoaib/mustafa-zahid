@@ -29,13 +29,13 @@ export async function generateMetadata({
 
   return {
     metadataBase: new URL('https://mustafazahid.com'),
-    title: `${post.title} | Music Blog`,
-    description: post.excerpt || post.content.substring(0, 160),
-    keywords: `${post.category}, music blog, ${post.title}`,
+    title: post.metadata.title,
+    description: post.metadata.description,
+    keywords: post.metadata.keywords,
     
     openGraph: {
-      title: post.title,
-      description: post.excerpt || post.content.substring(0, 160),
+      title: post.metadata.ogTitle,
+      description: post.metadata.ogDescription,
       url: `https://mustafazahid.com/blog/${slug}`,
       siteName: "Music Blog",
       images: [
@@ -54,8 +54,8 @@ export async function generateMetadata({
     
     twitter: {
       card: "summary_large_image",
-      title: post.title,
-      description: post.excerpt || post.content.substring(0, 160),
+      title: post.metadata.twitterTitle,
+      description: post.metadata.twitterDescription,
       images: [post.image],
     },
     

@@ -19,7 +19,7 @@ function generateStructuredData(qawwal: Qawwal) {
     "@context": "https://schema.org",
     "@type": "Person",
     name: qawwal.name,
-    jobTitle: "Qawwali Singer",
+    jobTitle: qawwal.seo?.structuredData?.jobTitle || "Qawwali Singer",
     description: qawwal.bio,
     birthDate: qawwal.birthDate,
     birthPlace: {
@@ -28,7 +28,7 @@ function generateStructuredData(qawwal: Qawwal) {
     },
     url: `https://mustafazahid.com/qawwals/${qawwal.slug}`,
     image: `https://mustafazahid.com${qawwal.image}`,
-    knowsAbout: [
+    knowsAbout: qawwal.seo?.structuredData?.knowsAbout || [
       "Qawwali",
       "Sufi Music",
       "Traditional Music",
@@ -39,43 +39,37 @@ function generateStructuredData(qawwal: Qawwal) {
 }
 
 function generateFAQSchema(qawwal: Qawwal) {
+  // Use custom FAQs if available, otherwise use default template
+  const faqs = qawwal.seo?.faqs || [
+    {
+      question: `How can I book ${qawwal.name} for a wedding or live event?`,
+      answer: `If you are looking to book ${qawwal.name} for a wedding, Qawwali night, or live performance, you can contact us directly via WhatsApp at +92 322 407 1299. We manage official bookings for ${qawwal.name} for weddings, corporate events, concerts, and private functions in Pakistan and internationally.`,
+    },
+    {
+      question: `What is the booking price of ${qawwal.name}?`,
+      answer: `The booking price of ${qawwal.name} depends on the event type, city, performance duration, and technical requirements. For the latest ${qawwal.name} booking charges and availability, please contact us on WhatsApp at +92 322 407 1299 for an accurate quote.`,
+    },
+    {
+      question: `Can I hire ${qawwal.name} for a wedding Qawwali performance?`,
+      answer: `Yes, ${qawwal.name} is available to hire for wedding Qawwali performances, mehndi nights, and spiritual gatherings. Clients frequently book ${qawwal.name} for weddings to create a soulful and unforgettable atmosphere. Contact us on WhatsApp to check date availability and performance details.`,
+    },
+    {
+      question: `Is ${qawwal.name} available for corporate events and Qawwali nights?`,
+      answer: `${qawwal.name} is available for corporate events, Sufi nights, cultural festivals, and private Qawwali gatherings. If you are planning to hire ${qawwal.name} for a corporate event or spiritual evening, reach out via WhatsApp at +92 322 407 1299 for booking details.`,
+    },
+  ];
+
   return {
     "@context": "https://schema.org",
     "@type": "FAQPage",
-    mainEntity: [
-      {
-        "@type": "Question",
-        name: `How can I book ${qawwal.name} for a wedding or live event?`,
-        acceptedAnswer: {
-          "@type": "Answer",
-          text: `If you are looking to book ${qawwal.name} for a wedding, Qawwali night, or live performance, you can contact us directly via WhatsApp at +92 322 407 1299. We manage official bookings for ${qawwal.name} for weddings, corporate events, concerts, and private functions in Pakistan and internationally.`,
-        },
+    mainEntity: faqs.map((faq) => ({
+      "@type": "Question",
+      name: faq.question,
+      acceptedAnswer: {
+        "@type": "Answer",
+        text: faq.answer,
       },
-      {
-        "@type": "Question",
-        name: `What is the booking price of ${qawwal.name}?`,
-        acceptedAnswer: {
-          "@type": "Answer",
-          text: `The booking price of ${qawwal.name} depends on the event type, city, performance duration, and technical requirements. For the latest ${qawwal.name} booking charges and availability, please contact us on WhatsApp at +92 322 407 1299 for an accurate quote.`,
-        },
-      },
-      {
-        "@type": "Question",
-        name: `Can I hire ${qawwal.name} for a wedding Qawwali performance?`,
-        acceptedAnswer: {
-          "@type": "Answer",
-          text: `Yes, ${qawwal.name} is available to hire for wedding Qawwali performances, mehndi nights, and spiritual gatherings. Clients frequently book ${qawwal.name} for weddings to create a soulful and unforgettable atmosphere. Contact us on WhatsApp to check date availability and performance details.`,
-        },
-      },
-      {
-        "@type": "Question",
-        name: `Is ${qawwal.name} available for corporate events and Qawwali nights?`,
-        acceptedAnswer: {
-          "@type": "Answer",
-          text: `${qawwal.name} is available for corporate events, Sufi nights, cultural festivals, and private Qawwali gatherings. If you are planning to hire ${qawwal.name} for a corporate event or spiritual evening, reach out via WhatsApp at +92 322 407 1299 for booking details.`,
-        },
-      },
-    ],
+    })),
   };
 }
 
@@ -94,29 +88,15 @@ export async function generateMetadata({
     };
   }
 
-  const bookingKeywords = [
-    `book ${qawwal.name} for event`,
-    `${qawwal.name} booking`,
-    `hire ${qawwal.name} for qawwali`,
-    `${qawwal.name} event booking`,
-    `book ${qawwal.name} pakistan`,
-    `${qawwal.name} qawwali booking`,
-    `book ${qawwal.name} for wedding`,
-    `${qawwal.name} sufi music booking`,
-    `${qawwal.name} booking price`,
-    `how to book ${qawwal.name}`,
-    `${qawwal.name} contact for booking`,
-  ].join(", ");
-
   return {
     metadataBase: new URL("https://mustafazahid.com"),
-    title: `Book ${qawwal.name} for Event | ${qawwal.name} Qawwali Booking - Concerts, Weddings & Events`,
-    description: `Book ${qawwal.name} for your event, concert, or wedding. ${qawwal.name} Qawwali booking available for concerts, weddings, corporate events, and spiritual gatherings across Pakistan. Contact us via WhatsApp at +92 322 407 1299 to book ${qawwal.name} for your event. Professional booking services for ${qawwal.name} Qawwali performances.`,
-    keywords: `${bookingKeywords}, ${qawwal.name} qawwali, ${qawwal.name} sufi music, ${qawwal.name} biography, ${qawwal.name} performances, traditional qawwali artist ${qawwal.name}`,
+    title: qawwal.metadata.title,
+    description: qawwal.metadata.description,
+    keywords: qawwal.metadata.keywords,
 
     openGraph: {
-      title: `Book ${qawwal.name} for Event | ${qawwal.name} Qawwali Booking`,
-      description: `Book ${qawwal.name} for Qawwali performances, concerts, weddings, and corporate events. ${qawwal.name} booking available across Pakistan. Contact +92 322 407 1299 for ${qawwal.name} event booking.`,
+      title: qawwal.metadata.ogTitle,
+      description: qawwal.metadata.ogDescription,
       url: `https://mustafazahid.com/qawwals/${slug}`,
       siteName: "Mustafa Zahid - Music & Events",
       images: [
@@ -133,8 +113,8 @@ export async function generateMetadata({
 
     twitter: {
       card: "summary_large_image",
-      title: `Book ${qawwal.name} for Event | ${qawwal.name} Qawwali Booking`,
-      description: `Book ${qawwal.name} for Qawwali performances, concerts, and weddings. Contact +92 322 407 1299 for booking.`,
+      title: qawwal.metadata.twitterTitle,
+      description: qawwal.metadata.twitterDescription,
       images: [qawwal.image],
     },
 
