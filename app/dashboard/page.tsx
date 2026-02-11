@@ -4,9 +4,10 @@ import { useState } from 'react';
 import SingerForm from '@/components/dashboard/SingerForm';
 import QawwalForm from '@/components/dashboard/QawwalForm';
 import BlogForm from '@/components/dashboard/BlogForm';
+import ClassForm from '@/components/dashboard/ClassForm';
 
 export default function DashboardPage() {
-  const [activeTab, setActiveTab] = useState<'singers' | 'qawwals' | 'blogs'>('singers');
+  const [activeTab, setActiveTab] = useState<'singers' | 'qawwals' | 'blogs' | 'classes'>('singers');
 
   return (
     <div className="min-h-screen bg-[#0a0a0a] text-white">
@@ -17,7 +18,7 @@ export default function DashboardPage() {
             Admin <span className="text-gradient">Dashboard</span>
           </h1>
           <p className="text-white/70 text-base sm:text-lg">
-            Manage singers, qawwals, and blog posts
+            Manage singers, qawwals, blog posts, and classes
           </p>
         </div>
 
@@ -53,6 +54,16 @@ export default function DashboardPage() {
           >
             Blogs
           </button>
+          <button
+            onClick={() => setActiveTab('classes')}
+            className={`px-4 sm:px-6 py-2.5 sm:py-3 font-semibold transition-all whitespace-nowrap min-h-[44px] touch-manipulation ${
+              activeTab === 'classes'
+                ? 'text-red-500 border-b-2 border-red-500'
+                : 'text-white/60 hover:text-white/80 active:text-white'
+            }`}
+          >
+            Classes
+          </button>
         </div>
 
         {/* Form Content */}
@@ -60,6 +71,7 @@ export default function DashboardPage() {
           {activeTab === 'singers' && <SingerForm />}
           {activeTab === 'qawwals' && <QawwalForm />}
           {activeTab === 'blogs' && <BlogForm />}
+          {activeTab === 'classes' && <ClassForm />}
         </div>
       </div>
     </div>

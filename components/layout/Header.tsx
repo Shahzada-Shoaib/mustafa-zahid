@@ -4,12 +4,19 @@ import Image from "next/image";
 import Link from "next/link";
 import { useState, useEffect, useRef } from "react";
 
+interface MusicClass {
+  href: string;
+  label: string;
+}
+
 export default function Header() {
   const [scrollY, setScrollY] = useState(0);
   const [isMounted, setIsMounted] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [musicClassesDropdownOpen, setMusicClassesDropdownOpen] =
     useState(false);
+  const [musicClasses, setMusicClasses] = useState<MusicClass[]>([]);
+  const [classesLoading, setClassesLoading] = useState(true);
   const dropdownRef = useRef<HTMLDivElement>(null);
   const mobileDropdownRef = useRef<HTMLDivElement>(null);
 
@@ -65,26 +72,35 @@ export default function Header() {
     };
   }, [musicClassesDropdownOpen]);
 
-  const musicClasses = [
-    {
-      href: "/music-classes/guitar-classes-in-lahore",
-      label: "Guitar Classes",
-    },
-    { href: "/music-classes/singing-classes-in-lahore", label: "Singing Classes" },
-    { href: "/music-classes/piano-classes-in-lahore", label: "Piano Classes" },
-    {
-      href: "/music-classes/guitar-classes-at-home-in-lahore",
-      label: "Guitar Classes at Home",
-    },
-    {
-      href: "/music-classes/singing-classes-at-home-in-lahore",
-      label: "Singing Classes at Home",
-    },
-    {
-      href: "/music-classes/piano-classes-at-home-in-lahore",
-      label: "Piano Classes at Home",
-    },
-  ];
+  // Fetch classes from API
+  useEffect(() => {
+    const fetchClasses = async () => {
+      try {
+        setClassesLoading(true);
+        const response = await fetch('/api/classes');
+        const result = await response.json();
+        
+        if (result.success && Array.isArray(result.data)) {
+          // Format data for header dropdown
+          const formattedClasses = result.data.map((classItem: any) => ({
+            href: classItem.href || `/music-classes/${classItem.slug}`,
+            label: classItem.label || classItem.title,
+          }));
+          setMusicClasses(formattedClasses);
+        } else {
+          // Fallback to empty array if fetch fails
+          setMusicClasses([]);
+        }
+      } catch (error) {
+        console.error('Error fetching classes:', error);
+        setMusicClasses([]);
+      } finally {
+        setClassesLoading(false);
+      }
+    };
+
+    fetchClasses();
+  }, []);
 
   const navLinks = [
     { href: "/", label: "Home" },
