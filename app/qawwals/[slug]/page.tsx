@@ -6,12 +6,24 @@ import Footer from "@/components/layout/Footer";
 import AnimatedBackground from "@/components/shared/AnimatedBackground";
 import { type Qawwal, getQawwal, getAllQawwalSlugs } from "@/lib/data/qawwals";
 
+// Use dynamic rendering to avoid build-time database issues
+export const dynamic = 'force-dynamic';
+
 export async function generateStaticParams() {
-  const slugs = await getAllQawwalSlugs();
-  
-  return slugs.map((slug) => ({
-    slug,
-  }));
+  try {
+    const slugs = await getAllQawwalSlugs();
+    
+    if (!Array.isArray(slugs)) {
+      return [];
+    }
+    
+    return slugs.map((slug) => ({
+      slug,
+    }));
+  } catch (error) {
+    console.error('Error generating static params for qawwals:', error);
+    return [];
+  }
 }
 
 function generateStructuredData(qawwal: Qawwal) {

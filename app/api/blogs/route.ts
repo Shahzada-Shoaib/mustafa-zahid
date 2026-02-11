@@ -28,7 +28,7 @@ export async function POST(request: NextRequest) {
     await blogPost.save();
 
     return NextResponse.json(
-      { success: true, data: blogPost },
+      { success: true, data: blogPost.toObject() },
       { status: 201 }
     );
   } catch (error: any) {

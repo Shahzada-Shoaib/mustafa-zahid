@@ -1,3 +1,6 @@
+import connectDB from '@/lib/db/mongodb';
+import BlogPost from '@/lib/models/BlogPost';
+
 export interface BlogPost {
   slug: string;
   title: string;
@@ -18,12 +21,26 @@ export interface BlogPost {
   };
 }
 
-async function getAllBlogPosts(): Promise<BlogPost[]> {
-  /**
-   * TODO: Replace with database query when database is set up
-   * Example: return await db.blogPost.findMany({ where: { published: true } });
-   */
+export async function getAllBlogPosts(): Promise<BlogPost[]> {
+  try {
+    await connectDB();
+    const posts = await BlogPost.find({}).lean();
+    
+    if (!posts || !Array.isArray(posts)) {
+      return [];
+    }
+    
+    // Convert Mongoose documents to plain objects matching BlogPost interface
+    return posts.map(post => {
+      const { _id, __v, createdAt, updatedAt, ...postData } = post as any;
+      return postData as BlogPost;
+    });
+  } catch (error) {
+    console.error('Error fetching blog posts from database:', error);
+    return [];
+  }
   
+  /* HARDCODED DATA - COMMENTED OUT - NOW USING DATABASE
   return [
     {
       slug: "history-of-pakistani-music",
@@ -64,6 +81,7 @@ async function getAllBlogPosts(): Promise<BlogPost[]> {
       },
     },
   ];
+  */
 }
 
 export async function getBlogPost(slug: string): Promise<BlogPost | undefined> {

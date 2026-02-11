@@ -4,6 +4,7 @@ import Image from "next/image";
 import Header from "@/components/layout/Header";
 import Footer from "@/components/layout/Footer";
 import AnimatedBackground from "@/components/shared/AnimatedBackground";
+import { getAllSingers } from "@/lib/data/singers";
 
 export const metadata: Metadata = {
   metadataBase: new URL('https://mustafazahid.com'),
@@ -41,25 +42,30 @@ export const metadata: Metadata = {
 };
 
 
-// This would typically come from a database or API
-const singers = [
-  {
-    slug: "hire-atif-aslam-for-concert",
-    name: "Atif Aslam",
-    image: "/atif-aslam.jpg", // Replace with actual singer images
-    genre: "Pop, Rock",
-    description: "Renowned Pakistani singer and actor",
-  },
-  {
-    slug: "book-rdb-for-wedding",
-    name: "RDB",
-    image: "/RDB-surj.jpg",
-    genre: "Rhythm, Dhol, Bass",
-    description: "Bollywood singer and song writer",
-  },
-];
+// Helper function to validate and sanitize image URL
+function getValidImageUrl(imageUrl: string | undefined | null): string {
+  if (!imageUrl || imageUrl.trim() === '') {
+    return '/mz-logo.png';
+  }
+  
+  // Check if it's a valid URL (starts with http/https) or a valid relative path (starts with /)
+  if (imageUrl.startsWith('http://') || imageUrl.startsWith('https://') || imageUrl.startsWith('/')) {
+    try {
+      // Try to construct URL to validate
+      if (imageUrl.startsWith('http')) {
+        new URL(imageUrl);
+      }
+      return imageUrl;
+    } catch {
+      return '/mz-logo.png';
+    }
+  }
+  
+  return '/mz-logo.png';
+}
 
-export default function SingersPage() {
+export default async function SingersPage() {
+  const singers = await getAllSingers();
   return (
     <div className="min-h-screen bg-[#0a0a0a] text-white">
       <AnimatedBackground />
@@ -92,7 +98,7 @@ export default function SingersPage() {
               >
                 <div className="relative aspect-[4/5] overflow-hidden">
                   <Image
-                    src={singer.image}
+                    src={getValidImageUrl(singer.image)}
                     alt={singer.name}
                     fill
                     className="object-cover transition-transform duration-700 group-hover:scale-110"
@@ -106,7 +112,7 @@ export default function SingersPage() {
                   <h3 className="text-xl font-semibold text-white mb-2 group-hover:text-red-400 transition-colors">
                     {singer.name}
                   </h3>
-                  <p className="text-white/70 text-sm">{singer.description}</p>
+                  <p className="text-white/70 text-sm">{singer.bio}</p>
                   <div className="mt-4 flex items-center gap-2 text-red-400 text-sm font-medium group-hover:text-red-300 transition-colors">
                     <span>View Profile</span>
                     <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">

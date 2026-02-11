@@ -6,12 +6,24 @@ import Footer from "@/components/layout/Footer";
 import AnimatedBackground from "@/components/shared/AnimatedBackground";
 import { type Singer, getSinger, getAllSingerSlugs } from "@/lib/data/singers";
 
+// Use dynamic rendering to avoid build-time database issues
+export const dynamic = 'force-dynamic';
+
 export async function generateStaticParams() {
-  const slugs = await getAllSingerSlugs();
-  
-  return slugs.map((slug) => ({
-    slug,
-  }));
+  try {
+    const slugs = await getAllSingerSlugs();
+    
+    if (!Array.isArray(slugs)) {
+      return [];
+    }
+    
+    return slugs.map((slug) => ({
+      slug,
+    }));
+  } catch (error) {
+    console.error('Error generating static params for singers:', error);
+    return [];
+  }
 }
 
 function generateStructuredData(singer: Singer) {

@@ -4,6 +4,8 @@ import Image from "next/image";
 import Header from "@/components/layout/Header";
 import Footer from "@/components/layout/Footer";
 import AnimatedBackground from "@/components/shared/AnimatedBackground";
+import { getAllBlogPosts } from "@/lib/data/blog";
+import BlogListClient from "@/components/blog/BlogListClient";
 
 export const metadata: Metadata = {
   metadataBase: new URL('https://mustafazahid.com'),
@@ -40,30 +42,51 @@ export const metadata: Metadata = {
   },
 };
 
-const blogPosts = [
-  {
-    slug: "history-of-pakistani-music",
-    title: "The History of Pakistani Music",
-    excerpt: "Explore the rich history and evolution of Pakistani music from traditional to contemporary styles.",
-    image: "/mz-logo.png",
-    date: "2024-01-15",
-    category: "Music History",
-  },
-  {
-    slug: "vocal-techniques",
-    title: "Essential Vocal Techniques for Singers",
-    excerpt: "Learn professional vocal techniques used by industry experts to improve your singing.",
-    image: "/mz-logo.png",
-    date: "2024-01-10",
-    category: "Tutorial",
-  },
-];
+// Helper function to calculate reading time
+function calculateReadingTime(content: string): number {
+  const wordsPerMinute = 200;
+  const text = content.replace(/<[^>]*>/g, ''); // Remove HTML tags
+  const wordCount = text.split(/\s+/).length;
+  return Math.ceil(wordCount / wordsPerMinute);
+}
 
-export default function BlogPage() {
+// Helper function to validate and sanitize image URL
+function getValidImageUrl(imageUrl: string | undefined | null): string {
+  if (!imageUrl || imageUrl.trim() === '') {
+    return '/mz-logo.png';
+  }
+  
+  if (imageUrl.startsWith('http://') || imageUrl.startsWith('https://') || imageUrl.startsWith('/')) {
+    try {
+      if (imageUrl.startsWith('http')) {
+        new URL(imageUrl);
+      }
+      return imageUrl;
+    } catch {
+      return '/mz-logo.png';
+    }
+  }
+  
+  return '/mz-logo.png';
+}
+
+export default async function BlogPage() {
+  const blogPosts = await getAllBlogPosts();
+  
+  // Get all unique categories
+  const categories = Array.from(new Set(blogPosts.map(post => post.category)));
+  const allCategories = ['All', ...categories];
+  
+  // Featured post (latest/first post)
+  const featuredPost = blogPosts.length > 0 ? blogPosts[0] : null;
+  const otherPosts = blogPosts.slice(1);
+
   return (
     <div className="min-h-screen bg-[#0a0a0a] text-white">
       <AnimatedBackground />
       <Header />
+      
+      {/* Hero Section */}
       <section className="relative py-20 lg:py-32">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-12">
           <div className="text-center space-y-6">
@@ -80,73 +103,68 @@ export default function BlogPage() {
         </div>
       </section>
 
-      {/* Categories Section */}
-      <section className="py-12 lg:py-16">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-12">
-          <div className="flex flex-wrap gap-4 justify-center mb-12">
-            {["All", "Music History", "Tutorial", "News", "Reviews"].map((category) => (
-              <button
-                key={category}
-                className="px-6 py-2 glass-card rounded-full text-white/80 hover:text-white hover:bg-white/10 transition-colors text-sm font-medium"
-              >
-                {category}
-              </button>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* Featured Post */}
-      {blogPosts.length > 0 && (
-        <section className="py-12 lg:py-16">
+      {/* Featured Post Hero */}
+      {featuredPost && (
+        <section className="py-8 lg:py-12">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-12">
-            <div className="mb-8">
-              <span className="text-red-500 uppercase tracking-[0.3em] text-sm font-medium">
-                Featured
-              </span>
-              <h2 className="font-display text-3xl md:text-4xl font-bold mt-4">
-                Latest <span className="text-gradient">Articles</span>
-              </h2>
-            </div>
-            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8">
-              {blogPosts.map((post) => (
-                <Link
-                  key={post.slug}
-                  href={`/blog/${post.slug}`}
-                  className="group glass-card rounded-2xl overflow-hidden hover-lift block"
-                >
-                  <div className="relative aspect-video overflow-hidden">
+            <Link
+              href={`/blog/${encodeURIComponent(featuredPost.slug)}`}
+              className="group block"
+            >
+              <div className="glass-card rounded-3xl overflow-hidden hover-lift">
+                <div className="grid lg:grid-cols-2 gap-0">
+                  <div className="relative aspect-[4/3] lg:aspect-auto lg:h-[500px] overflow-hidden">
                     <Image
-                      src={post.image}
-                      alt={post.title}
+                      src={getValidImageUrl(featuredPost.image)}
+                      alt={featuredPost.title}
                       fill
                       className="object-cover transition-transform duration-700 group-hover:scale-110"
+                      sizes="(max-width: 1024px) 100vw, 50vw"
                     />
-                    <div className="absolute top-4 left-4 px-3 py-1 bg-red-600/90 backdrop-blur-sm rounded-full text-xs text-white font-medium">
-                      {post.category}
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent" />
+                    <div className="absolute top-6 left-6 px-4 py-2 bg-red-600/90 backdrop-blur-sm rounded-full text-sm text-white font-medium">
+                      Featured
                     </div>
-                  </div>
-                  <div className="p-6">
-                    <h3 className="text-xl font-semibold text-white mt-2 mb-3 group-hover:text-red-400 transition-colors">
-                      {post.title}
-                    </h3>
-                    <p className="text-white/70 text-sm mb-4">{post.excerpt}</p>
-                    <div className="flex items-center justify-between text-xs text-white/60">
-                      <span>{new Date(post.date).toLocaleDateString()}</span>
-                      <span className="flex items-center gap-1 group-hover:text-red-400 transition-colors">
-                        Read More
-                        <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
-                        </svg>
+                    <div className="absolute bottom-6 left-6 right-6">
+                      <span className="inline-block px-3 py-1 bg-white/20 backdrop-blur-sm rounded-full text-xs text-white font-medium mb-3">
+                        {featuredPost.category}
                       </span>
                     </div>
                   </div>
-                </Link>
-              ))}
-            </div>
+                  <div className="p-8 lg:p-12 flex flex-col justify-center bg-gradient-to-br from-white/5 to-white/0">
+                    <div className="flex items-center gap-4 text-sm text-white/60 mb-4">
+                      <span>{new Date(featuredPost.date).toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' })}</span>
+                      <span>•</span>
+                      <span>{calculateReadingTime(featuredPost.content)} min read</span>
+                      <span>•</span>
+                      <span>{featuredPost.author}</span>
+                    </div>
+                    <h2 className="font-display text-3xl md:text-4xl lg:text-5xl font-bold mb-4 group-hover:text-red-400 transition-colors">
+                      {featuredPost.title}
+                    </h2>
+                    <p className="text-white/80 text-lg leading-relaxed mb-6">
+                      {featuredPost.excerpt}
+                    </p>
+                    <div className="flex items-center gap-2 text-red-400 font-medium group-hover:text-red-300 transition-colors">
+                      <span>Read Article</span>
+                      <svg className="w-5 h-5 transition-transform group-hover:translate-x-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
+                      </svg>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </Link>
           </div>
         </section>
       )}
+
+      {/* Blog List with Category Filtering */}
+      <BlogListClient 
+        posts={blogPosts} 
+        categories={allCategories}
+        featuredPostSlug={featuredPost?.slug}
+      />
 
       {/* Newsletter Section */}
       <section className="py-12 lg:py-16">
@@ -171,8 +189,8 @@ export default function BlogPage() {
           </div>
         </div>
       </section>
+      
       <Footer />
     </div>
   );
 }
-

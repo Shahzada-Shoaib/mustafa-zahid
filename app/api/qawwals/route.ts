@@ -36,7 +36,7 @@ export async function POST(request: NextRequest) {
     await qawwal.save();
 
     return NextResponse.json(
-      { success: true, data: qawwal },
+      { success: true, data: qawwal.toObject() },
       { status: 201 }
     );
   } catch (error: any) {

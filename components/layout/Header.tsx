@@ -91,7 +91,7 @@ export default function Header() {
     { href: "/about", label: "About" },
     { href: "/singers", label: "Singers" },
     { href: "/qawwals", label: "Qawwals" },
-    // { href: "/blog", label: "Blog" },
+    { href: "/blog", label: "Blog" },
   ];
 
   return (

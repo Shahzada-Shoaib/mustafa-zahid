@@ -4,6 +4,7 @@ import Image from "next/image";
 import Header from "@/components/layout/Header";
 import Footer from "@/components/layout/Footer";
 import AnimatedBackground from "@/components/shared/AnimatedBackground";
+import { getAllQawwals } from "@/lib/data/qawwals";
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://mustafazahid.com"),
@@ -43,22 +44,30 @@ Book live Qawwali performances with authentic Sufi music.`,
   },
 };
 
-const qawwals = [
-  // {
-  //   slug: "Rahat-fateh-ali-khan",
-  //   name: "Rahat Fateh Ali Khan",
-  //   image: "/mz-logo.png",
-  //   description: "Legendary Qawwali maestro",
-  // },
-  {
-    slug: "book-rahat-fateh-ali-khan-for-wedding-event",
-    name: "Rahat Fateh Ali Khan",
-    image: "/RFAK.jpg",
-    description: "Renowned Qawwali artist",
-  },
-];
+// Helper function to validate and sanitize image URL
+function getValidImageUrl(imageUrl: string | undefined | null): string {
+  if (!imageUrl || imageUrl.trim() === '') {
+    return '/mz-logo.png';
+  }
+  
+  // Check if it's a valid URL (starts with http/https) or a valid relative path (starts with /)
+  if (imageUrl.startsWith('http://') || imageUrl.startsWith('https://') || imageUrl.startsWith('/')) {
+    try {
+      // Try to construct URL to validate
+      if (imageUrl.startsWith('http')) {
+        new URL(imageUrl);
+      }
+      return imageUrl;
+    } catch {
+      return '/mz-logo.png';
+    }
+  }
+  
+  return '/mz-logo.png';
+}
 
-export default function QawwalsPage() {
+export default async function QawwalsPage() {
+  const qawwals = await getAllQawwals();
   return (
     <div className="min-h-screen bg-[#0a0a0a] text-white">
       <AnimatedBackground />
@@ -146,7 +155,7 @@ export default function QawwalsPage() {
               >
                 <div className="relative aspect-[4/5] overflow-hidden">
                   <Image
-                    src={qawwal.image}
+                    src={getValidImageUrl(qawwal.image)}
                     alt={qawwal.name}
                     fill
                     className="object-cover transition-transform duration-700 group-hover:scale-110"
@@ -161,7 +170,7 @@ export default function QawwalsPage() {
                     {qawwal.name}
                   </h3>
                   <p className="text-white/70 text-sm mb-4">
-                    {qawwal.description}
+                    {qawwal.bio}
                   </p>
                   <div className="flex items-center gap-2 text-red-400 text-sm font-medium group-hover:text-red-300 transition-colors">
                     <span>View Profile</span>

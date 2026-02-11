@@ -36,7 +36,7 @@ export async function POST(request: NextRequest) {
     await singer.save();
 
     return NextResponse.json(
-      { success: true, data: singer },
+      { success: true, data: singer.toObject() },
       { status: 201 }
     );
   } catch (error: any) {

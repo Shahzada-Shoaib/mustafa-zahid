@@ -1,3 +1,6 @@
+import connectDB from '@/lib/db/mongodb';
+import Qawwal from '@/lib/models/Qawwal';
+
 export interface Qawwal {
   slug: string;
   name: string;
@@ -42,12 +45,26 @@ export interface Qawwal {
   };
 }
 
-async function getAllQawwals(): Promise<Qawwal[]> {
-  /**
-   * TODO: Replace with database query when database is set up
-   * Example: return await db.qawwal.findMany({ where: { published: true } });
-   */
+export async function getAllQawwals(): Promise<Qawwal[]> {
+  try {
+    await connectDB();
+    const qawwals = await Qawwal.find({}).lean();
+    
+    if (!qawwals || !Array.isArray(qawwals)) {
+      return [];
+    }
+    
+    // Convert Mongoose documents to plain objects matching Qawwal interface
+    return qawwals.map(qawwal => {
+      const { _id, __v, createdAt, updatedAt, ...qawwalData } = qawwal as any;
+      return qawwalData as Qawwal;
+    });
+  } catch (error) {
+    console.error('Error fetching qawwals from database:', error);
+    return [];
+  }
   
+  /* HARDCODED DATA - COMMENTED OUT - NOW USING DATABASE
   return [
     {
       slug: "nusrat-fateh-ali-khan",
@@ -365,6 +382,7 @@ async function getAllQawwals(): Promise<Qawwal[]> {
       },
     },
   ];
+  */
 }
 
 export async function getQawwal(slug: string): Promise<Qawwal | undefined> {

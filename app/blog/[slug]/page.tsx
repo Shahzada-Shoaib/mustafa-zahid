@@ -5,22 +5,35 @@ import { notFound } from "next/navigation";
 import Header from "@/components/layout/Header";
 import Footer from "@/components/layout/Footer";
 import AnimatedBackground from "@/components/shared/AnimatedBackground";
-import { getBlogPost, getAllBlogSlugs } from "@/lib/data/blog";
+import { getBlogPost, getAllBlogSlugs, getAllBlogPosts } from "@/lib/data/blog";
+
+// Use dynamic rendering to avoid build-time database issues
+export const dynamic = 'force-dynamic';
 
 export async function generateStaticParams() {
-  const slugs = await getAllBlogSlugs();
-  
-  return slugs.map((slug) => ({
-    slug,
-  }));
+  try {
+    const slugs = await getAllBlogSlugs();
+    
+    if (!Array.isArray(slugs)) {
+      return [];
+    }
+    
+    return slugs.map((slug) => ({
+      slug,
+    }));
+  } catch (error) {
+    console.error('Error generating static params for blogs:', error);
+    return [];
+  }
 }
 
 export async function generateMetadata({ 
   params 
 }: { 
-  params: Promise<{ slug: string }> 
+  params: Promise<{ slug: string }>
 }): Promise<Metadata> {
-  const { slug } = await params;
+  const { slug: rawSlug } = await params;
+  const slug = decodeURIComponent(rawSlug);
   const post = await getBlogPost(slug);
   
   if (!post) {
@@ -36,7 +49,7 @@ export async function generateMetadata({
     openGraph: {
       title: post.metadata.ogTitle,
       description: post.metadata.ogDescription,
-      url: `https://mustafazahid.com/blog/${slug}`,
+      url: `https://mustafazahid.com/blog/${encodeURIComponent(slug)}`,
       siteName: "Music Blog",
       images: [
         {
@@ -71,7 +84,7 @@ export async function generateMetadata({
     },
     
     alternates: {
-      canonical: `https://mustafazahid.com/blog/${slug}`,
+      canonical: `https://mustafazahid.com/blog/${encodeURIComponent(slug)}`,
     },
   };
 }
@@ -107,19 +120,63 @@ function generateArticleSchema(post: Awaited<ReturnType<typeof getBlogPost>>) {
   };
 }
 
+// Helper function to calculate reading time
+function calculateReadingTime(content: string): number {
+  const wordsPerMinute = 200;
+  const text = content.replace(/<[^>]*>/g, '');
+  const wordCount = text.split(/\s+/).length;
+  return Math.ceil(wordCount / wordsPerMinute);
+}
+
+// Helper function to validate image URL
+function getValidImageUrl(imageUrl: string | undefined | null): string {
+  if (!imageUrl || imageUrl.trim() === '') {
+    return '/mz-logo.png';
+  }
+  
+  if (imageUrl.startsWith('http://') || imageUrl.startsWith('https://') || imageUrl.startsWith('/')) {
+    try {
+      if (imageUrl.startsWith('http')) {
+        new URL(imageUrl);
+      }
+      return imageUrl;
+    } catch {
+      return '/mz-logo.png';
+    }
+  }
+  
+  return '/mz-logo.png';
+}
+
 export default async function BlogPostPage({ 
   params 
 }: { 
-  params: Promise<{ slug: string }> 
+  params: Promise<{ slug: string }>
 }) {
-  const { slug } = await params;
+  const { slug: rawSlug } = await params;
+  const slug = decodeURIComponent(rawSlug);
   const post = await getBlogPost(slug);
 
   if (!post) {
     notFound();
   }
 
+  // Get related posts (same category, exclude current)
+  const allPosts = await getAllBlogPosts();
+  const relatedPosts = allPosts
+    .filter(p => p.slug !== post.slug && p.category === post.category)
+    .slice(0, 3);
+
+  // If not enough posts in same category, fill with other posts
+  if (relatedPosts.length < 3) {
+    const otherPosts = allPosts
+      .filter(p => p.slug !== post.slug && !relatedPosts.some(rp => rp.slug === p.slug))
+      .slice(0, 3 - relatedPosts.length);
+    relatedPosts.push(...otherPosts);
+  }
+
   const articleSchema = generateArticleSchema(post);
+  const readingTime = calculateReadingTime(post.content);
 
   return (
     <div className="min-h-screen bg-[#0a0a0a] text-white">
@@ -134,75 +191,148 @@ export default async function BlogPostPage({
       <AnimatedBackground />
       <Header />
       
-      <article className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-12 py-12 lg:py-16">
-        <div className="mb-8">
-          <span className="text-red-400 text-sm uppercase tracking-wider">
-            {post.category}
-          </span>
-          <h1 className="font-display text-4xl md:text-5xl font-bold mt-4 mb-4">
-            {post.title}
-          </h1>
-          <div className="flex items-center gap-4 text-sm text-white/60">
-            <span>{post.author}</span>
-            <span>•</span>
-            <span>{new Date(post.date).toLocaleDateString()}</span>
-          </div>
-        </div>
-
-        <div className="relative aspect-video rounded-2xl overflow-hidden mb-8">
-          <Image
-            src={post.image}
-            alt={post.title}
-            fill
-            className="object-cover"
-            priority
-            sizes="(max-width: 768px) 100vw, 800px"
-          />
-        </div>
-
-        <div 
-          className="prose prose-invert max-w-none prose-headings:text-white prose-p:text-white/80 prose-p:leading-relaxed prose-p:text-lg prose-a:text-red-400 prose-strong:text-white prose-ul:text-white/80 prose-ol:text-white/80"
-          dangerouslySetInnerHTML={{ __html: post.content }}
-        />
-      </article>
-
-      {/* Related Articles */}
-      <section className="py-12 lg:py-16">
+      {/* Hero Section */}
+      <section className="relative py-8 lg:py-12">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-12">
-          <h2 className="text-3xl font-bold mb-8">Related Articles</h2>
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {[
-              { title: "Music Theory Basics", category: "Tutorial", image: "/mz-logo.png" },
-              { title: "Pakistani Music Industry", category: "News", image: "/mz-logo.png" },
-              { title: "Vocal Health Tips", category: "Tutorial", image: "/mz-logo.png" }
-            ].map((article, index) => (
-              <Link
-                key={index}
-                href="/blog"
-                className="group glass-card rounded-xl overflow-hidden hover-lift block"
-              >
-                <div className="relative aspect-video overflow-hidden">
-                  <Image
-                    src={article.image}
-                    alt={article.title}
-                    fill
-                    className="object-cover transition-transform duration-700 group-hover:scale-110"
-                  />
+          {/* Back Button */}
+          <Link
+            href="/blog"
+            className="inline-flex items-center gap-2 text-white/70 hover:text-white mb-8 transition-colors group"
+          >
+            <svg className="w-5 h-5 transition-transform group-hover:-translate-x-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
+            </svg>
+            <span>Back to Blog</span>
+          </Link>
+
+          {/* Hero Image */}
+          <div className="relative aspect-[21/9] rounded-3xl overflow-hidden mb-8">
+            <Image
+              src={getValidImageUrl(post.image)}
+              alt={post.title}
+              fill
+              className="object-cover"
+              priority
+              sizes="(max-width: 768px) 100vw, 1200px"
+            />
+            <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent" />
+            <div className="absolute bottom-0 left-0 right-0 p-8 lg:p-12">
+              <div className="max-w-4xl">
+                <span className="inline-block px-4 py-2 bg-red-600/90 backdrop-blur-sm rounded-full text-sm text-white font-medium mb-4">
+                  {post.category}
+                </span>
+                <h1 className="font-display text-4xl md:text-5xl lg:text-6xl font-bold mb-6">
+                  {post.title}
+                </h1>
+                <div className="flex flex-wrap items-center gap-4 text-white/90">
+                  <div className="flex items-center gap-2">
+                    <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
+                    </svg>
+                    <span>{post.author}</span>
+                  </div>
+                  <span>•</span>
+                  <div className="flex items-center gap-2">
+                    <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
+                    </svg>
+                    <span>{new Date(post.date).toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' })}</span>
+                  </div>
+                  <span>•</span>
+                  <div className="flex items-center gap-2">
+                    <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+                    </svg>
+                    <span>{readingTime} min read</span>
+                  </div>
                 </div>
-                <div className="p-6">
-                  <span className="text-red-400 text-xs uppercase tracking-wider">{article.category}</span>
-                  <h3 className="text-lg font-semibold text-white mt-2 group-hover:text-red-400 transition-colors">
-                    {article.title}
-                  </h3>
-                </div>
-              </Link>
-            ))}
+              </div>
+            </div>
           </div>
         </div>
       </section>
+
+      {/* Article Content */}
+      <article className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-12 pb-12 lg:pb-16">
+        <div className="glass-card rounded-3xl p-8 lg:p-12">
+          <div 
+            className="prose prose-invert max-w-none 
+              prose-headings:text-white prose-headings:font-display
+              prose-h1:text-4xl prose-h1:font-bold prose-h1:mb-6 prose-h1:mt-8
+              prose-h2:text-3xl prose-h2:font-bold prose-h2:mb-4 prose-h2:mt-8
+              prose-h3:text-2xl prose-h3:font-semibold prose-h3:mb-3 prose-h3:mt-6
+              prose-p:text-white/90 prose-p:leading-relaxed prose-p:text-lg prose-p:mb-6
+              prose-a:text-red-400 prose-a:no-underline hover:prose-a:text-red-300 prose-a:font-medium
+              prose-strong:text-white prose-strong:font-semibold
+              prose-ul:text-white/90 prose-ul:mb-6 prose-ul:space-y-2
+              prose-ol:text-white/90 prose-ol:mb-6 prose-ol:space-y-2
+              prose-li:marker:text-red-400
+              prose-blockquote:border-l-red-500 prose-blockquote:pl-6 prose-blockquote:italic prose-blockquote:text-white/80
+              prose-img:rounded-2xl prose-img:my-8
+              prose-code:text-red-400 prose-code:bg-white/10 prose-code:px-2 prose-code:py-1 prose-code:rounded
+              prose-pre:bg-white/5 prose-pre:rounded-xl"
+            dangerouslySetInnerHTML={{ __html: post.content }}
+          />
+        </div>
+      </article>
+
+      {/* Related Articles */}
+      {relatedPosts.length > 0 && (
+        <section className="py-12 lg:py-16 bg-gradient-to-b from-transparent via-red-950/10 to-transparent">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-12">
+            <div className="mb-12 text-center">
+              <span className="text-red-500 uppercase tracking-[0.3em] text-sm font-medium">
+                Continue Reading
+              </span>
+              <h2 className="font-display text-3xl md:text-4xl lg:text-5xl font-bold mt-4">
+                Related <span className="text-gradient">Articles</span>
+              </h2>
+            </div>
+            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8">
+              {relatedPosts.map((relatedPost) => (
+                <Link
+                  key={relatedPost.slug}
+                  href={`/blog/${encodeURIComponent(relatedPost.slug)}`}
+                  className="group glass-card rounded-2xl overflow-hidden hover-lift block"
+                >
+                  <div className="relative aspect-video overflow-hidden">
+                    <Image
+                      src={getValidImageUrl(relatedPost.image)}
+                      alt={relatedPost.title}
+                      fill
+                      className="object-cover transition-transform duration-700 group-hover:scale-110"
+                      sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/10 to-transparent" />
+                    <div className="absolute top-4 left-4 px-3 py-1.5 bg-red-600/90 backdrop-blur-sm rounded-full text-xs text-white font-medium">
+                      {relatedPost.category}
+                    </div>
+                  </div>
+                  <div className="p-6">
+                    <div className="flex items-center gap-3 text-xs text-white/60 mb-3">
+                      <span>{new Date(relatedPost.date).toLocaleDateString('en-US', { month: 'short', day: 'numeric' })}</span>
+                      <span>•</span>
+                      <span>{calculateReadingTime(relatedPost.content)} min read</span>
+                    </div>
+                    <h3 className="text-xl font-semibold text-white mb-2 group-hover:text-red-400 transition-colors line-clamp-2">
+                      {relatedPost.title}
+                    </h3>
+                    <p className="text-white/70 text-sm line-clamp-2 mb-4">{relatedPost.excerpt}</p>
+                    <div className="flex items-center gap-2 text-red-400 text-sm font-medium group-hover:text-red-300 transition-colors">
+                      <span>Read More</span>
+                      <svg className="w-4 h-4 transition-transform group-hover:translate-x-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
+                      </svg>
+                    </div>
+                  </div>
+                </Link>
+              ))}
+            </div>
+          </div>
+        </section>
+      )}
 
       <Footer />
     </div>
   );
 }
-

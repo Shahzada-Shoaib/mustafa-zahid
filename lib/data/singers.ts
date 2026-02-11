@@ -1,3 +1,6 @@
+import connectDB from '@/lib/db/mongodb';
+import Singer from '@/lib/models/Singer';
+
 export interface Singer {
   slug: string;
   name: string;
@@ -49,12 +52,26 @@ export interface Singer {
   };
 }
 
-async function getAllSingers(): Promise<Singer[]> {
-  /**
-   * TODO: Replace with database query when database is set up
-   * Example: return await db.singer.findMany({ where: { published: true } });
-   */
+export async function getAllSingers(): Promise<Singer[]> {
+  try {
+    await connectDB();
+    const singers = await Singer.find({}).lean();
+    
+    if (!singers || !Array.isArray(singers)) {
+      return [];
+    }
+    
+    // Convert Mongoose documents to plain objects matching Singer interface
+    return singers.map(singer => {
+      const { _id, __v, createdAt, updatedAt, ...singerData } = singer as any;
+      return singerData as Singer;
+    });
+  } catch (error) {
+    console.error('Error fetching singers from database:', error);
+    return [];
+  }
   
+  /* HARDCODED DATA - COMMENTED OUT - NOW USING DATABASE
   return [
     {
       slug: "hire-atif-aslam-for-concert",
@@ -384,6 +401,7 @@ async function getAllSingers(): Promise<Singer[]> {
       },
     },
   ];
+  */
 }
 
 export async function getSinger(slug: string): Promise<Singer | undefined> {
