@@ -34,13 +34,13 @@ export default function ClientReviews({ reviews = defaultReviews }: ClientReview
   const [currentReviewIndex, setCurrentReviewIndex] = useState(0);
 
   return (
-    <section className="relative py-12 lg:py-16 bg-gradient-to-b from-transparent via-red-950/10 to-transparent">
-      <div className="max-w-7xl mx-auto px-6 lg:px-12">
-        <div className="text-center mb-12">
-          <span className="text-red-500 uppercase tracking-[0.3em] text-sm font-medium">
+    <section className="relative py-8 sm:py-12 lg:py-16 bg-gradient-to-b from-transparent via-red-950/10 to-transparent">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-12">
+        <div className="text-center mb-8 sm:mb-12">
+          <span className="text-red-500 uppercase tracking-[0.3em] text-xs sm:text-sm font-medium">
             Client Reviews
           </span>
-          <h2 className="font-display text-4xl md:text-5xl lg:text-6xl font-bold text-white mt-4">
+          <h2 className="font-display text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-white mt-3 sm:mt-4">
             What Clients <span className="text-gradient">Say</span>
           </h2>
         </div>
@@ -62,13 +62,13 @@ export default function ClientReviews({ reviews = defaultReviews }: ClientReview
               {reviews.map((testimonial, index) => (
                 <div
                   key={index}
-                  className="flex-shrink-0 w-full snap-start glass-card rounded-2xl p-6 hover-lift"
+                  className="flex-shrink-0 w-full snap-start glass-card rounded-xl sm:rounded-2xl p-4 sm:p-6 hover-lift"
                 >
-                  <div className="flex items-center gap-1 mb-4">
+                  <div className="flex items-center gap-1 mb-3 sm:mb-4">
                     {[...Array(testimonial.rating)].map((_, i) => (
                       <svg
                         key={i}
-                        className="w-5 h-5 text-amber-400"
+                        className="w-4 h-4 sm:w-5 sm:h-5 text-amber-400"
                         fill="currentColor"
                         viewBox="0 0 20 20"
                       >
@@ -76,15 +76,15 @@ export default function ClientReviews({ reviews = defaultReviews }: ClientReview
                       </svg>
                     ))}
                   </div>
-                  <p className="text-white/80 leading-relaxed mb-4 italic">
+                  <p className="text-white/80 text-sm sm:text-base leading-relaxed mb-3 sm:mb-4 italic">
                     &quot;{testimonial.review}&quot;
                   </p>
-                  <p className="text-white font-medium">— {testimonial.name}</p>
+                  <p className="text-white text-sm sm:text-base font-medium">— {testimonial.name}</p>
                 </div>
               ))}
             </div>
             {/* Dots Indicator */}
-            <div className="flex justify-center gap-2 mt-6">
+            <div className="flex justify-center gap-2 mt-4 sm:mt-6">
               {reviews.map((_, index) => (
                 <button
                   key={index}
@@ -98,7 +98,7 @@ export default function ClientReviews({ reviews = defaultReviews }: ClientReview
                       setCurrentReviewIndex(index);
                     }
                   }}
-                  className={`h-2 rounded-full transition-all duration-300 ${
+                  className={`h-2 rounded-full transition-all duration-300 min-w-[44px] min-h-[44px] touch-manipulation ${
                     currentReviewIndex === index
                       ? 'bg-red-500 w-6'
                       : 'bg-white/30 w-2'
@@ -110,17 +110,17 @@ export default function ClientReviews({ reviews = defaultReviews }: ClientReview
           </div>
 
           {/* Desktop Grid */}
-          <div className="hidden md:grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+          <div className="hidden md:grid md:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
             {reviews.map((testimonial, index) => (
               <div
                 key={index}
-                className="glass-card rounded-2xl p-6 lg:p-8 hover-lift"
+                className="glass-card rounded-xl sm:rounded-2xl p-5 sm:p-6 lg:p-8 hover-lift"
               >
-                <div className="flex items-center gap-1 mb-4">
+                <div className="flex items-center gap-1 mb-3 sm:mb-4">
                   {[...Array(testimonial.rating)].map((_, i) => (
                     <svg
                       key={i}
-                      className="w-5 h-5 text-amber-400"
+                      className="w-4 h-4 sm:w-5 sm:h-5 text-amber-400"
                       fill="currentColor"
                       viewBox="0 0 20 20"
                     >
@@ -128,10 +128,10 @@ export default function ClientReviews({ reviews = defaultReviews }: ClientReview
                     </svg>
                   ))}
                 </div>
-                <p className="text-white/80 leading-relaxed mb-4 italic">
+                <p className="text-white/80 text-sm sm:text-base leading-relaxed mb-3 sm:mb-4 italic">
                   &quot;{testimonial.review}&quot;
                 </p>
-                <p className="text-white font-medium">— {testimonial.name}</p>
+                <p className="text-white text-sm sm:text-base font-medium">— {testimonial.name}</p>
               </div>
             ))}
           </div>

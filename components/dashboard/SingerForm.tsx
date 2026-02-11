@@ -440,69 +440,69 @@ export default function SingerForm() {
   };
 
   return (
-    <form onSubmit={handleSubmit} className="space-y-8">
+    <form onSubmit={handleSubmit} className="space-y-6 sm:space-y-8">
       {/* Basic Information */}
-      <div className="space-y-4">
-        <h2 className="text-2xl font-bold text-white mb-4">Basic Information</h2>
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+      <div className="space-y-3 sm:space-y-4">
+        <h2 className="text-xl sm:text-2xl font-bold text-white mb-3 sm:mb-4">Basic Information</h2>
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-3 sm:gap-4">
           <div>
-            <label className="block text-sm font-medium text-white/80 mb-2">Slug</label>
+            <label className="block text-xs sm:text-sm font-medium text-white/80 mb-1.5 sm:mb-2">Slug</label>
             <input
               type="text"
               name="slug"
               value={formData.slug}
               onChange={handleInputChange}
-              className="w-full px-4 py-2 bg-white/5 border border-white/10 rounded-lg text-white focus:outline-none focus:border-red-500"
+              className="w-full px-3 sm:px-4 py-2.5 sm:py-2 bg-white/5 border border-white/10 rounded-lg text-sm sm:text-base text-white focus:outline-none focus:border-red-500 min-h-[44px]"
             />
           </div>
           <div>
-            <label className="block text-sm font-medium text-white/80 mb-2">Name</label>
+            <label className="block text-xs sm:text-sm font-medium text-white/80 mb-1.5 sm:mb-2">Name</label>
             <input
               type="text"
               name="name"
               value={formData.name}
               onChange={handleInputChange}
-              className="w-full px-4 py-2 bg-white/5 border border-white/10 rounded-lg text-white focus:outline-none focus:border-red-500"
+              className="w-full px-3 sm:px-4 py-2.5 sm:py-2 bg-white/5 border border-white/10 rounded-lg text-sm sm:text-base text-white focus:outline-none focus:border-red-500 min-h-[44px]"
             />
           </div>
           <div>
-            <label className="block text-sm font-medium text-white/80 mb-2">Genre</label>
+            <label className="block text-xs sm:text-sm font-medium text-white/80 mb-1.5 sm:mb-2">Genre</label>
             <input
               type="text"
               name="genre"
               value={formData.genre}
               onChange={handleInputChange}
-              className="w-full px-4 py-2 bg-white/5 border border-white/10 rounded-lg text-white focus:outline-none focus:border-red-500"
+              className="w-full px-3 sm:px-4 py-2.5 sm:py-2 bg-white/5 border border-white/10 rounded-lg text-sm sm:text-base text-white focus:outline-none focus:border-red-500 min-h-[44px]"
             />
           </div>
           <div>
-            <label className="block text-sm font-medium text-white/80 mb-2">Birth Date</label>
+            <label className="block text-xs sm:text-sm font-medium text-white/80 mb-1.5 sm:mb-2">Birth Date</label>
             <input
               type="text"
               name="birthDate"
               value={formData.birthDate}
               onChange={handleInputChange}
-              className="w-full px-4 py-2 bg-white/5 border border-white/10 rounded-lg text-white focus:outline-none focus:border-red-500"
+              className="w-full px-3 sm:px-4 py-2.5 sm:py-2 bg-white/5 border border-white/10 rounded-lg text-sm sm:text-base text-white focus:outline-none focus:border-red-500 min-h-[44px]"
             />
           </div>
           <div>
-            <label className="block text-sm font-medium text-white/80 mb-2">Birthplace</label>
+            <label className="block text-xs sm:text-sm font-medium text-white/80 mb-1.5 sm:mb-2">Birthplace</label>
             <input
               type="text"
               name="birthplace"
               value={formData.birthplace}
               onChange={handleInputChange}
-              className="w-full px-4 py-2 bg-white/5 border border-white/10 rounded-lg text-white focus:outline-none focus:border-red-500"
+              className="w-full px-3 sm:px-4 py-2.5 sm:py-2 bg-white/5 border border-white/10 rounded-lg text-sm sm:text-base text-white focus:outline-none focus:border-red-500 min-h-[44px]"
             />
           </div>
           <div>
-            <label className="block text-sm font-medium text-white/80 mb-2">Career Start</label>
+            <label className="block text-xs sm:text-sm font-medium text-white/80 mb-1.5 sm:mb-2">Career Start</label>
             <input
               type="number"
               name="careerStart"
               value={formData.careerStart}
               onChange={handleInputChange}
-              className="w-full px-4 py-2 bg-white/5 border border-white/10 rounded-lg text-white focus:outline-none focus:border-red-500"
+              className="w-full px-3 sm:px-4 py-2.5 sm:py-2 bg-white/5 border border-white/10 rounded-lg text-sm sm:text-base text-white focus:outline-none focus:border-red-500 min-h-[44px]"
             />
           </div>
         </div>
@@ -519,13 +519,13 @@ export default function SingerForm() {
       </div>
 
       {/* Full Bio Array */}
-      <div className="space-y-4">
+      <div className="space-y-3 sm:space-y-4">
         <div className="flex items-center justify-between">
           <h2 className="text-2xl font-bold text-white">Full Bio</h2>
           <button
             type="button"
             onClick={() => addArrayItem('fullBio')}
-            className="px-4 py-2 bg-red-600 text-white rounded-lg hover:bg-red-700"
+            className="px-3 sm:px-4 py-2.5 sm:py-2 bg-red-600 text-white rounded-lg hover:bg-red-700 active:bg-red-800 transition-colors text-sm sm:text-base font-semibold min-h-[44px] touch-manipulation"
           >
             Add Paragraph
           </button>
@@ -541,7 +541,7 @@ export default function SingerForm() {
             <button
               type="button"
               onClick={() => removeArrayItem('fullBio', index)}
-              className="px-4 py-2 bg-red-600 text-white rounded-lg hover:bg-red-700"
+              className="px-3 sm:px-4 py-2.5 sm:py-2 bg-red-600 text-white rounded-lg hover:bg-red-700 active:bg-red-800 transition-colors text-sm sm:text-base font-semibold min-h-[44px] touch-manipulation"
             >
               Remove
             </button>
@@ -550,20 +550,20 @@ export default function SingerForm() {
       </div>
 
       {/* Albums */}
-      <div className="space-y-4">
+      <div className="space-y-3 sm:space-y-4">
         <div className="flex items-center justify-between">
           <h2 className="text-2xl font-bold text-white">Albums</h2>
           <button
             type="button"
             onClick={addAlbum}
-            className="px-4 py-2 bg-red-600 text-white rounded-lg hover:bg-red-700"
+            className="px-3 sm:px-4 py-2.5 sm:py-2 bg-red-600 text-white rounded-lg hover:bg-red-700 active:bg-red-800 transition-colors text-sm sm:text-base font-semibold min-h-[44px] touch-manipulation"
           >
             Add Album
           </button>
         </div>
         {formData.albums.map((album, index) => (
-          <div key={index} className="p-4 bg-white/5 rounded-lg space-y-2">
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-2">
+          <div key={index} className="p-3 sm:p-4 bg-white/5 rounded-lg space-y-2 sm:space-y-3">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-2 sm:gap-3">
               <input
                 type="text"
                 placeholder="Album Name"
@@ -584,13 +584,13 @@ export default function SingerForm() {
               value={album.description}
               onChange={(e) => handleAlbumChange(index, 'description', e.target.value)}
               rows={2}
-              className="w-full px-4 py-2 bg-white/5 border border-white/10 rounded-lg text-white focus:outline-none focus:border-red-500"
+              className="w-full px-3 sm:px-4 py-2.5 sm:py-2 bg-white/5 border border-white/10 rounded-lg text-sm sm:text-base text-white focus:outline-none focus:border-red-500 min-h-[44px]"
             />
             <div className="flex justify-end">
               <button
                 type="button"
                 onClick={() => removeAlbum(index)}
-                className="px-4 py-2 bg-red-600 text-white rounded-lg hover:bg-red-700"
+                className="px-3 sm:px-4 py-2.5 sm:py-2 bg-red-600 text-white rounded-lg hover:bg-red-700 active:bg-red-800 transition-colors text-sm sm:text-base font-semibold min-h-[44px] touch-manipulation"
               >
                 Remove
               </button>
@@ -600,20 +600,20 @@ export default function SingerForm() {
       </div>
 
       {/* Songs */}
-      <div className="space-y-4">
+      <div className="space-y-3 sm:space-y-4">
         <div className="flex items-center justify-between">
           <h2 className="text-2xl font-bold text-white">Songs</h2>
           <button
             type="button"
             onClick={addSong}
-            className="px-4 py-2 bg-red-600 text-white rounded-lg hover:bg-red-700"
+            className="px-3 sm:px-4 py-2.5 sm:py-2 bg-red-600 text-white rounded-lg hover:bg-red-700 active:bg-red-800 transition-colors text-sm sm:text-base font-semibold min-h-[44px] touch-manipulation"
           >
             Add Song
           </button>
         </div>
         {formData.songs.map((song, index) => (
-          <div key={index} className="p-4 bg-white/5 rounded-lg space-y-2">
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-2">
+          <div key={index} className="p-3 sm:p-4 bg-white/5 rounded-lg space-y-2 sm:space-y-3">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-2 sm:gap-3">
               <input
                 type="text"
                 placeholder="Song Name"
@@ -634,13 +634,13 @@ export default function SingerForm() {
               value={song.description}
               onChange={(e) => handleSongChange(index, 'description', e.target.value)}
               rows={2}
-              className="w-full px-4 py-2 bg-white/5 border border-white/10 rounded-lg text-white focus:outline-none focus:border-red-500"
+              className="w-full px-3 sm:px-4 py-2.5 sm:py-2 bg-white/5 border border-white/10 rounded-lg text-sm sm:text-base text-white focus:outline-none focus:border-red-500 min-h-[44px]"
             />
             <div className="flex justify-end">
               <button
                 type="button"
                 onClick={() => removeSong(index)}
-                className="px-4 py-2 bg-red-600 text-white rounded-lg hover:bg-red-700"
+                className="px-3 sm:px-4 py-2.5 sm:py-2 bg-red-600 text-white rounded-lg hover:bg-red-700 active:bg-red-800 transition-colors text-sm sm:text-base font-semibold min-h-[44px] touch-manipulation"
               >
                 Remove
               </button>
@@ -650,13 +650,13 @@ export default function SingerForm() {
       </div>
 
       {/* Awards */}
-      <div className="space-y-4">
+      <div className="space-y-3 sm:space-y-4">
         <div className="flex items-center justify-between">
           <h2 className="text-2xl font-bold text-white">Awards</h2>
           <button
             type="button"
             onClick={addAward}
-            className="px-4 py-2 bg-red-600 text-white rounded-lg hover:bg-red-700"
+            className="px-3 sm:px-4 py-2.5 sm:py-2 bg-red-600 text-white rounded-lg hover:bg-red-700 active:bg-red-800 transition-colors text-sm sm:text-base font-semibold min-h-[44px] touch-manipulation"
           >
             Add Award
           </button>
@@ -690,7 +690,7 @@ export default function SingerForm() {
               <button
                 type="button"
                 onClick={() => removeAward(index)}
-                className="px-4 py-2 bg-red-600 text-white rounded-lg hover:bg-red-700"
+                className="px-3 sm:px-4 py-2.5 sm:py-2 bg-red-600 text-white rounded-lg hover:bg-red-700 active:bg-red-800 transition-colors text-sm sm:text-base font-semibold min-h-[44px] touch-manipulation"
               >
                 Remove
               </button>
@@ -700,20 +700,20 @@ export default function SingerForm() {
       </div>
 
       {/* Collaborations */}
-      <div className="space-y-4">
+      <div className="space-y-3 sm:space-y-4">
         <div className="flex items-center justify-between">
           <h2 className="text-2xl font-bold text-white">Collaborations</h2>
           <button
             type="button"
             onClick={addCollaboration}
-            className="px-4 py-2 bg-red-600 text-white rounded-lg hover:bg-red-700"
+            className="px-3 sm:px-4 py-2.5 sm:py-2 bg-red-600 text-white rounded-lg hover:bg-red-700 active:bg-red-800 transition-colors text-sm sm:text-base font-semibold min-h-[44px] touch-manipulation"
           >
             Add Collaboration
           </button>
         </div>
         {formData.collaborations.map((collab, index) => (
-          <div key={index} className="p-4 bg-white/5 rounded-lg space-y-2">
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-2">
+          <div key={index} className="p-3 sm:p-4 bg-white/5 rounded-lg space-y-2 sm:space-y-3">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-2 sm:gap-3">
               <input
                 type="text"
                 placeholder="Artist"
@@ -733,7 +733,7 @@ export default function SingerForm() {
               <button
                 type="button"
                 onClick={() => removeCollaboration(index)}
-                className="px-4 py-2 bg-red-600 text-white rounded-lg hover:bg-red-700"
+                className="px-3 sm:px-4 py-2.5 sm:py-2 bg-red-600 text-white rounded-lg hover:bg-red-700 active:bg-red-800 transition-colors text-sm sm:text-base font-semibold min-h-[44px] touch-manipulation"
               >
                 Remove
               </button>
@@ -743,81 +743,81 @@ export default function SingerForm() {
       </div>
 
       {/* Stats */}
-      <div className="space-y-4">
+      <div className="space-y-3 sm:space-y-4">
         <h2 className="text-2xl font-bold text-white">Stats</h2>
         <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
           <div>
-            <label className="block text-sm font-medium text-white/80 mb-2">Albums</label>
+            <label className="block text-xs sm:text-sm font-medium text-white/80 mb-1.5 sm:mb-2">Albums</label>
             <input
               type="number"
               value={formData.stats.albums}
               onChange={(e) => handleStatsChange('albums', parseInt(e.target.value) || 0)}
-              className="w-full px-4 py-2 bg-white/5 border border-white/10 rounded-lg text-white focus:outline-none focus:border-red-500"
+              className="w-full px-3 sm:px-4 py-2.5 sm:py-2 bg-white/5 border border-white/10 rounded-lg text-sm sm:text-base text-white focus:outline-none focus:border-red-500 min-h-[44px]"
             />
           </div>
           <div>
-            <label className="block text-sm font-medium text-white/80 mb-2">Songs</label>
+            <label className="block text-xs sm:text-sm font-medium text-white/80 mb-1.5 sm:mb-2">Songs</label>
             <input
               type="number"
               value={formData.stats.songs}
               onChange={(e) => handleStatsChange('songs', parseInt(e.target.value) || 0)}
-              className="w-full px-4 py-2 bg-white/5 border border-white/10 rounded-lg text-white focus:outline-none focus:border-red-500"
+              className="w-full px-3 sm:px-4 py-2.5 sm:py-2 bg-white/5 border border-white/10 rounded-lg text-sm sm:text-base text-white focus:outline-none focus:border-red-500 min-h-[44px]"
             />
           </div>
           <div>
-            <label className="block text-sm font-medium text-white/80 mb-2">Awards</label>
+            <label className="block text-xs sm:text-sm font-medium text-white/80 mb-1.5 sm:mb-2">Awards</label>
             <input
               type="number"
               value={formData.stats.awards}
               onChange={(e) => handleStatsChange('awards', parseInt(e.target.value) || 0)}
-              className="w-full px-4 py-2 bg-white/5 border border-white/10 rounded-lg text-white focus:outline-none focus:border-red-500"
+              className="w-full px-3 sm:px-4 py-2.5 sm:py-2 bg-white/5 border border-white/10 rounded-lg text-sm sm:text-base text-white focus:outline-none focus:border-red-500 min-h-[44px]"
             />
           </div>
           <div>
-            <label className="block text-sm font-medium text-white/80 mb-2">Views</label>
+            <label className="block text-xs sm:text-sm font-medium text-white/80 mb-1.5 sm:mb-2">Views</label>
             <input
               type="text"
               value={formData.stats.views}
               onChange={(e) => handleStatsChange('views', e.target.value)}
-              className="w-full px-4 py-2 bg-white/5 border border-white/10 rounded-lg text-white focus:outline-none focus:border-red-500"
+              className="w-full px-3 sm:px-4 py-2.5 sm:py-2 bg-white/5 border border-white/10 rounded-lg text-sm sm:text-base text-white focus:outline-none focus:border-red-500 min-h-[44px]"
             />
           </div>
           <div>
-            <label className="block text-sm font-medium text-white/80 mb-2">Streams</label>
+            <label className="block text-xs sm:text-sm font-medium text-white/80 mb-1.5 sm:mb-2">Streams</label>
             <input
               type="text"
               value={formData.stats.streams}
               onChange={(e) => handleStatsChange('streams', e.target.value)}
-              className="w-full px-4 py-2 bg-white/5 border border-white/10 rounded-lg text-white focus:outline-none focus:border-red-500"
+              className="w-full px-3 sm:px-4 py-2.5 sm:py-2 bg-white/5 border border-white/10 rounded-lg text-sm sm:text-base text-white focus:outline-none focus:border-red-500 min-h-[44px]"
             />
           </div>
           <div>
-            <label className="block text-sm font-medium text-white/80 mb-2">Followers</label>
+            <label className="block text-xs sm:text-sm font-medium text-white/80 mb-1.5 sm:mb-2">Followers</label>
             <input
               type="text"
               value={formData.stats.followers}
               onChange={(e) => handleStatsChange('followers', e.target.value)}
-              className="w-full px-4 py-2 bg-white/5 border border-white/10 rounded-lg text-white focus:outline-none focus:border-red-500"
+              className="w-full px-3 sm:px-4 py-2.5 sm:py-2 bg-white/5 border border-white/10 rounded-lg text-sm sm:text-base text-white focus:outline-none focus:border-red-500 min-h-[44px]"
             />
           </div>
         </div>
       </div>
 
       {/* Milestones */}
-      <div className="space-y-4">
+      <div className="space-y-3 sm:space-y-4">
         <div className="flex items-center justify-between">
           <h2 className="text-2xl font-bold text-white">Milestones</h2>
           <button
             type="button"
             onClick={addMilestone}
-            className="px-4 py-2 bg-red-600 text-white rounded-lg hover:bg-red-700"
+            className="px-3 sm:px-4 py-2.5 sm:py-2 bg-red-600 text-white rounded-lg hover:bg-red-700 active:bg-red-800 transition-colors text-sm sm:text-base font-semibold min-h-[44px] touch-manipulation"
           >
             Add Milestone
           </button>
         </div>
         {formData.milestones.map((milestone, index) => (
-          <div key={index} className="p-4 bg-white/5 rounded-lg space-y-2">
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-2">
+          <div key={index} className="p-3 sm:p-4 bg-white/5 rounded-lg space-y-2 sm:space-y-3">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-2 sm:gap-3">
               <input
                 type="number"
                 placeholder="Year"
@@ -837,7 +837,7 @@ export default function SingerForm() {
               <button
                 type="button"
                 onClick={() => removeMilestone(index)}
-                className="px-4 py-2 bg-red-600 text-white rounded-lg hover:bg-red-700"
+                className="px-3 sm:px-4 py-2.5 sm:py-2 bg-red-600 text-white rounded-lg hover:bg-red-700 active:bg-red-800 transition-colors text-sm sm:text-base font-semibold min-h-[44px] touch-manipulation"
               >
                 Remove
               </button>
@@ -847,13 +847,13 @@ export default function SingerForm() {
       </div>
 
       {/* Achievements */}
-      <div className="space-y-4">
+      <div className="space-y-3 sm:space-y-4">
         <div className="flex items-center justify-between">
           <h2 className="text-2xl font-bold text-white">Achievements</h2>
           <button
             type="button"
             onClick={() => addArrayItem('achievements')}
-            className="px-4 py-2 bg-red-600 text-white rounded-lg hover:bg-red-700"
+            className="px-3 sm:px-4 py-2.5 sm:py-2 bg-red-600 text-white rounded-lg hover:bg-red-700 active:bg-red-800 transition-colors text-sm sm:text-base font-semibold min-h-[44px] touch-manipulation"
           >
             Add Achievement
           </button>
@@ -869,7 +869,7 @@ export default function SingerForm() {
             <button
               type="button"
               onClick={() => removeArrayItem('achievements', index)}
-              className="px-4 py-2 bg-red-600 text-white rounded-lg hover:bg-red-700"
+              className="px-3 sm:px-4 py-2.5 sm:py-2 bg-red-600 text-white rounded-lg hover:bg-red-700 active:bg-red-800 transition-colors text-sm sm:text-base font-semibold min-h-[44px] touch-manipulation"
             >
               Remove
             </button>
@@ -878,7 +878,7 @@ export default function SingerForm() {
       </div>
 
       {/* Metadata */}
-      <div className="space-y-4">
+      <div className="space-y-3 sm:space-y-4">
         <h2 className="text-2xl font-bold text-white">Metadata</h2>
         <div className="space-y-2">
           <input
@@ -941,16 +941,16 @@ export default function SingerForm() {
       </div>
 
       {/* SEO */}
-      <div className="space-y-4">
+      <div className="space-y-3 sm:space-y-4">
         <h2 className="text-2xl font-bold text-white">SEO</h2>
-        <div className="space-y-4">
+        <div className="space-y-3 sm:space-y-4">
           <div>
-            <label className="block text-sm font-medium text-white/80 mb-2">Job Title</label>
+            <label className="block text-xs sm:text-sm font-medium text-white/80 mb-1.5 sm:mb-2">Job Title</label>
             <input
               type="text"
               value={formData.seo.structuredData.jobTitle}
               onChange={(e) => handleSEOStructuredDataChange('jobTitle', e.target.value)}
-              className="w-full px-4 py-2 bg-white/5 border border-white/10 rounded-lg text-white focus:outline-none focus:border-red-500"
+              className="w-full px-3 sm:px-4 py-2.5 sm:py-2 bg-white/5 border border-white/10 rounded-lg text-sm sm:text-base text-white focus:outline-none focus:border-red-500 min-h-[44px]"
             />
           </div>
           <div>
@@ -975,7 +975,7 @@ export default function SingerForm() {
                 <button
                   type="button"
                   onClick={() => removeKnowsAbout(index)}
-                  className="px-4 py-2 bg-red-600 text-white rounded-lg hover:bg-red-700"
+                  className="px-3 sm:px-4 py-2.5 sm:py-2 bg-red-600 text-white rounded-lg hover:bg-red-700 active:bg-red-800 transition-colors text-sm sm:text-base font-semibold min-h-[44px] touch-manipulation"
                 >
                   Remove
                 </button>
@@ -1000,20 +1000,20 @@ export default function SingerForm() {
                   placeholder="Question"
                   value={faq.question}
                   onChange={(e) => handleFAQChange(index, 'question', e.target.value)}
-                  className="w-full px-4 py-2 bg-white/5 border border-white/10 rounded-lg text-white focus:outline-none focus:border-red-500"
+                  className="w-full px-3 sm:px-4 py-2.5 sm:py-2 bg-white/5 border border-white/10 rounded-lg text-sm sm:text-base text-white focus:outline-none focus:border-red-500 min-h-[44px]"
                 />
                 <textarea
                   placeholder="Answer"
                   value={faq.answer}
                   onChange={(e) => handleFAQChange(index, 'answer', e.target.value)}
                   rows={2}
-                  className="w-full px-4 py-2 bg-white/5 border border-white/10 rounded-lg text-white focus:outline-none focus:border-red-500"
+                  className="w-full px-3 sm:px-4 py-2.5 sm:py-2 bg-white/5 border border-white/10 rounded-lg text-sm sm:text-base text-white focus:outline-none focus:border-red-500 min-h-[44px]"
                 />
                 <div className="flex justify-end">
                   <button
                     type="button"
                     onClick={() => removeFAQ(index)}
-                    className="px-4 py-2 bg-red-600 text-white rounded-lg hover:bg-red-700"
+                    className="px-3 sm:px-4 py-2.5 sm:py-2 bg-red-600 text-white rounded-lg hover:bg-red-700 active:bg-red-800 transition-colors text-sm sm:text-base font-semibold min-h-[44px] touch-manipulation"
                   >
                     Remove
                   </button>
@@ -1025,7 +1025,7 @@ export default function SingerForm() {
       </div>
 
       {/* Images */}
-      <div className="space-y-4">
+      <div className="space-y-3 sm:space-y-4">
         <h2 className="text-2xl font-bold text-white">Images</h2>
         <div>
           <label className="block text-sm font-medium text-white/80 mb-2">Main Image</label>
@@ -1049,11 +1049,11 @@ export default function SingerForm() {
       </div>
 
       {/* Submit Button */}
-      <div className="flex justify-end pt-4">
+      <div className="flex justify-end pt-3 sm:pt-4">
         <button
           type="submit"
           disabled={loading}
-          className="px-8 py-3 bg-gradient-to-r from-red-600 to-red-700 text-white rounded-lg hover:from-red-500 hover:to-red-600 transition-all font-semibold disabled:opacity-50"
+          className="w-full sm:w-auto px-6 sm:px-8 py-3 bg-gradient-to-r from-red-600 to-red-700 text-white rounded-lg hover:from-red-500 hover:to-red-600 active:from-red-700 active:to-red-800 transition-all font-semibold disabled:opacity-50 min-h-[48px] touch-manipulation text-sm sm:text-base"
         >
           {loading ? 'Submitting...' : 'Submit'}
         </button>

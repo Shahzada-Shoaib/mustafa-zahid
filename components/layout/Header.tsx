@@ -95,25 +95,23 @@ export default function Header() {
   ];
 
   return (
-    //Commented code is
     <nav
-      className={`my-4 fixed top-0 w-full z-50 transition-all duration-500 ${
+      className={`my-2 sm:my-4 fixed top-0 w-full z-50 transition-all duration-500 ${
         isMounted && scrollY > 50
-          ? "backdrop-blur-xl py-0.5 sm:py-1 rounded-4xl"
+          ? "backdrop-blur-xl bg-black/80 py-1 sm:py-1.5 md:py-0.5 md:rounded-4xl"
           : "bg-transparent py-1 sm:py-1.5"
       }`}
     >
-      {/* <nav className={`fixed top-0 w-full z-50 transition-all duration-500 'bg-black/90 backdrop-blur-xl py-0.5 sm:py-1'}`}> */}
-      <div className="max-w-7xl mx-auto px-4 py-2 sm:px-6 lg:px-12">
+      <div className="max-w-7xl mx-auto px-3 sm:px-4 md:px-6 lg:px-12 py-2 sm:py-2.5">
         <div className="flex items-center justify-between">
           {/* Logo */}
           <Link href="/" className="group flex items-center">
-            <div className="w-20 max-w-[80px] sm:max-w-[100px] md:max-w-[120px]">
+            <div className="w-16 sm:w-20 md:max-w-[100px] lg:max-w-[120px]">
               <Image
                 src="/mz-logo.png"
                 alt="Mustafa Zahid Logo"
-                width={120} // original image width
-                height={120} // original image height
+                width={120}
+                height={120}
                 className="w-full h-auto object-contain"
                 priority
               />
@@ -217,20 +215,19 @@ export default function Header() {
 
           {/* Mobile Menu Button */}
           <button
-            // onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
             onClick={() => {
               setMobileMenuOpen(!mobileMenuOpen);
-
-              // header ko black karne ke liye
-              setScrollY(100);
+              if (!mobileMenuOpen) {
+                setScrollY(100);
+              }
             }}
-            className="md:hidden p-2 sm:p-2.5 text-white hover:text-red-500 transition-colors"
+            className="md:hidden p-2.5 min-w-[44px] min-h-[44px] flex items-center justify-center text-white hover:text-red-500 active:text-red-400 transition-colors touch-manipulation"
             aria-label="Toggle mobile menu"
             aria-expanded={mobileMenuOpen}
           >
             {mobileMenuOpen ? (
               <svg
-                className="w-8 h-8 sm:w-6 sm:h-6"
+                className="w-6 h-6"
                 fill="none"
                 stroke="currentColor"
                 viewBox="0 0 24 24"
@@ -244,7 +241,7 @@ export default function Header() {
               </svg>
             ) : (
               <svg
-                className="w-8 h-8 sm:w-6 sm:h-6"
+                className="w-6 h-6"
                 fill="none"
                 stroke="currentColor"
                 viewBox="0 0 24 24"
@@ -262,17 +259,17 @@ export default function Header() {
 
         {/* Mobile Menu */}
         <div
-          className={`md:hidden overflow-hidden transition-all duration-300 ${
+          className={`md:hidden overflow-hidden transition-all duration-300 ease-in-out ${
             mobileMenuOpen
-              ? "max-h-[600px] opacity-100 mt-4"
-              : "max-h-0 opacity-0"
+              ? "max-h-[700px] opacity-100 mt-3 sm:mt-4"
+              : "max-h-0 opacity-0 mt-0"
           }`}
         >
-          <div className="flex flex-col gap-2 py-4 border-t border-white/10">
+          <div className="flex flex-col gap-1 sm:gap-2 py-3 sm:py-4 border-t border-white/10 bg-black/60 backdrop-blur-md rounded-b-2xl">
             <Link
               href="/"
               onClick={() => setMobileMenuOpen(false)}
-              className="px-4 py-2 text-white/80 hover:text-white hover:bg-white/10 rounded-lg transition-colors text-sm font-medium"
+              className="px-4 py-3 sm:py-2.5 text-white/90 hover:text-white active:text-white hover:bg-white/10 active:bg-white/15 rounded-lg transition-colors text-base sm:text-sm font-medium min-h-[44px] flex items-center touch-manipulation"
             >
               Home
             </Link>
@@ -284,11 +281,11 @@ export default function Header() {
                   e.stopPropagation();
                   setMusicClassesDropdownOpen(!musicClassesDropdownOpen);
                 }}
-                className="w-full px-4 py-2 text-white/80 hover:text-white hover:bg-white/10 rounded-lg transition-colors text-sm font-medium flex items-center justify-between"
+                className="w-full px-4 py-3 sm:py-2.5 text-white/90 hover:text-white active:text-white hover:bg-white/10 active:bg-white/15 rounded-lg transition-colors text-base sm:text-sm font-medium flex items-center justify-between min-h-[44px] touch-manipulation"
               >
                 <span>Music Classes</span>
                 <svg
-                  className={`w-4 h-4 transition-transform ${
+                  className={`w-5 h-5 sm:w-4 sm:h-4 transition-transform ${
                     musicClassesDropdownOpen ? "rotate-180" : ""
                   }`}
                   fill="none"
@@ -304,7 +301,7 @@ export default function Header() {
                 </svg>
               </button>
               {musicClassesDropdownOpen && (
-                <div className="pl-4 mt-2 space-y-1">
+                <div className="pl-4 sm:pl-6 mt-1 sm:mt-2 space-y-1">
                   {musicClasses.map((classItem) => (
                     <Link
                       key={classItem.href}
@@ -314,7 +311,7 @@ export default function Header() {
                         setMobileMenuOpen(false);
                         setMusicClassesDropdownOpen(false);
                       }}
-                      className="block px-4 py-2 text-white/60 hover:text-white hover:bg-white/5 rounded-lg transition-colors text-sm"
+                      className="block px-4 py-2.5 sm:py-2 text-white/70 hover:text-white active:text-white hover:bg-white/5 active:bg-white/10 rounded-lg transition-colors text-sm sm:text-xs min-h-[40px] flex items-center touch-manipulation"
                     >
                       {classItem.label}
                     </Link>
@@ -328,7 +325,7 @@ export default function Header() {
                 key={link.href}
                 href={link.href}
                 onClick={() => setMobileMenuOpen(false)}
-                className="px-4 py-2 text-white/80 hover:text-white hover:bg-white/10 rounded-lg transition-colors text-sm font-medium"
+                className="px-4 py-3 sm:py-2.5 text-white/90 hover:text-white active:text-white hover:bg-white/10 active:bg-white/15 rounded-lg transition-colors text-base sm:text-sm font-medium min-h-[44px] flex items-center touch-manipulation"
               >
                 {link.label}
               </Link>
@@ -336,7 +333,7 @@ export default function Header() {
             <Link
               href="/dashboard"
               onClick={() => setMobileMenuOpen(false)}
-              className="px-4 py-2 text-white/80 hover:text-white hover:bg-white/10 rounded-lg transition-colors text-sm font-medium"
+              className="px-4 py-3 sm:py-2.5 text-white/90 hover:text-white active:text-white hover:bg-white/10 active:bg-white/15 rounded-lg transition-colors text-base sm:text-sm font-medium min-h-[44px] flex items-center touch-manipulation"
             >
               Dashboard
             </Link>
@@ -345,11 +342,11 @@ export default function Header() {
               target="_blank"
               rel="noopener noreferrer"
               onClick={() => setMobileMenuOpen(false)}
-              className="flex items-center justify-center gap-2 px-6 py-3 bg-gradient-to-r from-red-600 to-red-700 text-white text-sm uppercase tracking-wider rounded-full hover:from-red-500 hover:to-red-600 transition-all mt-2"
+              className="flex items-center justify-center gap-2 px-6 py-3.5 sm:py-3 bg-gradient-to-r from-red-600 to-red-700 text-white text-sm sm:text-xs uppercase tracking-wider rounded-full hover:from-red-500 hover:to-red-600 active:from-red-700 active:to-red-800 transition-all mt-2 sm:mt-3 min-h-[48px] touch-manipulation font-semibold"
             >
               <span>Book Now</span>
               <svg
-                className="w-4 h-4"
+                className="w-4 h-4 sm:w-3.5 sm:h-3.5"
                 fill="none"
                 stroke="currentColor"
                 viewBox="0 0 24 24"

@@ -103,97 +103,97 @@ export default function BlogForm() {
   };
 
   return (
-    <form onSubmit={handleSubmit} className="space-y-8">
+    <form onSubmit={handleSubmit} className="space-y-6 sm:space-y-8">
       {/* Basic Information */}
-      <div className="space-y-4">
-        <h2 className="text-2xl font-bold text-white mb-4">Basic Information</h2>
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+      <div className="space-y-3 sm:space-y-4">
+        <h2 className="text-xl sm:text-2xl font-bold text-white mb-3 sm:mb-4">Basic Information</h2>
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-3 sm:gap-4">
           <div>
-            <label className="block text-sm font-medium text-white/80 mb-2">Slug</label>
+            <label className="block text-xs sm:text-sm font-medium text-white/80 mb-1.5 sm:mb-2">Slug</label>
             <input
               type="text"
               name="slug"
               value={formData.slug}
               onChange={handleInputChange}
-              className="w-full px-4 py-2 bg-white/5 border border-white/10 rounded-lg text-white focus:outline-none focus:border-red-500"
+              className="w-full px-3 sm:px-4 py-2.5 sm:py-2 bg-white/5 border border-white/10 rounded-lg text-sm sm:text-base text-white focus:outline-none focus:border-red-500 min-h-[44px]"
             />
           </div>
           <div>
-            <label className="block text-sm font-medium text-white/80 mb-2">Title</label>
+            <label className="block text-xs sm:text-sm font-medium text-white/80 mb-1.5 sm:mb-2">Title</label>
             <input
               type="text"
               name="title"
               value={formData.title}
               onChange={handleInputChange}
-              className="w-full px-4 py-2 bg-white/5 border border-white/10 rounded-lg text-white focus:outline-none focus:border-red-500"
+              className="w-full px-3 sm:px-4 py-2.5 sm:py-2 bg-white/5 border border-white/10 rounded-lg text-sm sm:text-base text-white focus:outline-none focus:border-red-500 min-h-[44px]"
             />
           </div>
           <div>
-            <label className="block text-sm font-medium text-white/80 mb-2">Date</label>
+            <label className="block text-xs sm:text-sm font-medium text-white/80 mb-1.5 sm:mb-2">Date</label>
             <input
               type="text"
               name="date"
               value={formData.date}
               onChange={handleInputChange}
               placeholder="YYYY-MM-DD"
-              className="w-full px-4 py-2 bg-white/5 border border-white/10 rounded-lg text-white focus:outline-none focus:border-red-500"
+              className="w-full px-3 sm:px-4 py-2.5 sm:py-2 bg-white/5 border border-white/10 rounded-lg text-sm sm:text-base text-white focus:outline-none focus:border-red-500 min-h-[44px]"
             />
           </div>
           <div>
-            <label className="block text-sm font-medium text-white/80 mb-2">Author</label>
+            <label className="block text-xs sm:text-sm font-medium text-white/80 mb-1.5 sm:mb-2">Author</label>
             <input
               type="text"
               name="author"
               value={formData.author}
               onChange={handleInputChange}
-              className="w-full px-4 py-2 bg-white/5 border border-white/10 rounded-lg text-white focus:outline-none focus:border-red-500"
+              className="w-full px-3 sm:px-4 py-2.5 sm:py-2 bg-white/5 border border-white/10 rounded-lg text-sm sm:text-base text-white focus:outline-none focus:border-red-500 min-h-[44px]"
             />
           </div>
           <div>
-            <label className="block text-sm font-medium text-white/80 mb-2">Category</label>
+            <label className="block text-xs sm:text-sm font-medium text-white/80 mb-1.5 sm:mb-2">Category</label>
             <input
               type="text"
               name="category"
               value={formData.category}
               onChange={handleInputChange}
-              className="w-full px-4 py-2 bg-white/5 border border-white/10 rounded-lg text-white focus:outline-none focus:border-red-500"
+              className="w-full px-3 sm:px-4 py-2.5 sm:py-2 bg-white/5 border border-white/10 rounded-lg text-sm sm:text-base text-white focus:outline-none focus:border-red-500 min-h-[44px]"
             />
           </div>
         </div>
         <div>
-          <label className="block text-sm font-medium text-white/80 mb-2">Excerpt</label>
+          <label className="block text-xs sm:text-sm font-medium text-white/80 mb-1.5 sm:mb-2">Excerpt</label>
           <textarea
             name="excerpt"
             value={formData.excerpt}
             onChange={handleInputChange}
             rows={3}
-            className="w-full px-4 py-2 bg-white/5 border border-white/10 rounded-lg text-white focus:outline-none focus:border-red-500"
+            className="w-full px-3 sm:px-4 py-2.5 sm:py-2 bg-white/5 border border-white/10 rounded-lg text-sm sm:text-base text-white focus:outline-none focus:border-red-500 resize-y"
           />
         </div>
         <div>
-          <label className="block text-sm font-medium text-white/80 mb-2">Content</label>
+          <label className="block text-xs sm:text-sm font-medium text-white/80 mb-1.5 sm:mb-2">Content</label>
           <textarea
             name="content"
             value={formData.content}
             onChange={handleInputChange}
-            rows={10}
+            rows={8}
             placeholder="HTML content here..."
-            className="w-full px-4 py-2 bg-white/5 border border-white/10 rounded-lg text-white focus:outline-none focus:border-red-500 font-mono text-sm"
+            className="w-full px-3 sm:px-4 py-2.5 sm:py-2 bg-white/5 border border-white/10 rounded-lg text-xs sm:text-sm text-white focus:outline-none focus:border-red-500 font-mono resize-y"
           />
         </div>
       </div>
 
       {/* Metadata */}
-      <div className="space-y-4">
-        <h2 className="text-2xl font-bold text-white">Metadata</h2>
-        <div className="space-y-2">
+      <div className="space-y-3 sm:space-y-4">
+        <h2 className="text-xl sm:text-2xl font-bold text-white">Metadata</h2>
+        <div className="space-y-2 sm:space-y-3">
           <input
             type="text"
             name="metadata.title"
             value={formData.metadata.title}
             onChange={handleInputChange}
             placeholder="Title"
-            className="w-full px-4 py-2 bg-white/5 border border-white/10 rounded-lg text-white focus:outline-none focus:border-red-500"
+            className="w-full px-3 sm:px-4 py-2.5 sm:py-2 bg-white/5 border border-white/10 rounded-lg text-sm sm:text-base text-white focus:outline-none focus:border-red-500 min-h-[44px]"
           />
           <textarea
             name="metadata.description"
@@ -201,7 +201,7 @@ export default function BlogForm() {
             onChange={handleInputChange}
             placeholder="Description"
             rows={3}
-            className="w-full px-4 py-2 bg-white/5 border border-white/10 rounded-lg text-white focus:outline-none focus:border-red-500"
+            className="w-full px-3 sm:px-4 py-2.5 sm:py-2 bg-white/5 border border-white/10 rounded-lg text-sm sm:text-base text-white focus:outline-none focus:border-red-500 resize-y"
           />
           <input
             type="text"
@@ -209,7 +209,7 @@ export default function BlogForm() {
             value={formData.metadata.keywords}
             onChange={handleInputChange}
             placeholder="Keywords"
-            className="w-full px-4 py-2 bg-white/5 border border-white/10 rounded-lg text-white focus:outline-none focus:border-red-500"
+            className="w-full px-3 sm:px-4 py-2.5 sm:py-2 bg-white/5 border border-white/10 rounded-lg text-sm sm:text-base text-white focus:outline-none focus:border-red-500 min-h-[44px]"
           />
           <input
             type="text"
@@ -217,7 +217,7 @@ export default function BlogForm() {
             value={formData.metadata.ogTitle}
             onChange={handleInputChange}
             placeholder="OG Title"
-            className="w-full px-4 py-2 bg-white/5 border border-white/10 rounded-lg text-white focus:outline-none focus:border-red-500"
+            className="w-full px-3 sm:px-4 py-2.5 sm:py-2 bg-white/5 border border-white/10 rounded-lg text-sm sm:text-base text-white focus:outline-none focus:border-red-500 min-h-[44px]"
           />
           <textarea
             name="metadata.ogDescription"
@@ -225,7 +225,7 @@ export default function BlogForm() {
             onChange={handleInputChange}
             placeholder="OG Description"
             rows={2}
-            className="w-full px-4 py-2 bg-white/5 border border-white/10 rounded-lg text-white focus:outline-none focus:border-red-500"
+            className="w-full px-3 sm:px-4 py-2.5 sm:py-2 bg-white/5 border border-white/10 rounded-lg text-sm sm:text-base text-white focus:outline-none focus:border-red-500 resize-y"
           />
           <input
             type="text"
@@ -233,7 +233,7 @@ export default function BlogForm() {
             value={formData.metadata.twitterTitle}
             onChange={handleInputChange}
             placeholder="Twitter Title"
-            className="w-full px-4 py-2 bg-white/5 border border-white/10 rounded-lg text-white focus:outline-none focus:border-red-500"
+            className="w-full px-3 sm:px-4 py-2.5 sm:py-2 bg-white/5 border border-white/10 rounded-lg text-sm sm:text-base text-white focus:outline-none focus:border-red-500 min-h-[44px]"
           />
           <textarea
             name="metadata.twitterDescription"
@@ -241,31 +241,31 @@ export default function BlogForm() {
             onChange={handleInputChange}
             placeholder="Twitter Description"
             rows={2}
-            className="w-full px-4 py-2 bg-white/5 border border-white/10 rounded-lg text-white focus:outline-none focus:border-red-500"
+            className="w-full px-3 sm:px-4 py-2.5 sm:py-2 bg-white/5 border border-white/10 rounded-lg text-sm sm:text-base text-white focus:outline-none focus:border-red-500 resize-y"
           />
         </div>
       </div>
 
       {/* Image */}
-      <div className="space-y-4">
-        <h2 className="text-2xl font-bold text-white">Image</h2>
+      <div className="space-y-3 sm:space-y-4">
+        <h2 className="text-xl sm:text-2xl font-bold text-white">Image</h2>
         <div>
-          <label className="block text-sm font-medium text-white/80 mb-2">Blog Image</label>
+          <label className="block text-xs sm:text-sm font-medium text-white/80 mb-1.5 sm:mb-2">Blog Image</label>
           <input
             type="file"
             accept="image/*"
             onChange={(e) => setImage(e.target.files?.[0] || null)}
-            className="w-full px-4 py-2 bg-white/5 border border-white/10 rounded-lg text-white focus:outline-none focus:border-red-500"
+            className="w-full px-3 sm:px-4 py-2.5 sm:py-2 bg-white/5 border border-white/10 rounded-lg text-xs sm:text-sm text-white focus:outline-none focus:border-red-500 min-h-[44px] file:mr-4 file:py-2 file:px-4 file:rounded-lg file:border-0 file:text-sm file:font-semibold file:bg-red-600 file:text-white hover:file:bg-red-500 file:cursor-pointer"
           />
         </div>
       </div>
 
       {/* Submit Button */}
-      <div className="flex justify-end pt-4">
+      <div className="flex justify-end pt-3 sm:pt-4">
         <button
           type="submit"
           disabled={loading}
-          className="px-8 py-3 bg-gradient-to-r from-red-600 to-red-700 text-white rounded-lg hover:from-red-500 hover:to-red-600 transition-all font-semibold disabled:opacity-50"
+          className="w-full sm:w-auto px-6 sm:px-8 py-3 bg-gradient-to-r from-red-600 to-red-700 text-white rounded-lg hover:from-red-500 hover:to-red-600 active:from-red-700 active:to-red-800 transition-all font-semibold disabled:opacity-50 min-h-[48px] touch-manipulation text-sm sm:text-base"
         >
           {loading ? 'Submitting...' : 'Submit'}
         </button>

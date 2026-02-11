@@ -192,21 +192,21 @@ export default async function BlogPostPage({
       <Header />
       
       {/* Hero Section */}
-      <section className="relative py-8 lg:py-12">
+      <section className="relative py-6 sm:py-8 lg:py-12">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-12">
           {/* Back Button */}
           <Link
             href="/blog"
-            className="inline-flex items-center gap-2 text-white/70 hover:text-white mb-8 transition-colors group"
+            className="inline-flex items-center gap-2 text-white/70 hover:text-white active:text-white mb-6 sm:mb-8 transition-colors group min-h-[44px] touch-manipulation"
           >
-            <svg className="w-5 h-5 transition-transform group-hover:-translate-x-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <svg className="w-4 h-4 sm:w-5 sm:h-5 transition-transform group-hover:-translate-x-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
             </svg>
-            <span>Back to Blog</span>
+            <span className="text-sm sm:text-base">Back to Blog</span>
           </Link>
 
           {/* Hero Image */}
-          <div className="relative aspect-[21/9] rounded-3xl overflow-hidden mb-8">
+          <div className="relative aspect-[16/9] sm:aspect-[21/9] rounded-2xl sm:rounded-3xl overflow-hidden mb-6 sm:mb-8">
             <Image
               src={getValidImageUrl(post.image)}
               alt={post.title}
@@ -216,31 +216,31 @@ export default async function BlogPostPage({
               sizes="(max-width: 768px) 100vw, 1200px"
             />
             <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent" />
-            <div className="absolute bottom-0 left-0 right-0 p-8 lg:p-12">
+            <div className="absolute bottom-0 left-0 right-0 p-4 sm:p-6 lg:p-8 xl:p-12">
               <div className="max-w-4xl">
-                <span className="inline-block px-4 py-2 bg-red-600/90 backdrop-blur-sm rounded-full text-sm text-white font-medium mb-4">
+                <span className="inline-block px-3 sm:px-4 py-1.5 sm:py-2 bg-red-600/90 backdrop-blur-sm rounded-full text-xs sm:text-sm text-white font-medium mb-3 sm:mb-4">
                   {post.category}
                 </span>
-                <h1 className="font-display text-4xl md:text-5xl lg:text-6xl font-bold mb-6">
+                <h1 className="font-display text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-bold mb-4 sm:mb-6">
                   {post.title}
                 </h1>
-                <div className="flex flex-wrap items-center gap-4 text-white/90">
-                  <div className="flex items-center gap-2">
-                    <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <div className="flex flex-wrap items-center gap-2 sm:gap-3 lg:gap-4 text-xs sm:text-sm lg:text-base text-white/90">
+                  <div className="flex items-center gap-1.5 sm:gap-2">
+                    <svg className="w-4 h-4 sm:w-5 sm:h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
                     </svg>
                     <span>{post.author}</span>
                   </div>
-                  <span>•</span>
-                  <div className="flex items-center gap-2">
-                    <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <span className="hidden sm:inline">•</span>
+                  <div className="flex items-center gap-1.5 sm:gap-2">
+                    <svg className="w-4 h-4 sm:w-5 sm:h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
                     </svg>
                     <span>{new Date(post.date).toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' })}</span>
                   </div>
-                  <span>•</span>
-                  <div className="flex items-center gap-2">
-                    <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <span className="hidden sm:inline">•</span>
+                  <div className="flex items-center gap-1.5 sm:gap-2">
+                    <svg className="w-4 h-4 sm:w-5 sm:h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
                     </svg>
                     <span>{readingTime} min read</span>
@@ -253,24 +253,24 @@ export default async function BlogPostPage({
       </section>
 
       {/* Article Content */}
-      <article className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-12 pb-12 lg:pb-16">
-        <div className="glass-card rounded-3xl p-8 lg:p-12">
+      <article className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-12 pb-8 sm:pb-12 lg:pb-16">
+        <div className="glass-card rounded-2xl sm:rounded-3xl p-4 sm:p-6 lg:p-8 xl:p-12">
           <div 
             className="prose prose-invert max-w-none 
               prose-headings:text-white prose-headings:font-display
-              prose-h1:text-4xl prose-h1:font-bold prose-h1:mb-6 prose-h1:mt-8
-              prose-h2:text-3xl prose-h2:font-bold prose-h2:mb-4 prose-h2:mt-8
-              prose-h3:text-2xl prose-h3:font-semibold prose-h3:mb-3 prose-h3:mt-6
-              prose-p:text-white/90 prose-p:leading-relaxed prose-p:text-lg prose-p:mb-6
-              prose-a:text-red-400 prose-a:no-underline hover:prose-a:text-red-300 prose-a:font-medium
+              prose-h1:text-2xl sm:prose-h1:text-3xl lg:prose-h1:text-4xl prose-h1:font-bold prose-h1:mb-4 sm:prose-h1:mb-6 prose-h1:mt-6 sm:prose-h1:mt-8
+              prose-h2:text-xl sm:prose-h2:text-2xl lg:prose-h2:text-3xl prose-h2:font-bold prose-h2:mb-3 sm:prose-h2:mb-4 prose-h2:mt-6 sm:prose-h2:mt-8
+              prose-h3:text-lg sm:prose-h3:text-xl lg:prose-h3:text-2xl prose-h3:font-semibold prose-h3:mb-2 sm:prose-h3:mb-3 prose-h3:mt-4 sm:prose-h3:mt-6
+              prose-p:text-white/90 prose-p:leading-relaxed prose-p:text-sm sm:prose-p:text-base lg:prose-p:text-lg prose-p:mb-4 sm:prose-p:mb-6
+              prose-a:text-red-400 prose-a:no-underline hover:prose-a:text-red-300 active:prose-a:text-red-200 prose-a:font-medium prose-a:break-words
               prose-strong:text-white prose-strong:font-semibold
-              prose-ul:text-white/90 prose-ul:mb-6 prose-ul:space-y-2
-              prose-ol:text-white/90 prose-ol:mb-6 prose-ol:space-y-2
+              prose-ul:text-white/90 prose-ul:mb-4 sm:prose-ul:mb-6 prose-ul:space-y-2 prose-ul:text-sm sm:prose-ul:text-base
+              prose-ol:text-white/90 prose-ol:mb-4 sm:prose-ol:mb-6 prose-ol:space-y-2 prose-ol:text-sm sm:prose-ol:text-base
               prose-li:marker:text-red-400
-              prose-blockquote:border-l-red-500 prose-blockquote:pl-6 prose-blockquote:italic prose-blockquote:text-white/80
-              prose-img:rounded-2xl prose-img:my-8
-              prose-code:text-red-400 prose-code:bg-white/10 prose-code:px-2 prose-code:py-1 prose-code:rounded
-              prose-pre:bg-white/5 prose-pre:rounded-xl"
+              prose-blockquote:border-l-red-500 prose-blockquote:pl-4 sm:prose-blockquote:pl-6 prose-blockquote:italic prose-blockquote:text-white/80 prose-blockquote:text-sm sm:prose-blockquote:text-base
+              prose-img:rounded-xl sm:prose-img:rounded-2xl prose-img:my-6 sm:prose-img:my-8 prose-img:w-full prose-img:h-auto
+              prose-code:text-red-400 prose-code:bg-white/10 prose-code:px-1.5 sm:prose-code:px-2 prose-code:py-0.5 sm:prose-code:py-1 prose-code:rounded prose-code:text-xs sm:prose-code:text-sm
+              prose-pre:bg-white/5 prose-pre:rounded-xl prose-pre:text-xs sm:prose-pre:text-sm prose-pre:overflow-x-auto"
             dangerouslySetInnerHTML={{ __html: post.content }}
           />
         </div>
@@ -278,22 +278,22 @@ export default async function BlogPostPage({
 
       {/* Related Articles */}
       {relatedPosts.length > 0 && (
-        <section className="py-12 lg:py-16 bg-gradient-to-b from-transparent via-red-950/10 to-transparent">
+        <section className="py-8 sm:py-12 lg:py-16 bg-gradient-to-b from-transparent via-red-950/10 to-transparent">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-12">
-            <div className="mb-12 text-center">
-              <span className="text-red-500 uppercase tracking-[0.3em] text-sm font-medium">
+            <div className="mb-8 sm:mb-12 text-center">
+              <span className="text-red-500 uppercase tracking-[0.3em] text-xs sm:text-sm font-medium">
                 Continue Reading
               </span>
-              <h2 className="font-display text-3xl md:text-4xl lg:text-5xl font-bold mt-4">
+              <h2 className="font-display text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold mt-3 sm:mt-4">
                 Related <span className="text-gradient">Articles</span>
               </h2>
             </div>
-            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8">
+            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 lg:gap-8">
               {relatedPosts.map((relatedPost) => (
                 <Link
                   key={relatedPost.slug}
                   href={`/blog/${encodeURIComponent(relatedPost.slug)}`}
-                  className="group glass-card rounded-2xl overflow-hidden hover-lift block"
+                  className="group glass-card rounded-xl sm:rounded-2xl overflow-hidden hover-lift block touch-manipulation"
                 >
                   <div className="relative aspect-video overflow-hidden">
                     <Image
@@ -304,23 +304,23 @@ export default async function BlogPostPage({
                       sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
                     />
                     <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/10 to-transparent" />
-                    <div className="absolute top-4 left-4 px-3 py-1.5 bg-red-600/90 backdrop-blur-sm rounded-full text-xs text-white font-medium">
+                    <div className="absolute top-3 sm:top-4 left-3 sm:left-4 px-2 sm:px-3 py-1 sm:py-1.5 bg-red-600/90 backdrop-blur-sm rounded-full text-[10px] sm:text-xs text-white font-medium">
                       {relatedPost.category}
                     </div>
                   </div>
-                  <div className="p-6">
-                    <div className="flex items-center gap-3 text-xs text-white/60 mb-3">
+                  <div className="p-4 sm:p-6">
+                    <div className="flex flex-wrap items-center gap-2 sm:gap-3 text-[10px] sm:text-xs text-white/60 mb-2 sm:mb-3">
                       <span>{new Date(relatedPost.date).toLocaleDateString('en-US', { month: 'short', day: 'numeric' })}</span>
-                      <span>•</span>
+                      <span className="hidden sm:inline">•</span>
                       <span>{calculateReadingTime(relatedPost.content)} min read</span>
                     </div>
-                    <h3 className="text-xl font-semibold text-white mb-2 group-hover:text-red-400 transition-colors line-clamp-2">
+                    <h3 className="text-lg sm:text-xl font-semibold text-white mb-2 group-hover:text-red-400 transition-colors line-clamp-2">
                       {relatedPost.title}
                     </h3>
-                    <p className="text-white/70 text-sm line-clamp-2 mb-4">{relatedPost.excerpt}</p>
-                    <div className="flex items-center gap-2 text-red-400 text-sm font-medium group-hover:text-red-300 transition-colors">
+                    <p className="text-white/70 text-xs sm:text-sm line-clamp-2 mb-3 sm:mb-4">{relatedPost.excerpt}</p>
+                    <div className="flex items-center gap-2 text-red-400 text-xs sm:text-sm font-medium group-hover:text-red-300 transition-colors min-h-[32px] sm:min-h-[36px]">
                       <span>Read More</span>
-                      <svg className="w-4 h-4 transition-transform group-hover:translate-x-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <svg className="w-3 h-3 sm:w-4 sm:h-4 transition-transform group-hover:translate-x-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
                       </svg>
                     </div>

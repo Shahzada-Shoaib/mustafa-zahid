@@ -46,16 +46,16 @@ export default function AboutPage() {
       <Header />
       
       {/* Hero Section */}
-      <section className="relative py-20 lg:py-32">
+      <section className="relative py-16 sm:py-20 lg:py-32">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-12">
-          <div className="text-center space-y-6">
-            <span className="text-red-500 uppercase tracking-[0.3em] text-sm font-medium">
+          <div className="text-center space-y-4 sm:space-y-6">
+            <span className="text-red-500 uppercase tracking-[0.3em] text-xs sm:text-sm font-medium">
               Official Website
             </span>
-            <h1 className="font-display text-4xl md:text-6xl lg:text-7xl font-bold">
+            <h1 className="font-display text-3xl sm:text-4xl md:text-6xl lg:text-7xl font-bold">
               About <span className="text-gradient">Mustafa Zahid</span>
             </h1>
-            <p className="text-lg text-white/80 max-w-2xl mx-auto">
+            <p className="text-base sm:text-lg text-white/80 max-w-2xl mx-auto px-4">
               Discover the journey of one of Pakistan&apos;s most celebrated vocalists, 
               with over 20 years of musical excellence and countless memorable performances
             </p>
@@ -64,15 +64,15 @@ export default function AboutPage() {
       </section>
 
       {/* Main Content */}
-      <section className="relative py-12 lg:py-16">
-        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-12 space-y-8">
+      <section className="relative py-8 sm:py-12 lg:py-16">
+        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-12 space-y-6 sm:space-y-8">
           {/* Biography Section */}
-          <div className="glass-card rounded-3xl p-8 lg:p-12 space-y-6">
-            <div className="space-y-4">
-              <h2 className="font-display text-3xl md:text-4xl font-bold text-white">
+          <div className="glass-card rounded-2xl sm:rounded-3xl p-6 sm:p-8 lg:p-12 space-y-4 sm:space-y-6">
+            <div className="space-y-3 sm:space-y-4">
+              <h2 className="font-display text-2xl sm:text-3xl md:text-4xl font-bold text-white">
                 Biography & Career
               </h2>
-              <div className="space-y-4 text-white/80 leading-relaxed text-lg">
+              <div className="space-y-3 sm:space-y-4 text-white/80 leading-relaxed text-sm sm:text-base lg:text-lg">
                 <p>
                   A renowned Pakistani singer, songwriter, and musician, best known as 
                   the lead vocalist of the band <strong className="text-red-400">Roxen</strong>. 
@@ -96,11 +96,11 @@ export default function AboutPage() {
           </div>
 
           {/* Musical Style Section */}
-          <div className="glass-card rounded-3xl p-8 lg:p-12 space-y-6">
-            <h2 className="font-display text-3xl md:text-4xl font-bold text-white">
+          <div className="glass-card rounded-2xl sm:rounded-3xl p-6 sm:p-8 lg:p-12 space-y-4 sm:space-y-6">
+            <h2 className="font-display text-2xl sm:text-3xl md:text-4xl font-bold text-white">
               Musical Style & Legacy
             </h2>
-            <div className="space-y-4 text-white/80 leading-relaxed text-lg">
+            <div className="space-y-3 sm:space-y-4 text-white/80 leading-relaxed text-sm sm:text-base lg:text-lg">
               <p>
                 The music is characterized by soulful melodies, powerful emotions, and 
                 exceptional vocal talent. The artist&apos;s ability to blend contemporary 
@@ -117,11 +117,11 @@ export default function AboutPage() {
           </div>
 
           {/* Roxen Band Section */}
-          <div className="glass-card rounded-3xl p-8 lg:p-12 space-y-6">
-            <h2 className="font-display text-3xl md:text-4xl font-bold text-white">
+          <div className="glass-card rounded-2xl sm:rounded-3xl p-6 sm:p-8 lg:p-12 space-y-4 sm:space-y-6">
+            <h2 className="font-display text-2xl sm:text-3xl md:text-4xl font-bold text-white">
               Roxen Band
             </h2>
-            <div className="space-y-4 text-white/80 leading-relaxed text-lg">
+            <div className="space-y-3 sm:space-y-4 text-white/80 leading-relaxed text-sm sm:text-base lg:text-lg">
               <p>
                 As the lead vocalist of <strong className="text-red-400">Roxen</strong>, 
                 the artist has been instrumental in shaping the band&apos;s sound and 
@@ -137,11 +137,11 @@ export default function AboutPage() {
           </div>
 
           {/* Booking Information */}
-          <div className="glass-card rounded-3xl p-8 lg:p-12 space-y-6">
-            <h2 className="font-display text-3xl md:text-4xl font-bold text-white">
+          <div className="glass-card rounded-2xl sm:rounded-3xl p-6 sm:p-8 lg:p-12 space-y-4 sm:space-y-6">
+            <h2 className="font-display text-2xl sm:text-3xl md:text-4xl font-bold text-white">
               Booking & Events
             </h2>
-            <div className="space-y-4 text-white/80 leading-relaxed text-lg">
+            <div className="space-y-3 sm:space-y-4 text-white/80 leading-relaxed text-sm sm:text-base lg:text-lg">
               <p>
                 Available for live performances at weddings, mehndi nights, concerts, 
                 corporate events, and private celebrations in Lahore and across Pakistan. 
@@ -151,7 +151,7 @@ export default function AboutPage() {
                 To book live performances, contact us via WhatsApp at{" "}
                 <a 
                   href="https://wa.me/+923224071299" 
-                  className="text-red-400 hover:text-red-300 font-medium"
+                  className="text-red-400 hover:text-red-300 active:text-red-200 font-medium break-all"
                   target="_blank"
                   rel="noopener noreferrer"
                 >
@@ -160,16 +160,16 @@ export default function AboutPage() {
                 . Our team handles all booking inquiries, availability checks, and 
                 event coordination to ensure a seamless experience.
               </p>
-              <div className="pt-4">
+              <div className="pt-3 sm:pt-4">
                 <a
                   href="https://wa.me/+923224071299"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="inline-flex items-center gap-2 px-6 py-3 bg-gradient-to-r from-red-600 to-red-700 text-white rounded-full text-base font-semibold hover:from-red-500 hover:to-red-600 transition-all"
+                  className="inline-flex items-center gap-2 px-5 sm:px-6 py-2.5 sm:py-3 bg-gradient-to-r from-red-600 to-red-700 text-white rounded-full text-sm sm:text-base font-semibold hover:from-red-500 hover:to-red-600 active:from-red-700 active:to-red-800 transition-all min-h-[48px] touch-manipulation"
                 >
                   Book Now via WhatsApp
                   <svg
-                    className="w-5 h-5"
+                    className="w-4 h-4 sm:w-5 sm:h-5"
                     fill="none"
                     stroke="currentColor"
                     viewBox="0 0 24 24"
@@ -187,7 +187,7 @@ export default function AboutPage() {
           </div>
 
           {/* Last Updated */}
-          <div className="text-center text-white/50 text-sm pt-4">
+          <div className="text-center text-white/50 text-xs sm:text-sm pt-4">
             <p>
               Last Updated: {new Date().toLocaleDateString('en-US', { 
                 year: 'numeric', 

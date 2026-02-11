@@ -97,16 +97,16 @@ export default function MusicClassesPage() {
       <AnimatedBackground />
       <Header />
       {/* Hero Section */}
-      <section className="relative py-20 lg:py-32">
+      <section className="relative py-16 sm:py-20 lg:py-32">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-12">
-          <div className="text-center space-y-6">
-            <span className="text-red-500 uppercase tracking-[0.3em] text-sm font-medium">
+          <div className="text-center space-y-4 sm:space-y-6">
+            <span className="text-red-500 uppercase tracking-[0.3em] text-xs sm:text-sm font-medium">
               Music Education
             </span>
-            <h1 className="font-display text-4xl md:text-6xl lg:text-7xl font-bold">
+            <h1 className="font-display text-3xl sm:text-4xl md:text-6xl lg:text-7xl font-bold">
               Professional <span className="text-gradient">Music Classes</span>
             </h1>
-            <p className="text-lg text-white/80 max-w-2xl mx-auto">
+            <p className="text-base sm:text-lg text-white/80 max-w-2xl mx-auto px-4">
               Choose from our range of music classes - Guitar, Singing, Piano. 
               Available both at our studio and at your home.
             </p>
@@ -115,17 +115,17 @@ export default function MusicClassesPage() {
       </section>
 
       {/* Dropdown Navigation */}
-      <section className="py-12 lg:py-16">
+      <section className="py-6 sm:py-8 lg:py-12">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-12">
           <div className="flex justify-center">
-            <div className="relative">
+            <div className="relative w-full sm:w-auto">
               <button
                 onClick={() => setDropdownOpen(!dropdownOpen)}
-                className="flex items-center gap-3 px-6 py-4 bg-red-600 text-white rounded-xl hover:bg-red-500 transition-colors font-semibold"
+                className="w-full sm:w-auto flex items-center justify-between sm:justify-center gap-3 px-5 sm:px-6 py-3.5 sm:py-4 bg-red-600 text-white rounded-xl hover:bg-red-500 active:bg-red-700 transition-colors font-semibold text-sm sm:text-base min-h-[48px] touch-manipulation"
               >
                 <span>Select Music Class</span>
                 <svg
-                  className={`w-5 h-5 transition-transform ${dropdownOpen ? 'rotate-180' : ''}`}
+                  className={`w-4 h-4 sm:w-5 sm:h-5 transition-transform flex-shrink-0 ${dropdownOpen ? 'rotate-180' : ''}`}
                   fill="none"
                   stroke="currentColor"
                   viewBox="0 0 24 24"
@@ -135,16 +135,16 @@ export default function MusicClassesPage() {
               </button>
 
               {dropdownOpen && (
-                <div className="absolute top-full left-0 mt-2 w-80 bg-black/95 backdrop-blur-xl border border-white/10 rounded-xl overflow-hidden z-50">
+                <div className="absolute top-full left-0 right-0 sm:right-auto mt-2 w-full sm:w-80 bg-black/95 backdrop-blur-xl border border-white/10 rounded-xl overflow-hidden z-50 max-h-[60vh] sm:max-h-none overflow-y-auto">
                   {classes.map((classItem, index) => (
                     <Link
                       key={index}
                       href={classItem.href}
                       onClick={() => setDropdownOpen(false)}
-                      className="block px-6 py-4 hover:bg-white/10 transition-colors border-b border-white/5 last:border-b-0"
+                      className="block px-4 sm:px-6 py-3 sm:py-4 hover:bg-white/10 active:bg-white/15 transition-colors border-b border-white/5 last:border-b-0 min-h-[64px] sm:min-h-[72px] flex flex-col justify-center touch-manipulation"
                     >
-                      <div className="font-semibold text-white mb-1">{classItem.title}</div>
-                      <div className="text-sm text-white/70">{classItem.description}</div>
+                      <div className="font-semibold text-white mb-1 text-sm sm:text-base">{classItem.title}</div>
+                      <div className="text-xs sm:text-sm text-white/70">{classItem.description}</div>
                     </Link>
                   ))}
                 </div>
@@ -155,22 +155,22 @@ export default function MusicClassesPage() {
       </section>
 
       {/* Classes Grid */}
-      <section className="py-12 lg:py-16">
+      <section className="py-6 sm:py-8 lg:py-12">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-12">
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8">
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 lg:gap-8">
             {classes.map((classItem, index) => (
               <Link
                 key={index}
                 href={classItem.href}
-                className="group glass-card rounded-2xl p-6 lg:p-8 hover-lift block"
+                className="group glass-card rounded-xl sm:rounded-2xl p-5 sm:p-6 lg:p-8 hover-lift block touch-manipulation"
               >
-                <h3 className="text-2xl font-semibold text-white mb-3 group-hover:text-red-400 transition-colors">
+                <h3 className="text-xl sm:text-2xl font-semibold text-white mb-2 sm:mb-3 group-hover:text-red-400 transition-colors">
                   {classItem.title}
                 </h3>
-                <p className="text-white/70 mb-4">{classItem.description}</p>
-                <div className="flex items-center gap-2 text-red-400 text-sm font-medium group-hover:text-red-300 transition-colors">
+                <p className="text-white/70 text-sm sm:text-base mb-3 sm:mb-4">{classItem.description}</p>
+                <div className="flex items-center gap-2 text-red-400 text-xs sm:text-sm font-medium group-hover:text-red-300 transition-colors min-h-[32px] sm:min-h-[36px]">
                   <span>Learn More</span>
-                  <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <svg className="w-3 h-3 sm:w-4 sm:h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
                   </svg>
                 </div>

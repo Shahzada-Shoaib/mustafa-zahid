@@ -433,22 +433,22 @@ export default function Home() {
       {/* Hero Section */}
       <section
         id="home"
-        className="relative min-h-screen flex items-center justify-center pt-12 sm:pt-14 md:pt-16 overflow-hidden"
+        className="relative min-h-screen flex items-center justify-center pt-20 sm:pt-24 md:pt-16 overflow-hidden"
       >
-        <div className=" max-w-7xl mx-auto px-4 sm:px-6 lg:px-12 pb-12 lg:pb-16 relative z-10">
-          <div className="grid lg:grid-cols-2 gap-6 lg:gap-8 items-center">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-12 pb-8 sm:pb-12 lg:pb-16 relative z-10">
+          <div className="grid lg:grid-cols-2 gap-8 sm:gap-6 lg:gap-8 items-center">
             {/* Left Content */}
             <div
-              className={` pt-12 space-y-6 lg:space-y-8 text-center lg:text-left ${
+              className={`pt-4 sm:pt-8 lg:pt-12 space-y-4 sm:space-y-6 lg:space-y-8 text-center lg:text-left ${
                 isMounted ? "animate-slide-in-left" : ""
               }`}
             >
-              <h1 className="font-display text-4xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl font-bold leading-[0.9] pt-8 sm:pt-0">
+              <h1 className="font-display text-3xl sm:text-4xl md:text-5xl lg:text-7xl xl:text-8xl font-bold leading-[1.1] sm:leading-[0.9]">
                 <span className="inline text-white">Mustafa </span>
                 <span className="inline text-gradient">Zahid</span>
               </h1>
 
-              <div className="text-base sm:text-lg md:text-xl text-white/80 max-w-lg leading-relaxed mx-auto lg:mx-0 space-y-4">
+              <div className="text-sm sm:text-base md:text-lg lg:text-xl text-white/80 max-w-lg leading-relaxed mx-auto lg:mx-0 space-y-3 sm:space-y-4">
                 <p>
                   One of Pakistan&apos;s most celebrated vocalists, known for blending 
                   soulful melodies with powerful emotions. With over 20 years of 
@@ -457,7 +457,7 @@ export default function Home() {
                 </p>
                 <p>
                   Book live performances for{" "}
-                  <strong>
+                  <strong className="text-white">
                     weddings, mehndi nights, concerts, corporate events, and
                     private performances in Lahore
                   </strong>
@@ -466,12 +466,12 @@ export default function Home() {
                 </p>
               </div>
 
-              <div className="flex flex-col sm:flex-row flex-wrap gap-3 sm:gap-4">
+              <div className="flex flex-col sm:flex-row flex-wrap gap-3 sm:gap-4 justify-center lg:justify-start">
                 <a
                   href="https://wa.me/+923224071299"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="group flex items-center justify-center gap-2 sm:gap-3 px-6 sm:px-8 py-3 sm:py-4 bg-gradient-to-r from-red-600 to-red-700 text-white rounded-full text-sm sm:text-base font-semibold hover:from-red-500 hover:to-red-600 transition-all duration-300 shadow-lg shadow-red-900/30 hover:shadow-xl hover:shadow-red-900/40 hover:scale-105"
+                  className="group flex items-center justify-center gap-2 sm:gap-3 px-6 sm:px-8 py-3.5 sm:py-4 bg-gradient-to-r from-red-600 to-red-700 text-white rounded-full text-sm sm:text-base font-semibold hover:from-red-500 hover:to-red-600 active:from-red-700 active:to-red-800 transition-all duration-300 shadow-lg shadow-red-900/30 hover:shadow-xl hover:shadow-red-900/40 hover:scale-105 active:scale-95 min-h-[48px] touch-manipulation"
                 >
                   <svg
                     className="w-4 h-4 sm:w-5 sm:h-5"
@@ -499,17 +499,17 @@ export default function Home() {
               </div>
 
               {/* Stats */}
-              <div className="flex justify-center lg:justify-start gap-6 lg:gap-8 pt-6 border-t border-white/10">
+              <div className="flex justify-center lg:justify-start gap-4 sm:gap-6 lg:gap-8 pt-4 sm:pt-6 border-t border-white/10">
                 {[
                   { value: "100+", label: "Songs" },
                   { value: "50M+", label: "Streams" },
                   { value: "20+", label: "Years" },
                 ].map((stat, i) => (
                   <div key={i} className="text-center">
-                    <div className="text-3xl md:text-4xl font-display font-bold text-gradient">
+                    <div className="text-2xl sm:text-3xl md:text-4xl font-display font-bold text-gradient">
                       {stat.value}
                     </div>
-                    <div className="text-sm text-white/70 uppercase tracking-wider mt-1">
+                    <div className="text-xs sm:text-sm text-white/70 uppercase tracking-wider mt-1">
                       {stat.label}
                     </div>
                   </div>
@@ -519,24 +519,24 @@ export default function Home() {
 
             {/* Right - Hero Image */}
             <div
-              className={`relative ${
+              className={`relative mt-6 sm:mt-8 lg:mt-0 ${
                 isMounted ? "animate-slide-in-right" : ""
               }`}
             >
-              <div className="relative w-full aspect-[4/5] max-w-md mx-auto">
-                {/* Decorative Elements */}
+              <div className="relative w-full aspect-[4/5] max-w-sm sm:max-w-md mx-auto">
+                {/* Decorative Elements - Hidden on mobile */}
                 <div
-                  className="absolute -top-8 -right-8 w-32 h-32 border border-red-500/30 rounded-full animate-rotate-slow"
+                  className="hidden sm:block absolute -top-8 -right-8 w-24 sm:w-32 h-24 sm:h-32 border border-red-500/30 rounded-full animate-rotate-slow"
                   aria-hidden="true"
                 ></div>
                 <div
-                  className="absolute -bottom-8 -left-8 w-24 h-24 bg-gradient-to-br from-red-600/20 to-transparent rounded-full blur-xl"
+                  className="hidden sm:block absolute -bottom-8 -left-8 w-16 sm:w-24 h-16 sm:h-24 bg-gradient-to-br from-red-600/20 to-transparent rounded-full blur-xl"
                   aria-hidden="true"
                 ></div>
 
-                {/* Animated Vinyl Record */}
+                {/* Animated Vinyl Record - Smaller on mobile */}
                 <div
-                  className="absolute -top-12 -right-12 w-24 h-24 z-30 animate-rotate-slow"
+                  className="absolute -top-8 sm:-top-12 -right-8 sm:-right-12 w-16 h-16 sm:w-24 sm:h-24 z-30 animate-rotate-slow hidden sm:block"
                   aria-hidden="true"
                 >
                   <svg
@@ -570,7 +570,7 @@ export default function Home() {
                 </div>
 
                 {/* Main Image Container */}
-                <div className="relative lg:mt-12 w-full h-full rounded-3xl overflow-hidden animate-pulse-glow">
+                <div className="relative lg:mt-12 w-full h-full rounded-2xl sm:rounded-3xl overflow-hidden animate-pulse-glow">
                   <div className="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-black/60 z-10"></div>
                   <Image
                     src="/Mz-pic.jpg"
@@ -579,11 +579,12 @@ export default function Home() {
                     className="object-cover"
                     priority
                     fetchPriority="high"
+                    sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
                   />
 
-                  {/* Animated Sound Waves Overlay */}
+                  {/* Animated Sound Waves Overlay - Hidden on mobile */}
                   <div
-                    className="absolute bottom-20 left-4 flex items-end gap-1 h-12 z-20 opacity-60"
+                    className="hidden sm:flex absolute bottom-20 left-4 items-end gap-1 h-12 z-20 opacity-60"
                     aria-hidden="true"
                   >
                     {[...Array(4)].map((_, i) => (
@@ -599,11 +600,11 @@ export default function Home() {
                   </div>
                 </div>
 
-                {/* Floating Badge with Animation */}
-                <div className="absolute -bottom-10 left-1/2 -translate-x-1/2 px-6 py-3 glass-card rounded-full flex items-center gap-3 z-20 animate-bounce-in">
-                  <div className="w-10 h-10 bg-red-600 rounded-full flex items-center justify-center animate-pulse">
+                {/* Floating Badge with Animation - Smaller on mobile */}
+                <div className="absolute -bottom-6 sm:-bottom-10 left-1/2 -translate-x-1/2 px-4 sm:px-6 py-2 sm:py-3 glass-card rounded-full flex items-center gap-2 sm:gap-3 z-20 animate-bounce-in">
+                  <div className="w-8 h-8 sm:w-10 sm:h-10 bg-red-600 rounded-full flex items-center justify-center animate-pulse">
                     <svg
-                      className="w-5 h-5 text-white"
+                      className="w-4 h-4 sm:w-5 sm:h-5 text-white"
                       fill="currentColor"
                       viewBox="0 0 20 20"
                     >
@@ -611,16 +612,16 @@ export default function Home() {
                     </svg>
                   </div>
                   <div>
-                    <div className="text-xs text-white/70 uppercase tracking-wider">
+                    <div className="text-[10px] sm:text-xs text-white/70 uppercase tracking-wider">
                       Now Playing
                     </div>
-                    <div className="text-sm font-medium text-white">
+                    <div className="text-xs sm:text-sm font-medium text-white">
                       Bhula Dena
                     </div>
                   </div>
                   {/* Animated Music Note */}
                   <svg
-                    className="w-4 h-4 text-red-400 animate-music-note ml-2"
+                    className="w-3 h-3 sm:w-4 sm:h-4 text-red-400 animate-music-note ml-1 sm:ml-2"
                     style={{ animationDelay: "0.5s" }}
                     fill="currentColor"
                     viewBox="0 0 24 24"
@@ -630,9 +631,9 @@ export default function Home() {
                   </svg>
                 </div>
 
-                {/* Floating Music Notes */}
+                {/* Floating Music Notes - Hidden on mobile */}
                 <div
-                  className="absolute -top-16 left-1/4 animate-music-note"
+                  className="hidden sm:block absolute -top-16 left-1/4 animate-music-note"
                   style={{ animationDelay: "1s" }}
                   aria-hidden="true"
                 >
@@ -651,7 +652,7 @@ export default function Home() {
                   </svg>
                 </div>
                 <div
-                  className="absolute -bottom-20 right-1/4 animate-music-note"
+                  className="hidden sm:block absolute -bottom-20 right-1/4 animate-music-note"
                   style={{ animationDelay: "1.5s" }}
                   aria-hidden="true"
                 >
@@ -674,8 +675,8 @@ export default function Home() {
           </div>
         </div>
 
-        {/* Scroll Indicator */}
-        <div className="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 animate-bounce">
+        {/* Scroll Indicator - Hidden on mobile */}
+        <div className="hidden sm:flex absolute bottom-6 sm:bottom-8 left-1/2 -translate-x-1/2 flex-col items-center gap-2 animate-bounce">
           <span className="text-xs text-white/70 uppercase tracking-widest">
             Scroll
           </span>
@@ -686,10 +687,24 @@ export default function Home() {
       </section>
 
       {/* About Section with Sticky Layout */}
-      <section id="about" className="relative">
+      <section id="about" className="relative py-8 sm:py-12 lg:py-16">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-12">
           <div className="lg:grid lg:grid-cols-2 lg:gap-8">
-            {/* Sticky Image Column */}
+            {/* Mobile Image - Shown only on mobile/tablet */}
+            <div className="lg:hidden mb-6 sm:mb-8">
+              <div className="relative w-full aspect-[3/4] sm:aspect-[2/3] rounded-2xl sm:rounded-3xl overflow-hidden">
+                <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent z-10"></div>
+                <Image
+                  src="/mz-pic-2.JPG"
+                  alt="Mustafa Zahid in recording studio - Professional Pakistani singer and songwriter available for booking"
+                  fill
+                  className="object-cover"
+                  sizes="(max-width: 1024px) 100vw, 50vw"
+                />
+              </div>
+            </div>
+
+            {/* Sticky Image Column - Desktop only */}
             <div className="hidden lg:block lg:h-screen lg:sticky lg:top-0">
               <div className="h-full overflow-hidden rounded-4xl flex items-center py-12 lg:py-16">
                 <div className="relative w-full aspect-[2/3] rounded-4xl overflow-hidden">
@@ -699,6 +714,7 @@ export default function Home() {
                     alt="Mustafa Zahid in recording studio - Professional Pakistani singer and songwriter available for booking"
                     fill
                     className="object-cover"
+                    sizes="50vw"
                   />
                 </div>
               </div>
@@ -711,13 +727,13 @@ export default function Home() {
             </div>
 
             {/* Scrolling Content Column */}
-            <div className="py-4 space-y-6 lg:space-y-8">
+            <div className="py-4 sm:py-6 lg:py-4 space-y-4 sm:space-y-6 lg:space-y-8">
               {/* Section Header */}
-              <div className="space-y-4 lg:space-y-6">
-                <span className="text-red-500 uppercase tracking-[0.3em] text-sm font-medium">
+              <div className="space-y-3 sm:space-y-4 lg:space-y-6">
+                <span className="text-red-500 uppercase tracking-[0.3em] text-xs sm:text-sm font-medium">
                   About The Artist
                 </span>
-                <h2 className="font-display text-4xl md:text-5xl lg:text-6xl font-bold text-white leading-tight">
+                <h2 className="font-display text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-white leading-tight">
                   Mustafa Zahid: A Voice That
                   <br />
                   <span className="text-gradient">Moves Souls</span>
@@ -725,12 +741,12 @@ export default function Home() {
               </div>
 
               {/* Bio Cards */}
-              <div className="space-y-6 lg:space-y-8">
-                <div className="glass-card rounded-2xl p-6 lg:p-8 hover-lift">
-                  <div className="flex items-start gap-4 mb-4">
-                    <div className="w-12 h-12 bg-red-600/20 rounded-xl flex items-center justify-center flex-shrink-0">
+              <div className="space-y-4 sm:space-y-6 lg:space-y-8">
+                <div className="glass-card rounded-xl sm:rounded-2xl p-4 sm:p-6 lg:p-8 hover-lift">
+                  <div className="flex items-start gap-3 sm:gap-4 mb-3 sm:mb-4">
+                    <div className="w-10 h-10 sm:w-12 sm:h-12 bg-red-600/20 rounded-lg sm:rounded-xl flex items-center justify-center flex-shrink-0">
                       <svg
-                        className="w-6 h-6 text-red-500"
+                        className="w-5 h-5 sm:w-6 sm:h-6 text-red-500"
                         fill="none"
                         stroke="currentColor"
                         viewBox="0 0 24 24"
@@ -744,10 +760,10 @@ export default function Home() {
                       </svg>
                     </div>
                     <div>
-                      <h3 className="text-xl font-semibold text-white mb-2">
+                      <h3 className="text-lg sm:text-xl font-semibold text-white mb-2">
                         The Journey
                       </h3>
-                      <p className="text-white/80 leading-relaxed">
+                      <p className="text-sm sm:text-base text-white/80 leading-relaxed">
                         A renowned Pakistani singer, songwriter, and musician, 
                         best known as the lead vocalist of the band{" "}
                         <span className="text-red-400 font-medium">Roxen</span>. 
@@ -759,11 +775,11 @@ export default function Home() {
                   </div>
                 </div>
 
-                <div className="glass-card rounded-2xl p-6 lg:p-8 hover-lift">
-                  <div className="flex items-start gap-4 mb-4">
-                    <div className="w-12 h-12 bg-amber-600/20 rounded-xl flex items-center justify-center flex-shrink-0">
+                <div className="glass-card rounded-xl sm:rounded-2xl p-4 sm:p-6 lg:p-8 hover-lift">
+                  <div className="flex items-start gap-3 sm:gap-4 mb-3 sm:mb-4">
+                    <div className="w-10 h-10 sm:w-12 sm:h-12 bg-amber-600/20 rounded-lg sm:rounded-xl flex items-center justify-center flex-shrink-0">
                       <svg
-                        className="w-6 h-6 text-amber-500"
+                        className="w-5 h-5 sm:w-6 sm:h-6 text-amber-500"
                         fill="none"
                         stroke="currentColor"
                         viewBox="0 0 24 24"
@@ -777,10 +793,10 @@ export default function Home() {
                       </svg>
                     </div>
                     <div>
-                      <h3 className="text-xl font-semibold text-white mb-2">
+                      <h3 className="text-lg sm:text-xl font-semibold text-white mb-2">
                         Musical Legacy
                       </h3>
-                      <p className="text-white/80 leading-relaxed">
+                      <p className="text-sm sm:text-base text-white/80 leading-relaxed">
                         The music blends contemporary sounds with traditional
                         influences, creating a unique style that resonates with
                         listeners of all ages. Through powerful vocals and 
@@ -792,11 +808,11 @@ export default function Home() {
                   </div>
                 </div>
 
-                <div className="glass-card rounded-2xl p-6 lg:p-8 hover-lift">
-                  <div className="flex items-start gap-4 mb-4">
-                    <div className="w-12 h-12 bg-emerald-600/20 rounded-xl flex items-center justify-center flex-shrink-0">
+                <div className="glass-card rounded-xl sm:rounded-2xl p-4 sm:p-6 lg:p-8 hover-lift">
+                  <div className="flex items-start gap-3 sm:gap-4 mb-3 sm:mb-4">
+                    <div className="w-10 h-10 sm:w-12 sm:h-12 bg-emerald-600/20 rounded-lg sm:rounded-xl flex items-center justify-center flex-shrink-0">
                       <svg
-                        className="w-6 h-6 text-emerald-500"
+                        className="w-5 h-5 sm:w-6 sm:h-6 text-emerald-500"
                         fill="none"
                         stroke="currentColor"
                         viewBox="0 0 24 24"
@@ -810,10 +826,10 @@ export default function Home() {
                       </svg>
                     </div>
                     <div>
-                      <h3 className="text-xl font-semibold text-white mb-2">
+                      <h3 className="text-lg sm:text-xl font-semibold text-white mb-2">
                         Global Impact
                       </h3>
-                      <p className="text-white/80 leading-relaxed">
+                      <p className="text-sm sm:text-base text-white/80 leading-relaxed">
                         Through work with Roxen and as a solo artist, the 
                         performer continues to inspire and entertain music lovers
                         worldwide. Songs have transcended borders, making
@@ -829,33 +845,33 @@ export default function Home() {
         </div>
 
         {/* Internal Links Section */}
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-12 mt-12">
-          <div className="glass-card rounded-2xl p-6 lg:p-8">
-            <h3 className="text-2xl font-semibold text-white mb-4">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-12 mt-8 sm:mt-12">
+          <div className="glass-card rounded-xl sm:rounded-2xl p-4 sm:p-6 lg:p-8">
+            <h3 className="text-xl sm:text-2xl font-semibold text-white mb-3 sm:mb-4">
               Explore More
             </h3>
-            <div className="flex flex-wrap gap-4">
+            <div className="flex flex-col sm:flex-row flex-wrap gap-3 sm:gap-4">
               <a
                 href="/about"
-                className="text-white/80 hover:text-red-400 transition-colors text-sm font-medium"
+                className="text-white/80 hover:text-red-400 active:text-red-300 transition-colors text-sm font-medium py-2 sm:py-0 min-h-[44px] sm:min-h-0 flex items-center touch-manipulation"
               >
                 Learn More About the Artist →
               </a>
               <a
                 href="/music-classes"
-                className="text-white/80 hover:text-red-400 transition-colors text-sm font-medium"
+                className="text-white/80 hover:text-red-400 active:text-red-300 transition-colors text-sm font-medium py-2 sm:py-0 min-h-[44px] sm:min-h-0 flex items-center touch-manipulation"
               >
                 Music Classes in Lahore →
               </a>
               <a
                 href="/singers"
-                className="text-white/80 hover:text-red-400 transition-colors text-sm font-medium"
+                className="text-white/80 hover:text-red-400 active:text-red-300 transition-colors text-sm font-medium py-2 sm:py-0 min-h-[44px] sm:min-h-0 flex items-center touch-manipulation"
               >
                 Book Other Singers →
               </a>
               <a
                 href="/qawwals"
-                className="text-white/80 hover:text-red-400 transition-colors text-sm font-medium"
+                className="text-white/80 hover:text-red-400 active:text-red-300 transition-colors text-sm font-medium py-2 sm:py-0 min-h-[44px] sm:min-h-0 flex items-center touch-manipulation"
               >
                 Book Qawwali Artists →
               </a>
@@ -867,11 +883,11 @@ export default function Home() {
       {/* Music Section with Sticky Header */}
       <section
         id="music"
-        className="relative bg-gradient-to-b from-transparent via-red-950/20 to-transparent overflow-hidden py-12 lg:py-16"
+        className="relative bg-gradient-to-b from-transparent via-red-950/20 to-transparent overflow-hidden py-8 sm:py-12 lg:py-16"
       >
-        {/* Animated Sound Waves Background */}
+        {/* Animated Sound Waves Background - Hidden on mobile */}
         <div
-          className="absolute top-20 left-10 flex items-end gap-1 h-24 opacity-20"
+          className="hidden sm:flex absolute top-20 left-10 items-end gap-1 h-24 opacity-20"
           aria-hidden="true"
         >
           {[...Array(7)].map((_, i) => (
@@ -887,7 +903,7 @@ export default function Home() {
         </div>
 
         <div
-          className="absolute bottom-20 right-16 flex items-end gap-1 h-20 opacity-20"
+          className="hidden sm:flex absolute bottom-20 right-16 items-end gap-1 h-20 opacity-20"
           aria-hidden="true"
         >
           {[...Array(5)].map((_, i) => (
@@ -902,9 +918,9 @@ export default function Home() {
           ))}
         </div>
 
-        {/* Floating Music Notes */}
+        {/* Floating Music Notes - Hidden on mobile */}
         <div
-          className="absolute top-1/4 right-20 animate-music-note"
+          className="hidden sm:block absolute top-1/4 right-20 animate-music-note"
           style={{ animationDelay: "2s" }}
           aria-hidden="true"
         >
@@ -924,15 +940,15 @@ export default function Home() {
         </div>
 
         {/* Sticky Section Header */}
-        <div className="sticky z-30 py-6 bg-black/80 backdrop-blur-xl border-y border-white/5">
+        <div className="sticky z-30 py-4 sm:py-6 bg-black/80 backdrop-blur-xl border-y border-white/5">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-12">
             <div className="flex items-center justify-between">
-              <div className="flex items-center gap-4">
+              <div className="flex items-center gap-2 sm:gap-4">
                 <div>
-                  <span className="text-red-500 uppercase tracking-[0.3em] text-xs font-medium">
+                  <span className="text-red-500 uppercase tracking-[0.3em] text-[10px] sm:text-xs font-medium">
                     Discography
                   </span>
-                  <h2 className="font-display text-2xl md:text-3xl font-bold text-white">
+                  <h2 className="font-display text-xl sm:text-2xl md:text-3xl font-bold text-white">
                     Popular Songs by Mustafa Zahid
                   </h2>
                 </div>
@@ -952,15 +968,15 @@ export default function Home() {
         </div>
 
         {/* Songs Grid */}
-        <div className="max-w-7xl mx-auto px-6 pt-4 lg:px-12 ">
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 lg:gap-5">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 pt-4 lg:px-12">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-5 lg:gap-5">
             {songs.map((song, index) => (
               <a
                 key={index}
                 href={song.youtubeUrl || undefined}
                 target={song.youtubeUrl ? "_blank" : undefined}
                 rel={song.youtubeUrl ? "noopener noreferrer" : undefined}
-                className="group glass-card rounded-2xl overflow-hidden hover-lift cursor-pointer block animate-bounce-in"
+                className="group glass-card rounded-xl sm:rounded-2xl overflow-hidden hover-lift cursor-pointer block animate-bounce-in touch-manipulation"
                 style={{ animationDelay: `${index * 0.1}s` }}
                 onClick={!song.youtubeUrl ? (e) => e.preventDefault() : undefined}
               >
@@ -976,10 +992,10 @@ export default function Home() {
                   <div className="absolute inset-0 bg-gradient-to-t from-black via-black/20 to-transparent opacity-60 group-hover:opacity-80 transition-opacity"></div>
 
                   {/* Play Button */}
-                  <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-all duration-300">
-                    <div className="w-16 h-16 bg-red-600 rounded-full flex items-center justify-center transform scale-75 group-hover:scale-100 transition-transform shadow-2xl">
+                  <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 sm:group-active:opacity-100 transition-all duration-300">
+                    <div className="w-14 h-14 sm:w-16 sm:h-16 bg-red-600 rounded-full flex items-center justify-center transform scale-75 group-hover:scale-100 transition-transform shadow-2xl">
                       <svg
-                        className="w-7 h-7 text-white ml-1"
+                        className="w-6 h-6 sm:w-7 sm:h-7 text-white ml-1"
                         fill="currentColor"
                         viewBox="0 0 20 20"
                       >
@@ -990,9 +1006,9 @@ export default function Home() {
 
                   {/* YouTube Badge for Latest Songs */}
                   {song.youtubeUrl && (
-                    <div className="absolute top-4 left-4 px-3 py-1 bg-red-600/90 backdrop-blur-sm rounded-full text-xs text-white font-medium flex items-center gap-1">
+                    <div className="absolute top-3 sm:top-4 left-3 sm:left-4 px-2 sm:px-3 py-1 bg-red-600/90 backdrop-blur-sm rounded-full text-[10px] sm:text-xs text-white font-medium flex items-center gap-1">
                       <svg
-                        className="w-3 h-3"
+                        className="w-2.5 h-2.5 sm:w-3 sm:h-3"
                         fill="currentColor"
                         viewBox="0 0 24 24"
                       >
@@ -1003,16 +1019,16 @@ export default function Home() {
                   )}
 
                   {/* Year Badge */}
-                  <div className="absolute top-4 right-4 px-3 py-1 bg-black/50 backdrop-blur-sm rounded-full text-xs text-white/80">
+                  <div className="absolute top-3 sm:top-4 right-3 sm:right-4 px-2 sm:px-3 py-1 bg-black/50 backdrop-blur-sm rounded-full text-[10px] sm:text-xs text-white/80">
                     {song.year}
                   </div>
                 </div>
 
-                <div className="p-6 lg:p-8">
-                  <h3 className="text-xl font-semibold text-white group-hover:text-red-400 transition-colors mb-2">
+                <div className="p-4 sm:p-6 lg:p-8">
+                  <h3 className="text-lg sm:text-xl font-semibold text-white group-hover:text-red-400 transition-colors mb-2">
                     {song.title}
                   </h3>
-                  <p className="text-white/70 text-sm">{song.description}</p>
+                  <p className="text-white/70 text-xs sm:text-sm">{song.description}</p>
 
                   {/* YouTube Link Button */}
                   {song.youtubeUrl && (
@@ -1040,16 +1056,16 @@ export default function Home() {
       </section>
 
       {/* Gallery Section with Sticky Header */}
-      <section id="gallery" className="relative">
+      <section id="gallery" className="relative py-8 sm:py-12">
         {/* Sticky Section Header */}
-        <div className="sticky top-6 z-30 py-4 bg-black/80 backdrop-blur-xl border-y border-white/5">
+        <div className="sticky top-0 sm:top-6 z-30 py-3 sm:py-4 bg-black/80 backdrop-blur-xl border-y border-white/5">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-12">
             <div className="flex items-center justify-between">
               <div>
-                <span className="text-red-500 uppercase tracking-[0.3em] text-xs font-medium">
+                <span className="text-red-500 uppercase tracking-[0.3em] text-[10px] sm:text-xs font-medium">
                   Visual Journey
                 </span>
-                <h2 className="font-display text-2xl md:text-3xl font-bold text-white">
+                <h2 className="font-display text-xl sm:text-2xl md:text-3xl font-bold text-white">
                   Gallery
                 </h2>
               </div>
@@ -1058,13 +1074,13 @@ export default function Home() {
         </div>
 
         {/* Gallery Grid */}
-        <div className="max-w-7xl mx-auto px-6 lg:px-12 pt-4 lg:pt-8">
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 lg:gap-5">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-12 pt-4 sm:pt-6 lg:pt-8">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3 sm:gap-4 lg:gap-5">
             {galleryImages.map((img, index) => (
               <div
                 key={index}
                 onClick={() => setSelectedImage(img.src)}
-                className={`group relative rounded-2xl overflow-hidden cursor-pointer hover-lift ${
+                className={`group relative rounded-xl sm:rounded-2xl overflow-hidden cursor-pointer hover-lift touch-manipulation ${
                   index === 0 ? "md:col-span-2 md:row-span-2" : ""
                 }`}
                 role="button"
@@ -1082,26 +1098,26 @@ export default function Home() {
                     src={img.src}
                     alt={img.alt}
                     fill
-                    className="object-cover transition-transform duration-700 group-hover:scale-105 rounded-2xl"
+                    className="object-cover transition-transform duration-700 group-hover:scale-105 group-active:scale-105 rounded-xl sm:rounded-2xl"
                     loading="lazy"
                     sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
                   />
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-2xl"></div>
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent opacity-0 group-hover:opacity-100 sm:group-active:opacity-100 transition-opacity duration-300 rounded-xl sm:rounded-2xl"></div>
 
                   {/* Overlay Content */}
-                  <div className="absolute inset-0 p-6 lg:p-8 flex flex-col justify-end opacity-0 group-hover:opacity-100 transition-all duration-300 translate-y-4 group-hover:translate-y-0 rounded-2xl">
-                    <span className="text-red-400 text-sm uppercase tracking-wider mb-2">
+                  <div className="absolute inset-0 p-4 sm:p-6 lg:p-8 flex flex-col justify-end opacity-0 group-hover:opacity-100 sm:group-active:opacity-100 transition-all duration-300 translate-y-4 group-hover:translate-y-0 sm:group-active:translate-y-0 rounded-xl sm:rounded-2xl">
+                    <span className="text-red-400 text-xs sm:text-sm uppercase tracking-wider mb-2">
                       {img.category}
                     </span>
-                    <p className="text-white font-medium">
+                    <p className="text-white text-sm sm:text-base font-medium">
                       {img.alt.split(" - ")[1]}
                     </p>
                   </div>
 
                   {/* Zoom Icon */}
-                  <div className="absolute top-4 right-4 w-10 h-10 bg-white/20 backdrop-blur-sm rounded-full flex items-center justify-center opacity-0 group-hover:opacity-100 transition-all">
+                  <div className="absolute top-3 sm:top-4 right-3 sm:right-4 w-8 h-8 sm:w-10 sm:h-10 bg-white/20 backdrop-blur-sm rounded-full flex items-center justify-center opacity-0 group-hover:opacity-100 sm:group-active:opacity-100 transition-all">
                     <svg
-                      className="w-5 h-5 text-white"
+                      className="w-4 h-4 sm:w-5 sm:h-5 text-white"
                       fill="none"
                       stroke="currentColor"
                       viewBox="0 0 24 24"
@@ -1124,7 +1140,7 @@ export default function Home() {
       {/* Gallery Lightbox Modal */}
       {selectedImage && (
         <div
-          className="fixed inset-0 z-[100] bg-black/95 backdrop-blur-sm flex items-center justify-center p-4"
+          className="fixed inset-0 z-[100] bg-black/95 backdrop-blur-sm flex items-center justify-center p-2 sm:p-4"
           onClick={() => setSelectedImage(null)}
           role="dialog"
           aria-modal="true"
@@ -1132,11 +1148,11 @@ export default function Home() {
         >
           <button
             onClick={() => setSelectedImage(null)}
-            className="absolute top-4 right-4 w-12 h-12 bg-white/10 hover:bg-white/20 rounded-full flex items-center justify-center text-white transition-colors z-10"
+            className="absolute top-3 sm:top-4 right-3 sm:right-4 w-10 h-10 sm:w-12 sm:h-12 bg-white/10 hover:bg-white/20 active:bg-white/30 rounded-full flex items-center justify-center text-white transition-colors z-10 min-h-[44px] touch-manipulation"
             aria-label="Close lightbox"
           >
             <svg
-              className="w-6 h-6"
+              className="w-5 h-5 sm:w-6 sm:h-6"
               fill="none"
               stroke="currentColor"
               viewBox="0 0 24 24"
@@ -1150,7 +1166,7 @@ export default function Home() {
             </svg>
           </button>
           <div
-            className="relative max-w-7xl max-h-[90vh] w-full h-full"
+            className="relative max-w-7xl max-h-[95vh] sm:max-h-[90vh] w-full h-full"
             onClick={(e) => e.stopPropagation()}
           >
             <Image
@@ -1158,20 +1174,20 @@ export default function Home() {
               alt="Gallery image full size"
               fill
               className="object-contain"
-              sizes="90vw"
+              sizes="95vw"
             />
           </div>
         </div>
       )}
 
       {/* Contact Section */}
-      <section id="contact" className="relative py-12 lg:py-16 overflow-hidden">
+      <section id="contact" className="relative py-8 sm:py-12 lg:py-16 overflow-hidden">
         {/* Decorative Background */}
         <div className="absolute inset-0 bg-gradient-to-b from-transparent via-red-950/10 to-black/50"></div>
 
-        {/* Animated Musical Elements */}
+        {/* Animated Musical Elements - Hidden on mobile */}
         <div
-          className="absolute top-20 right-20 animate-music-note"
+          className="hidden sm:block absolute top-20 right-20 animate-music-note"
           style={{ animationDelay: "0.5s" }}
           aria-hidden="true"
         >
@@ -1191,7 +1207,7 @@ export default function Home() {
         </div>
 
         <div
-          className="absolute bottom-32 left-16 animate-music-note"
+          className="hidden sm:block absolute bottom-32 left-16 animate-music-note"
           style={{ animationDelay: "1.5s" }}
           aria-hidden="true"
         >
@@ -1210,9 +1226,9 @@ export default function Home() {
           </svg>
         </div>
 
-        {/* Sound Waves */}
+        {/* Sound Waves - Hidden on mobile */}
         <div
-          className="absolute top-1/2 right-10 flex items-end gap-1 h-16 opacity-20"
+          className="hidden sm:flex absolute top-1/2 right-10 items-end gap-1 h-16 opacity-20"
           aria-hidden="true"
         >
           {[...Array(5)].map((_, i) => (
@@ -1227,50 +1243,50 @@ export default function Home() {
           ))}
         </div>
 
-        <div className="max-w-7xl mx-auto px-6 lg:px-12 relative z-10">
-          <div className="grid lg:grid-cols-2 gap-6 lg:gap-8 items-center">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-12 relative z-10">
+          <div className="grid lg:grid-cols-2 gap-6 sm:gap-8 lg:gap-8 items-start lg:items-center">
             {/* Left Content */}
-            <div className="space-y-6 lg:space-y-8 animate-slide-in-left">
+            <div className="space-y-4 sm:space-y-6 lg:space-y-8 animate-slide-in-left">
               <div>
-                <span className="text-red-500 uppercase tracking-[0.3em] text-sm font-medium">
+                <span className="text-red-500 uppercase tracking-[0.3em] text-xs sm:text-sm font-medium">
                   Get In Touch
                 </span>
-                <h2 className="font-display text-4xl md:text-5xl lg:text-6xl font-bold text-white mt-4 leading-tight">
+                <h2 className="font-display text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-white mt-3 sm:mt-4 leading-tight">
                   Let&apos;s Create
                   <br />
                   <span className="text-gradient">Together</span>
                 </h2>
               </div>
 
-              <p className="text-lg text-white/80 leading-relaxed max-w-lg">
+              <p className="text-base sm:text-lg text-white/80 leading-relaxed max-w-lg">
                 For bookings, collaborations, or inquiries, reach out through
                 the following channels. Let&apos;s make music that resonates.
               </p>
 
               {/* Contact Info */}
-              <div className="space-y-4 lg:space-y-6">
+              <div className="space-y-3 sm:space-y-4 lg:space-y-6">
                 <a 
                   href="mailto:contact@mustafazahid.com" 
-                  className="flex items-center gap-4 p-4 lg:p-6 glass-card rounded-xl hover:bg-white/10 transition-all group"
+                  className="flex items-center gap-3 sm:gap-4 p-3 sm:p-4 lg:p-6 glass-card rounded-xl hover:bg-white/10 active:bg-white/15 transition-all group min-h-[64px] touch-manipulation"
                 >
-                  <div className="w-12 h-12 bg-red-600/20 rounded-full flex items-center justify-center group-hover:bg-red-600 transition-colors">
-                    <svg className="w-5 h-5 text-red-500 group-hover:text-white transition-colors" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <div className="w-10 h-10 sm:w-12 sm:h-12 bg-red-600/20 rounded-full flex items-center justify-center group-hover:bg-red-600 transition-colors flex-shrink-0">
+                    <svg className="w-4 h-4 sm:w-5 sm:h-5 text-red-500 group-hover:text-white transition-colors" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
                     </svg>
                   </div>
-                  <div>
-                    <div className="text-sm text-white/70">Email</div>
-                    <div className="text-white font-medium">contact@mustafazahid.com</div>
+                  <div className="min-w-0">
+                    <div className="text-xs sm:text-sm text-white/70">Email</div>
+                    <div className="text-sm sm:text-base text-white font-medium break-all">contact@mustafazahid.com</div>
                   </div>
                 </a>
 
                 <a
                   href="tel:+923224071299"
-                  className="flex items-center gap-4 p-4 lg:p-6 glass-card rounded-xl hover:bg-white/10 transition-all group"
+                  className="flex items-center gap-3 sm:gap-4 p-3 sm:p-4 lg:p-6 glass-card rounded-xl hover:bg-white/10 active:bg-white/15 transition-all group min-h-[64px] touch-manipulation"
                 >
-                  <div className="w-12 h-12 bg-red-600/20 rounded-full flex items-center justify-center group-hover:bg-red-600 transition-colors">
+                  <div className="w-10 h-10 sm:w-12 sm:h-12 bg-red-600/20 rounded-full flex items-center justify-center group-hover:bg-red-600 transition-colors flex-shrink-0">
                     <svg
-                      className="w-5 h-5 text-red-500 group-hover:text-white transition-colors"
+                      className="w-4 h-4 sm:w-5 sm:h-5 text-red-500 group-hover:text-white transition-colors"
                       fill="none"
                       stroke="currentColor"
                       viewBox="0 0 24 24"
@@ -1284,8 +1300,8 @@ export default function Home() {
                     </svg>
                   </div>
                   <div>
-                    <div className="text-sm text-white/70">Phone</div>
-                    <div className="text-white font-medium">
+                    <div className="text-xs sm:text-sm text-white/70">Phone</div>
+                    <div className="text-sm sm:text-base text-white font-medium">
                       +92 322 407 1299
                     </div>
                   </div>
@@ -1294,10 +1310,10 @@ export default function Home() {
             </div>
 
             {/* Right - Social Links & CTA */}
-            <div className="glass-card rounded-3xl p-8 lg:p-10 animate-slide-in-right relative overflow-hidden">
-              {/* Animated Vinyl Record Decoration */}
+            <div className="glass-card rounded-2xl sm:rounded-3xl p-6 sm:p-8 lg:p-10 animate-slide-in-right relative overflow-hidden">
+              {/* Animated Vinyl Record Decoration - Hidden on mobile */}
               <div
-                className="absolute -top-8 -right-8 w-32 h-32 opacity-10 animate-rotate-slow"
+                className="hidden sm:block absolute -top-8 -right-8 w-24 sm:w-32 h-24 sm:h-32 opacity-10 animate-rotate-slow"
                 aria-hidden="true"
               >
                 <svg
@@ -1318,11 +1334,11 @@ export default function Home() {
                 </svg>
               </div>
 
-              <h3 className="font-display text-2xl font-bold text-white mb-8 relative z-10">
+              <h3 className="font-display text-xl sm:text-2xl font-bold text-white mb-6 sm:mb-8 relative z-10">
                 Connect on Social
               </h3>
 
-              <div className="grid grid-cols-2 gap-3 lg:gap-4 mb-6">
+              <div className="grid grid-cols-2 gap-2 sm:gap-3 lg:gap-4 mb-6">
                 {[
                   {
                     name: "Facebook",
@@ -1355,16 +1371,16 @@ export default function Home() {
                     href={social.url}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className={`flex items-center gap-3 p-4 lg:p-6 rounded-xl ${social.color} transition-all hover:scale-105 hover:shadow-lg`}
+                    className={`flex items-center gap-2 sm:gap-3 p-3 sm:p-4 lg:p-6 rounded-xl ${social.color} transition-all hover:scale-105 active:scale-95 hover:shadow-lg min-h-[56px] sm:min-h-[64px] touch-manipulation`}
                   >
                     <svg
-                      className="w-6 h-6 text-white"
+                      className="w-5 h-5 sm:w-6 sm:h-6 text-white flex-shrink-0"
                       fill="currentColor"
                       viewBox="0 0 24 24"
                     >
                       <path d={social.icon} />
                     </svg>
-                    <span className="text-white font-medium">
+                    <span className="text-white text-sm sm:text-base font-medium">
                       {social.name}
                     </span>
                   </a>
@@ -1372,8 +1388,8 @@ export default function Home() {
               </div>
 
               {/* Newsletter */}
-              <div className="pt-8 lg:pt-10 border-t border-white/10">
-                <h4 className="text-white font-medium mb-4">
+              <div className="pt-6 sm:pt-8 lg:pt-10 border-t border-white/10">
+                <h4 className="text-white text-base sm:text-lg font-medium mb-3 sm:mb-4">
                   Subscribe for Updates
                 </h4>
                 <form
@@ -1419,16 +1435,16 @@ export default function Home() {
                       }}
                       placeholder="Enter your email"
                       required
-                      className="flex-1 px-4 py-3 bg-white/5 border border-white/10 rounded-xl text-white placeholder-white/40 focus:outline-none focus:border-red-500 transition-colors"
+                      className="flex-1 px-3 sm:px-4 py-2.5 sm:py-3 bg-white/5 border border-white/10 rounded-xl text-sm sm:text-base text-white placeholder-white/40 focus:outline-none focus:border-red-500 transition-colors"
                       aria-label="Email address for newsletter subscription"
                     />
                     <button
                       type="submit"
-                      className="px-6 py-3 bg-red-600 text-white rounded-xl hover:bg-red-500 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+                      className="px-4 sm:px-6 py-2.5 sm:py-3 bg-red-600 text-white rounded-xl hover:bg-red-500 active:bg-red-700 transition-colors disabled:opacity-50 disabled:cursor-not-allowed min-w-[48px] min-h-[44px] touch-manipulation"
                       aria-label="Subscribe to newsletter"
                     >
                       <svg
-                        className="w-5 h-5"
+                        className="w-4 h-4 sm:w-5 sm:h-5"
                         fill="none"
                         stroke="currentColor"
                         viewBox="0 0 24 24"
@@ -1486,18 +1502,18 @@ export default function Home() {
       </section>
 
       {/* FAQ Section */}
-      <section id="faq" className="relative py-12 lg:py-16 overflow-hidden">
-        <div className="max-w-7xl mx-auto px-6 lg:px-12">
-          <div className="text-center mb-12">
-            <span className="text-red-500 uppercase tracking-[0.3em] text-sm font-medium">
+      <section id="faq" className="relative py-8 sm:py-12 lg:py-16 overflow-hidden">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-12">
+          <div className="text-center mb-8 sm:mb-12">
+            <span className="text-red-500 uppercase tracking-[0.3em] text-xs sm:text-sm font-medium">
               Common Questions
             </span>
-            <h2 className="font-display text-4xl md:text-5xl lg:text-6xl font-bold text-white mt-4">
+            <h2 className="font-display text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-white mt-3 sm:mt-4">
               Frequently Asked <span className="text-gradient">Questions</span>
             </h2>
           </div>
 
-          <div className="max-w-4xl mx-auto space-y-4">
+          <div className="max-w-4xl mx-auto space-y-3 sm:space-y-4">
             {[
               {
                 q: "How can I book Mustafa Zahid for an event?",
@@ -1522,12 +1538,12 @@ export default function Home() {
             ].map((faq, index) => (
               <div
                 key={index}
-                className="glass-card rounded-2xl p-6 lg:p-8 hover-lift"
+                className="glass-card rounded-xl sm:rounded-2xl p-4 sm:p-6 lg:p-8 hover-lift"
               >
-                <h3 className="text-xl font-semibold text-white mb-3">
+                <h3 className="text-lg sm:text-xl font-semibold text-white mb-2 sm:mb-3">
                   {faq.q}
                 </h3>
-                <p className="text-white/80 leading-relaxed">{faq.a}</p>
+                <p className="text-sm sm:text-base text-white/80 leading-relaxed">{faq.a}</p>
               </div>
             ))}
           </div>
@@ -1538,9 +1554,9 @@ export default function Home() {
       <ClientReviews />
 
       {/* Last Updated & E-A-T Signals */}
-      <section className="relative py-8 border-t border-white/10">
-        <div className="max-w-7xl mx-auto px-6 lg:px-12">
-          <div className="text-center text-white/50 text-sm space-y-2">
+      <section className="relative py-6 sm:py-8 border-t border-white/10">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-12">
+          <div className="text-center text-white/50 text-xs sm:text-sm space-y-2">
             <p>
               Last Updated: {new Date().toLocaleDateString('en-US', { 
                 year: 'numeric', 
@@ -1558,7 +1574,7 @@ export default function Home() {
       {/* Scroll to Top Button */}
       <button
         onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
-        className={`fixed bottom-4 right-4 sm:bottom-6 sm:right-6 md:bottom-8 md:right-8 z-50 w-12 h-12 sm:w-14 sm:h-14 bg-red-600 rounded-full flex items-center justify-center hover:bg-red-500 transition-all transform hover:scale-110 shadow-2xl shadow-red-900/50 ${
+        className={`fixed bottom-4 right-4 sm:bottom-6 sm:right-6 md:bottom-8 md:right-8 z-50 w-12 h-12 sm:w-14 sm:h-14 bg-red-600 rounded-full flex items-center justify-center hover:bg-red-500 active:bg-red-700 transition-all transform hover:scale-110 active:scale-95 shadow-2xl shadow-red-900/50 touch-manipulation ${
           isMounted && scrollY > 500
             ? "opacity-100 translate-y-0"
             : "opacity-0 translate-y-10 pointer-events-none"

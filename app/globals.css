@@ -1,5 +1,22 @@
 @import "tailwindcss";
 
+/* Mobile-specific optimizations */
+@media (max-width: 640px) {
+  /* Hide scrollbar on mobile for better UX */
+  .scrollbar-hide {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+  .scrollbar-hide::-webkit-scrollbar {
+    display: none;
+  }
+  
+  /* Improve touch targets */
+  button, a, input, textarea, select {
+    -webkit-tap-highlight-color: rgba(220, 38, 38, 0.2);
+  }
+}
+
 :root {
   --background: #000000;
   --foreground: #ffffff;
