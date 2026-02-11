@@ -86,13 +86,15 @@ export default function SingerForm() {
     const { name, value } = e.target;
     if (name.includes('.')) {
       const [parent, child] = name.split('.');
-      setFormData(prev => ({
-        ...prev,
-        [parent]: {
-          ...prev[parent as keyof typeof prev],
-          [child]: value,
-        },
-      }));
+      if (parent === 'metadata') {
+        setFormData(prev => ({
+          ...prev,
+          metadata: {
+            ...prev.metadata,
+            [child]: value,
+          },
+        }));
+      }
     } else {
       setFormData(prev => ({
         ...prev,
@@ -147,7 +149,7 @@ export default function SingerForm() {
     }));
   };
 
-  const handleSongChange = (index: number, field: keyof Song, value: string | number) => {
+  const handleSongChange = (index: number, field: keyof Song, value: string | number | undefined) => {
     setFormData(prev => ({
       ...prev,
       songs: prev.songs.map((song, i) =>

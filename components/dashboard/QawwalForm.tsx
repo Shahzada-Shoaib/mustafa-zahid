@@ -77,13 +77,15 @@ export default function QawwalForm() {
     const { name, value } = e.target;
     if (name.includes('.')) {
       const [parent, child] = name.split('.');
-      setFormData(prev => ({
-        ...prev,
-        [parent]: {
-          ...prev[parent as keyof typeof prev],
-          [child]: value,
-        },
-      }));
+      if (parent === 'metadata') {
+        setFormData(prev => ({
+          ...prev,
+          metadata: {
+            ...prev.metadata,
+            [child]: value,
+          },
+        }));
+      }
     } else {
       setFormData(prev => ({
         ...prev,
@@ -115,7 +117,7 @@ export default function QawwalForm() {
     }));
   };
 
-  const handlePerformanceChange = (index: number, field: keyof Performance, value: string | number) => {
+  const handlePerformanceChange = (index: number, field: keyof Performance, value: string | number | undefined) => {
     setFormData(prev => ({
       ...prev,
       performances: prev.performances.map((perf, i) =>

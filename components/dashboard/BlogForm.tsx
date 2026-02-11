@@ -29,13 +29,15 @@ export default function BlogForm() {
     const { name, value } = e.target;
     if (name.includes('.')) {
       const [parent, child] = name.split('.');
-      setFormData(prev => ({
-        ...prev,
-        [parent]: {
-          ...prev[parent as keyof typeof prev],
-          [child]: value,
-        },
-      }));
+      if (parent === 'metadata') {
+        setFormData(prev => ({
+          ...prev,
+          metadata: {
+            ...prev.metadata,
+            [child]: value,
+          },
+        }));
+      }
     } else {
       setFormData(prev => ({
         ...prev,

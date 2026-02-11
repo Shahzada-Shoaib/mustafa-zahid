@@ -183,6 +183,13 @@ export default function Header() {
                 <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-red-500 transition-all group-hover:w-full"></span>
               </Link>
             ))}
+            <Link
+              href="/dashboard"
+              className="text-white/80 hover:text-white text-sm font-medium transition-colors relative group"
+            >
+              Dashboard
+              <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-red-500 transition-all group-hover:w-full"></span>
+            </Link>
           </div>
 
           {/* CTA Button - Desktop */}
@@ -326,6 +333,13 @@ export default function Header() {
                 {link.label}
               </Link>
             ))}
+            <Link
+              href="/dashboard"
+              onClick={() => setMobileMenuOpen(false)}
+              className="px-4 py-2 text-white/80 hover:text-white hover:bg-white/10 rounded-lg transition-colors text-sm font-medium"
+            >
+              Dashboard
+            </Link>
             <a
               href="https://wa.me/+923224071299"
               target="_blank"
