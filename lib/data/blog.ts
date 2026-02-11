@@ -104,3 +104,22 @@ export async function getAllBlogSlugs(): Promise<string[]> {
   }
 }
 
+export async function getAllBlogSlugsWithDates(): Promise<{ slug: string; updatedAt: Date }[]> {
+  try {
+    await connectDB();
+    const posts = await BlogPost.find({}).select('slug updatedAt').lean();
+    
+    if (!posts || !Array.isArray(posts)) {
+      return [];
+    }
+    
+    return posts.map((post: any) => ({
+      slug: post.slug,
+      updatedAt: post.updatedAt ? new Date(post.updatedAt) : new Date(),
+    }));
+  } catch (error) {
+    console.error('Error fetching blog slugs with dates:', error);
+    return [];
+  }
+}
+

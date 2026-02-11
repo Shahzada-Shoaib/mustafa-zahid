@@ -405,3 +405,22 @@ export async function getAllQawwalSlugs(): Promise<string[]> {
   }
 }
 
+export async function getAllQawwalSlugsWithDates(): Promise<{ slug: string; updatedAt: Date }[]> {
+  try {
+    await connectDB();
+    const qawwals = await Qawwal.find({}).select('slug updatedAt').lean();
+    
+    if (!qawwals || !Array.isArray(qawwals)) {
+      return [];
+    }
+    
+    return qawwals.map((qawwal: any) => ({
+      slug: qawwal.slug,
+      updatedAt: qawwal.updatedAt ? new Date(qawwal.updatedAt) : new Date(),
+    }));
+  } catch (error) {
+    console.error('Error fetching qawwal slugs with dates:', error);
+    return [];
+  }
+}
+

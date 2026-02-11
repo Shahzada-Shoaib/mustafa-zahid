@@ -424,3 +424,22 @@ export async function getAllSingerSlugs(): Promise<string[]> {
   }
 }
 
+export async function getAllSingerSlugsWithDates(): Promise<{ slug: string; updatedAt: Date }[]> {
+  try {
+    await connectDB();
+    const singers = await Singer.find({}).select('slug updatedAt').lean();
+    
+    if (!singers || !Array.isArray(singers)) {
+      return [];
+    }
+    
+    return singers.map((singer: any) => ({
+      slug: singer.slug,
+      updatedAt: singer.updatedAt ? new Date(singer.updatedAt) : new Date(),
+    }));
+  } catch (error) {
+    console.error('Error fetching singer slugs with dates:', error);
+    return [];
+  }
+}
+

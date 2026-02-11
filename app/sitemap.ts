@@ -1,17 +1,20 @@
 import { MetadataRoute } from "next";
-import { getAllSingerSlugs } from "@/lib/data/singers";
-import { getAllQawwalSlugs } from "@/lib/data/qawwals";
-import { getAllBlogSlugs } from "@/lib/data/blog";
+import { getAllSingerSlugsWithDates } from "@/lib/data/singers";
+import { getAllQawwalSlugsWithDates } from "@/lib/data/qawwals";
+import { getAllBlogSlugsWithDates } from "@/lib/data/blog";
 import { SITE_URL } from "@/lib/constants/site";
+
+// Revalidate sitemap every hour to ensure new pages are included
+export const revalidate = 3600;
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const baseUrl = SITE_URL;
 
-  // Fetch all dynamic route slugs in parallel
-  const [singerSlugs, qawwalSlugs, blogSlugs] = await Promise.all([
-    getAllSingerSlugs(),
-    getAllQawwalSlugs(),
-    getAllBlogSlugs(),
+  // Fetch all dynamic route slugs with dates in parallel
+  const [singerSlugsWithDates, qawwalSlugsWithDates, blogSlugsWithDates] = await Promise.all([
+    getAllSingerSlugsWithDates(),
+    getAllQawwalSlugsWithDates(),
+    getAllBlogSlugsWithDates(),
   ]);
 
   // Static pages
@@ -97,25 +100,25 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   ];
 
   // Dynamic singer pages
-  const singerPages: MetadataRoute.Sitemap = singerSlugs.map((slug) => ({
+  const singerPages: MetadataRoute.Sitemap = singerSlugsWithDates.map(({ slug, updatedAt }) => ({
     url: `${baseUrl}/singers/${slug}`,
-    lastModified: new Date(),
+    lastModified: updatedAt,
     changeFrequency: "monthly" as const,
     priority: 0.7,
   }));
 
   // Dynamic qawwal pages
-  const qawwalPages: MetadataRoute.Sitemap = qawwalSlugs.map((slug) => ({
+  const qawwalPages: MetadataRoute.Sitemap = qawwalSlugsWithDates.map(({ slug, updatedAt }) => ({
     url: `${baseUrl}/qawwals/${slug}`,
-    lastModified: new Date(),
+    lastModified: updatedAt,
     changeFrequency: "monthly" as const,
     priority: 0.7,
   }));
 
   // Dynamic blog pages
-  const blogPages: MetadataRoute.Sitemap = blogSlugs.map((slug) => ({
+  const blogPages: MetadataRoute.Sitemap = blogSlugsWithDates.map(({ slug, updatedAt }) => ({
     url: `${baseUrl}/blog/${slug}`,
-    lastModified: new Date(),
+    lastModified: updatedAt,
     changeFrequency: "weekly" as const,
     priority: 0.8,
   }));
