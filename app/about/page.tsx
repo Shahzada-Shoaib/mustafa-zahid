@@ -56,8 +56,8 @@ export default function AboutPage() {
               About <span className="text-gradient">Mustafa Zahid</span>
             </h1>
             <p className="text-base sm:text-lg text-white/80 max-w-2xl mx-auto px-4">
-              Discover the journey of one of Pakistan&apos;s most celebrated vocalists, 
-              with over 20 years of musical excellence and countless memorable performances
+              Discover Mustafa Zahid&apos;s journey as one of Pakistan&apos;s most celebrated vocalists, 
+              with over 20 years of musical excellence and countless memorable Mustafa Zahid performances
             </p>
           </div>
         </div>
@@ -74,22 +74,25 @@ export default function AboutPage() {
               </h2>
               <div className="space-y-3 sm:space-y-4 text-white/80 leading-relaxed text-sm sm:text-base lg:text-lg">
                 <p>
-                  A renowned Pakistani singer, songwriter, and musician, best known as 
+                  Mustafa Zahid is a renowned Pakistani singer, songwriter, and musician, best known as 
                   the lead vocalist of the band <strong className="text-red-400">Roxen</strong>. 
-                  With over 20 years of experience in the music industry, the artist has 
-                  established himself as one of Pakistan&apos;s most celebrated vocalists.
+                  With over 20 years of experience in the music industry, Mustafa Zahid has 
+                  established himself as one of Pakistan&apos;s most celebrated vocalists. Mustafa Zahid&apos;s 
+                  career spans two decades of musical excellence.
                 </p>
                 <p>
-                  Starting his career in the early 2000s, the performer has released 
-                  numerous hit songs and albums that have resonated with audiences across 
-                  South Asia and beyond. The music blends contemporary sounds with traditional 
-                  influences, creating a unique style that appeals to listeners of all ages.
+                  Starting his career in the early 2000s, Mustafa Zahid has released 
+                  numerous hit Mustafa Zahid songs and albums that have resonated with audiences across 
+                  South Asia and beyond. Mustafa Zahid&apos;s music blends contemporary sounds with traditional 
+                  influences, creating a unique style that appeals to listeners of all ages. Mustafa Zahid Roxen 
+                  collaboration has produced some of the most memorable tracks in Pakistani music.
                 </p>
                 <p>
-                  Through work with Roxen and as a solo artist, the singer has contributed 
+                  Through work with Roxen and as a solo artist, Mustafa Zahid has contributed 
                   significantly to the Pakistani music industry with powerful vocals and 
-                  meaningful lyrics. Songs have transcended borders, earning recognition 
-                  and establishing the artist as a beloved figure in South Asian music.
+                  meaningful lyrics. Mustafa Zahid songs have transcended borders, earning recognition 
+                  and establishing Mustafa Zahid as a beloved figure in South Asian music with millions 
+                  of dedicated fans worldwide.
                 </p>
               </div>
             </div>
@@ -102,16 +105,18 @@ export default function AboutPage() {
             </h2>
             <div className="space-y-3 sm:space-y-4 text-white/80 leading-relaxed text-sm sm:text-base lg:text-lg">
               <p>
-                The music is characterized by soulful melodies, powerful emotions, and 
-                exceptional vocal talent. The artist&apos;s ability to blend contemporary 
+                Mustafa Zahid&apos;s music is characterized by soulful melodies, powerful emotions, and 
+                exceptional vocal talent. Mustafa Zahid&apos;s ability to blend contemporary 
                 sounds with traditional Pakistani music influences has created a distinctive 
-                style that sets the work apart.
+                style that sets Mustafa Zahid&apos;s work apart. Mustafa Zahid songs showcase 
+                a unique fusion of modern and traditional elements.
               </p>
               <p>
-                With 100+ songs in the discography, the performer has explored various 
-                genres while maintaining a signature sound. From romantic ballads to 
-                energetic performances, each song showcases the versatility and depth 
-                of the artist&apos;s musical talent.
+                With 100+ Mustafa Zahid songs in the discography, Mustafa Zahid has explored various 
+                genres while maintaining a signature sound. From romantic ballads like &quot;Tu Phir Aao&quot; 
+                to energetic performances, each Mustafa Zahid song showcases the versatility and depth 
+                of Mustafa Zahid&apos;s musical talent. Mustafa Zahid&apos;s discography reflects 
+                his evolution as an artist over two decades.
               </p>
             </div>
           </div>
@@ -124,14 +129,15 @@ export default function AboutPage() {
             <div className="space-y-3 sm:space-y-4 text-white/80 leading-relaxed text-sm sm:text-base lg:text-lg">
               <p>
                 As the lead vocalist of <strong className="text-red-400">Roxen</strong>, 
-                the artist has been instrumental in shaping the band&apos;s sound and 
-                success. Roxen has become one of Pakistan&apos;s most recognized music 
-                groups, known for their powerful performances and memorable songs.
+                Mustafa Zahid has been instrumental in shaping the band&apos;s sound and 
+                success. Mustafa Zahid Roxen collaboration has made Roxen one of Pakistan&apos;s most recognized music 
+                groups, known for their powerful performances and memorable Mustafa Zahid songs.
               </p>
               <p>
-                The collaboration with Roxen has produced numerous hit tracks that have 
+                Mustafa Zahid&apos;s collaboration with Roxen has produced numerous hit tracks that have 
                 become anthems for music lovers across Pakistan and the South Asian region. 
-                The band&apos;s music continues to inspire and entertain audiences worldwide.
+                Mustafa Zahid Roxen band&apos;s music continues to inspire and entertain audiences worldwide, 
+                with Mustafa Zahid&apos;s distinctive voice being the hallmark of the band&apos;s success.
               </p>
             </div>
           </div>
@@ -143,12 +149,13 @@ export default function AboutPage() {
             </h2>
             <div className="space-y-3 sm:space-y-4 text-white/80 leading-relaxed text-sm sm:text-base lg:text-lg">
               <p>
-                Available for live performances at weddings, mehndi nights, concerts, 
+                Mustafa Zahid is available for live performances at weddings, mehndi nights, concerts, 
                 corporate events, and private celebrations in Lahore and across Pakistan. 
-                The artist brings years of experience and professionalism to every event.
+                Book Mustafa Zahid for your event and experience years of musical excellence and professionalism 
+                that Mustafa Zahid brings to every performance.
               </p>
               <p>
-                To book live performances, contact us via WhatsApp at{" "}
+                To book Mustafa Zahid for live performances, contact us via WhatsApp at{" "}
                 <a 
                   href="https://wa.me/+923224071299" 
                   className="text-red-400 hover:text-red-300 active:text-red-200 font-medium break-all"
@@ -157,8 +164,8 @@ export default function AboutPage() {
                 >
                   +92 322 407 1299
                 </a>
-                . Our team handles all booking inquiries, availability checks, and 
-                event coordination to ensure a seamless experience.
+                . Our team handles all Mustafa Zahid booking inquiries, availability checks, and 
+                event coordination to ensure a seamless experience when you book Mustafa Zahid.
               </p>
               <div className="pt-3 sm:pt-4">
                 <a

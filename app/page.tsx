@@ -450,19 +450,20 @@ export default function Home() {
 
               <div className="text-sm sm:text-base md:text-lg lg:text-xl text-white/80 max-w-lg leading-relaxed mx-auto lg:mx-0 space-y-3 sm:space-y-4">
                 <p>
-                  One of Pakistan&apos;s most celebrated vocalists, known for blending 
+                  Mustafa Zahid is one of Pakistan&apos;s most celebrated vocalists, known for blending 
                   soulful melodies with powerful emotions. With over 20 years of 
-                  experience and 100+ songs, the artist has captivated audiences 
-                  across South Asia and beyond.
+                  experience and 100+ Mustafa Zahid songs, Mustafa Zahid has captivated audiences 
+                  across South Asia and beyond. Mustafa Zahid&apos;s music career spans two decades, 
+                  establishing him as the lead vocalist of Roxen and a prominent figure in Pakistani music.
                 </p>
                 <p>
-                  Book live performances for{" "}
+                  Book Mustafa Zahid for live performances at{" "}
                   <strong className="text-white">
                     weddings, mehndi nights, concerts, corporate events, and
                     private performances in Lahore
                   </strong>
-                  . Reserve your dates now to experience unforgettable shows 
-                  and award-winning musical performances.
+                  . Reserve your dates now to experience unforgettable Mustafa Zahid concerts 
+                  and award-winning musical performances by one of Pakistan&apos;s finest vocalists.
                 </p>
               </div>
 
@@ -731,7 +732,7 @@ export default function Home() {
               {/* Section Header */}
               <div className="space-y-3 sm:space-y-4 lg:space-y-6">
                 <span className="text-red-500 uppercase tracking-[0.3em] text-xs sm:text-sm font-medium">
-                  About The Artist
+                  About Mustafa Zahid
                 </span>
                 <h2 className="font-display text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-white leading-tight">
                   Mustafa Zahid: A Voice That
@@ -764,12 +765,13 @@ export default function Home() {
                         The Journey
                       </h3>
                       <p className="text-sm sm:text-base text-white/80 leading-relaxed">
-                        A renowned Pakistani singer, songwriter, and musician, 
+                        Mustafa Zahid is a renowned Pakistani singer, songwriter, and musician, 
                         best known as the lead vocalist of the band{" "}
                         <span className="text-red-400 font-medium">Roxen</span>. 
-                        Starting his career in the early 2000s, the artist has 
-                        released numerous hit songs and albums, establishing 
-                        himself as a prominent figure in the Pakistani music industry.
+                        Starting his career in the early 2000s, Mustafa Zahid has 
+                        released numerous hit Mustafa Zahid songs and albums, establishing 
+                        himself as a prominent figure in the Pakistani music industry. Mustafa Zahid&apos;s 
+                        journey with Roxen has made him one of the most recognized voices in Pakistani music.
                       </p>
                     </div>
                   </div>
@@ -797,12 +799,13 @@ export default function Home() {
                         Musical Legacy
                       </h3>
                       <p className="text-sm sm:text-base text-white/80 leading-relaxed">
-                        The music blends contemporary sounds with traditional
+                        Mustafa Zahid&apos;s music blends contemporary sounds with traditional
                         influences, creating a unique style that resonates with
                         listeners of all ages. Through powerful vocals and 
-                        meaningful lyrics, the artist has contributed
+                        meaningful lyrics, Mustafa Zahid has contributed
                         significantly to the Pakistani music industry, 
-                        earning recognition and awards for exceptional work.
+                        earning recognition and awards for exceptional work. Mustafa Zahid songs 
+                        like &quot;Tu Phir Aao&quot; and &quot;Tera Mera Rishta Purana&quot; have become timeless classics.
                       </p>
                     </div>
                   </div>
@@ -830,11 +833,12 @@ export default function Home() {
                         Global Impact
                       </h3>
                       <p className="text-sm sm:text-base text-white/80 leading-relaxed">
-                        Through work with Roxen and as a solo artist, the 
-                        performer continues to inspire and entertain music lovers
-                        worldwide. Songs have transcended borders, making
-                        the artist a beloved figure in South Asian music with 
-                        millions of streams and dedicated fans globally.
+                        Through work with Roxen and as a solo artist, Mustafa Zahid 
+                        continues to inspire and entertain music lovers
+                        worldwide. Mustafa Zahid songs have transcended borders, making
+                        Mustafa Zahid a beloved figure in South Asian music with 
+                        millions of streams and dedicated fans globally. Mustafa Zahid&apos;s 
+                        impact extends beyond Pakistan, with fans across South Asia and beyond.
                       </p>
                     </div>
                   </div>
@@ -855,7 +859,7 @@ export default function Home() {
                 href="/about"
                 className="text-white/80 hover:text-red-400 active:text-red-300 transition-colors text-sm font-medium py-2 sm:py-0 min-h-[44px] sm:min-h-0 flex items-center touch-manipulation"
               >
-                Learn More About the Artist →
+                Learn More About Mustafa Zahid →
               </a>
               <a
                 href="/music-classes"
@@ -1259,8 +1263,9 @@ export default function Home() {
               </div>
 
               <p className="text-base sm:text-lg text-white/80 leading-relaxed max-w-lg">
-                For bookings, collaborations, or inquiries, reach out through
-                the following channels. Let&apos;s make music that resonates.
+                For Mustafa Zahid bookings, collaborations, or inquiries, reach out through
+                the following channels. Book Mustafa Zahid for your event and experience 
+                music that resonates with audiences worldwide.
               </p>
 
               {/* Contact Info */}
@@ -1517,19 +1522,19 @@ export default function Home() {
             {[
               {
                 q: "How can I book Mustafa Zahid for an event?",
-                a: "You can book live performances by contacting us via WhatsApp at +92 322 407 1299. We handle bookings for weddings, concerts, corporate events, and private performances across Pakistan. Our team will assist you with availability, pricing, and all booking details.",
+                a: "You can book Mustafa Zahid for live performances by contacting us via WhatsApp at +92 322 407 1299. We handle Mustafa Zahid bookings for weddings, concerts, corporate events, and private performances across Pakistan. Our team will assist you with Mustafa Zahid&apos;s availability, pricing, and all booking details.",
               },
               {
-                q: "What is the booking price for events?",
-                a: "Booking prices vary depending on the event type, location, duration, and technical requirements. For accurate pricing and availability, please contact us directly via WhatsApp at +92 322 407 1299. We provide transparent pricing and work with you to create a package that fits your budget.",
+                q: "What is the booking price for Mustafa Zahid events?",
+                a: "Mustafa Zahid booking prices vary depending on the event type, location, duration, and technical requirements. For accurate pricing and Mustafa Zahid&apos;s availability, please contact us directly via WhatsApp at +92 322 407 1299. We provide transparent pricing and work with you to create a package that fits your budget for booking Mustafa Zahid.",
               },
               {
                 q: "Is Mustafa Zahid available for weddings in Lahore?",
-                a: "Yes, the artist is available for wedding bookings in Lahore and across Pakistan. Whether it's a mehndi night, wedding ceremony, or reception, we can arrange live performances. Contact us to discuss your specific requirements and preferred dates.",
+                a: "Yes, Mustafa Zahid is available for wedding bookings in Lahore and across Pakistan. Whether it's a mehndi night, wedding ceremony, or reception, we can arrange Mustafa Zahid live performances. Contact us to discuss your specific requirements and preferred dates for booking Mustafa Zahid.",
               },
               {
-                q: "Can I book for corporate events?",
-                a: "Absolutely! The performer is available for corporate events, product launches, company celebrations, and business gatherings. We provide professional sound systems and can customize the performance to match your event theme and requirements.",
+                q: "Can I book Mustafa Zahid for corporate events?",
+                a: "Absolutely! Mustafa Zahid is available for corporate events, product launches, company celebrations, and business gatherings. We provide professional sound systems and can customize Mustafa Zahid&apos;s performance to match your event theme and requirements.",
               },
               {
                 q: "How far in advance should I book?",
