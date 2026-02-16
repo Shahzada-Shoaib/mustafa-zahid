@@ -1,7 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server';
 import connectDB from '@/lib/db/mongodb';
 import Qawwal from '@/lib/models/Qawwal';
-import { uploadImage, uploadMultipleImages } from '@/lib/utils/cloudinary';
+import { uploadImage, uploadMultipleImages, deleteMultipleImages } from '@/lib/utils/cloudinary';
 
 export async function GET(request: NextRequest) {
   try {
@@ -90,7 +90,27 @@ export async function DELETE(request: NextRequest) {
       );
     }
     
+    // Fetch qawwals first to get image URLs
+    const qawwals = await Qawwal.find({ _id: { $in: ids } });
+    
+    // Collect all image URLs
+    const imageUrls: string[] = [];
+    qawwals.forEach(qawwal => {
+      if (qawwal.image) imageUrls.push(qawwal.image);
+      if (qawwal.gallery && Array.isArray(qawwal.gallery)) {
+        imageUrls.push(...qawwal.gallery);
+      }
+    });
+    
+    // Delete from database
     const result = await Qawwal.deleteMany({ _id: { $in: ids } });
+    
+    // Delete images from Cloudinary (don't wait, fire and forget)
+    if (imageUrls.length > 0) {
+      deleteMultipleImages(imageUrls).catch(error => {
+        console.error('Error deleting images from Cloudinary:', error);
+      });
+    }
     
     return NextResponse.json(
       { success: true, deletedCount: result.deletedCount },

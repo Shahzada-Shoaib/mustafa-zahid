@@ -1,7 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server';
 import connectDB from '@/lib/db/mongodb';
 import Class from '@/lib/models/Class';
-import { uploadImage } from '@/lib/utils/cloudinary';
+import { uploadImage, deleteMultipleImages } from '@/lib/utils/cloudinary';
 import mongoose from 'mongoose';
 
 export async function GET(
@@ -218,13 +218,34 @@ export async function DELETE(
       );
     }
     
-    const result = await Class.findByIdAndDelete(slug);
+    // Fetch the class first to get image URLs
+    const classDoc = await Class.findById(slug);
     
-    if (!result) {
+    if (!classDoc) {
       return NextResponse.json(
         { success: false, error: 'Class not found' },
         { status: 404 }
       );
+    }
+    
+    // Collect all image URLs from class
+    const imageUrls: string[] = [];
+    if (classDoc.hero?.heroImage) imageUrls.push(classDoc.hero.heroImage);
+    if (classDoc.images?.heroImage) imageUrls.push(classDoc.images.heroImage);
+    if (classDoc.images?.curriculumImage) imageUrls.push(classDoc.images.curriculumImage);
+    if (classDoc.images?.teachingImage) imageUrls.push(classDoc.images.teachingImage);
+    
+    // Remove duplicates
+    const uniqueImageUrls = [...new Set(imageUrls)];
+    
+    // Delete from database
+    await Class.findByIdAndDelete(slug);
+    
+    // Delete images from Cloudinary (don't wait, fire and forget)
+    if (uniqueImageUrls.length > 0) {
+      deleteMultipleImages(uniqueImageUrls).catch(error => {
+        console.error('Error deleting images from Cloudinary:', error);
+      });
     }
     
     return NextResponse.json(

@@ -1,7 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server';
 import connectDB from '@/lib/db/mongodb';
 import BlogPost from '@/lib/models/BlogPost';
-import { uploadImage } from '@/lib/utils/cloudinary';
+import { uploadImage, deleteImage } from '@/lib/utils/cloudinary';
 import mongoose from 'mongoose';
 
 export async function GET(
@@ -144,13 +144,26 @@ export async function DELETE(
       );
     }
     
-    const result = await BlogPost.findByIdAndDelete(id);
+    // Fetch the blog first to get image URL
+    const blog = await BlogPost.findById(id);
     
-    if (!result) {
+    if (!blog) {
       return NextResponse.json(
         { success: false, error: 'Blog not found' },
         { status: 404 }
       );
+    }
+    
+    const imageUrl = blog.image;
+    
+    // Delete from database
+    await BlogPost.findByIdAndDelete(id);
+    
+    // Delete image from Cloudinary (don't wait, fire and forget)
+    if (imageUrl) {
+      deleteImage(imageUrl).catch(error => {
+        console.error('Error deleting image from Cloudinary:', error);
+      });
     }
     
     return NextResponse.json(

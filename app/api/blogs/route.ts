@@ -1,7 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server';
 import connectDB from '@/lib/db/mongodb';
 import BlogPost from '@/lib/models/BlogPost';
-import { uploadImage } from '@/lib/utils/cloudinary';
+import { uploadImage, deleteMultipleImages } from '@/lib/utils/cloudinary';
 
 export async function GET(request: NextRequest) {
   try {
@@ -82,7 +82,24 @@ export async function DELETE(request: NextRequest) {
       );
     }
     
+    // Fetch blogs first to get image URLs
+    const blogs = await BlogPost.find({ _id: { $in: ids } });
+    
+    // Collect all image URLs
+    const imageUrls: string[] = [];
+    blogs.forEach(blog => {
+      if (blog.image) imageUrls.push(blog.image);
+    });
+    
+    // Delete from database
     const result = await BlogPost.deleteMany({ _id: { $in: ids } });
+    
+    // Delete images from Cloudinary (don't wait, fire and forget)
+    if (imageUrls.length > 0) {
+      deleteMultipleImages(imageUrls).catch(error => {
+        console.error('Error deleting images from Cloudinary:', error);
+      });
+    }
     
     return NextResponse.json(
       { success: true, deletedCount: result.deletedCount },

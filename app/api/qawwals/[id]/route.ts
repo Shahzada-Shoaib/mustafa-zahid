@@ -1,7 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server';
 import connectDB from '@/lib/db/mongodb';
 import Qawwal from '@/lib/models/Qawwal';
-import { uploadImage, uploadMultipleImages } from '@/lib/utils/cloudinary';
+import { uploadImage, uploadMultipleImages, deleteMultipleImages } from '@/lib/utils/cloudinary';
 import mongoose from 'mongoose';
 
 export async function GET(
@@ -155,13 +155,31 @@ export async function DELETE(
       );
     }
     
-    const result = await Qawwal.findByIdAndDelete(id);
+    // Fetch the qawwal first to get image URLs
+    const qawwal = await Qawwal.findById(id);
     
-    if (!result) {
+    if (!qawwal) {
       return NextResponse.json(
         { success: false, error: 'Qawwal not found' },
         { status: 404 }
       );
+    }
+    
+    // Collect all image URLs
+    const imageUrls: string[] = [];
+    if (qawwal.image) imageUrls.push(qawwal.image);
+    if (qawwal.gallery && Array.isArray(qawwal.gallery)) {
+      imageUrls.push(...qawwal.gallery);
+    }
+    
+    // Delete from database
+    await Qawwal.findByIdAndDelete(id);
+    
+    // Delete images from Cloudinary (don't wait, fire and forget)
+    if (imageUrls.length > 0) {
+      deleteMultipleImages(imageUrls).catch(error => {
+        console.error('Error deleting images from Cloudinary:', error);
+      });
     }
     
     return NextResponse.json(

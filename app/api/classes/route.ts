@@ -1,7 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server';
 import connectDB from '@/lib/db/mongodb';
 import Class from '@/lib/models/Class';
-import { uploadImage } from '@/lib/utils/cloudinary';
+import { uploadImage, deleteMultipleImages } from '@/lib/utils/cloudinary';
 
 export async function POST(request: NextRequest) {
   try {
@@ -162,7 +162,30 @@ export async function DELETE(request: NextRequest) {
       );
     }
     
+    // Fetch classes first to get image URLs
+    const classes = await Class.find({ _id: { $in: ids } });
+    
+    // Collect all image URLs from all classes
+    const imageUrls: string[] = [];
+    classes.forEach(classDoc => {
+      if (classDoc.hero?.heroImage) imageUrls.push(classDoc.hero.heroImage);
+      if (classDoc.images?.heroImage) imageUrls.push(classDoc.images.heroImage);
+      if (classDoc.images?.curriculumImage) imageUrls.push(classDoc.images.curriculumImage);
+      if (classDoc.images?.teachingImage) imageUrls.push(classDoc.images.teachingImage);
+    });
+    
+    // Remove duplicates
+    const uniqueImageUrls = [...new Set(imageUrls)];
+    
+    // Delete from database
     const result = await Class.deleteMany({ _id: { $in: ids } });
+    
+    // Delete images from Cloudinary (don't wait, fire and forget)
+    if (uniqueImageUrls.length > 0) {
+      deleteMultipleImages(uniqueImageUrls).catch(error => {
+        console.error('Error deleting images from Cloudinary:', error);
+      });
+    }
     
     return NextResponse.json(
       { success: true, deletedCount: result.deletedCount },

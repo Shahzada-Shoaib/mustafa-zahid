@@ -51,3 +51,78 @@ export async function uploadMultipleImages(files: File[]): Promise<string[]> {
   }
 }
 
+/**
+ * Extract public_id from Cloudinary URL
+ * Example: https://res.cloudinary.com/cloud_name/image/upload/v1234567890/mustafa-zahid/image.jpg
+ * Returns: mustafa-zahid/image
+ */
+function extractPublicId(url: string): string | null {
+  try {
+    // Extract the path after /upload/
+    const match = url.match(/\/upload\/(?:v\d+\/)?(.+)$/);
+    if (match && match[1]) {
+      // Remove file extension
+      return match[1].replace(/\.[^/.]+$/, '');
+    }
+    return null;
+  } catch (error) {
+    console.error('Error extracting public_id:', error);
+    return null;
+  }
+}
+
+/**
+ * Delete a single image from Cloudinary
+ */
+export async function deleteImage(imageUrl: string): Promise<boolean> {
+  try {
+    if (!imageUrl || typeof imageUrl !== 'string') {
+      console.warn('Invalid image URL provided:', imageUrl);
+      return false;
+    }
+
+    const publicId = extractPublicId(imageUrl);
+    if (!publicId) {
+      console.warn('Could not extract public_id from URL:', imageUrl);
+      return false;
+    }
+
+    return new Promise((resolve) => {
+      cloudinary.uploader.destroy(publicId, (error, result) => {
+        if (error) {
+          console.error('Error deleting image from Cloudinary:', error);
+          resolve(false);
+        } else {
+          console.log('Image deleted from Cloudinary:', publicId);
+          resolve(result?.result === 'ok');
+        }
+      });
+    });
+  } catch (error) {
+    console.error('Error in deleteImage:', error);
+    return false;
+  }
+}
+
+/**
+ * Delete multiple images from Cloudinary
+ */
+export async function deleteMultipleImages(imageUrls: string[]): Promise<boolean> {
+  try {
+    if (!Array.isArray(imageUrls) || imageUrls.length === 0) {
+      return true; // Nothing to delete
+    }
+
+    const deletePromises = imageUrls
+      .filter(url => url && typeof url === 'string') // Filter out invalid URLs
+      .map(url => deleteImage(url));
+    
+    const results = await Promise.all(deletePromises);
+    // Return true if at least some deletions succeeded (don't fail if some fail)
+    return results.some(result => result === true);
+  } catch (error) {
+    console.error('Error deleting multiple images:', error);
+    return false;
+  }
+}
+
