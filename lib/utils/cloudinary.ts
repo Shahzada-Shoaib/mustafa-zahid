@@ -21,6 +21,23 @@ export async function uploadImage(file: File | Blob): Promise<string> {
           {
             resource_type: 'image',
             folder: 'mustafa-zahid',
+            
+            // ✅ Format: WebP (best compression, 30-50% smaller than JPEG)
+            format: 'webp',
+            
+            // ✅ Quality: 75 (good balance between quality and size)
+            quality: 75,
+            
+            // ✅ Size Limits: Max 1200px (prevents huge images, good for web)
+            width: 1200,
+            height: 1200,
+            crop: 'limit', // Don't crop, just limit size
+            
+            // ✅ Progressive loading (better UX)
+            flags: ['progressive', 'strip_profile'], // Remove metadata to save space
+            
+            // ✅ Smart compression
+            fetch_format: 'auto',
           },
           (error, result) => {
             if (error) {
