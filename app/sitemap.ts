@@ -2,6 +2,7 @@ import { MetadataRoute } from "next";
 import { getAllSingerSlugsWithDates } from "@/lib/data/singers";
 import { getAllQawwalSlugsWithDates } from "@/lib/data/qawwals";
 import { getAllBlogSlugsWithDates } from "@/lib/data/blog";
+import { getAllClassSlugsWithDates } from "@/lib/data/classes";
 import { SITE_URL } from "@/lib/constants/site";
 
 // Revalidate sitemap every hour to ensure new pages are included
@@ -11,10 +12,11 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const baseUrl = SITE_URL;
 
   // Fetch all dynamic route slugs with dates in parallel
-  const [singerSlugsWithDates, qawwalSlugsWithDates, blogSlugsWithDates] = await Promise.all([
+  const [singerSlugsWithDates, qawwalSlugsWithDates, blogSlugsWithDates, classSlugsWithDates] = await Promise.all([
     getAllSingerSlugsWithDates(),
     getAllQawwalSlugsWithDates(),
     getAllBlogSlugsWithDates(),
+    getAllClassSlugsWithDates(),
   ]);
 
   // Static pages
@@ -123,5 +125,13 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     priority: 0.8,
   }));
 
-  return [...staticPages, ...singerPages, ...qawwalPages, ...blogPages];
+  // Dynamic class pages
+  const classPages: MetadataRoute.Sitemap = classSlugsWithDates.map(({ slug, updatedAt }) => ({
+    url: `${baseUrl}/music-classes/${slug}`,
+    lastModified: updatedAt,
+    changeFrequency: "weekly" as const,
+    priority: 0.8,
+  }));
+
+  return [...staticPages, ...singerPages, ...qawwalPages, ...blogPages, ...classPages];
 }

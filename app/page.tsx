@@ -700,6 +700,7 @@ export default function Home() {
                   alt="Mustafa Zahid in recording studio - Professional Pakistani singer and songwriter available for booking"
                   fill
                   className="object-cover"
+                  loading="lazy"
                   sizes="(max-width: 1024px) 100vw, 50vw"
                 />
               </div>
@@ -715,6 +716,7 @@ export default function Home() {
                     alt="Mustafa Zahid in recording studio - Professional Pakistani singer and songwriter available for booking"
                     fill
                     className="object-cover"
+                    loading="lazy"
                     sizes="50vw"
                   />
                 </div>
