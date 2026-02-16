@@ -101,22 +101,38 @@ export async function GET(request: NextRequest) {
   try {
     await connectDB();
     
-    // For header, we only need slug, title, and type to build href
+    const url = new URL(request.url);
+    const forDashboard = url.searchParams.get('forDashboard') === 'true';
+    
     const classes = await Class.find({})
-      .select('slug title type instrument')
+      .select(forDashboard ? '_id slug title type instrument createdAt updatedAt' : 'slug title type instrument')
+      .sort({ createdAt: -1 })
       .lean();
     
     if (!classes || !Array.isArray(classes)) {
       return NextResponse.json({ success: true, data: [] }, { status: 200 });
     }
     
-    // Format for header dropdown
+    // Format for header dropdown (default behavior for backward compatibility)
+    if (!forDashboard) {
+      const formattedClasses = classes.map((classItem: any) => ({
+        href: `/music-classes/${classItem.slug}`,
+        label: classItem.title,
+        slug: classItem.slug,
+        type: classItem.type,
+        instrument: classItem.instrument,
+      }));
+      
+      return NextResponse.json(
+        { success: true, data: formattedClasses },
+        { status: 200 }
+      );
+    }
+    
+    // Return raw data for dashboard (convert _id to string)
     const formattedClasses = classes.map((classItem: any) => ({
-      href: `/music-classes/${classItem.slug}`,
-      label: classItem.title,
-      slug: classItem.slug,
-      type: classItem.type,
-      instrument: classItem.instrument,
+      ...classItem,
+      _id: classItem._id?.toString() || classItem._id,
     }));
     
     return NextResponse.json(
@@ -127,6 +143,35 @@ export async function GET(request: NextRequest) {
     console.error('Error fetching classes:', error);
     return NextResponse.json(
       { success: false, error: error.message || 'Failed to fetch classes' },
+      { status: 500 }
+    );
+  }
+}
+
+export async function DELETE(request: NextRequest) {
+  try {
+    await connectDB();
+    
+    const body = await request.json();
+    const { ids } = body;
+    
+    if (!ids || !Array.isArray(ids) || ids.length === 0) {
+      return NextResponse.json(
+        { success: false, error: 'IDs array is required' },
+        { status: 400 }
+      );
+    }
+    
+    const result = await Class.deleteMany({ _id: { $in: ids } });
+    
+    return NextResponse.json(
+      { success: true, deletedCount: result.deletedCount },
+      { status: 200 }
+    );
+  } catch (error: any) {
+    console.error('Error deleting classes:', error);
+    return NextResponse.json(
+      { success: false, error: error.message || 'Failed to delete classes' },
       { status: 500 }
     );
   }

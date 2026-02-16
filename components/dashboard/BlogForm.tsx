@@ -1,8 +1,15 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 
-export default function BlogForm() {
+interface BlogFormProps {
+  editMode?: boolean;
+  initialData?: any;
+  onCancel?: () => void;
+  onSuccess?: () => void;
+}
+
+export default function BlogForm({ editMode = false, initialData, onCancel, onSuccess }: BlogFormProps) {
   const [loading, setLoading] = useState(false);
   const [formData, setFormData] = useState({
     slug: '',
@@ -24,6 +31,32 @@ export default function BlogForm() {
   });
 
   const [image, setImage] = useState<File | null>(null);
+  const [existingImage, setExistingImage] = useState<string>('');
+
+  // Populate form when initialData is provided
+  useEffect(() => {
+    if (editMode && initialData) {
+      setFormData({
+        slug: initialData.slug || '',
+        title: initialData.title || '',
+        content: initialData.content || '',
+        date: initialData.date || '',
+        author: initialData.author || '',
+        category: initialData.category || '',
+        excerpt: initialData.excerpt || '',
+        metadata: initialData.metadata || {
+          title: '',
+          description: '',
+          keywords: '',
+          ogTitle: '',
+          ogDescription: '',
+          twitterTitle: '',
+          twitterDescription: '',
+        },
+      });
+      setExistingImage(initialData.image || '');
+    }
+  }, [editMode, initialData]);
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const { name, value } = e.target;
@@ -51,6 +84,12 @@ export default function BlogForm() {
     setLoading(true);
 
     try {
+      // Validate ID in edit mode
+      if (editMode && (!initialData?._id)) {
+        alert('Error: No ID found for editing. Please try again.');
+        setLoading(false);
+        return;
+      }
       const dataToSubmit = {
         ...formData,
       };
@@ -63,16 +102,63 @@ export default function BlogForm() {
         formDataToSend.append('image', image);
       }
 
-      const response = await fetch('/api/blogs', {
-        method: 'POST',
+      // Submit to API
+      let url = '/api/blogs';
+      const method = editMode ? 'PUT' : 'POST';
+      
+      if (editMode && initialData?._id) {
+        // Ensure ID is converted to string and is valid
+        const id = String(initialData._id).trim();
+        
+        // Basic ObjectId format check (24 hex characters)
+        const objectIdRegex = /^[0-9a-fA-F]{24}$/;
+        const isValidId = objectIdRegex.test(id);
+        
+        console.log('Submitting update with ID:', { 
+          id, 
+          idType: typeof id, 
+          idLength: id.length,
+          isValid: isValidId,
+          originalId: initialData._id,
+          originalIdType: typeof initialData._id
+        });
+        
+        if (!isValidId) {
+          alert(`Error: Invalid ID format. ID: "${id}". Please try editing again.`);
+          setLoading(false);
+          return;
+        }
+        
+        url = `/api/blogs/${id}`;
+      }
+      
+      console.log('Submitting form:', { url, method, editMode });
+      
+      const response = await fetch(url, {
+        method,
         body: formDataToSend,
       });
 
-      const result = await response.json();
+      const responseText = await response.text();
+      let result;
+      try {
+        result = JSON.parse(responseText);
+      } catch (e) {
+        console.error('Failed to parse response:', e, 'Response:', responseText);
+        alert(`Error: Invalid response from server. Status: ${response.status}`);
+        setLoading(false);
+        return;
+      }
+      
+      console.log('Form submission response:', result);
 
       if (result.success) {
-        alert('Blog post created successfully!');
-        setFormData({
+        alert(editMode ? 'Blog post updated successfully!' : 'Blog post created successfully!');
+        if (onSuccess) {
+          onSuccess();
+        }
+        if (!editMode) {
+          setFormData({
           slug: '',
           title: '',
           content: '',
@@ -89,8 +175,10 @@ export default function BlogForm() {
             twitterTitle: '',
             twitterDescription: '',
           },
-        });
-        setImage(null);
+          });
+          setImage(null);
+          setExistingImage('');
+        }
       } else {
         alert(`Error: ${result.error}`);
       }
@@ -251,23 +339,39 @@ export default function BlogForm() {
         <h2 className="text-xl sm:text-2xl font-bold text-white">Image</h2>
         <div>
           <label className="block text-xs sm:text-sm font-medium text-white/80 mb-1.5 sm:mb-2">Blog Image</label>
+          {existingImage && (
+            <div className="mb-2">
+              <p className="text-white/60 text-sm mb-2">Current Image:</p>
+              <img src={existingImage} alt="Current" className="w-32 h-32 object-cover rounded" />
+            </div>
+          )}
           <input
             type="file"
             accept="image/*"
             onChange={(e) => setImage(e.target.files?.[0] || null)}
             className="w-full px-3 sm:px-4 py-2.5 sm:py-2 bg-white/5 border border-white/10 rounded-lg text-xs sm:text-sm text-white focus:outline-none focus:border-red-500 min-h-[44px] file:mr-4 file:py-2 file:px-4 file:rounded-lg file:border-0 file:text-sm file:font-semibold file:bg-red-600 file:text-white hover:file:bg-red-500 file:cursor-pointer"
           />
+          <p className="text-white/40 text-xs mt-1">{editMode ? 'Leave empty to keep current image' : ''}</p>
         </div>
       </div>
 
       {/* Submit Button */}
-      <div className="flex justify-end pt-3 sm:pt-4">
+      <div className="flex justify-end gap-3 pt-3 sm:pt-4">
+        {editMode && onCancel && (
+          <button
+            type="button"
+            onClick={onCancel}
+            className="px-6 sm:px-8 py-3 bg-white/10 text-white rounded-lg hover:bg-white/20 transition-all font-semibold min-h-[48px] touch-manipulation text-sm sm:text-base"
+          >
+            Cancel
+          </button>
+        )}
         <button
           type="submit"
           disabled={loading}
           className="w-full sm:w-auto px-6 sm:px-8 py-3 bg-gradient-to-r from-red-600 to-red-700 text-white rounded-lg hover:from-red-500 hover:to-red-600 active:from-red-700 active:to-red-800 transition-all font-semibold disabled:opacity-50 min-h-[48px] touch-manipulation text-sm sm:text-base"
         >
-          {loading ? 'Submitting...' : 'Submit'}
+          {loading ? (editMode ? 'Updating...' : 'Submitting...') : (editMode ? 'Update' : 'Submit')}
         </button>
       </div>
     </form>

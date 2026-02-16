@@ -3,6 +3,34 @@ import connectDB from '@/lib/db/mongodb';
 import Singer from '@/lib/models/Singer';
 import { uploadImage, uploadMultipleImages } from '@/lib/utils/cloudinary';
 
+export async function GET(request: NextRequest) {
+  try {
+    await connectDB();
+    
+    const singers = await Singer.find({})
+      .select('_id name slug image createdAt updatedAt')
+      .sort({ createdAt: -1 })
+      .lean();
+    
+    // Convert _id to string for consistency
+    const formattedSingers = singers.map((singer: any) => ({
+      ...singer,
+      _id: singer._id?.toString() || singer._id,
+    }));
+    
+    return NextResponse.json(
+      { success: true, data: formattedSingers },
+      { status: 200 }
+    );
+  } catch (error: any) {
+    console.error('Error fetching singers:', error);
+    return NextResponse.json(
+      { success: false, error: error.message || 'Failed to fetch singers' },
+      { status: 500 }
+    );
+  }
+}
+
 export async function POST(request: NextRequest) {
   try {
     await connectDB();
@@ -43,6 +71,35 @@ export async function POST(request: NextRequest) {
     console.error('Error creating singer:', error);
     return NextResponse.json(
       { success: false, error: error.message || 'Failed to create singer' },
+      { status: 500 }
+    );
+  }
+}
+
+export async function DELETE(request: NextRequest) {
+  try {
+    await connectDB();
+    
+    const body = await request.json();
+    const { ids } = body;
+    
+    if (!ids || !Array.isArray(ids) || ids.length === 0) {
+      return NextResponse.json(
+        { success: false, error: 'IDs array is required' },
+        { status: 400 }
+      );
+    }
+    
+    const result = await Singer.deleteMany({ _id: { $in: ids } });
+    
+    return NextResponse.json(
+      { success: true, deletedCount: result.deletedCount },
+      { status: 200 }
+    );
+  } catch (error: any) {
+    console.error('Error deleting singers:', error);
+    return NextResponse.json(
+      { success: false, error: error.message || 'Failed to delete singers' },
       { status: 500 }
     );
   }

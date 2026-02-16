@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 
 interface Feature {
   icon: string;
@@ -30,7 +30,14 @@ interface FAQ {
   answer: string;
 }
 
-export default function ClassForm() {
+interface ClassFormProps {
+  editMode?: boolean;
+  initialData?: any;
+  onCancel?: () => void;
+  onSuccess?: () => void;
+}
+
+export default function ClassForm({ editMode = false, initialData, onCancel, onSuccess }: ClassFormProps) {
   const [loading, setLoading] = useState(false);
   const [formData, setFormData] = useState({
     slug: '',
@@ -87,6 +94,69 @@ export default function ClassForm() {
   const [heroImage, setHeroImage] = useState<File | null>(null);
   const [curriculumImage, setCurriculumImage] = useState<File | null>(null);
   const [teachingImage, setTeachingImage] = useState<File | null>(null);
+  const [existingHeroImage, setExistingHeroImage] = useState<string>('');
+  const [existingCurriculumImage, setExistingCurriculumImage] = useState<string>('');
+  const [existingTeachingImage, setExistingTeachingImage] = useState<string>('');
+
+  // Populate form when initialData is provided
+  useEffect(() => {
+    if (editMode && initialData) {
+      setFormData({
+        slug: initialData.slug || '',
+        title: initialData.title || '',
+        type: initialData.type || 'studio',
+        instrument: initialData.instrument || 'guitar',
+        hero: initialData.hero || {
+          badge: '',
+          title: '',
+          titleHighlight: '',
+          description: '',
+          heroImage: '',
+        },
+        features: initialData.features || [],
+        curriculum: initialData.curriculum || [],
+        learningPaths: initialData.learningPaths || [],
+        benefits: initialData.benefits || [],
+        practiceTips: initialData.practiceTips || {
+          routineTips: [''],
+          mistakes: [''],
+        },
+        cta: initialData.cta || {
+          title: '',
+          description: '',
+        },
+        images: initialData.images || {
+          heroImage: '',
+          curriculumImage: '',
+          teachingImage: '',
+        },
+        metadata: initialData.metadata || {
+          title: '',
+          description: '',
+          keywords: '',
+          ogTitle: '',
+          ogDescription: '',
+          ogUrl: '',
+          ogImage: '',
+          twitterTitle: '',
+          twitterDescription: '',
+          twitterImage: '',
+          canonical: '',
+          robots: 'index, follow',
+        },
+        seo: initialData.seo || {
+          structuredData: {
+            jobTitle: '',
+            knowsAbout: [''],
+          },
+          faqs: [],
+        },
+      });
+      setExistingHeroImage(initialData.hero?.heroImage || initialData.images?.heroImage || '');
+      setExistingCurriculumImage(initialData.images?.curriculumImage || '');
+      setExistingTeachingImage(initialData.images?.teachingImage || '');
+    }
+  }, [editMode, initialData]);
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
     const { name, value } = e.target;
@@ -367,6 +437,12 @@ export default function ClassForm() {
     setLoading(true);
 
     try {
+      // Validate ID in edit mode
+      if (editMode && (!initialData?._id)) {
+        alert('Error: No ID found for editing. Please try again.');
+        setLoading(false);
+        return;
+      }
       // Prepare data object
       const dataToSubmit = {
         ...formData,
@@ -413,17 +489,63 @@ export default function ClassForm() {
       }
 
       // Submit to API
-      const response = await fetch('/api/classes', {
-        method: 'POST',
+      let url = '/api/classes';
+      const method = editMode ? 'PUT' : 'POST';
+      
+      if (editMode && initialData?._id) {
+        // Ensure ID is converted to string and is valid
+        const id = String(initialData._id).trim();
+        
+        // Basic ObjectId format check (24 hex characters)
+        const objectIdRegex = /^[0-9a-fA-F]{24}$/;
+        const isValidId = objectIdRegex.test(id);
+        
+        console.log('Submitting update with ID:', { 
+          id, 
+          idType: typeof id, 
+          idLength: id.length,
+          isValid: isValidId,
+          originalId: initialData._id,
+          originalIdType: typeof initialData._id
+        });
+        
+        if (!isValidId) {
+          alert(`Error: Invalid ID format. ID: "${id}". Please try editing again.`);
+          setLoading(false);
+          return;
+        }
+        
+        url = `/api/classes/${id}`;
+      }
+      
+      console.log('Submitting form:', { url, method, editMode });
+      
+      const response = await fetch(url, {
+        method,
         body: formDataToSend,
       });
 
-      const result = await response.json();
+      const responseText = await response.text();
+      let result;
+      try {
+        result = JSON.parse(responseText);
+      } catch (e) {
+        console.error('Failed to parse response:', e, 'Response:', responseText);
+        alert(`Error: Invalid response from server. Status: ${response.status}`);
+        setLoading(false);
+        return;
+      }
+      
+      console.log('Form submission response:', result);
 
       if (result.success) {
-        alert('Class created successfully!');
-        // Reset form
-        setFormData({
+        alert(editMode ? 'Class updated successfully!' : 'Class created successfully!');
+        if (onSuccess) {
+          onSuccess();
+        }
+        if (!editMode) {
+          // Reset form only if not in edit mode
+          setFormData({
           slug: '',
           title: '',
           type: 'studio',
@@ -473,10 +595,14 @@ export default function ClassForm() {
             },
             faqs: [],
           },
-        });
-        setHeroImage(null);
-        setCurriculumImage(null);
-        setTeachingImage(null);
+          });
+          setHeroImage(null);
+          setCurriculumImage(null);
+          setTeachingImage(null);
+          setExistingHeroImage('');
+          setExistingCurriculumImage('');
+          setExistingTeachingImage('');
+        }
       } else {
         alert(`Error: ${result.error}`);
       }
@@ -1097,41 +1223,71 @@ export default function ClassForm() {
         <h2 className="text-2xl font-bold text-white">Images</h2>
         <div>
           <label className="block text-sm font-medium text-white/80 mb-2">Hero Image</label>
+          {existingHeroImage && (
+            <div className="mb-2">
+              <p className="text-white/60 text-sm mb-2">Current Image:</p>
+              <img src={existingHeroImage} alt="Current Hero" className="w-32 h-32 object-cover rounded" />
+            </div>
+          )}
           <input
             type="file"
             accept="image/*"
             onChange={(e) => setHeroImage(e.target.files?.[0] || null)}
             className="w-full px-4 py-2 bg-white/5 border border-white/10 rounded-lg text-white focus:outline-none focus:border-red-500"
           />
+          <p className="text-white/40 text-xs mt-1">{editMode ? 'Leave empty to keep current image' : ''}</p>
         </div>
         <div>
           <label className="block text-sm font-medium text-white/80 mb-2">Curriculum Image</label>
+          {existingCurriculumImage && (
+            <div className="mb-2">
+              <p className="text-white/60 text-sm mb-2">Current Image:</p>
+              <img src={existingCurriculumImage} alt="Current Curriculum" className="w-32 h-32 object-cover rounded" />
+            </div>
+          )}
           <input
             type="file"
             accept="image/*"
             onChange={(e) => setCurriculumImage(e.target.files?.[0] || null)}
             className="w-full px-4 py-2 bg-white/5 border border-white/10 rounded-lg text-white focus:outline-none focus:border-red-500"
           />
+          <p className="text-white/40 text-xs mt-1">{editMode ? 'Leave empty to keep current image' : ''}</p>
         </div>
         <div>
           <label className="block text-sm font-medium text-white/80 mb-2">Teaching Image</label>
+          {existingTeachingImage && (
+            <div className="mb-2">
+              <p className="text-white/60 text-sm mb-2">Current Image:</p>
+              <img src={existingTeachingImage} alt="Current Teaching" className="w-32 h-32 object-cover rounded" />
+            </div>
+          )}
           <input
             type="file"
             accept="image/*"
             onChange={(e) => setTeachingImage(e.target.files?.[0] || null)}
             className="w-full px-4 py-2 bg-white/5 border border-white/10 rounded-lg text-white focus:outline-none focus:border-red-500"
           />
+          <p className="text-white/40 text-xs mt-1">{editMode ? 'Leave empty to keep current image' : ''}</p>
         </div>
       </div>
 
       {/* Submit Button */}
-      <div className="flex justify-end pt-3 sm:pt-4">
+      <div className="flex justify-end gap-3 pt-3 sm:pt-4">
+        {editMode && onCancel && (
+          <button
+            type="button"
+            onClick={onCancel}
+            className="px-6 sm:px-8 py-3 bg-white/10 text-white rounded-lg hover:bg-white/20 transition-all font-semibold min-h-[48px] touch-manipulation text-sm sm:text-base"
+          >
+            Cancel
+          </button>
+        )}
         <button
           type="submit"
           disabled={loading}
           className="w-full sm:w-auto px-6 sm:px-8 py-3 bg-gradient-to-r from-red-600 to-red-700 text-white rounded-lg hover:from-red-500 hover:to-red-600 active:from-red-700 active:to-red-800 transition-all font-semibold disabled:opacity-50 min-h-[48px] touch-manipulation text-sm sm:text-base"
         >
-          {loading ? 'Submitting...' : 'Submit'}
+          {loading ? (editMode ? 'Updating...' : 'Submitting...') : (editMode ? 'Update' : 'Submit')}
         </button>
       </div>
     </form>

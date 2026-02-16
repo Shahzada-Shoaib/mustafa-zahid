@@ -3,6 +3,34 @@ import connectDB from '@/lib/db/mongodb';
 import Qawwal from '@/lib/models/Qawwal';
 import { uploadImage, uploadMultipleImages } from '@/lib/utils/cloudinary';
 
+export async function GET(request: NextRequest) {
+  try {
+    await connectDB();
+    
+    const qawwals = await Qawwal.find({})
+      .select('_id name slug image createdAt updatedAt')
+      .sort({ createdAt: -1 })
+      .lean();
+    
+    // Convert _id to string for consistency
+    const formattedQawwals = qawwals.map((qawwal: any) => ({
+      ...qawwal,
+      _id: qawwal._id?.toString() || qawwal._id,
+    }));
+    
+    return NextResponse.json(
+      { success: true, data: formattedQawwals },
+      { status: 200 }
+    );
+  } catch (error: any) {
+    console.error('Error fetching qawwals:', error);
+    return NextResponse.json(
+      { success: false, error: error.message || 'Failed to fetch qawwals' },
+      { status: 500 }
+    );
+  }
+}
+
 export async function POST(request: NextRequest) {
   try {
     await connectDB();
@@ -43,6 +71,35 @@ export async function POST(request: NextRequest) {
     console.error('Error creating qawwal:', error);
     return NextResponse.json(
       { success: false, error: error.message || 'Failed to create qawwal' },
+      { status: 500 }
+    );
+  }
+}
+
+export async function DELETE(request: NextRequest) {
+  try {
+    await connectDB();
+    
+    const body = await request.json();
+    const { ids } = body;
+    
+    if (!ids || !Array.isArray(ids) || ids.length === 0) {
+      return NextResponse.json(
+        { success: false, error: 'IDs array is required' },
+        { status: 400 }
+      );
+    }
+    
+    const result = await Qawwal.deleteMany({ _id: { $in: ids } });
+    
+    return NextResponse.json(
+      { success: true, deletedCount: result.deletedCount },
+      { status: 200 }
+    );
+  } catch (error: any) {
+    console.error('Error deleting qawwals:', error);
+    return NextResponse.json(
+      { success: false, error: error.message || 'Failed to delete qawwals' },
       { status: 500 }
     );
   }

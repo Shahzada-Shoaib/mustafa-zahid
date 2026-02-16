@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 
 interface Album {
   name: string;
@@ -36,7 +36,14 @@ interface FAQ {
   answer: string;
 }
 
-export default function SingerForm() {
+interface SingerFormProps {
+  editMode?: boolean;
+  initialData?: any;
+  onCancel?: () => void;
+  onSuccess?: () => void;
+}
+
+export default function SingerForm({ editMode = false, initialData, onCancel, onSuccess }: SingerFormProps) {
   const [loading, setLoading] = useState(false);
   const [formData, setFormData] = useState({
     slug: '',
@@ -81,6 +88,56 @@ export default function SingerForm() {
 
   const [mainImage, setMainImage] = useState<File | null>(null);
   const [galleryImages, setGalleryImages] = useState<File[]>([]);
+  const [existingMainImage, setExistingMainImage] = useState<string>('');
+  const [existingGalleryImages, setExistingGalleryImages] = useState<string[]>([]);
+
+  // Populate form when initialData is provided
+  useEffect(() => {
+    if (editMode && initialData) {
+      setFormData({
+        slug: initialData.slug || '',
+        name: initialData.name || '',
+        genre: initialData.genre || '',
+        bio: initialData.bio || '',
+        birthDate: initialData.birthDate || '',
+        birthplace: initialData.birthplace || '',
+        careerStart: initialData.careerStart || 0,
+        fullBio: initialData.fullBio && initialData.fullBio.length > 0 ? initialData.fullBio : [''],
+        albums: initialData.albums || [],
+        songs: initialData.songs || [],
+        awards: initialData.awards || [],
+        collaborations: initialData.collaborations || [],
+        stats: initialData.stats || {
+          albums: 0,
+          songs: 0,
+          awards: 0,
+          views: '',
+          streams: '',
+          followers: '',
+        },
+        milestones: initialData.milestones || [],
+        achievements: initialData.achievements && initialData.achievements.length > 0 ? initialData.achievements : [''],
+        metadata: initialData.metadata || {
+          title: '',
+          description: '',
+          keywords: '',
+          ogTitle: '',
+          ogDescription: '',
+          twitterTitle: '',
+          twitterDescription: '',
+        },
+        seo: initialData.seo || {
+          structuredData: {
+            jobTitle: '',
+            knowsAbout: [''],
+          },
+          faqs: [],
+        },
+      });
+      setExistingMainImage(initialData.image || '');
+      setExistingGalleryImages(initialData.gallery || []);
+    }
+  }, [editMode, initialData]);
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const { name, value } = e.target;
@@ -342,6 +399,12 @@ export default function SingerForm() {
     setLoading(true);
 
     try {
+      // Validate ID in edit mode
+      if (editMode && (!initialData?._id)) {
+        alert('Error: No ID found for editing. Please try again.');
+        setLoading(false);
+        return;
+      }
       // Prepare data object
       const dataToSubmit = {
         ...formData,
@@ -376,17 +439,63 @@ export default function SingerForm() {
       });
 
       // Submit to API
-      const response = await fetch('/api/singers', {
-        method: 'POST',
+      let url = '/api/singers';
+      const method = editMode ? 'PUT' : 'POST';
+      
+      if (editMode && initialData?._id) {
+        // Ensure ID is converted to string and is valid
+        const id = String(initialData._id).trim();
+        
+        // Basic ObjectId format check (24 hex characters)
+        const objectIdRegex = /^[0-9a-fA-F]{24}$/;
+        const isValidId = objectIdRegex.test(id);
+        
+        console.log('Submitting update with ID:', { 
+          id, 
+          idType: typeof id, 
+          idLength: id.length,
+          isValid: isValidId,
+          originalId: initialData._id,
+          originalIdType: typeof initialData._id
+        });
+        
+        if (!isValidId) {
+          alert(`Error: Invalid ID format. ID: "${id}". Please try editing again.`);
+          setLoading(false);
+          return;
+        }
+        
+        url = `/api/singers/${id}`;
+      }
+      
+      console.log('Submitting form:', { url, method, editMode });
+      
+      const response = await fetch(url, {
+        method,
         body: formDataToSend,
       });
 
-      const result = await response.json();
+      const responseText = await response.text();
+      let result;
+      try {
+        result = JSON.parse(responseText);
+      } catch (e) {
+        console.error('Failed to parse response:', e, 'Response:', responseText);
+        alert(`Error: Invalid response from server. Status: ${response.status}`);
+        setLoading(false);
+        return;
+      }
+      
+      console.log('Form submission response:', result);
 
       if (result.success) {
-        alert('Singer created successfully!');
-        // Reset form
-        setFormData({
+        alert(editMode ? 'Singer updated successfully!' : 'Singer created successfully!');
+        if (onSuccess) {
+          onSuccess();
+        }
+        if (!editMode) {
+          // Reset form only if not in edit mode
+          setFormData({
           slug: '',
           name: '',
           genre: '',
@@ -425,9 +534,12 @@ export default function SingerForm() {
             },
             faqs: [],
           },
-        });
-        setMainImage(null);
-        setGalleryImages([]);
+          });
+          setMainImage(null);
+          setGalleryImages([]);
+          setExistingMainImage('');
+          setExistingGalleryImages([]);
+        }
       } else {
         alert(`Error: ${result.error}`);
       }
@@ -1029,15 +1141,32 @@ export default function SingerForm() {
         <h2 className="text-2xl font-bold text-white">Images</h2>
         <div>
           <label className="block text-sm font-medium text-white/80 mb-2">Main Image</label>
+          {existingMainImage && (
+            <div className="mb-2">
+              <p className="text-white/60 text-sm mb-2">Current Image:</p>
+              <img src={existingMainImage} alt="Current" className="w-32 h-32 object-cover rounded" />
+            </div>
+          )}
           <input
             type="file"
             accept="image/*"
             onChange={(e) => setMainImage(e.target.files?.[0] || null)}
             className="w-full px-4 py-2 bg-white/5 border border-white/10 rounded-lg text-white focus:outline-none focus:border-red-500"
           />
+          <p className="text-white/40 text-xs mt-1">{editMode ? 'Leave empty to keep current image' : ''}</p>
         </div>
         <div>
           <label className="block text-sm font-medium text-white/80 mb-2">Gallery Images</label>
+          {existingGalleryImages.length > 0 && (
+            <div className="mb-2">
+              <p className="text-white/60 text-sm mb-2">Current Gallery ({existingGalleryImages.length} images):</p>
+              <div className="flex flex-wrap gap-2">
+                {existingGalleryImages.map((img, idx) => (
+                  <img key={idx} src={img} alt={`Gallery ${idx + 1}`} className="w-24 h-24 object-cover rounded" />
+                ))}
+              </div>
+            </div>
+          )}
           <input
             type="file"
             accept="image/*"
@@ -1045,17 +1174,27 @@ export default function SingerForm() {
             onChange={(e) => setGalleryImages(Array.from(e.target.files || []))}
             className="w-full px-4 py-2 bg-white/5 border border-white/10 rounded-lg text-white focus:outline-none focus:border-red-500"
           />
+          <p className="text-white/40 text-xs mt-1">{editMode ? 'Select new images to add to gallery' : ''}</p>
         </div>
       </div>
 
       {/* Submit Button */}
-      <div className="flex justify-end pt-3 sm:pt-4">
+      <div className="flex justify-end gap-3 pt-3 sm:pt-4">
+        {editMode && onCancel && (
+          <button
+            type="button"
+            onClick={onCancel}
+            className="px-6 sm:px-8 py-3 bg-white/10 text-white rounded-lg hover:bg-white/20 transition-all font-semibold min-h-[48px] touch-manipulation text-sm sm:text-base"
+          >
+            Cancel
+          </button>
+        )}
         <button
           type="submit"
           disabled={loading}
           className="w-full sm:w-auto px-6 sm:px-8 py-3 bg-gradient-to-r from-red-600 to-red-700 text-white rounded-lg hover:from-red-500 hover:to-red-600 active:from-red-700 active:to-red-800 transition-all font-semibold disabled:opacity-50 min-h-[48px] touch-manipulation text-sm sm:text-base"
         >
-          {loading ? 'Submitting...' : 'Submit'}
+          {loading ? (editMode ? 'Updating...' : 'Submitting...') : (editMode ? 'Update' : 'Submit')}
         </button>
       </div>
     </form>
