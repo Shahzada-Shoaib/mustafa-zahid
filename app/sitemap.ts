@@ -11,13 +11,25 @@ export const revalidate = 3600;
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const baseUrl = SITE_URL;
 
-  // Fetch all dynamic route slugs with dates in parallel
-  const [singerSlugsWithDates, qawwalSlugsWithDates, blogSlugsWithDates, classSlugsWithDates] = await Promise.all([
-    getAllSingerSlugsWithDates(),
-    getAllQawwalSlugsWithDates(),
-    getAllBlogSlugsWithDates(),
-    getAllClassSlugsWithDates(),
-  ]);
+  // Initialize empty arrays for dynamic routes
+  let singerSlugsWithDates: { slug: string; updatedAt: Date }[] = [];
+  let qawwalSlugsWithDates: { slug: string; updatedAt: Date }[] = [];
+  let blogSlugsWithDates: { slug: string; updatedAt: Date }[] = [];
+  let classSlugsWithDates: { slug: string; updatedAt: Date }[] = [];
+
+  // Fetch all dynamic route slugs with dates in parallel with error handling
+  try {
+    [singerSlugsWithDates, qawwalSlugsWithDates, blogSlugsWithDates, classSlugsWithDates] = await Promise.all([
+      getAllSingerSlugsWithDates(),
+      getAllQawwalSlugsWithDates(),
+      getAllBlogSlugsWithDates(),
+      getAllClassSlugsWithDates(),
+    ]);
+  } catch (error) {
+    // MongoDB unavailable during build - use static pages only
+    console.warn('MongoDB unavailable during sitemap generation. Using static pages only.');
+    // All arrays remain empty, sitemap will only include static pages
+  }
 
   // Static pages
   const staticPages: MetadataRoute.Sitemap = [
