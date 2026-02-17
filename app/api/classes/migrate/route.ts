@@ -304,7 +304,6 @@ const migrationData = [
       heroImage: '/guitarCloud.png',
     },
     features: [],
-    curriculum: [],
     learningPaths: [],
     benefits: [
       { icon: 'HomeIcon', title: 'Learn in Your Space', description: 'No need to travel - our expert instructors come directly to your home, saving you time and creating a comfortable learning environment where you can focus entirely on your musical development.' },
@@ -394,7 +393,6 @@ const migrationData = [
       heroImage: '/piano.jpg',
     },
     features: [],
-    curriculum: [],
     learningPaths: [],
     benefits: [
       { icon: 'PianoIcon', title: 'Learn on Your Piano', description: 'Practice on the exact piano you\'ll use daily, building familiarity and muscle memory. Learning on your own instrument means you\'ll develop technique specific to your piano\'s touch and sound.' },
@@ -484,7 +482,6 @@ const migrationData = [
       heroImage: '/music-listening.png',
     },
     features: [],
-    curriculum: [],
     learningPaths: [],
     benefits: [
       { icon: 'HomeIcon', title: 'Learn in Your Space', description: 'Practice in the comfort of your own home where you feel most relaxed. This familiar environment helps reduce performance anxiety and allows you to focus entirely on developing your voice without distractions.' },
