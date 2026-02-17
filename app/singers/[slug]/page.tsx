@@ -6,9 +6,6 @@ import Footer from "@/components/layout/Footer";
 import AnimatedBackground from "@/components/shared/AnimatedBackground";
 import { type Singer, getSinger, getAllSingerSlugs } from "@/lib/data/singers";
 
-// Use dynamic rendering to avoid build-time database issues
-export const dynamic = 'force-dynamic';
-
 export async function generateStaticParams() {
   try {
     const slugs = await getAllSingerSlugs();
