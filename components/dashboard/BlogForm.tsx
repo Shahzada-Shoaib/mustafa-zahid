@@ -1,6 +1,8 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
+import RichTextEditor, { RichTextEditorRef } from './RichTextEditor';
+import InternalLinkDialog from './InternalLinkDialog';
 
 interface BlogFormProps {
   editMode?: boolean;
@@ -32,6 +34,8 @@ export default function BlogForm({ editMode = false, initialData, onCancel, onSu
 
   const [image, setImage] = useState<File | null>(null);
   const [existingImage, setExistingImage] = useState<string>('');
+  const [showLinkDialog, setShowLinkDialog] = useState(false);
+  const editorRef = useRef<RichTextEditorRef>(null);
 
   // Populate form when initialData is provided
   useEffect(() => {
@@ -76,6 +80,34 @@ export default function BlogForm({ editMode = false, initialData, onCancel, onSu
         ...prev,
         [name]: value,
       }));
+    }
+  };
+
+  const handleContentChange = (content: string) => {
+    setFormData(prev => ({
+      ...prev,
+      content,
+    }));
+  };
+
+  const handleInsertLink = (url: string, text: string) => {
+    // Get current selection or cursor position
+    const editor = editorRef.current;
+    if (!editor) return;
+
+    const quill = editor.getEditor();
+    const range = quill.getSelection(true);
+    
+    if (range) {
+      // Insert link at current selection
+      quill.insertText(range.index, text, 'user');
+      quill.formatText(range.index, text.length, 'link', url);
+      quill.setSelection(range.index + text.length);
+    } else {
+      // If no selection, insert at end
+      const length = quill.getLength();
+      quill.insertText(length - 1, text, 'user');
+      quill.formatText(length - 1, text.length, 'link', url);
     }
   };
 
@@ -259,14 +291,21 @@ export default function BlogForm({ editMode = false, initialData, onCancel, onSu
           />
         </div>
         <div>
-          <label className="block text-xs sm:text-sm font-medium text-white/80 mb-1.5 sm:mb-2">Content</label>
-          <textarea
-            name="content"
+          <div className="flex justify-between items-center mb-1.5 sm:mb-2">
+            <label className="block text-xs sm:text-sm font-medium text-white/80">Content</label>
+            <button
+              type="button"
+              onClick={() => setShowLinkDialog(true)}
+              className="px-3 py-1.5 text-xs sm:text-sm bg-red-600/20 hover:bg-red-600/30 text-red-400 rounded-lg transition-colors font-medium border border-red-500/30"
+            >
+              Add Internal Link
+            </button>
+          </div>
+          <RichTextEditor
+            ref={editorRef}
             value={formData.content}
-            onChange={handleInputChange}
-            rows={8}
-            placeholder="HTML content here..."
-            className="w-full px-3 sm:px-4 py-2.5 sm:py-2 bg-white/5 border border-white/10 rounded-lg text-xs sm:text-sm text-white focus:outline-none focus:border-red-500 font-mono resize-y"
+            onChange={handleContentChange}
+            placeholder="Write your blog content here..."
           />
         </div>
       </div>
@@ -354,6 +393,13 @@ export default function BlogForm({ editMode = false, initialData, onCancel, onSu
           <p className="text-white/40 text-xs mt-1">{editMode ? 'Leave empty to keep current image' : ''}</p>
         </div>
       </div>
+
+      {/* Internal Link Dialog */}
+      <InternalLinkDialog
+        isOpen={showLinkDialog}
+        onClose={() => setShowLinkDialog(false)}
+        onInsert={handleInsertLink}
+      />
 
       {/* Submit Button */}
       <div className="flex justify-end gap-3 pt-3 sm:pt-4">
