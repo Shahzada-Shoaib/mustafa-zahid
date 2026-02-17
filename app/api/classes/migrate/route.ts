@@ -304,7 +304,6 @@ const migrationData = [
       heroImage: '/guitarCloud.png',
     },
     features: [],
-    learningPaths: [],
     benefits: [
       { icon: 'HomeIcon', title: 'Learn in Your Space', description: 'No need to travel - our expert instructors come directly to your home, saving you time and creating a comfortable learning environment where you can focus entirely on your musical development.' },
       { icon: 'UserIcon', title: 'One-on-One Attention', description: 'Receive undivided attention from your instructor. Every lesson is tailored to your specific needs, learning style, and musical goals, ensuring maximum progress in minimal time.' },
@@ -393,7 +392,6 @@ const migrationData = [
       heroImage: '/piano.jpg',
     },
     features: [],
-    learningPaths: [],
     benefits: [
       { icon: 'PianoIcon', title: 'Learn on Your Piano', description: 'Practice on the exact piano you\'ll use daily, building familiarity and muscle memory. Learning on your own instrument means you\'ll develop technique specific to your piano\'s touch and sound.' },
       { icon: 'PianoIcon', title: 'Instrument Familiarity', description: 'Develop a deep connection with your piano from day one. Your instructor can assess your instrument\'s condition, provide tuning guidance, and help you understand your piano\'s unique characteristics.' },
@@ -482,7 +480,6 @@ const migrationData = [
       heroImage: '/music-listening.png',
     },
     features: [],
-    learningPaths: [],
     benefits: [
       { icon: 'HomeIcon', title: 'Learn in Your Space', description: 'Practice in the comfort of your own home where you feel most relaxed. This familiar environment helps reduce performance anxiety and allows you to focus entirely on developing your voice without distractions.' },
       { icon: 'MicrophoneIcon', title: 'Private Vocal Training', description: 'Receive undivided attention from expert vocal instructors. One-on-one sessions ensure that every aspect of your voice development is carefully monitored and personalized to your unique vocal characteristics and goals.' },
