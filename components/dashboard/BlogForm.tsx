@@ -91,24 +91,16 @@ export default function BlogForm({ editMode = false, initialData, onCancel, onSu
   };
 
   const handleInsertLink = (url: string, text: string) => {
-    // Get current selection or cursor position
-    const editor = editorRef.current;
+    // Get Tiptap editor instance
+    const editor = editorRef.current?.getEditor();
     if (!editor) return;
 
-    const quill = editor.getEditor();
-    const range = quill.getSelection(true);
-    
-    if (range) {
-      // Insert link at current selection
-      quill.insertText(range.index, text, 'user');
-      quill.formatText(range.index, text.length, 'link', url);
-      quill.setSelection(range.index + text.length);
-    } else {
-      // If no selection, insert at end
-      const length = quill.getLength();
-      quill.insertText(length - 1, text, 'user');
-      quill.formatText(length - 1, text.length, 'link', url);
-    }
+    // Insert link with text at current cursor position
+    editor
+      .chain()
+      .focus()
+      .insertContent(`<a href="${url}">${text}</a>`)
+      .run();
   };
 
   const handleSubmit = async (e: React.FormEvent) => {
