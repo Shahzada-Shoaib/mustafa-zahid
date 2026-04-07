@@ -850,40 +850,7 @@ export default function Home() {
           </div>
         </div>
 
-        {/* Internal Links Section */}
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-12 mt-8 sm:mt-12">
-          <div className="glass-card rounded-xl sm:rounded-2xl p-4 sm:p-6 lg:p-8">
-            <h3 className="text-xl sm:text-2xl font-semibold text-white mb-3 sm:mb-4">
-              Explore More
-            </h3>
-            <div className="flex flex-col sm:flex-row flex-wrap gap-3 sm:gap-4">
-              <a
-                href="/about"
-                className="text-white/80 hover:text-red-400 active:text-red-300 transition-colors text-sm font-medium py-2 sm:py-0 min-h-[44px] sm:min-h-0 flex items-center touch-manipulation"
-              >
-                Learn More About Mustafa Zahid →
-              </a>
-              <a
-                href="/music-classes"
-                className="text-white/80 hover:text-red-400 active:text-red-300 transition-colors text-sm font-medium py-2 sm:py-0 min-h-[44px] sm:min-h-0 flex items-center touch-manipulation"
-              >
-                Music Classes in Lahore →
-              </a>
-              <a
-                href="/singers"
-                className="text-white/80 hover:text-red-400 active:text-red-300 transition-colors text-sm font-medium py-2 sm:py-0 min-h-[44px] sm:min-h-0 flex items-center touch-manipulation"
-              >
-                Book Other Singers →
-              </a>
-              <a
-                href="/qawwals"
-                className="text-white/80 hover:text-red-400 active:text-red-300 transition-colors text-sm font-medium py-2 sm:py-0 min-h-[44px] sm:min-h-0 flex items-center touch-manipulation"
-              >
-                Book Qawwali Artists →
-              </a>
-            </div>
-          </div>
-        </div>
+      
       </section>
 
       {/* Music Section with Sticky Header */}
@@ -1557,26 +1524,6 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Testimonials Section */}
-      <ClientReviews />
-
-      {/* Last Updated & E-A-T Signals */}
-      <section className="relative py-6 sm:py-8 border-t border-white/10">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-12">
-          <div className="text-center text-white/50 text-xs sm:text-sm space-y-2">
-            <p>
-              Last Updated: {new Date().toLocaleDateString('en-US', { 
-                year: 'numeric', 
-                month: 'long', 
-                day: 'numeric' 
-              })}
-            </p>
-            <p>
-              Official website of Mustafa Zahid - Pakistani singer, songwriter, and lead vocalist of Roxen
-            </p>
-          </div>
-        </div>
-      </section>
 
       {/* Scroll to Top Button */}
       <button
