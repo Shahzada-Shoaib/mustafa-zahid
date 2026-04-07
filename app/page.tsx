@@ -1,7 +1,6 @@
 'use client';
 import Footer from "@/components/layout/Footer";
 import Header from "@/components/layout/Header";
-import ClientReviews from "@/components/sections/ClientReviews";
 import Image from "next/image";
 import { useEffect, useState } from "react";
 
@@ -15,6 +14,7 @@ export default function Home() {
     "idle"
   );
   const [selectedImage, setSelectedImage] = useState<string | null>(null);
+  const [openFaqIndex, setOpenFaqIndex] = useState<number | null>(null);
 
   useEffect(() => {
     // Ensure client-side only execution
@@ -1509,17 +1509,67 @@ export default function Home() {
                 q: "How far in advance should I book?",
                 a: "We recommend booking at least 2-3 months in advance, especially for popular dates and wedding seasons. However, we also accommodate last-minute bookings subject to availability. Contact us to check current availability for your preferred dates.",
               },
-            ].map((faq, index) => (
-              <div
-                key={index}
-                className="glass-card rounded-xl sm:rounded-2xl p-4 sm:p-6 lg:p-8 hover-lift"
-              >
-                <h3 className="text-lg sm:text-xl font-semibold text-white mb-2 sm:mb-3">
-                  {faq.q}
-                </h3>
-                <p className="text-sm sm:text-base text-white/80 leading-relaxed">{faq.a}</p>
-              </div>
-            ))}
+            ].map((faq, index) => {
+              const isOpen = openFaqIndex === index;
+              const panelId = `faq-panel-${index}`;
+              const buttonId = `faq-trigger-${index}`;
+              return (
+                <div
+                  key={index}
+                  className="glass-card rounded-xl sm:rounded-2xl overflow-hidden hover-lift"
+                >
+                  <div className="flex items-start gap-3 sm:gap-4 p-4 sm:p-6 lg:p-8">
+                    <h3 className="text-lg sm:text-xl font-semibold text-white flex-1 min-w-0 pr-2">
+                      {faq.q}
+                    </h3>
+                    <button
+                      type="button"
+                      id={buttonId}
+                      aria-expanded={isOpen}
+                      aria-controls={panelId}
+                      className="shrink-0 mt-0.5 w-10 h-10 sm:w-11 sm:h-11 rounded-full flex items-center justify-center bg-white/10 text-white hover:bg-red-600/90 active:bg-red-700 transition-colors touch-manipulation focus:outline-none focus-visible:ring-2 focus-visible:ring-red-500 focus-visible:ring-offset-2 focus-visible:ring-offset-[#0a0a0a]"
+                      onClick={() =>
+                        setOpenFaqIndex((prev) => (prev === index ? null : index))
+                      }
+                      aria-label={isOpen ? "Hide answer" : "Show answer"}
+                    >
+                      <svg
+                        className={`w-5 h-5 sm:w-6 sm:h-6 transition-transform duration-300 ${
+                          isOpen ? "rotate-180" : "rotate-0"
+                        }`}
+                        fill="none"
+                        stroke="currentColor"
+                        viewBox="0 0 24 24"
+                        aria-hidden
+                      >
+                        <path
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                          strokeWidth={2}
+                          d="M19 9l-7 7-7-7"
+                        />
+                      </svg>
+                    </button>
+                  </div>
+                  <div
+                    id={panelId}
+                    role="region"
+                    aria-labelledby={buttonId}
+                    className={`grid transition-[grid-template-rows] duration-300 ease-out ${
+                      isOpen ? "grid-rows-[1fr]" : "grid-rows-[0fr]"
+                    }`}
+                  >
+                    <div className="overflow-hidden">
+                      <div className="px-4 sm:px-6 lg:px-8 pb-4 sm:pb-6 lg:pb-8 pt-0 border-t border-white/10">
+                        <p className="text-sm sm:text-base text-white/80 leading-relaxed pt-4">
+                          {faq.a}
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              );
+            })}
           </div>
         </div>
       </section>
