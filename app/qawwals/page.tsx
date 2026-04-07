@@ -6,6 +6,9 @@ import Footer from "@/components/layout/Footer";
 import AnimatedBackground from "@/components/shared/AnimatedBackground";
 import { getAllQawwals } from "@/lib/data/qawwals";
 
+// Use dynamic rendering so listings reflect CMS updates without rebuild
+export const dynamic = "force-dynamic";
+
 export const metadata: Metadata = {
   metadataBase: new URL("https://mustafazahid.com"),
   title: "Book Qawwali Artists | Hire Qawwals for Weddings & Live Events",

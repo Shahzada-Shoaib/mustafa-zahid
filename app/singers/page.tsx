@@ -6,6 +6,9 @@ import Footer from "@/components/layout/Footer";
 import AnimatedBackground from "@/components/shared/AnimatedBackground";
 import { getAllSingers } from "@/lib/data/singers";
 
+// Use dynamic rendering so listings reflect CMS updates without rebuild
+export const dynamic = "force-dynamic";
+
 export const metadata: Metadata = {
   metadataBase: new URL('https://mustafazahid.com'),
   title: "Book Singers & Music Artists | Hire Vocalists for Events",
