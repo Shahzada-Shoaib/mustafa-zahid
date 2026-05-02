@@ -50,7 +50,6 @@ function generateStructuredData(qawwal: Qawwal) {
       "Traditional Music",
       "Pakistani Music",
     ],
-    award: qawwal.awards.map((award) => `${award.name} - ${award.year}`),
   };
 }
 
@@ -252,42 +251,6 @@ export default async function QawwalPage({
                   </p>
                 </div>
 
-                {/* Quick Stats */}
-                <div className="grid grid-cols-4 gap-4 py-6 border-y border-white/10">
-                  <div className="text-center">
-                    <div className="text-2xl md:text-3xl font-bold text-gradient mb-1">
-                      {qawwal.stats.performances}
-                    </div>
-                    <div className="text-xs text-white/60 uppercase tracking-wider">
-                      Performances
-                    </div>
-                  </div>
-                  <div className="text-center">
-                    <div className="text-2xl md:text-3xl font-bold text-gradient mb-1">
-                      {qawwal.stats.recordings}
-                    </div>
-                    <div className="text-xs text-white/60 uppercase tracking-wider">
-                      Recordings
-                    </div>
-                  </div>
-                  <div className="text-center">
-                    <div className="text-2xl md:text-3xl font-bold text-gradient mb-1">
-                      {qawwal.stats.awards}
-                    </div>
-                    <div className="text-xs text-white/60 uppercase tracking-wider">
-                      Awards
-                    </div>
-                  </div>
-                  <div className="text-center">
-                    <div className="text-2xl md:text-3xl font-bold text-gradient mb-1">
-                      {new Date().getFullYear() - qawwal.careerStart}+
-                    </div>
-                    <div className="text-xs text-white/60 uppercase tracking-wider">
-                      Years
-                    </div>
-                  </div>
-                </div>
-
                 {/* Booking CTA - Hero */}
                 <div className="pt-4">
                   <a
@@ -340,30 +303,6 @@ export default async function QawwalPage({
           </div>
         </section>
 
-        {/* Statistics Banner */}
-        <section className="py-8 bg-gradient-to-r from-red-950/30 via-red-900/20 to-red-950/30 border-y border-red-900/30">
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-12">
-            <div className="grid grid-cols-2 md:grid-cols-5 gap-6">
-              {[
-                { label: "Views", value: qawwal.stats.views },
-                { label: "Streams", value: qawwal.stats.streams },
-                { label: "Followers", value: qawwal.stats.followers },
-                { label: "Recordings", value: `${qawwal.stats.recordings}` },
-                { label: "Awards", value: `${qawwal.stats.awards}` },
-              ].map((stat, index) => (
-                <div key={index} className="text-center">
-                  <div className="text-2xl md:text-3xl font-bold text-gradient mb-1">
-                    {stat.value}
-                  </div>
-                  <div className="text-xs text-white/70 uppercase tracking-wider">
-                    {stat.label}
-                  </div>
-                </div>
-              ))}
-            </div>
-          </div>
-        </section>
-
         {/* Biography Section */}
         <section className="py-4 lg:py-8 bg-gradient-to-b from-transparent via-red-950/10 to-transparent">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-12">
@@ -386,84 +325,6 @@ export default async function QawwalPage({
                   </p>
                 ))}
               </div>
-
-              {/* Key Achievements */}
-              <div className="mt-12 pt-12 border-t border-white/10">
-                <h3 className="text-2xl md:text-3xl font-semibold mb-8">
-                  Key Achievements
-                </h3>
-                <div className="grid md:grid-cols-2 gap-4">
-                  {qawwal.achievements.map((achievement, index) => (
-                    <div
-                      key={index}
-                      className="flex items-start gap-3 p-4 rounded-xl bg-white/5 hover:bg-white/10 transition-colors"
-                    >
-                      <svg
-                        className="w-6 h-6 text-red-400 flex-shrink-0 mt-0.5"
-                        fill="currentColor"
-                        viewBox="0 0 20 20"
-                      >
-                        <path
-                          fillRule="evenodd"
-                          d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
-                          clipRule="evenodd"
-                        />
-                      </svg>
-                      <p className="text-white/90">{achievement}</p>
-                    </div>
-                  ))}
-                </div>
-              </div>
-            </div>
-          </div>
-        </section>
-
-        {/* Popular Performances Section */}
-        <section className="py-4 lg:py-8 bg-gradient-to-b from-transparent via-red-950/10 to-transparent">
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-12">
-            <div className="mb-12 text-center">
-              <span className="text-red-500 uppercase tracking-[0.3em] text-sm font-medium">
-                Performances
-              </span>
-              <h2 className="font-display text-3xl md:text-4xl lg:text-5xl font-bold mt-4">
-                Popular <span className="text-gradient">Qawwalis</span>
-              </h2>
-            </div>
-            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-              {qawwal.performances.map((performance, index) => (
-                <div
-                  key={index}
-                  className="glass-card rounded-2xl p-6 hover-lift group cursor-pointer"
-                >
-                  <div className="flex items-center justify-between mb-4">
-                    <div className="w-14 h-14 bg-gradient-to-br from-red-600/20 to-red-700/20 rounded-xl flex items-center justify-center group-hover:from-red-600 group-hover:to-red-700 transition-all">
-                      <svg
-                        className="w-7 h-7 text-red-400 group-hover:text-white transition-colors"
-                        fill="currentColor"
-                        viewBox="0 0 20 20"
-                      >
-                        <path d="M18 3a1 1 0 00-1.196-.98l-10 2A1 1 0 006 5v9.114A4.369 4.369 0 005 14c-1.657 0-3 .895-3 2s1.343 2 3 2 3-.895 3-2V7.82l8-1.6v5.894A4.37 4.37 0 0013 13c-1.657 0-3 .895-3 2s1.343 2 3 2 3-.895 3-2V3z" />
-                      </svg>
-                    </div>
-                    <div className="flex items-center gap-3">
-                      {performance.year && (
-                        <span className="text-white/40 text-xs">
-                          {performance.year}
-                        </span>
-                      )}
-                      <span className="text-white/60 text-sm font-bold">
-                        #{index + 1}
-                      </span>
-                    </div>
-                  </div>
-                  <h3 className="text-xl font-semibold text-white group-hover:text-red-400 transition-colors mb-2">
-                    {performance.name}
-                  </h3>
-                  <p className="text-white/70 text-sm leading-relaxed">
-                    {performance.description}
-                  </p>
-                </div>
-              ))}
             </div>
           </div>
         </section>

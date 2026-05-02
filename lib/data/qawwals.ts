@@ -10,20 +10,7 @@ export interface Qawwal {
   birthDate: string;
   birthplace: string;
   careerStart: number;
-  performances: Array<{ name: string; description: string; year?: number }>;
-  awards: Array<{ name: string; year: number; category: string }>;
-  collaborations: Array<{ artist: string; performance: string }>;
-  stats: {
-    performances: number;
-    recordings: number;
-    awards: number;
-    views: string;
-    streams: string;
-    followers: string;
-  };
   gallery: string[];
-  milestones: Array<{ year: number; event: string }>;
-  achievements: string[];
   metadata: {
     title: string;
     description: string;

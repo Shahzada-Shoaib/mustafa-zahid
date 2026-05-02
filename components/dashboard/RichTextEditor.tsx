@@ -18,6 +18,7 @@ export interface RichTextEditorRef {
 const RichTextEditor = forwardRef<RichTextEditorRef, RichTextEditorProps>(
   ({ value, onChange, placeholder = 'Write your blog content here...' }, ref) => {
     const editor = useEditor({
+      immediatelyRender: false,
       extensions: [
         StarterKit.configure({
           heading: {
