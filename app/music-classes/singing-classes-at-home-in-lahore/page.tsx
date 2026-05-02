@@ -13,7 +13,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: "Singing Classes at Home in Lahore | Private Vocal Lessons",
     description: "Private singing classes at home in Lahore. One-on-one vocal training. Expert instructors. Book now: +92 322 407 1299",
-    url: "https://mustafazahid.com/music-classes/singing-classes-at-home",
+    url: "https://mustafazahid.com/music-classes/singing-classes-at-home-in-lahore",
     siteName: "Music Classes",
     images: [
       {
@@ -46,7 +46,7 @@ export const metadata: Metadata = {
   },
 
   alternates: {
-    canonical: "https://mustafazahid.com/music-classes/singing-classes-at-home",
+    canonical: "https://mustafazahid.com/music-classes/singing-classes-at-home-in-lahore",
   },
 };
 

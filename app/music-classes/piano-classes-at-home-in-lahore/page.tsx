@@ -13,7 +13,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: "Piano Classes at Home - Private Piano Lessons",
     description: "Private piano classes at home in Lahore. One-on-one lessons. Expert instructors. Book now: +92 322 407 1299",
-    url: "https://mustafazahid.com/music-classes/piano-classes-at-home",
+    url: "https://mustafazahid.com/music-classes/piano-classes-at-home-in-lahore",
     siteName: "Music Classes",
     images: [
       {
@@ -46,7 +46,7 @@ export const metadata: Metadata = {
   },
   
   alternates: {
-    canonical: "https://mustafazahid.com/music-classes/piano-classes-at-home",
+    canonical: "https://mustafazahid.com/music-classes/piano-classes-at-home-in-lahore",
   },
 };
 
