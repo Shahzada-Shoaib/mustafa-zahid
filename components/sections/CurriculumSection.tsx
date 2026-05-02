@@ -2,6 +2,7 @@ import Image from 'next/image';
 import { CurriculumSectionProps } from '@/lib/types/components';
 import { SPACING } from '@/lib/utils/spacing';
 import { CheckIcon } from '@/components/icons';
+import { renderInlineMarkdownLinks } from '@/lib/utils/inlineMarkdownLinks';
 
 export default function CurriculumSection({
   items,
@@ -40,7 +41,9 @@ export default function CurriculumSection({
                   <div className="flex-shrink-0 w-4 h-4 sm:w-5 sm:h-5 rounded-full bg-red-500/20 flex items-center justify-center mt-0.5">
                     <CheckIcon className="w-2.5 h-2.5 sm:w-3 sm:h-3 text-red-500" />
                   </div>
-                  <span className="text-white/80 text-xs sm:text-sm leading-relaxed">{item.text}</span>
+                  <span className="text-white/80 text-xs sm:text-sm leading-relaxed">
+                    {renderInlineMarkdownLinks(item.text)}
+                  </span>
                 </div>
               ))}
             </div>

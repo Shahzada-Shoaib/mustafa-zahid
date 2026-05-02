@@ -15,6 +15,10 @@ import CTASection from "@/components/sections/CTASection";
 import { type Class, getClass, getAllClassSlugs } from "@/lib/data/classes";
 import { SPACING } from "@/lib/utils/spacing";
 import {
+  plainTextFromInlineMarkdown,
+  renderInlineMarkdownLinks,
+} from "@/lib/utils/inlineMarkdownLinks";
+import {
   GuitarIcon,
   PianoIcon,
   MicrophoneIcon,
@@ -73,7 +77,7 @@ function generateStructuredData(classData: Class) {
     "@context": "https://schema.org",
     "@type": "EducationalOrganization",
     "name": classData.title,
-    "description": classData.hero.description,
+    "description": plainTextFromInlineMarkdown(classData.hero.description),
     "url": classData.metadata.canonical || `https://mustafazahid.com/music-classes/${classData.slug}`,
     "image": classData.images.heroImage,
     "offers": {
@@ -81,7 +85,7 @@ function generateStructuredData(classData: Class) {
       "itemOffered": {
         "@type": "Service",
         "name": classData.title,
-        "description": classData.hero.description,
+        "description": plainTextFromInlineMarkdown(classData.hero.description),
       },
     },
   };
@@ -99,10 +103,10 @@ function generateFAQSchema(classData: Class) {
     "@type": "FAQPage",
     mainEntity: faqs.map((faq) => ({
       "@type": "Question",
-      name: faq.question,
+      name: plainTextFromInlineMarkdown(faq.question),
       acceptedAnswer: {
         "@type": "Answer",
-        text: faq.answer,
+        text: plainTextFromInlineMarkdown(faq.answer),
       },
     })),
   };
@@ -356,6 +360,37 @@ export default async function ClassPage({
         title={classData.cta.title}
         description={classData.cta.description}
       />
+
+      {classData.seo?.faqs && classData.seo.faqs.length > 0 && (
+        <section className="py-16 lg:py-20">
+          <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-12">
+            <div className="mb-12 text-center">
+              <span className="text-red-500 uppercase tracking-[0.3em] text-sm font-medium">
+                Frequently Asked Questions
+              </span>
+              <h2 className="font-display text-3xl md:text-4xl lg:text-5xl font-bold mt-4">
+                About <span className="text-gradient">this class</span>
+              </h2>
+            </div>
+            <div className="space-y-4">
+              {classData.seo.faqs.map((faq, index) => (
+                <div
+                  key={index}
+                  className="glass-card rounded-2xl p-6 hover-lift"
+                >
+                  <h3 className="text-lg font-semibold text-white mb-3 flex items-start gap-3">
+                    <span className="text-red-400 flex-shrink-0">Q{index + 1}.</span>
+                    <span>{renderInlineMarkdownLinks(faq.question)}</span>
+                  </h3>
+                  <p className="text-white/80 leading-relaxed pl-8">
+                    {renderInlineMarkdownLinks(faq.answer)}
+                  </p>
+                </div>
+              ))}
+            </div>
+          </div>
+        </section>
+      )}
 
       <Footer />
     </div>

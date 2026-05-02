@@ -5,6 +5,7 @@ import Header from "@/components/layout/Header";
 import Footer from "@/components/layout/Footer";
 import AnimatedBackground from "@/components/shared/AnimatedBackground";
 import { getAllQawwals } from "@/lib/data/qawwals";
+import { renderInlineMarkdownLinks } from "@/lib/utils/inlineMarkdownLinks";
 
 // Use dynamic rendering so listings reflect CMS updates without rebuild
 export const dynamic = "force-dynamic";
@@ -174,7 +175,7 @@ export default async function QawwalsPage() {
                     {qawwal.name}
                   </h3>
                   <p className="text-white/70 text-xs sm:text-sm mb-3 sm:mb-4 line-clamp-2 sm:line-clamp-3">
-                    {qawwal.bio}
+                    {renderInlineMarkdownLinks(qawwal.bio)}
                   </p>
                   <div className="flex items-center gap-2 text-red-400 text-xs sm:text-sm font-medium group-hover:text-red-300 transition-colors min-h-[32px] sm:min-h-[36px]">
                     <span>View Profile</span>

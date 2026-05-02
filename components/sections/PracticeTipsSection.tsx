@@ -1,5 +1,6 @@
 import { SPACING } from '@/lib/utils/spacing';
 import { CheckCircleIcon, WarningIcon } from '@/components/icons';
+import { renderInlineMarkdownLinks } from '@/lib/utils/inlineMarkdownLinks';
 
 interface PracticeTipsSectionProps {
   title?: string;
@@ -42,7 +43,9 @@ export default function PracticeTipsSection({
                 {routineTips.map((tip, i) => (
                   <li key={i} className="flex items-start gap-2 sm:gap-3 text-white/80">
                     <span className="text-red-500 font-semibold flex-shrink-0 text-xs sm:text-sm">{i + 1}.</span>
-                    <span className="leading-relaxed text-xs sm:text-sm">{tip}</span>
+                    <span className="leading-relaxed text-xs sm:text-sm">
+                      {renderInlineMarkdownLinks(tip)}
+                    </span>
                   </li>
                 ))}
               </ul>
@@ -58,7 +61,9 @@ export default function PracticeTipsSection({
                 {mistakes.map((mistake, i) => (
                   <li key={i} className="flex items-start gap-2 sm:gap-3 text-white/80">
                     <span className="text-red-500 font-semibold flex-shrink-0 text-xs sm:text-sm">{i + 1}.</span>
-                    <span className="leading-relaxed text-xs sm:text-sm">{mistake}</span>
+                    <span className="leading-relaxed text-xs sm:text-sm">
+                      {renderInlineMarkdownLinks(mistake)}
+                    </span>
                   </li>
                 ))}
               </ul>

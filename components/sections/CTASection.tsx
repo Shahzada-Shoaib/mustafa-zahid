@@ -1,5 +1,6 @@
 import { CTASectionProps } from '@/lib/types/components';
 import { SPACING } from '@/lib/utils/spacing';
+import { renderInlineMarkdownLinks } from '@/lib/utils/inlineMarkdownLinks';
 
 export default function CTASection({
   title,
@@ -13,10 +14,10 @@ export default function CTASection({
       <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className={`glass-card rounded-2xl sm:rounded-3xl p-6 sm:p-8 lg:p-10 xl:p-14 text-center`}>
           <h2 className="font-display text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold mb-4 sm:mb-6">
-            {title}
+            {renderInlineMarkdownLinks(title)}
           </h2>
           <p className="text-white/80 mb-6 sm:mb-8 text-base sm:text-lg md:text-xl leading-relaxed max-w-2xl mx-auto">
-            {description}
+            {renderInlineMarkdownLinks(description)}
           </p>
           <a
             href={buttonHref}

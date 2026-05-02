@@ -1,4 +1,5 @@
 import { BenefitCardProps } from '@/lib/types/components';
+import { renderInlineMarkdownLinks } from '@/lib/utils/inlineMarkdownLinks';
 
 export default function BenefitCard({
   icon,
@@ -14,7 +15,9 @@ export default function BenefitCard({
         </div>
         {title}
       </h3>
-      <p className="text-white/80 text-xs sm:text-sm leading-relaxed">{description}</p>
+      <p className="text-white/80 text-xs sm:text-sm leading-relaxed">
+        {renderInlineMarkdownLinks(description)}
+      </p>
     </div>
   );
 }

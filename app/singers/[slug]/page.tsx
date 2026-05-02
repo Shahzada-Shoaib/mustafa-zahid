@@ -5,6 +5,10 @@ import Header from "@/components/layout/Header";
 import Footer from "@/components/layout/Footer";
 import AnimatedBackground from "@/components/shared/AnimatedBackground";
 import { type Singer, getSinger, getAllSingerSlugs } from "@/lib/data/singers";
+import {
+  plainTextFromInlineMarkdown,
+  renderInlineMarkdownLinks,
+} from "@/lib/utils/inlineMarkdownLinks";
 
 // Use dynamic rendering to avoid build-time database / stale cache issues
 export const dynamic = "force-dynamic";
@@ -32,7 +36,7 @@ function generateStructuredData(singer: Singer) {
     "@type": "Person",
     name: singer.name,
     jobTitle: singer.seo?.structuredData?.jobTitle || "Singer",
-    description: singer.bio,
+    description: plainTextFromInlineMarkdown(singer.bio),
     birthDate: singer.birthDate,
     birthPlace: {
       "@type": "Place",
@@ -66,10 +70,10 @@ function generateFAQSchema(singer: Singer) {
     "@type": "FAQPage",
     mainEntity: faqs.map((faq) => ({
       "@type": "Question",
-      name: faq.question,
+      name: plainTextFromInlineMarkdown(faq.question),
       acceptedAnswer: {
         "@type": "Answer",
-        text: faq.answer,
+        text: plainTextFromInlineMarkdown(faq.answer),
       },
     })),
   };
@@ -154,6 +158,32 @@ export default async function SingerPage({
   );
   const whatsappLink = `https://wa.me/+923224071299?text=${bookingMessage}`;
 
+  const bookingFaqs =
+    singer.seo?.faqs && singer.seo.faqs.length > 0
+      ? singer.seo.faqs.map((f) => ({ q: f.question, a: f.answer }))
+      : [
+          {
+            q: `How can I book ${singer.name} for an event?`,
+            a: `If you’re looking to book ${singer.name} for a wedding, private event, or live performance, you can contact us directly via WhatsApp at +92 322 407 1299. Our team manages official bookings for ${singer.name} and will guide you through availability, performance details, and next steps in a simple and transparent way.`,
+          },
+          {
+            q: `What is the booking price for ${singer.name}?`,
+            a: `The cost to hire ${singer.name} depends on factors such as event type, location, performance duration, and technical requirements. To get an accurate booking quote for ${singer.name}, please message us on WhatsApp at +92 322 407 1299. We’ll help you find the best option based on your event and budget.`,
+          },
+          {
+            q: `Can I book ${singer.name} for a wedding or mehndi event?`,
+            a: `Yes, ${singer.name} is frequently booked for weddings, mehndi nights, sangeet ceremonies, and private celebrations. If you’re planning to book ${singer.name} for a wedding, simply reach out on WhatsApp to check date availability and performance details. Live performances are customized to match the energy of your celebration.`,
+          },
+          {
+            q: `Is ${singer.name} available for corporate events and private shows?`,
+            a: `Absolutely. ${singer.name} is available for corporate events, brand launches, private parties, and large-scale functions. Clients who hire ${singer.name} for corporate events appreciate the professional setup, engaging performance, and crowd-friendly music selection.`,
+          },
+          {
+            q: `How early should I contact you to book ${singer.name}?`,
+            a: `We recommend contacting us as early as possible, especially for wedding season dates. ${singer.name} is in high demand for weddings and live events, so early booking helps secure your preferred date and allows smooth planning of the performance.`,
+          },
+        ];
+
   return (
     <>
       <script
@@ -208,7 +238,7 @@ export default async function SingerPage({
                     {singer.name}
                   </h1>
                   <p className="text-xl text-white/90 leading-relaxed mb-6">
-                    {singer.bio}
+                    {renderInlineMarkdownLinks(singer.bio)}
                   </p>
                 </div>
 
@@ -283,7 +313,7 @@ export default async function SingerPage({
                     key={index}
                     className="text-white/90 text-lg leading-relaxed"
                   >
-                    {paragraph}
+                    {renderInlineMarkdownLinks(paragraph)}
                   </p>
                 ))}
               </div>
@@ -452,28 +482,7 @@ export default async function SingerPage({
     </div>
 
     <div className="space-y-4">
-      {[
-        {
-          q: `How can I book ${singer.name} for an event?`,
-          a: `If you’re looking to book ${singer.name} for a wedding, private event, or live performance, you can contact us directly via WhatsApp at +92 322 407 1299. Our team manages official bookings for ${singer.name} and will guide you through availability, performance details, and next steps in a simple and transparent way.`,
-        },
-        {
-          q: `What is the booking price for ${singer.name}?`,
-          a: `The cost to hire ${singer.name} depends on factors such as event type, location, performance duration, and technical requirements. To get an accurate booking quote for ${singer.name}, please message us on WhatsApp at +92 322 407 1299. We’ll help you find the best option based on your event and budget.`,
-        },
-        {
-          q: `Can I book ${singer.name} for a wedding or mehndi event?`,
-          a: `Yes, ${singer.name} is frequently booked for weddings, mehndi nights, sangeet ceremonies, and private celebrations. If you’re planning to book ${singer.name} for a wedding, simply reach out on WhatsApp to check date availability and performance details. Live performances are customized to match the energy of your celebration.`,
-        },
-        {
-          q: `Is ${singer.name} available for corporate events and private shows?`,
-          a: `Absolutely. ${singer.name} is available for corporate events, brand launches, private parties, and large-scale functions. Clients who hire ${singer.name} for corporate events appreciate the professional setup, engaging performance, and crowd-friendly music selection.`,
-        },
-        {
-          q: `How early should I contact you to book ${singer.name}?`,
-          a: `We recommend contacting us as early as possible, especially for wedding season dates. ${singer.name} is in high demand for weddings and live events, so early booking helps secure your preferred date and allows smooth planning of the performance.`,
-        },
-      ].map((faq, index) => (
+      {bookingFaqs.map((faq, index) => (
         <div
           key={index}
           className="glass-card rounded-2xl p-6 hover-lift"
@@ -482,10 +491,10 @@ export default async function SingerPage({
             <span className="text-red-400 flex-shrink-0">
               Q{index + 1}.
             </span>
-            <span>{faq.q}</span>
+            <span>{renderInlineMarkdownLinks(faq.q)}</span>
           </h3>
           <p className="text-white/80 leading-relaxed pl-8">
-            {faq.a}
+            {renderInlineMarkdownLinks(faq.a)}
           </p>
         </div>
       ))}

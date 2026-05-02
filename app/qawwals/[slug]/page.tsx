@@ -5,6 +5,10 @@ import Header from "@/components/layout/Header";
 import Footer from "@/components/layout/Footer";
 import AnimatedBackground from "@/components/shared/AnimatedBackground";
 import { type Qawwal, getQawwal, getAllQawwalSlugs } from "@/lib/data/qawwals";
+import {
+  plainTextFromInlineMarkdown,
+  renderInlineMarkdownLinks,
+} from "@/lib/utils/inlineMarkdownLinks";
 
 // Use dynamic rendering to avoid build-time database / stale cache issues
 export const dynamic = "force-dynamic";
@@ -32,7 +36,7 @@ function generateStructuredData(qawwal: Qawwal) {
     "@type": "Person",
     name: qawwal.name,
     jobTitle: qawwal.seo?.structuredData?.jobTitle || "Qawwali Singer",
-    description: qawwal.bio,
+    description: plainTextFromInlineMarkdown(qawwal.bio),
     birthDate: qawwal.birthDate,
     birthPlace: {
       "@type": "Place",
@@ -76,10 +80,10 @@ function generateFAQSchema(qawwal: Qawwal) {
     "@type": "FAQPage",
     mainEntity: faqs.map((faq) => ({
       "@type": "Question",
-      name: faq.question,
+      name: plainTextFromInlineMarkdown(faq.question),
       acceptedAnswer: {
         "@type": "Answer",
-        text: faq.answer,
+        text: plainTextFromInlineMarkdown(faq.answer),
       },
     })),
   };
@@ -164,6 +168,32 @@ export default async function QawwalPage({
   );
   const whatsappLink = `https://wa.me/+923224071299?text=${bookingMessage}`;
 
+  const bookingFaqs =
+    qawwal.seo?.faqs && qawwal.seo.faqs.length > 0
+      ? qawwal.seo.faqs.map((f) => ({ q: f.question, a: f.answer }))
+      : [
+          {
+            q: `How to book ${qawwal.name} for an event?`,
+            a: `To book ${qawwal.name} for your event, concert, or wedding, contact us via WhatsApp at +92 322 407 1299. We handle bookings for ${qawwal.name} for various events including Qawwali performances, concerts, weddings, and spiritual gatherings across Pakistan and internationally. Our team will assist you with all booking details and requirements.`,
+          },
+          {
+            q: `What is the booking price for ${qawwal.name}?`,
+            a: `The booking price for ${qawwal.name} varies depending on the type of event, location, and duration. For detailed pricing information and availability for ${qawwal.name} Qawwali booking, please contact us directly via WhatsApp at +92 322 407 1299. We provide transparent pricing and will work with you to create a package that fits your budget.`,
+          },
+          {
+            q: `Can I book ${qawwal.name} for a wedding?`,
+            a: `Yes, ${qawwal.name} is available for wedding bookings. ${qawwal.name} performs Qawwali at weddings and special events, adding spiritual depth and cultural richness to your celebration. Contact us via WhatsApp to discuss your wedding event requirements, preferred dates, and availability for ${qawwal.name} booking.`,
+          },
+          {
+            q: `Is ${qawwal.name} available for corporate events?`,
+            a: `Yes, ${qawwal.name} is available for corporate events, product launches, and business functions. For corporate event booking inquiries for ${qawwal.name} Qawwali performance, please contact us via WhatsApp at +92 322 407 1299. ${qawwal.name} brings cultural authenticity and entertainment to corporate gatherings.`,
+          },
+          {
+            q: `How can I contact ${qawwal.name} for booking?`,
+            a: `You can contact us to book ${qawwal.name} by sending a WhatsApp message to +92 322 407 1299. Our team will assist you with booking ${qawwal.name} for Qawwali performances, concerts, events, weddings, or corporate functions. We respond quickly and will help you with all the details you need for your event.`,
+          },
+        ];
+
   return (
     <>
       <script
@@ -218,7 +248,7 @@ export default async function QawwalPage({
                     {qawwal.name}
                   </h1>
                   <p className="text-xl text-white/90 leading-relaxed mb-6">
-                    {qawwal.bio}
+                    {renderInlineMarkdownLinks(qawwal.bio)}
                   </p>
                 </div>
 
@@ -352,7 +382,7 @@ export default async function QawwalPage({
                     key={index}
                     className="text-white/90 text-lg leading-relaxed"
                   >
-                    {paragraph}
+                    {renderInlineMarkdownLinks(paragraph)}
                   </p>
                 ))}
               </div>
@@ -597,28 +627,7 @@ export default async function QawwalPage({
               </h2>
             </div>
             <div className="space-y-4">
-              {[
-                {
-                  q: `How to book ${qawwal.name} for an event?`,
-                  a: `To book ${qawwal.name} for your event, concert, or wedding, contact us via WhatsApp at +92 322 407 1299. We handle bookings for ${qawwal.name} for various events including Qawwali performances, concerts, weddings, and spiritual gatherings across Pakistan and internationally. Our team will assist you with all booking details and requirements.`,
-                },
-                {
-                  q: `What is the booking price for ${qawwal.name}?`,
-                  a: `The booking price for ${qawwal.name} varies depending on the type of event, location, and duration. For detailed pricing information and availability for ${qawwal.name} Qawwali booking, please contact us directly via WhatsApp at +92 322 407 1299. We provide transparent pricing and will work with you to create a package that fits your budget.`,
-                },
-                {
-                  q: `Can I book ${qawwal.name} for a wedding?`,
-                  a: `Yes, ${qawwal.name} is available for wedding bookings. ${qawwal.name} performs Qawwali at weddings and special events, adding spiritual depth and cultural richness to your celebration. Contact us via WhatsApp to discuss your wedding event requirements, preferred dates, and availability for ${qawwal.name} booking.`,
-                },
-                {
-                  q: `Is ${qawwal.name} available for corporate events?`,
-                  a: `Yes, ${qawwal.name} is available for corporate events, product launches, and business functions. For corporate event booking inquiries for ${qawwal.name} Qawwali performance, please contact us via WhatsApp at +92 322 407 1299. ${qawwal.name} brings cultural authenticity and entertainment to corporate gatherings.`,
-                },
-                {
-                  q: `How can I contact ${qawwal.name} for booking?`,
-                  a: `You can contact us to book ${qawwal.name} by sending a WhatsApp message to +92 322 407 1299. Our team will assist you with booking ${qawwal.name} for Qawwali performances, concerts, events, weddings, or corporate functions. We respond quickly and will help you with all the details you need for your event.`,
-                },
-              ].map((faq, index) => (
+              {bookingFaqs.map((faq, index) => (
                 <div
                   key={index}
                   className="glass-card rounded-2xl p-6 hover-lift"
@@ -627,9 +636,11 @@ export default async function QawwalPage({
                     <span className="text-red-400 flex-shrink-0">
                       Q{index + 1}.
                     </span>
-                    <span>{faq.q}</span>
+                    <span>{renderInlineMarkdownLinks(faq.q)}</span>
                   </h3>
-                  <p className="text-white/80 leading-relaxed pl-8">{faq.a}</p>
+                  <p className="text-white/80 leading-relaxed pl-8">
+                    {renderInlineMarkdownLinks(faq.a)}
+                  </p>
                 </div>
               ))}
             </div>

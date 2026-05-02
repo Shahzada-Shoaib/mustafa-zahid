@@ -1,5 +1,6 @@
 import { LearningPathCardProps } from '@/lib/types/components';
 import { CheckIcon } from '@/components/icons';
+import { renderInlineMarkdownLinks } from '@/lib/utils/inlineMarkdownLinks';
 
 export default function LearningPathCard({
   stage,
@@ -15,13 +16,15 @@ export default function LearningPathCard({
       </div>
       <div className="mb-4 sm:mb-6 pr-12 sm:pr-14 lg:pr-16">
         <h3 className="text-xl sm:text-2xl font-bold text-white mb-2 sm:mb-3">{stage}</h3>
-        <p className="text-white/70 text-xs sm:text-sm leading-relaxed">{description}</p>
+        <p className="text-white/70 text-xs sm:text-sm leading-relaxed">
+          {renderInlineMarkdownLinks(description)}
+        </p>
       </div>
       <ul className="space-y-2 sm:space-y-2.5 pt-3 sm:pt-4 border-t border-white/10">
         {skills.map((skill, i) => (
           <li key={i} className="flex items-start gap-2 sm:gap-2.5 text-white/70 text-xs sm:text-sm">
             <CheckIcon className="w-3 h-3 sm:w-4 sm:h-4 text-red-500 flex-shrink-0 mt-0.5" />
-            <span className="leading-relaxed">{skill}</span>
+            <span className="leading-relaxed">{renderInlineMarkdownLinks(skill)}</span>
           </li>
         ))}
       </ul>

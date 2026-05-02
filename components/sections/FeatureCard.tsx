@@ -1,5 +1,6 @@
 import { FeatureCardProps } from '@/lib/types/components';
 import { SPACING } from '@/lib/utils/spacing';
+import { renderInlineMarkdownLinks } from '@/lib/utils/inlineMarkdownLinks';
 
 export default function FeatureCard({
   icon,
@@ -15,7 +16,9 @@ export default function FeatureCard({
         </div>
       </div>
       <h3 className="text-lg sm:text-xl font-semibold text-white mb-2 sm:mb-3">{title}</h3>
-      <p className="text-white/70 text-xs sm:text-sm leading-relaxed">{description}</p>
+      <p className="text-white/70 text-xs sm:text-sm leading-relaxed">
+        {renderInlineMarkdownLinks(description)}
+      </p>
     </div>
   );
 }

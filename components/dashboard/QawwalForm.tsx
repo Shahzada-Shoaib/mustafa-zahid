@@ -576,6 +576,10 @@ export default function QawwalForm({ editMode = false, initialData, onCancel, on
             rows={3}
             className="w-full px-4 py-2 bg-white/5 border border-white/10 rounded-lg text-white focus:outline-none focus:border-red-500"
           />
+          <p className="text-white/40 text-xs mt-1.5">
+            Links: <code className="text-white/55">[visible text](https://…)</code> or{' '}
+            <code className="text-white/55">[/qawwals/slug]</code> — same in full bio paragraphs and FAQ answers.
+          </p>
         </div>
       </div>
 
@@ -1004,6 +1008,10 @@ export default function QawwalForm({ editMode = false, initialData, onCancel, on
                 Add FAQ
               </button>
             </div>
+            <p className="text-white/40 text-xs mb-2">
+              Questions and answers support inline links:{' '}
+              <code className="text-white/55">[label](https://…)</code> or <code className="text-white/55">[/path]</code>
+            </p>
             {formData.seo.faqs.map((faq, index) => (
               <div key={index} className="p-4 bg-white/5 rounded-lg space-y-2 mb-2">
                 <input

@@ -1,6 +1,7 @@
 import Image from 'next/image';
 import { HeroSectionProps } from '@/lib/types/components';
 import { SPACING } from '@/lib/utils/spacing';
+import { renderInlineMarkdownLinks } from '@/lib/utils/inlineMarkdownLinks';
 
 export default function HeroSection({
   badge,
@@ -26,7 +27,7 @@ export default function HeroSection({
               {title} {titleHighlight && <><br /><span className="text-gradient">{titleHighlight}</span></>}
             </h1>
             <p className="text-base sm:text-lg md:text-xl text-white/80 leading-relaxed">
-              {description}
+              {renderInlineMarkdownLinks(description)}
             </p>
             <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 pt-2">
               <a
