@@ -41,7 +41,6 @@ function generateStructuredData(singer: Singer) {
     url: `https://mustafazahid.com/singers/${singer.slug}`,
     image: `https://mustafazahid.com${singer.image}`,
     knowsAbout: singer.seo?.structuredData?.knowsAbout || ["Pakistani Music", "Pop Music", "Rock Music", "Singing"],
-    award: singer.awards.map((award) => `${award.name} - ${award.year}`),
   };
 }
 
@@ -266,30 +265,6 @@ export default async function SingerPage({
           </div>
         </section>
 
-        {/* Statistics Banner */}
-        <section className="py-8 bg-gradient-to-r from-red-950/30 via-red-900/20 to-red-950/30 border-y border-red-900/30">
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-12">
-            <div className="grid grid-cols-2 md:grid-cols-5 gap-6">
-              {[
-                { label: "Views", value: singer.stats.views },
-                { label: "Streams", value: singer.stats.streams },
-                { label: "Followers", value: singer.stats.followers },
-                { label: "Albums", value: `${singer.stats.albums}` },
-                { label: "Awards", value: `${singer.stats.awards}` },
-              ].map((stat, index) => (
-                <div key={index} className="text-center">
-                  <div className="text-2xl md:text-3xl font-bold text-gradient mb-1">
-                    {stat.value}
-                  </div>
-                  <div className="text-xs text-white/70 uppercase tracking-wider">
-                    {stat.label}
-                  </div>
-                </div>
-              ))}
-            </div>
-          </div>
-        </section>
-
         {/* Biography Section */}
         <section className="py-6 lg:py-6 bg-gradient-to-b from-transparent via-red-950/10 to-transparent">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-12">
@@ -312,85 +287,6 @@ export default async function SingerPage({
                   </p>
                 ))}
               </div>
-
-
-              {/* Key Achievements */}
-              <div className="mt-12 pt-12 border-t border-white/10">
-                <h3 className="text-2xl md:text-3xl font-semibold mb-8">
-                  Key Achievements
-                </h3>
-                <div className="grid md:grid-cols-2 gap-4">
-                  {singer.achievements.map((achievement, index) => (
-                    <div
-                      key={index}
-                      className="flex items-start gap-3 p-4 rounded-xl bg-white/5 hover:bg-white/10 transition-colors"
-                    >
-                      <svg
-                        className="w-6 h-6 text-red-400 flex-shrink-0 mt-0.5"
-                        fill="currentColor"
-                        viewBox="0 0 20 20"
-                      >
-                        <path
-                          fillRule="evenodd"
-                          d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
-                          clipRule="evenodd"
-                        />
-                      </svg>
-                      <p className="text-white/90">{achievement}</p>
-                    </div>
-                  ))}
-                </div>
-              </div>
-            </div>
-          </div>
-        </section>
-
-        {/* Popular Songs Section */}
-        <section className="py-16 lg:py-20 bg-gradient-to-b from-transparent via-red-950/10 to-transparent">
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-12">
-            <div className="mb-12 text-center">
-              <span className="text-red-500 uppercase tracking-[0.3em] text-sm font-medium">
-                Hit Songs
-              </span>
-              <h2 className="font-display text-3xl md:text-4xl lg:text-5xl font-bold mt-4">
-                Popular <span className="text-gradient">Tracks</span>
-              </h2>
-            </div>
-            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-              {singer.songs.map((song, index) => (
-                <div
-                  key={index}
-                  className="glass-card rounded-2xl p-6 hover-lift group cursor-pointer"
-                >
-                  <div className="flex items-center justify-between mb-4">
-                    <div className="w-14 h-14 bg-gradient-to-br from-red-600/20 to-red-700/20 rounded-xl flex items-center justify-center group-hover:from-red-600 group-hover:to-red-700 transition-all">
-                      <svg
-                        className="w-7 h-7 text-red-400 group-hover:text-white transition-colors"
-                        fill="currentColor"
-                        viewBox="0 0 20 20"
-                      >
-                        <path d="M18 3a1 1 0 00-1.196-.98l-10 2A1 1 0 006 5v9.114A4.369 4.369 0 005 14c-1.657 0-3 .895-3 2s1.343 2 3 2 3-.895 3-2V7.82l8-1.6v5.894A4.37 4.37 0 0013 13c-1.657 0-3 .895-3 2s1.343 2 3 2 3-.895 3-2V3z" />
-                      </svg>
-                    </div>
-                    <div className="flex items-center gap-3">
-                      {song.year && (
-                        <span className="text-white/40 text-xs">
-                          {song.year}
-                        </span>
-                      )}
-                      <span className="text-white/60 text-sm font-bold">
-                        #{index + 1}
-                      </span>
-                    </div>
-                  </div>
-                  <h3 className="text-xl font-semibold text-white group-hover:text-red-400 transition-colors mb-2">
-                    {song.name}
-                  </h3>
-                  <p className="text-white/70 text-sm leading-relaxed">
-                    {song.description}
-                  </p>
-                </div>
-              ))}
             </div>
           </div>
         </section>

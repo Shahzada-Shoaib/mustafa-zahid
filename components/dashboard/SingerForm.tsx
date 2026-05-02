@@ -2,35 +2,6 @@
 
 import { useState, useEffect } from 'react';
 
-interface Album {
-  name: string;
-  year: number;
-  description: string;
-  cover?: string;
-}
-
-interface Song {
-  name: string;
-  description: string;
-  year?: number;
-}
-
-interface Award {
-  name: string;
-  year: number;
-  category: string;
-}
-
-interface Collaboration {
-  artist: string;
-  song: string;
-}
-
-interface Milestone {
-  year: number;
-  event: string;
-}
-
 interface FAQ {
   question: string;
   answer: string;
@@ -43,6 +14,16 @@ interface SingerFormProps {
   onSuccess?: () => void;
 }
 
+const emptyMetadata = {
+  title: '',
+  description: '',
+  keywords: '',
+  ogTitle: '',
+  ogDescription: '',
+  twitterTitle: '',
+  twitterDescription: '',
+};
+
 export default function SingerForm({ editMode = false, initialData, onCancel, onSuccess }: SingerFormProps) {
   const [loading, setLoading] = useState(false);
   const [formData, setFormData] = useState({
@@ -53,34 +34,12 @@ export default function SingerForm({ editMode = false, initialData, onCancel, on
     birthDate: '',
     birthplace: '',
     careerStart: 0,
-    fullBio: [''],
-    albums: [] as Album[],
-    songs: [] as Song[],
-    awards: [] as Award[],
-    collaborations: [] as Collaboration[],
-    stats: {
-      albums: 0,
-      songs: 0,
-      awards: 0,
-      views: '',
-      streams: '',
-      followers: '',
-    },
-    milestones: [] as Milestone[],
-    achievements: [''],
-    metadata: {
-      title: '',
-      description: '',
-      keywords: '',
-      ogTitle: '',
-      ogDescription: '',
-      twitterTitle: '',
-      twitterDescription: '',
-    },
+    fullBio: [''] as string[],
+    metadata: { ...emptyMetadata },
     seo: {
       structuredData: {
         jobTitle: '',
-        knowsAbout: [''],
+        knowsAbout: [''] as string[],
       },
       faqs: [] as FAQ[],
     },
@@ -91,7 +50,6 @@ export default function SingerForm({ editMode = false, initialData, onCancel, on
   const [existingMainImage, setExistingMainImage] = useState<string>('');
   const [existingGalleryImages, setExistingGalleryImages] = useState<string[]>([]);
 
-  // Populate form when initialData is provided
   useEffect(() => {
     if (editMode && initialData) {
       setFormData({
@@ -103,35 +61,16 @@ export default function SingerForm({ editMode = false, initialData, onCancel, on
         birthplace: initialData.birthplace || '',
         careerStart: initialData.careerStart || 0,
         fullBio: initialData.fullBio && initialData.fullBio.length > 0 ? initialData.fullBio : [''],
-        albums: initialData.albums || [],
-        songs: initialData.songs || [],
-        awards: initialData.awards || [],
-        collaborations: initialData.collaborations || [],
-        stats: initialData.stats || {
-          albums: 0,
-          songs: 0,
-          awards: 0,
-          views: '',
-          streams: '',
-          followers: '',
-        },
-        milestones: initialData.milestones || [],
-        achievements: initialData.achievements && initialData.achievements.length > 0 ? initialData.achievements : [''],
-        metadata: initialData.metadata || {
-          title: '',
-          description: '',
-          keywords: '',
-          ogTitle: '',
-          ogDescription: '',
-          twitterTitle: '',
-          twitterDescription: '',
-        },
-        seo: initialData.seo || {
+        metadata: { ...emptyMetadata, ...initialData.metadata },
+        seo: {
           structuredData: {
-            jobTitle: '',
-            knowsAbout: [''],
+            jobTitle: initialData.seo?.structuredData?.jobTitle ?? '',
+            knowsAbout:
+              initialData.seo?.structuredData?.knowsAbout?.length
+                ? [...initialData.seo.structuredData.knowsAbout]
+                : [''],
           },
-          faqs: [],
+          faqs: Array.isArray(initialData.seo?.faqs) ? initialData.seo.faqs : [],
         },
       });
       setExistingMainImage(initialData.image || '');
@@ -142,176 +81,55 @@ export default function SingerForm({ editMode = false, initialData, onCancel, on
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const { name, value } = e.target;
     if (name.includes('.')) {
-      const [parent, child] = name.split('.');
-      if (parent === 'metadata') {
-        setFormData(prev => ({
-          ...prev,
-          metadata: {
-            ...prev.metadata,
-            [child]: value,
-          },
-        }));
-      }
-    } else {
-      setFormData(prev => ({
+      const [, child] = name.split('.');
+      setFormData((prev) => ({
         ...prev,
-        [name]: name === 'careerStart' ? parseInt(value) || 0 : value,
+        metadata: {
+          ...prev.metadata,
+          [child]: value,
+        },
+      }));
+    } else {
+      setFormData((prev) => ({
+        ...prev,
+        [name]: name === 'careerStart' ? parseInt(value, 10) || 0 : value,
       }));
     }
   };
 
-  const handleArrayChange = (field: string, index: number, value: string) => {
-    setFormData(prev => ({
+  const handleArrayChange = (field: 'fullBio', index: number, value: string) => {
+    setFormData((prev) => ({
       ...prev,
-      [field]: (prev[field as keyof typeof prev] as string[]).map((item, i) =>
-        i === index ? value : item
-      ),
+      [field]: (prev[field] as string[]).map((item, i) => (i === index ? value : item)),
     }));
   };
 
-  const addArrayItem = (field: string) => {
-    setFormData(prev => ({
+  const addArrayItem = (field: 'fullBio') => {
+    setFormData((prev) => ({
       ...prev,
-      [field]: [...(prev[field as keyof typeof prev] as string[]), ''],
+      [field]: [...(prev[field] as string[]), ''],
     }));
   };
 
-  const removeArrayItem = (field: string, index: number) => {
-    setFormData(prev => ({
+  const removeArrayItem = (field: 'fullBio', index: number) => {
+    setFormData((prev) => ({
       ...prev,
-      [field]: (prev[field as keyof typeof prev] as string[]).filter((_, i) => i !== index),
-    }));
-  };
-
-  const handleAlbumChange = (index: number, field: keyof Album, value: string | number) => {
-    setFormData(prev => ({
-      ...prev,
-      albums: prev.albums.map((album, i) =>
-        i === index ? { ...album, [field]: value } : album
-      ),
-    }));
-  };
-
-  const addAlbum = () => {
-    setFormData(prev => ({
-      ...prev,
-      albums: [...prev.albums, { name: '', year: 0, description: '', cover: '' }],
-    }));
-  };
-
-  const removeAlbum = (index: number) => {
-    setFormData(prev => ({
-      ...prev,
-      albums: prev.albums.filter((_, i) => i !== index),
-    }));
-  };
-
-  const handleSongChange = (index: number, field: keyof Song, value: string | number | undefined) => {
-    setFormData(prev => ({
-      ...prev,
-      songs: prev.songs.map((song, i) =>
-        i === index ? { ...song, [field]: value } : song
-      ),
-    }));
-  };
-
-  const addSong = () => {
-    setFormData(prev => ({
-      ...prev,
-      songs: [...prev.songs, { name: '', description: '', year: undefined }],
-    }));
-  };
-
-  const removeSong = (index: number) => {
-    setFormData(prev => ({
-      ...prev,
-      songs: prev.songs.filter((_, i) => i !== index),
-    }));
-  };
-
-  const handleAwardChange = (index: number, field: keyof Award, value: string | number) => {
-    setFormData(prev => ({
-      ...prev,
-      awards: prev.awards.map((award, i) =>
-        i === index ? { ...award, [field]: value } : award
-      ),
-    }));
-  };
-
-  const addAward = () => {
-    setFormData(prev => ({
-      ...prev,
-      awards: [...prev.awards, { name: '', year: 0, category: '' }],
-    }));
-  };
-
-  const removeAward = (index: number) => {
-    setFormData(prev => ({
-      ...prev,
-      awards: prev.awards.filter((_, i) => i !== index),
-    }));
-  };
-
-  const handleCollaborationChange = (index: number, field: keyof Collaboration, value: string) => {
-    setFormData(prev => ({
-      ...prev,
-      collaborations: prev.collaborations.map((collab, i) =>
-        i === index ? { ...collab, [field]: value } : collab
-      ),
-    }));
-  };
-
-  const addCollaboration = () => {
-    setFormData(prev => ({
-      ...prev,
-      collaborations: [...prev.collaborations, { artist: '', song: '' }],
-    }));
-  };
-
-  const removeCollaboration = (index: number) => {
-    setFormData(prev => ({
-      ...prev,
-      collaborations: prev.collaborations.filter((_, i) => i !== index),
-    }));
-  };
-
-  const handleMilestoneChange = (index: number, field: keyof Milestone, value: string | number) => {
-    setFormData(prev => ({
-      ...prev,
-      milestones: prev.milestones.map((milestone, i) =>
-        i === index ? { ...milestone, [field]: value } : milestone
-      ),
-    }));
-  };
-
-  const addMilestone = () => {
-    setFormData(prev => ({
-      ...prev,
-      milestones: [...prev.milestones, { year: 0, event: '' }],
-    }));
-  };
-
-  const removeMilestone = (index: number) => {
-    setFormData(prev => ({
-      ...prev,
-      milestones: prev.milestones.filter((_, i) => i !== index),
+      [field]: (prev[field] as string[]).filter((_, i) => i !== index),
     }));
   };
 
   const handleFAQChange = (index: number, field: keyof FAQ, value: string) => {
-    setFormData(prev => ({
+    setFormData((prev) => ({
       ...prev,
       seo: {
         ...prev.seo,
-        faqs: prev.seo.faqs.map((faq, i) =>
-          i === index ? { ...faq, [field]: value } : faq
-        ),
+        faqs: prev.seo.faqs.map((faq, i) => (i === index ? { ...faq, [field]: value } : faq)),
       },
     }));
   };
 
   const addFAQ = () => {
-    setFormData(prev => ({
+    setFormData((prev) => ({
       ...prev,
       seo: {
         ...prev.seo,
@@ -321,7 +139,7 @@ export default function SingerForm({ editMode = false, initialData, onCancel, on
   };
 
   const removeFAQ = (index: number) => {
-    setFormData(prev => ({
+    setFormData((prev) => ({
       ...prev,
       seo: {
         ...prev.seo,
@@ -330,18 +148,8 @@ export default function SingerForm({ editMode = false, initialData, onCancel, on
     }));
   };
 
-  const handleStatsChange = (field: keyof typeof formData.stats, value: string | number) => {
-    setFormData(prev => ({
-      ...prev,
-      stats: {
-        ...prev.stats,
-        [field]: value,
-      },
-    }));
-  };
-
   const handleSEOStructuredDataChange = (field: string, value: string | string[]) => {
-    setFormData(prev => ({
+    setFormData((prev) => ({
       ...prev,
       seo: {
         ...prev.seo,
@@ -354,22 +162,21 @@ export default function SingerForm({ editMode = false, initialData, onCancel, on
   };
 
   const handleKnowsAboutChange = (index: number, value: string) => {
-    setFormData(prev => ({
+    setFormData((prev) => ({
       ...prev,
       seo: {
         ...prev.seo,
         structuredData: {
           ...prev.seo.structuredData,
-          knowsAbout: prev.seo.structuredData.knowsAbout?.map((item, i) =>
-            i === index ? value : item
-          ) || [],
+          knowsAbout:
+            prev.seo.structuredData.knowsAbout?.map((item, i) => (i === index ? value : item)) || [],
         },
       },
     }));
   };
 
   const addKnowsAbout = () => {
-    setFormData(prev => ({
+    setFormData((prev) => ({
       ...prev,
       seo: {
         ...prev.seo,
@@ -382,7 +189,7 @@ export default function SingerForm({ editMode = false, initialData, onCancel, on
   };
 
   const removeKnowsAbout = (index: number) => {
-    setFormData(prev => ({
+    setFormData((prev) => ({
       ...prev,
       seo: {
         ...prev.seo,
@@ -399,36 +206,27 @@ export default function SingerForm({ editMode = false, initialData, onCancel, on
     setLoading(true);
 
     try {
-      // Validate ID in edit mode
-      if (editMode && (!initialData?._id)) {
+      if (editMode && !initialData?._id) {
         alert('Error: No ID found for editing. Please try again.');
         setLoading(false);
         return;
       }
-      // Prepare data object
+
       const dataToSubmit = {
         ...formData,
-        fullBio: formData.fullBio.filter(bio => bio.trim() !== ''),
-        achievements: formData.achievements.filter(ach => ach.trim() !== ''),
-        albums: formData.albums.filter(album => album.name.trim() !== ''),
-        songs: formData.songs.filter(song => song.name.trim() !== ''),
-        awards: formData.awards.filter(award => award.name.trim() !== ''),
-        collaborations: formData.collaborations.filter(collab => collab.artist.trim() !== ''),
-        milestones: formData.milestones.filter(milestone => milestone.event.trim() !== ''),
+        fullBio: formData.fullBio.filter((bio) => bio.trim() !== ''),
+        gallery: existingGalleryImages,
         seo: {
           ...formData.seo,
           structuredData: {
             ...formData.seo.structuredData,
-            knowsAbout: formData.seo.structuredData.knowsAbout?.filter(item => item.trim() !== '') || [],
+            knowsAbout:
+              formData.seo.structuredData.knowsAbout?.filter((item) => item.trim() !== '') || [],
           },
-          faqs: formData.seo.faqs.filter(faq => faq.question.trim() !== ''),
+          faqs: formData.seo.faqs.filter((faq) => faq.question.trim() !== ''),
         },
       };
 
-      // Log the object to console
-      console.log('Singer Data Object:', JSON.stringify(dataToSubmit, null, 2));
-
-      // Create FormData for file uploads
       const formDataToSend = new FormData();
       formDataToSend.append('data', JSON.stringify(dataToSubmit));
       if (mainImage) {
@@ -438,38 +236,20 @@ export default function SingerForm({ editMode = false, initialData, onCancel, on
         formDataToSend.append('gallery', file);
       });
 
-      // Submit to API
       let url = '/api/singers';
       const method = editMode ? 'PUT' : 'POST';
-      
+
       if (editMode && initialData?._id) {
-        // Ensure ID is converted to string and is valid
         const id = String(initialData._id).trim();
-        
-        // Basic ObjectId format check (24 hex characters)
         const objectIdRegex = /^[0-9a-fA-F]{24}$/;
-        const isValidId = objectIdRegex.test(id);
-        
-        console.log('Submitting update with ID:', { 
-          id, 
-          idType: typeof id, 
-          idLength: id.length,
-          isValid: isValidId,
-          originalId: initialData._id,
-          originalIdType: typeof initialData._id
-        });
-        
-        if (!isValidId) {
+        if (!objectIdRegex.test(id)) {
           alert(`Error: Invalid ID format. ID: "${id}". Please try editing again.`);
           setLoading(false);
           return;
         }
-        
         url = `/api/singers/${id}`;
       }
-      
-      console.log('Submitting form:', { url, method, editMode });
-      
+
       const response = await fetch(url, {
         method,
         body: formDataToSend,
@@ -479,61 +259,30 @@ export default function SingerForm({ editMode = false, initialData, onCancel, on
       let result;
       try {
         result = JSON.parse(responseText);
-      } catch (e) {
-        console.error('Failed to parse response:', e, 'Response:', responseText);
+      } catch {
         alert(`Error: Invalid response from server. Status: ${response.status}`);
         setLoading(false);
         return;
       }
-      
-      console.log('Form submission response:', result);
 
       if (result.success) {
         alert(editMode ? 'Singer updated successfully!' : 'Singer created successfully!');
-        if (onSuccess) {
-          onSuccess();
-        }
+        onSuccess?.();
         if (!editMode) {
-          // Reset form only if not in edit mode
           setFormData({
-          slug: '',
-          name: '',
-          genre: '',
-          bio: '',
-          birthDate: '',
-          birthplace: '',
-          careerStart: 0,
-          fullBio: [''],
-          albums: [],
-          songs: [],
-          awards: [],
-          collaborations: [],
-          stats: {
-            albums: 0,
-            songs: 0,
-            awards: 0,
-            views: '',
-            streams: '',
-            followers: '',
-          },
-          milestones: [],
-          achievements: [''],
-          metadata: {
-            title: '',
-            description: '',
-            keywords: '',
-            ogTitle: '',
-            ogDescription: '',
-            twitterTitle: '',
-            twitterDescription: '',
-          },
-          seo: {
-            structuredData: {
-              jobTitle: '',
-              knowsAbout: [''],
+            slug: '',
+            name: '',
+            genre: '',
+            bio: '',
+            birthDate: '',
+            birthplace: '',
+            careerStart: 0,
+            fullBio: [''],
+            metadata: { ...emptyMetadata },
+            seo: {
+              structuredData: { jobTitle: '', knowsAbout: [''] },
+              faqs: [],
             },
-            faqs: [],
-          },
           });
           setMainImage(null);
           setGalleryImages([]);
@@ -543,9 +292,9 @@ export default function SingerForm({ editMode = false, initialData, onCancel, on
       } else {
         alert(`Error: ${result.error}`);
       }
-    } catch (error: any) {
-      console.error('Error submitting form:', error);
-      alert(`Error: ${error.message}`);
+    } catch (error: unknown) {
+      const message = error instanceof Error ? error.message : 'Unknown error';
+      alert(`Error: ${message}`);
     } finally {
       setLoading(false);
     }
@@ -553,7 +302,6 @@ export default function SingerForm({ editMode = false, initialData, onCancel, on
 
   return (
     <form onSubmit={handleSubmit} className="space-y-6 sm:space-y-8">
-      {/* Basic Information */}
       <div className="space-y-3 sm:space-y-4">
         <h2 className="text-xl sm:text-2xl font-bold text-white mb-3 sm:mb-4">Basic Information</h2>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-3 sm:gap-4">
@@ -630,7 +378,6 @@ export default function SingerForm({ editMode = false, initialData, onCancel, on
         </div>
       </div>
 
-      {/* Full Bio Array */}
       <div className="space-y-3 sm:space-y-4">
         <div className="flex items-center justify-between">
           <h2 className="text-2xl font-bold text-white">Full Bio</h2>
@@ -661,335 +408,6 @@ export default function SingerForm({ editMode = false, initialData, onCancel, on
         ))}
       </div>
 
-      {/* Albums */}
-      <div className="space-y-3 sm:space-y-4">
-        <div className="flex items-center justify-between">
-          <h2 className="text-2xl font-bold text-white">Albums</h2>
-          <button
-            type="button"
-            onClick={addAlbum}
-            className="px-3 sm:px-4 py-2.5 sm:py-2 bg-red-600 text-white rounded-lg hover:bg-red-700 active:bg-red-800 transition-colors text-sm sm:text-base font-semibold min-h-[44px] touch-manipulation"
-          >
-            Add Album
-          </button>
-        </div>
-        {formData.albums.map((album, index) => (
-          <div key={index} className="p-3 sm:p-4 bg-white/5 rounded-lg space-y-2 sm:space-y-3">
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-2 sm:gap-3">
-              <input
-                type="text"
-                placeholder="Album Name"
-                value={album.name}
-                onChange={(e) => handleAlbumChange(index, 'name', e.target.value)}
-                className="px-4 py-2 bg-white/5 border border-white/10 rounded-lg text-white focus:outline-none focus:border-red-500"
-              />
-              <input
-                type="number"
-                placeholder="Year"
-                value={album.year}
-                onChange={(e) => handleAlbumChange(index, 'year', parseInt(e.target.value) || 0)}
-                className="px-4 py-2 bg-white/5 border border-white/10 rounded-lg text-white focus:outline-none focus:border-red-500"
-              />
-            </div>
-            <textarea
-              placeholder="Description"
-              value={album.description}
-              onChange={(e) => handleAlbumChange(index, 'description', e.target.value)}
-              rows={2}
-              className="w-full px-3 sm:px-4 py-2.5 sm:py-2 bg-white/5 border border-white/10 rounded-lg text-sm sm:text-base text-white focus:outline-none focus:border-red-500 min-h-[44px]"
-            />
-            <div className="flex justify-end">
-              <button
-                type="button"
-                onClick={() => removeAlbum(index)}
-                className="px-3 sm:px-4 py-2.5 sm:py-2 bg-red-600 text-white rounded-lg hover:bg-red-700 active:bg-red-800 transition-colors text-sm sm:text-base font-semibold min-h-[44px] touch-manipulation"
-              >
-                Remove
-              </button>
-            </div>
-          </div>
-        ))}
-      </div>
-
-      {/* Songs */}
-      <div className="space-y-3 sm:space-y-4">
-        <div className="flex items-center justify-between">
-          <h2 className="text-2xl font-bold text-white">Songs</h2>
-          <button
-            type="button"
-            onClick={addSong}
-            className="px-3 sm:px-4 py-2.5 sm:py-2 bg-red-600 text-white rounded-lg hover:bg-red-700 active:bg-red-800 transition-colors text-sm sm:text-base font-semibold min-h-[44px] touch-manipulation"
-          >
-            Add Song
-          </button>
-        </div>
-        {formData.songs.map((song, index) => (
-          <div key={index} className="p-3 sm:p-4 bg-white/5 rounded-lg space-y-2 sm:space-y-3">
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-2 sm:gap-3">
-              <input
-                type="text"
-                placeholder="Song Name"
-                value={song.name}
-                onChange={(e) => handleSongChange(index, 'name', e.target.value)}
-                className="px-4 py-2 bg-white/5 border border-white/10 rounded-lg text-white focus:outline-none focus:border-red-500"
-              />
-              <input
-                type="number"
-                placeholder="Year (optional)"
-                value={song.year || ''}
-                onChange={(e) => handleSongChange(index, 'year', e.target.value ? parseInt(e.target.value) : undefined)}
-                className="px-4 py-2 bg-white/5 border border-white/10 rounded-lg text-white focus:outline-none focus:border-red-500"
-              />
-            </div>
-            <textarea
-              placeholder="Description"
-              value={song.description}
-              onChange={(e) => handleSongChange(index, 'description', e.target.value)}
-              rows={2}
-              className="w-full px-3 sm:px-4 py-2.5 sm:py-2 bg-white/5 border border-white/10 rounded-lg text-sm sm:text-base text-white focus:outline-none focus:border-red-500 min-h-[44px]"
-            />
-            <div className="flex justify-end">
-              <button
-                type="button"
-                onClick={() => removeSong(index)}
-                className="px-3 sm:px-4 py-2.5 sm:py-2 bg-red-600 text-white rounded-lg hover:bg-red-700 active:bg-red-800 transition-colors text-sm sm:text-base font-semibold min-h-[44px] touch-manipulation"
-              >
-                Remove
-              </button>
-            </div>
-          </div>
-        ))}
-      </div>
-
-      {/* Awards */}
-      <div className="space-y-3 sm:space-y-4">
-        <div className="flex items-center justify-between">
-          <h2 className="text-2xl font-bold text-white">Awards</h2>
-          <button
-            type="button"
-            onClick={addAward}
-            className="px-3 sm:px-4 py-2.5 sm:py-2 bg-red-600 text-white rounded-lg hover:bg-red-700 active:bg-red-800 transition-colors text-sm sm:text-base font-semibold min-h-[44px] touch-manipulation"
-          >
-            Add Award
-          </button>
-        </div>
-        {formData.awards.map((award, index) => (
-          <div key={index} className="p-4 bg-white/5 rounded-lg space-y-2">
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-2">
-              <input
-                type="text"
-                placeholder="Award Name"
-                value={award.name}
-                onChange={(e) => handleAwardChange(index, 'name', e.target.value)}
-                className="px-4 py-2 bg-white/5 border border-white/10 rounded-lg text-white focus:outline-none focus:border-red-500"
-              />
-              <input
-                type="number"
-                placeholder="Year"
-                value={award.year}
-                onChange={(e) => handleAwardChange(index, 'year', parseInt(e.target.value) || 0)}
-                className="px-4 py-2 bg-white/5 border border-white/10 rounded-lg text-white focus:outline-none focus:border-red-500"
-              />
-              <input
-                type="text"
-                placeholder="Category"
-                value={award.category}
-                onChange={(e) => handleAwardChange(index, 'category', e.target.value)}
-                className="px-4 py-2 bg-white/5 border border-white/10 rounded-lg text-white focus:outline-none focus:border-red-500"
-              />
-            </div>
-            <div className="flex justify-end">
-              <button
-                type="button"
-                onClick={() => removeAward(index)}
-                className="px-3 sm:px-4 py-2.5 sm:py-2 bg-red-600 text-white rounded-lg hover:bg-red-700 active:bg-red-800 transition-colors text-sm sm:text-base font-semibold min-h-[44px] touch-manipulation"
-              >
-                Remove
-              </button>
-            </div>
-          </div>
-        ))}
-      </div>
-
-      {/* Collaborations */}
-      <div className="space-y-3 sm:space-y-4">
-        <div className="flex items-center justify-between">
-          <h2 className="text-2xl font-bold text-white">Collaborations</h2>
-          <button
-            type="button"
-            onClick={addCollaboration}
-            className="px-3 sm:px-4 py-2.5 sm:py-2 bg-red-600 text-white rounded-lg hover:bg-red-700 active:bg-red-800 transition-colors text-sm sm:text-base font-semibold min-h-[44px] touch-manipulation"
-          >
-            Add Collaboration
-          </button>
-        </div>
-        {formData.collaborations.map((collab, index) => (
-          <div key={index} className="p-3 sm:p-4 bg-white/5 rounded-lg space-y-2 sm:space-y-3">
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-2 sm:gap-3">
-              <input
-                type="text"
-                placeholder="Artist"
-                value={collab.artist}
-                onChange={(e) => handleCollaborationChange(index, 'artist', e.target.value)}
-                className="px-4 py-2 bg-white/5 border border-white/10 rounded-lg text-white focus:outline-none focus:border-red-500"
-              />
-              <input
-                type="text"
-                placeholder="Song"
-                value={collab.song}
-                onChange={(e) => handleCollaborationChange(index, 'song', e.target.value)}
-                className="px-4 py-2 bg-white/5 border border-white/10 rounded-lg text-white focus:outline-none focus:border-red-500"
-              />
-            </div>
-            <div className="flex justify-end">
-              <button
-                type="button"
-                onClick={() => removeCollaboration(index)}
-                className="px-3 sm:px-4 py-2.5 sm:py-2 bg-red-600 text-white rounded-lg hover:bg-red-700 active:bg-red-800 transition-colors text-sm sm:text-base font-semibold min-h-[44px] touch-manipulation"
-              >
-                Remove
-              </button>
-            </div>
-          </div>
-        ))}
-      </div>
-
-      {/* Stats */}
-      <div className="space-y-3 sm:space-y-4">
-        <h2 className="text-2xl font-bold text-white">Stats</h2>
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-          <div>
-            <label className="block text-xs sm:text-sm font-medium text-white/80 mb-1.5 sm:mb-2">Albums</label>
-            <input
-              type="number"
-              value={formData.stats.albums}
-              onChange={(e) => handleStatsChange('albums', parseInt(e.target.value) || 0)}
-              className="w-full px-3 sm:px-4 py-2.5 sm:py-2 bg-white/5 border border-white/10 rounded-lg text-sm sm:text-base text-white focus:outline-none focus:border-red-500 min-h-[44px]"
-            />
-          </div>
-          <div>
-            <label className="block text-xs sm:text-sm font-medium text-white/80 mb-1.5 sm:mb-2">Songs</label>
-            <input
-              type="number"
-              value={formData.stats.songs}
-              onChange={(e) => handleStatsChange('songs', parseInt(e.target.value) || 0)}
-              className="w-full px-3 sm:px-4 py-2.5 sm:py-2 bg-white/5 border border-white/10 rounded-lg text-sm sm:text-base text-white focus:outline-none focus:border-red-500 min-h-[44px]"
-            />
-          </div>
-          <div>
-            <label className="block text-xs sm:text-sm font-medium text-white/80 mb-1.5 sm:mb-2">Awards</label>
-            <input
-              type="number"
-              value={formData.stats.awards}
-              onChange={(e) => handleStatsChange('awards', parseInt(e.target.value) || 0)}
-              className="w-full px-3 sm:px-4 py-2.5 sm:py-2 bg-white/5 border border-white/10 rounded-lg text-sm sm:text-base text-white focus:outline-none focus:border-red-500 min-h-[44px]"
-            />
-          </div>
-          <div>
-            <label className="block text-xs sm:text-sm font-medium text-white/80 mb-1.5 sm:mb-2">Views</label>
-            <input
-              type="text"
-              value={formData.stats.views}
-              onChange={(e) => handleStatsChange('views', e.target.value)}
-              className="w-full px-3 sm:px-4 py-2.5 sm:py-2 bg-white/5 border border-white/10 rounded-lg text-sm sm:text-base text-white focus:outline-none focus:border-red-500 min-h-[44px]"
-            />
-          </div>
-          <div>
-            <label className="block text-xs sm:text-sm font-medium text-white/80 mb-1.5 sm:mb-2">Streams</label>
-            <input
-              type="text"
-              value={formData.stats.streams}
-              onChange={(e) => handleStatsChange('streams', e.target.value)}
-              className="w-full px-3 sm:px-4 py-2.5 sm:py-2 bg-white/5 border border-white/10 rounded-lg text-sm sm:text-base text-white focus:outline-none focus:border-red-500 min-h-[44px]"
-            />
-          </div>
-          <div>
-            <label className="block text-xs sm:text-sm font-medium text-white/80 mb-1.5 sm:mb-2">Followers</label>
-            <input
-              type="text"
-              value={formData.stats.followers}
-              onChange={(e) => handleStatsChange('followers', e.target.value)}
-              className="w-full px-3 sm:px-4 py-2.5 sm:py-2 bg-white/5 border border-white/10 rounded-lg text-sm sm:text-base text-white focus:outline-none focus:border-red-500 min-h-[44px]"
-            />
-          </div>
-        </div>
-      </div>
-
-      {/* Milestones */}
-      <div className="space-y-3 sm:space-y-4">
-        <div className="flex items-center justify-between">
-          <h2 className="text-2xl font-bold text-white">Milestones</h2>
-          <button
-            type="button"
-            onClick={addMilestone}
-            className="px-3 sm:px-4 py-2.5 sm:py-2 bg-red-600 text-white rounded-lg hover:bg-red-700 active:bg-red-800 transition-colors text-sm sm:text-base font-semibold min-h-[44px] touch-manipulation"
-          >
-            Add Milestone
-          </button>
-        </div>
-        {formData.milestones.map((milestone, index) => (
-          <div key={index} className="p-3 sm:p-4 bg-white/5 rounded-lg space-y-2 sm:space-y-3">
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-2 sm:gap-3">
-              <input
-                type="number"
-                placeholder="Year"
-                value={milestone.year}
-                onChange={(e) => handleMilestoneChange(index, 'year', parseInt(e.target.value) || 0)}
-                className="px-4 py-2 bg-white/5 border border-white/10 rounded-lg text-white focus:outline-none focus:border-red-500"
-              />
-              <input
-                type="text"
-                placeholder="Event"
-                value={milestone.event}
-                onChange={(e) => handleMilestoneChange(index, 'event', e.target.value)}
-                className="px-4 py-2 bg-white/5 border border-white/10 rounded-lg text-white focus:outline-none focus:border-red-500"
-              />
-            </div>
-            <div className="flex justify-end">
-              <button
-                type="button"
-                onClick={() => removeMilestone(index)}
-                className="px-3 sm:px-4 py-2.5 sm:py-2 bg-red-600 text-white rounded-lg hover:bg-red-700 active:bg-red-800 transition-colors text-sm sm:text-base font-semibold min-h-[44px] touch-manipulation"
-              >
-                Remove
-              </button>
-            </div>
-          </div>
-        ))}
-      </div>
-
-      {/* Achievements */}
-      <div className="space-y-3 sm:space-y-4">
-        <div className="flex items-center justify-between">
-          <h2 className="text-2xl font-bold text-white">Achievements</h2>
-          <button
-            type="button"
-            onClick={() => addArrayItem('achievements')}
-            className="px-3 sm:px-4 py-2.5 sm:py-2 bg-red-600 text-white rounded-lg hover:bg-red-700 active:bg-red-800 transition-colors text-sm sm:text-base font-semibold min-h-[44px] touch-manipulation"
-          >
-            Add Achievement
-          </button>
-        </div>
-        {formData.achievements.map((achievement, index) => (
-          <div key={index} className="flex gap-2">
-            <input
-              type="text"
-              value={achievement}
-              onChange={(e) => handleArrayChange('achievements', index, e.target.value)}
-              className="flex-1 px-4 py-2 bg-white/5 border border-white/10 rounded-lg text-white focus:outline-none focus:border-red-500"
-            />
-            <button
-              type="button"
-              onClick={() => removeArrayItem('achievements', index)}
-              className="px-3 sm:px-4 py-2.5 sm:py-2 bg-red-600 text-white rounded-lg hover:bg-red-700 active:bg-red-800 transition-colors text-sm sm:text-base font-semibold min-h-[44px] touch-manipulation"
-            >
-              Remove
-            </button>
-          </div>
-        ))}
-      </div>
-
-      {/* Metadata */}
       <div className="space-y-3 sm:space-y-4">
         <h2 className="text-2xl font-bold text-white">Metadata</h2>
         <div className="space-y-2">
@@ -1052,7 +470,6 @@ export default function SingerForm({ editMode = false, initialData, onCancel, on
         </div>
       </div>
 
-      {/* SEO */}
       <div className="space-y-3 sm:space-y-4">
         <h2 className="text-2xl font-bold text-white">SEO</h2>
         <div className="space-y-3 sm:space-y-4">
@@ -1136,7 +553,6 @@ export default function SingerForm({ editMode = false, initialData, onCancel, on
         </div>
       </div>
 
-      {/* Images */}
       <div className="space-y-3 sm:space-y-4">
         <h2 className="text-2xl font-bold text-white">Images</h2>
         <div>
@@ -1178,7 +594,6 @@ export default function SingerForm({ editMode = false, initialData, onCancel, on
         </div>
       </div>
 
-      {/* Submit Button */}
       <div className="flex justify-end gap-3 pt-3 sm:pt-4">
         {editMode && onCancel && (
           <button
@@ -1194,10 +609,9 @@ export default function SingerForm({ editMode = false, initialData, onCancel, on
           disabled={loading}
           className="w-full sm:w-auto px-6 sm:px-8 py-3 bg-gradient-to-r from-red-600 to-red-700 text-white rounded-lg hover:from-red-500 hover:to-red-600 active:from-red-700 active:to-red-800 transition-all font-semibold disabled:opacity-50 min-h-[48px] touch-manipulation text-sm sm:text-base"
         >
-          {loading ? (editMode ? 'Updating...' : 'Submitting...') : (editMode ? 'Update' : 'Submit')}
+          {loading ? (editMode ? 'Updating...' : 'Submitting...') : editMode ? 'Update' : 'Submit'}
         </button>
       </div>
     </form>
   );
 }
-

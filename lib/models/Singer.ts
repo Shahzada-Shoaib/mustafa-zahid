@@ -10,26 +10,7 @@ export interface ISinger extends Document {
   birthDate: string;
   birthplace: string;
   careerStart: number;
-  albums: Array<{
-    name: string;
-    year: number;
-    description: string;
-    cover?: string;
-  }>;
-  songs: Array<{ name: string; description: string; year?: number }>;
-  awards: Array<{ name: string; year: number; category: string }>;
-  collaborations: Array<{ artist: string; song: string }>;
-  stats: {
-    albums: number;
-    songs: number;
-    awards: number;
-    views: string;
-    streams: string;
-    followers: string;
-  };
   gallery: string[];
-  milestones: Array<{ year: number; event: string }>;
-  achievements: string[];
   metadata: {
     title: string;
     description: string;
@@ -52,44 +33,6 @@ export interface ISinger extends Document {
   createdAt?: Date;
   updatedAt?: Date;
 }
-
-const AlbumSchema = new Schema({
-  name: { type: String, required: true },
-  year: { type: Number, required: true },
-  description: { type: String, required: true },
-  cover: { type: String },
-}, { _id: false });
-
-const SongSchema = new Schema({
-  name: { type: String, required: true },
-  description: { type: String, required: true },
-  year: { type: Number },
-}, { _id: false });
-
-const AwardSchema = new Schema({
-  name: { type: String, required: true },
-  year: { type: Number, required: true },
-  category: { type: String, required: true },
-}, { _id: false });
-
-const CollaborationSchema = new Schema({
-  artist: { type: String, required: true },
-  song: { type: String, required: true },
-}, { _id: false });
-
-const StatsSchema = new Schema({
-  albums: { type: Number, required: true },
-  songs: { type: Number, required: true },
-  awards: { type: Number, required: true },
-  views: { type: String, required: true },
-  streams: { type: String, required: true },
-  followers: { type: String, required: true },
-}, { _id: false });
-
-const MilestoneSchema = new Schema({
-  year: { type: Number, required: true },
-  event: { type: String, required: true },
-}, { _id: false });
 
 const MetadataSchema = new Schema({
   title: { type: String, required: true },
@@ -126,14 +69,7 @@ const SingerSchema = new Schema({
   birthDate: { type: String, required: true },
   birthplace: { type: String, required: true },
   careerStart: { type: Number, required: true },
-  albums: { type: [AlbumSchema], default: [] },
-  songs: { type: [SongSchema], default: [] },
-  awards: { type: [AwardSchema], default: [] },
-  collaborations: { type: [CollaborationSchema], default: [] },
-  stats: { type: StatsSchema, required: true },
   gallery: { type: [String], default: [] },
-  milestones: { type: [MilestoneSchema], default: [] },
-  achievements: { type: [String], default: [] },
   metadata: { type: MetadataSchema, required: true },
   seo: { type: SEOSchema },
 }, {
@@ -141,4 +77,3 @@ const SingerSchema = new Schema({
 });
 
 export default mongoose.models.Singer || mongoose.model<ISinger>('Singer', SingerSchema);
-
