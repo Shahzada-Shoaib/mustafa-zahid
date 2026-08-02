@@ -4,6 +4,7 @@ import Header from "@/components/layout/Header";
 import Image from "next/image";
 import Link from "next/link";
 import { useEffect, useState } from "react";
+import FeaturedCollectibles from "@/components/sections/FeaturedCollectibles";
 
 
 export default function Home() {
@@ -1002,6 +1003,8 @@ export default function Home() {
           </div>
         </div>
       </section>
+
+      <FeaturedCollectibles />
 
       {/* Gallery Section with Sticky Header */}
       <section id="gallery" className="relative py-8 sm:py-12">

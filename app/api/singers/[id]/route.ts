@@ -3,11 +3,13 @@ import connectDB from '@/lib/db/mongodb';
 import Singer from '@/lib/models/Singer';
 import { uploadImage, uploadMultipleImages, deleteMultipleImages } from '@/lib/utils/cloudinary';
 import mongoose from 'mongoose';
+import { requireAdmin } from '@/lib/auth';
 
 export async function GET(
   request: NextRequest,
   { params }: { params: Promise<{ id: string }> | { id: string } }
 ) {
+  const unauthorized = requireAdmin(request); if (unauthorized) return unauthorized;
   try {
     await connectDB();
     
@@ -55,6 +57,7 @@ export async function PUT(
   request: NextRequest,
   { params }: { params: Promise<{ id: string }> | { id: string } }
 ) {
+  const unauthorized = requireAdmin(request); if (unauthorized) return unauthorized;
   try {
     await connectDB();
     
@@ -140,6 +143,7 @@ export async function DELETE(
   request: NextRequest,
   { params }: { params: Promise<{ id: string }> | { id: string } }
 ) {
+  const unauthorized = requireAdmin(request); if (unauthorized) return unauthorized;
   try {
     await connectDB();
     
@@ -194,4 +198,3 @@ export async function DELETE(
     );
   }
 }
-

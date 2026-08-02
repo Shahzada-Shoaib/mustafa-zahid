@@ -3,11 +3,13 @@ import connectDB from '@/lib/db/mongodb';
 import Class from '@/lib/models/Class';
 import { uploadImage, deleteMultipleImages } from '@/lib/utils/cloudinary';
 import mongoose from 'mongoose';
+import { requireAdmin } from '@/lib/auth';
 
 export async function GET(
   request: NextRequest,
   { params }: { params: Promise<{ slug: string }> | { slug: string } }
 ) {
+  const unauthorized = requireAdmin(request); if (unauthorized) return unauthorized;
   try {
     await connectDB();
 
@@ -67,6 +69,7 @@ export async function PUT(
   request: NextRequest,
   { params }: { params: Promise<{ slug: string }> | { slug: string } }
 ) {
+  const unauthorized = requireAdmin(request); if (unauthorized) return unauthorized;
   try {
     await connectDB();
     
@@ -203,6 +206,7 @@ export async function DELETE(
   request: NextRequest,
   { params }: { params: Promise<{ slug: string }> | { slug: string } }
 ) {
+  const unauthorized = requireAdmin(request); if (unauthorized) return unauthorized;
   try {
     await connectDB();
     
@@ -260,4 +264,3 @@ export async function DELETE(
     );
   }
 }
-

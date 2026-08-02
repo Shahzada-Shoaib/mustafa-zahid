@@ -1,4 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server';
+import { requireAdmin } from '@/lib/auth';
 import connectDB from '@/lib/db/mongodb';
 import Class from '@/lib/models/Class';
 
@@ -557,7 +558,8 @@ const migrationData = [
   },
 ];
 
-export async function GET() {
+export async function GET(request: NextRequest) {
+  const unauthorized = requireAdmin(request); if (unauthorized) return unauthorized;
   return NextResponse.json(
     {
       message: 'Class Migration Endpoint',
@@ -570,6 +572,7 @@ export async function GET() {
 }
 
 export async function POST(request: NextRequest) {
+  const unauthorized = requireAdmin(request); if (unauthorized) return unauthorized;
   try {
     await connectDB();
 
@@ -623,4 +626,3 @@ export async function POST(request: NextRequest) {
     );
   }
 }
-

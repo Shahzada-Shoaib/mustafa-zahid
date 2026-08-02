@@ -3,6 +3,7 @@ import { getAllSingerSlugsWithDates } from "@/lib/data/singers";
 import { getAllQawwalSlugsWithDates } from "@/lib/data/qawwals";
 import { getAllBlogSlugsWithDates } from "@/lib/data/blog";
 import { getAllClassSlugsWithDates } from "@/lib/data/classes";
+import { getAllProductSlugsWithDates } from "@/lib/data/products";
 import { SITE_URL } from "@/lib/constants/site";
 
 // Revalidate sitemap every hour to ensure new pages are included
@@ -16,14 +17,16 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   let qawwalSlugsWithDates: { slug: string; updatedAt: Date }[] = [];
   let blogSlugsWithDates: { slug: string; updatedAt: Date }[] = [];
   let classSlugsWithDates: { slug: string; updatedAt: Date }[] = [];
+  let productSlugsWithDates: { slug: string; updatedAt: Date }[] = [];
 
   // Fetch all dynamic route slugs with dates in parallel with error handling
   try {
-    [singerSlugsWithDates, qawwalSlugsWithDates, blogSlugsWithDates, classSlugsWithDates] = await Promise.all([
+    [singerSlugsWithDates, qawwalSlugsWithDates, blogSlugsWithDates, classSlugsWithDates, productSlugsWithDates] = await Promise.all([
       getAllSingerSlugsWithDates(),
       getAllQawwalSlugsWithDates(),
       getAllBlogSlugsWithDates(),
       getAllClassSlugsWithDates(),
+      getAllProductSlugsWithDates(),
     ]);
   } catch (error) {
     // MongoDB unavailable during build - use static pages only
@@ -111,6 +114,12 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       changeFrequency: "daily",
       priority: 0.9,
     },
+    {
+      url: `${baseUrl}/art-and-collectibles`,
+      lastModified: new Date(),
+      changeFrequency: "weekly",
+      priority: 0.9,
+    },
   ];
 
   // Dynamic singer pages
@@ -145,5 +154,12 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     priority: 0.8,
   }));
 
-  return [...staticPages, ...singerPages, ...qawwalPages, ...blogPages, ...classPages];
+  const productPages: MetadataRoute.Sitemap = productSlugsWithDates.map(({ slug, updatedAt }) => ({
+    url: `${baseUrl}/art-and-collectibles/${slug}`,
+    lastModified: updatedAt,
+    changeFrequency: "weekly" as const,
+    priority: 0.8,
+  }));
+
+  return [...staticPages, ...singerPages, ...qawwalPages, ...blogPages, ...classPages, ...productPages];
 }

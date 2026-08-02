@@ -103,11 +103,11 @@ export default function Header() {
   }, []);
 
   const navLinks = [
-    { href: "/", label: "Home" },
     { href: "/about", label: "About" },
     { href: "/singers", label: "Singers" },
     { href: "/qawwals", label: "Qawwals" },
     { href: "/blog", label: "Blog" },
+    { href: "/art-and-collectibles", label: "Art & Collectibles" },
   ];
 
   return (
@@ -136,13 +136,6 @@ export default function Header() {
 
           {/* Desktop Navigation */}
           <div className="hidden md:flex items-center gap-6 lg:gap-8">
-            <Link
-              href="/"
-              className="text-white/80 hover:text-white text-sm font-medium transition-colors relative group"
-            >
-              Home
-              <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-red-500 transition-all group-hover:w-full"></span>
-            </Link>
 
             {/* Music Classes Dropdown */}
             <div className="relative" ref={dropdownRef}>
@@ -187,7 +180,7 @@ export default function Header() {
               )}
             </div>
 
-            {navLinks.slice(1).map((link) => (
+            {navLinks.map((link) => (
               <Link
                 key={link.href}
                 href={link.href}
@@ -197,13 +190,6 @@ export default function Header() {
                 <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-red-500 transition-all group-hover:w-full"></span>
               </Link>
             ))}
-            <Link
-              href="/dashboard"
-              className="text-white/80 hover:text-white text-sm font-medium transition-colors relative group"
-            >
-              Dashboard
-              <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-red-500 transition-all group-hover:w-full"></span>
-            </Link>
           </div>
 
           {/* CTA Button - Desktop */}
@@ -282,14 +268,6 @@ export default function Header() {
           }`}
         >
           <div className="flex flex-col gap-1 sm:gap-2 py-3 sm:py-4 border-t border-white/10 bg-black/60 backdrop-blur-md rounded-b-2xl">
-            <Link
-              href="/"
-              onClick={() => setMobileMenuOpen(false)}
-              className="px-4 py-3 sm:py-2.5 text-white/90 hover:text-white active:text-white hover:bg-white/10 active:bg-white/15 rounded-lg transition-colors text-base sm:text-sm font-medium min-h-[44px] flex items-center touch-manipulation"
-            >
-              Home
-            </Link>
-
             {/* Music Classes Mobile Dropdown */}
             <div ref={mobileDropdownRef}>
               <button
@@ -336,7 +314,7 @@ export default function Header() {
               )}
             </div>
 
-            {navLinks.slice(1).map((link) => (
+            {navLinks.map((link) => (
               <Link
                 key={link.href}
                 href={link.href}
@@ -346,13 +324,6 @@ export default function Header() {
                 {link.label}
               </Link>
             ))}
-            <Link
-              href="/dashboard"
-              onClick={() => setMobileMenuOpen(false)}
-              className="px-4 py-3 sm:py-2.5 text-white/90 hover:text-white active:text-white hover:bg-white/10 active:bg-white/15 rounded-lg transition-colors text-base sm:text-sm font-medium min-h-[44px] flex items-center touch-manipulation"
-            >
-              Dashboard
-            </Link>
             <a
               href="https://wa.me/+923224071299"
               target="_blank"

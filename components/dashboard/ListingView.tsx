@@ -15,10 +15,12 @@ interface ListingItem {
   category?: string;
   type?: string;
   instrument?: string;
+  price?: number;
+  status?: string;
 }
 
 interface ListingViewProps {
-  type: 'singers' | 'qawwals' | 'blogs' | 'classes';
+  type: 'singers' | 'qawwals' | 'blogs' | 'classes' | 'products';
   items: ListingItem[];
   loading?: boolean;
   onEdit: (id: string) => void;
@@ -215,6 +217,12 @@ export default function ListingView({
                     <th className="text-left py-3 px-4 text-white/80 font-semibold text-sm">Instrument</th>
                   </>
                 )}
+                {type === 'products' && (
+                  <>
+                    <th className="text-left py-3 px-4 text-white/80 font-semibold text-sm">Price</th>
+                    <th className="text-left py-3 px-4 text-white/80 font-semibold text-sm">Status</th>
+                  </>
+                )}
                 <th className="text-left py-3 px-4 text-white/80 font-semibold text-sm">Created</th>
                 <th className="text-right py-3 px-4 text-white/80 font-semibold text-sm">Actions</th>
               </tr>
@@ -258,6 +266,12 @@ export default function ListingView({
                     <>
                       <td className="py-3 px-4 text-white/60 text-sm capitalize">{item.type || 'N/A'}</td>
                       <td className="py-3 px-4 text-white/60 text-sm capitalize">{item.instrument || 'N/A'}</td>
+                    </>
+                  )}
+                  {type === 'products' && (
+                    <>
+                      <td className="py-3 px-4 text-white/60 text-sm">PKR {(item.price || 0).toLocaleString()}</td>
+                      <td className="py-3 px-4 text-white/60 text-sm capitalize">{item.status || 'available'}</td>
                     </>
                   )}
                   <td className="py-3 px-4 text-white/60 text-sm">{formatDate(item.createdAt)}</td>
@@ -376,4 +390,3 @@ export default function ListingView({
     </>
   );
 }
-

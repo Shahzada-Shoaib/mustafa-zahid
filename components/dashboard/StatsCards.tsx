@@ -7,6 +7,7 @@ interface Stats {
   qawwals: number;
   blogs: number;
   classes: number;
+  products: number;
 }
 
 export default function StatsCards({ onCardClick }: { onCardClick?: (type: string) => void }) {
@@ -15,29 +16,33 @@ export default function StatsCards({ onCardClick }: { onCardClick?: (type: strin
     qawwals: 0,
     blogs: 0,
     classes: 0,
+    products: 0,
   });
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     const fetchStats = async () => {
       try {
-        const [singersRes, qawwalsRes, blogsRes, classesRes] = await Promise.all([
+        const [singersRes, qawwalsRes, blogsRes, classesRes, productsRes] = await Promise.all([
           fetch('/api/singers'),
           fetch('/api/qawwals'),
           fetch('/api/blogs'),
           fetch('/api/classes?forDashboard=true'),
+          fetch('/api/products'),
         ]);
 
         const singersData = await singersRes.json();
         const qawwalsData = await qawwalsRes.json();
         const blogsData = await blogsRes.json();
         const classesData = await classesRes.json();
+        const productsData = await productsRes.json();
 
         setStats({
           singers: singersData.success ? singersData.data.length : 0,
           qawwals: qawwalsData.success ? qawwalsData.data.length : 0,
           blogs: blogsData.success ? blogsData.data.length : 0,
           classes: classesData.success ? classesData.data.length : 0,
+          products: productsData.success ? productsData.data.length : 0,
         });
       } catch (error) {
         console.error('Error fetching stats:', error);
@@ -50,6 +55,13 @@ export default function StatsCards({ onCardClick }: { onCardClick?: (type: strin
   }, []);
 
   const cards = [
+    {
+      label: 'Collectibles',
+      count: stats.products,
+      color: 'from-purple-600 to-purple-700',
+      hoverColor: 'hover:from-purple-500 hover:to-purple-600',
+      type: 'products',
+    },
     {
       label: 'Singers',
       count: stats.singers,
@@ -81,7 +93,7 @@ export default function StatsCards({ onCardClick }: { onCardClick?: (type: strin
   ];
 
   return (
-    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 mb-6 sm:mb-8">
+    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-4 mb-6 sm:mb-8">
       {cards.map((card) => (
         <button
           key={card.type}
@@ -110,4 +122,3 @@ export default function StatsCards({ onCardClick }: { onCardClick?: (type: strin
     </div>
   );
 }
-

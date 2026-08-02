@@ -5,10 +5,11 @@ import SingerForm from '@/components/dashboard/SingerForm';
 import QawwalForm from '@/components/dashboard/QawwalForm';
 import BlogForm from '@/components/dashboard/BlogForm';
 import ClassForm from '@/components/dashboard/ClassForm';
+import ProductForm from '@/components/dashboard/ProductForm';
 import StatsCards from '@/components/dashboard/StatsCards';
 import ListingView from '@/components/dashboard/ListingView';
 
-type TabType = 'singers' | 'qawwals' | 'blogs' | 'classes';
+type TabType = 'singers' | 'qawwals' | 'blogs' | 'classes' | 'products';
 type ViewMode = 'list' | 'create' | 'edit';
 
 export default function DashboardPage() {
@@ -156,18 +157,26 @@ export default function DashboardPage() {
     fetchItems(); // Refresh list
   };
 
+  const handleLogout = async () => {
+    await fetch('/api/auth/logout', { method: 'POST' });
+    window.location.href = '/admin/login';
+  };
+
 
   return (
     <div className="min-h-screen bg-[#0a0a0a] text-white">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-12 py-8 sm:py-12">
         {/* Header */}
-        <div className="mb-6 sm:mb-8">
+        <div className="mb-6 flex items-start justify-between gap-4 sm:mb-8">
+          <div>
           <h1 className="font-display text-3xl sm:text-4xl md:text-5xl font-bold mb-3 sm:mb-4">
             Admin <span className="text-gradient">Dashboard</span>
           </h1>
           <p className="text-white/70 text-base sm:text-lg">
-            Manage singers, qawwals, blog posts, and classes
+            Manage singers, qawwals, blog posts, classes, and collectibles
           </p>
+          </div>
+          <button onClick={handleLogout} className="rounded-full border border-white/15 px-4 py-2 text-sm text-white/65 transition hover:border-red-500/50 hover:text-white">Logout</button>
         </div>
 
         {/* Stats Cards */}
@@ -226,6 +235,12 @@ export default function DashboardPage() {
             }`}
           >
             Classes
+          </button>
+          <button
+            onClick={() => { setActiveTab('products'); setViewMode('list'); }}
+            className={`px-4 sm:px-6 py-2.5 sm:py-3 font-semibold transition-all whitespace-nowrap min-h-[44px] touch-manipulation ${activeTab === 'products' ? 'text-red-500 border-b-2 border-red-500' : 'text-white/60 hover:text-white/80 active:text-white'}`}
+          >
+            Art & Collectibles
           </button>
         </div>
 
@@ -300,6 +315,14 @@ export default function DashboardPage() {
               )}
               {activeTab === 'classes' && (
                 <ClassForm
+                  editMode={viewMode === 'edit'}
+                  initialData={editingData}
+                  onCancel={viewMode === 'edit' ? handleCancelEdit : undefined}
+                  onSuccess={handleFormSuccess}
+                />
+              )}
+              {activeTab === 'products' && (
+                <ProductForm
                   editMode={viewMode === 'edit'}
                   initialData={editingData}
                   onCancel={viewMode === 'edit' ? handleCancelEdit : undefined}

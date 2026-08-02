@@ -1,17 +1,27 @@
 import { v2 as cloudinary } from 'cloudinary';
 
-const cloudName = process.env.CLOUDINARY_CLOUD_NAME || 'Mustafa-zahid-website';
-const apiKey = process.env.CLOUDINARY_API_KEY || '464448985568564';
-const apiSecret = process.env.CLOUDINARY_API_SECRET || 'c60EFkXij0C9PwIjwPihfz888gk';
+function configureCloudinary() {
+  const cloudName = process.env.CLOUDINARY_CLOUD_NAME?.trim();
+  const apiKey = process.env.CLOUDINARY_API_KEY?.trim();
+  const apiSecret = process.env.CLOUDINARY_API_SECRET?.trim();
 
-cloudinary.config({
-  cloud_name: cloudName,
-  api_key: apiKey,
-  api_secret: apiSecret,
-});
+  if (!cloudName || !apiKey || !apiSecret) {
+    throw new Error(
+      'Cloudinary is not configured. Add CLOUDINARY_CLOUD_NAME, CLOUDINARY_API_KEY, and CLOUDINARY_API_SECRET to .env.local, then restart the development server.'
+    );
+  }
+
+  cloudinary.config({
+    cloud_name: cloudName,
+    api_key: apiKey,
+    api_secret: apiSecret,
+    secure: true,
+  });
+}
 
 export async function uploadImage(file: File | Blob): Promise<string> {
   try {
+    configureCloudinary();
     const arrayBuffer = await file.arrayBuffer();
     const buffer = Buffer.from(arrayBuffer);
 
@@ -93,6 +103,7 @@ function extractPublicId(url: string): string | null {
  */
 export async function deleteImage(imageUrl: string): Promise<boolean> {
   try {
+    configureCloudinary();
     if (!imageUrl || typeof imageUrl !== 'string') {
       console.warn('Invalid image URL provided:', imageUrl);
       return false;
@@ -142,4 +153,3 @@ export async function deleteMultipleImages(imageUrls: string[]): Promise<boolean
     return false;
   }
 }
-

@@ -2,8 +2,10 @@ import { NextRequest, NextResponse } from 'next/server';
 import connectDB from '@/lib/db/mongodb';
 import Class from '@/lib/models/Class';
 import { uploadImage, deleteMultipleImages } from '@/lib/utils/cloudinary';
+import { requireAdmin } from '@/lib/auth';
 
 export async function POST(request: NextRequest) {
+  const unauthorized = requireAdmin(request); if (unauthorized) return unauthorized;
   try {
     await connectDB();
 
@@ -149,6 +151,7 @@ export async function GET(request: NextRequest) {
 }
 
 export async function DELETE(request: NextRequest) {
+  const unauthorized = requireAdmin(request); if (unauthorized) return unauthorized;
   try {
     await connectDB();
     
@@ -199,4 +202,3 @@ export async function DELETE(request: NextRequest) {
     );
   }
 }
-
