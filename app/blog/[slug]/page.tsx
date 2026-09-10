@@ -5,7 +5,13 @@ import { notFound } from "next/navigation";
 import Header from "@/components/layout/Header";
 import Footer from "@/components/layout/Footer";
 import AnimatedBackground from "@/components/shared/AnimatedBackground";
-import { getBlogPost, getAllBlogSlugs, getAllBlogPosts } from "@/lib/data/blog";
+import {
+  getBlogPost,
+  getAllBlogSlugs,
+  getAllBlogPosts,
+  type BlogPost,
+  type BlogSection,
+} from "@/lib/data/blog";
 
 // Use dynamic rendering to avoid build-time database / stale cache issues
 export const dynamic = "force-dynamic";
@@ -91,13 +97,15 @@ export async function generateMetadata({
 
 function generateArticleSchema(post: Awaited<ReturnType<typeof getBlogPost>>) {
   if (!post) return null;
+
+  const articleBody = getPostText(post);
   
   return {
     "@context": "https://schema.org",
     "@type": "Article",
     "headline": post.title,
     "description": post.excerpt,
-    "image": `https://mustafazahid.com${post.image}`,
+    "image": getAbsoluteImageUrl(post.image),
     "datePublished": post.date,
     "dateModified": post.date,
     "author": {
@@ -116,16 +124,23 @@ function generateArticleSchema(post: Awaited<ReturnType<typeof getBlogPost>>) {
       "@type": "WebPage",
       "@id": `https://mustafazahid.com/blog/${post.slug}`
     },
-    "articleBody": post.content.replace(/<[^>]*>/g, '').substring(0, 500) + "..."
+    "articleBody": articleBody.length > 500 ? `${articleBody.substring(0, 500)}...` : articleBody
   };
 }
 
+function getPostText(post: BlogPost): string {
+  const html = post.sections?.length
+    ? post.sections.map((section) => `${section.heading} ${section.description}`).join(' ')
+    : post.content;
+
+  return html.replace(/<[^>]*>/g, ' ').replace(/\s+/g, ' ').trim();
+}
+
 // Helper function to calculate reading time
-function calculateReadingTime(content: string): number {
+function calculateReadingTime(post: BlogPost): number {
   const wordsPerMinute = 200;
-  const text = content.replace(/<[^>]*>/g, '');
-  const wordCount = text.split(/\s+/).length;
-  return Math.ceil(wordCount / wordsPerMinute);
+  const wordCount = getPostText(post).split(/\s+/).filter(Boolean).length;
+  return Math.max(1, Math.ceil(wordCount / wordsPerMinute));
 }
 
 // Helper function to validate image URL
@@ -146,6 +161,30 @@ function getValidImageUrl(imageUrl: string | undefined | null): string {
   }
   
   return '/mz-logo.png';
+}
+
+function getAbsoluteImageUrl(imageUrl: string | undefined | null): string {
+  const validImageUrl = getValidImageUrl(imageUrl);
+  return validImageUrl.startsWith('http')
+    ? validImageUrl
+    : new URL(validImageUrl, 'https://mustafazahid.com').toString();
+}
+
+function BlogSectionImage({ section, postTitle }: { section: BlogSection; postTitle: string }) {
+  if (!section.image) return null;
+
+  return (
+    <figure className="blog-section-image">
+      {/* Content images have user-defined aspect ratios, so preserve their natural dimensions. */}
+      <img
+        src={getValidImageUrl(section.image)}
+        alt={section.imageAlt || section.heading || postTitle}
+        loading="lazy"
+        decoding="async"
+      />
+      {section.imageCaption && <figcaption>{section.imageCaption}</figcaption>}
+    </figure>
+  );
 }
 
 export default async function BlogPostPage({ 
@@ -176,7 +215,7 @@ export default async function BlogPostPage({
   }
 
   const articleSchema = generateArticleSchema(post);
-  const readingTime = calculateReadingTime(post.content);
+  const readingTime = calculateReadingTime(post);
 
   return (
     <div className="min-h-screen bg-[#0a0a0a] text-white">
@@ -253,26 +292,64 @@ export default async function BlogPostPage({
       </section>
 
       {/* Article Content */}
-      <article className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-12 pb-8 sm:pb-12 lg:pb-16">
+      <article className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-12 pb-8 sm:pb-12 lg:pb-16">
         <div className="glass-card rounded-2xl sm:rounded-3xl p-4 sm:p-6 lg:p-8 xl:p-12">
-          <div 
-            className="prose prose-invert max-w-none 
-              prose-headings:text-white prose-headings:font-display
-              prose-h1:text-2xl sm:prose-h1:text-3xl lg:prose-h1:text-4xl prose-h1:font-bold prose-h1:mb-4 sm:prose-h1:mb-6 prose-h1:mt-6 sm:prose-h1:mt-8
-              prose-h2:text-xl sm:prose-h2:text-2xl lg:prose-h2:text-3xl prose-h2:font-bold prose-h2:mb-3 sm:prose-h2:mb-4 prose-h2:mt-6 sm:prose-h2:mt-8
-              prose-h3:text-lg sm:prose-h3:text-xl lg:prose-h3:text-2xl prose-h3:font-semibold prose-h3:mb-2 sm:prose-h3:mb-3 prose-h3:mt-4 sm:prose-h3:mt-6
-              prose-p:text-white/90 prose-p:leading-relaxed prose-p:text-sm sm:prose-p:text-base lg:prose-p:text-lg prose-p:mb-4 sm:prose-p:mb-6
-              prose-a:text-red-400 prose-a:no-underline hover:prose-a:text-red-300 active:prose-a:text-red-200 prose-a:font-medium prose-a:break-words
-              prose-strong:text-white prose-strong:font-semibold
-              prose-ul:text-white/90 prose-ul:mb-4 sm:prose-ul:mb-6 prose-ul:space-y-2 prose-ul:text-sm sm:prose-ul:text-base
-              prose-ol:text-white/90 prose-ol:mb-4 sm:prose-ol:mb-6 prose-ol:space-y-2 prose-ol:text-sm sm:prose-ol:text-base
-              prose-li:marker:text-red-400
-              prose-blockquote:border-l-red-500 prose-blockquote:pl-4 sm:prose-blockquote:pl-6 prose-blockquote:italic prose-blockquote:text-white/80 prose-blockquote:text-sm sm:prose-blockquote:text-base
-              prose-img:rounded-xl sm:prose-img:rounded-2xl prose-img:my-6 sm:prose-img:my-8 prose-img:w-full prose-img:h-auto
-              prose-code:text-red-400 prose-code:bg-white/10 prose-code:px-1.5 sm:prose-code:px-2 prose-code:py-0.5 sm:prose-code:py-1 prose-code:rounded prose-code:text-xs sm:prose-code:text-sm
-              prose-pre:bg-white/5 prose-pre:rounded-xl prose-pre:text-xs sm:prose-pre:text-sm prose-pre:overflow-x-auto"
-            dangerouslySetInnerHTML={{ __html: post.content }}
-          />
+          <div className="blog-content">
+            {post.sections?.length ? (
+              post.sections.map((section, index) => {
+                const HeadingTag = ['h1', 'h2', 'h3'].includes(section.headingLevel)
+                  ? section.headingLevel
+                  : 'h2';
+                const headingId = section.heading
+                  ? `blog-section-${section.id || index}`.replace(/[^a-zA-Z0-9_-]/g, '-')
+                  : undefined;
+                const requestedLayout = ['image-left', 'image-right'].includes(section.layout)
+                  ? section.layout
+                  : 'stacked';
+                const layout = section.image ? requestedLayout : 'stacked';
+                const sectionImage = (
+                  <BlogSectionImage section={section} postTitle={post.title} />
+                );
+                const sectionHeading = section.heading
+                  ? <HeadingTag id={headingId}>{section.heading}</HeadingTag>
+                  : null;
+                const sectionDescription = section.description ? (
+                  <div
+                    className="blog-section-description"
+                    dangerouslySetInnerHTML={{ __html: section.description }}
+                  />
+                ) : null;
+
+                return (
+                  <section
+                    key={section.id || `${section.heading}-${index}`}
+                    className={`blog-section blog-section--${layout}`}
+                    aria-labelledby={headingId}
+                  >
+                    {layout === 'stacked' ? (
+                      <>
+                        {sectionHeading}
+                        {section.imagePosition === 'before' && sectionImage}
+                        {sectionDescription}
+                        {section.imagePosition !== 'before' && sectionImage}
+                      </>
+                    ) : (
+                      <div className="blog-section-split">
+                        {layout === 'image-left' && sectionImage}
+                        <div className="blog-section-text">
+                          {sectionHeading}
+                          {sectionDescription}
+                        </div>
+                        {layout === 'image-right' && sectionImage}
+                      </div>
+                    )}
+                  </section>
+                );
+              })
+            ) : (
+              <div dangerouslySetInnerHTML={{ __html: post.content }} />
+            )}
+          </div>
         </div>
       </article>
 
@@ -312,7 +389,7 @@ export default async function BlogPostPage({
                     <div className="flex flex-wrap items-center gap-2 sm:gap-3 text-[10px] sm:text-xs text-white/60 mb-2 sm:mb-3">
                       <span>{new Date(relatedPost.date).toLocaleDateString('en-US', { month: 'short', day: 'numeric' })}</span>
                       <span className="hidden sm:inline">•</span>
-                      <span>{calculateReadingTime(relatedPost.content)} min read</span>
+                      <span>{calculateReadingTime(relatedPost)} min read</span>
                     </div>
                     <h3 className="text-lg sm:text-xl font-semibold text-white mb-2 group-hover:text-red-400 transition-colors line-clamp-2">
                       {relatedPost.title}

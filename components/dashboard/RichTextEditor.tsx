@@ -35,7 +35,7 @@ const RichTextEditor = forwardRef<RichTextEditorRef, RichTextEditorProps>(
       content: value,
       editorProps: {
         attributes: {
-          class: 'prose prose-invert max-w-none focus:outline-none min-h-[300px] px-4 py-3 text-white',
+          class: 'blog-content',
           'data-placeholder': placeholder,
         },
       },
@@ -242,7 +242,6 @@ const RichTextEditor = forwardRef<RichTextEditorRef, RichTextEditorProps>(
           .editor-content .ProseMirror {
             outline: none;
             min-height: 300px;
-            color: white;
             padding: 1rem;
           }
 
@@ -252,77 +251,6 @@ const RichTextEditor = forwardRef<RichTextEditorRef, RichTextEditorProps>(
             color: rgba(255, 255, 255, 0.4);
             pointer-events: none;
             height: 0;
-          }
-
-          .editor-content .ProseMirror h1,
-          .editor-content .ProseMirror h2,
-          .editor-content .ProseMirror h3 {
-            color: white;
-            font-weight: bold;
-            margin-top: 1.5rem;
-            margin-bottom: 1rem;
-          }
-
-          .editor-content .ProseMirror h1 {
-            font-size: 2rem;
-          }
-
-          .editor-content .ProseMirror h2 {
-            font-size: 1.5rem;
-          }
-
-          .editor-content .ProseMirror h3 {
-            font-size: 1.25rem;
-          }
-
-          .editor-content .ProseMirror p {
-            margin-bottom: 1rem;
-            line-height: 1.6;
-          }
-
-          .editor-content .ProseMirror ul,
-          .editor-content .ProseMirror ol {
-            margin: 1rem 0;
-            padding-left: 2rem;
-            color: white;
-          }
-
-          .editor-content .ProseMirror ul {
-            list-style-type: disc;
-          }
-
-          .editor-content .ProseMirror ol {
-            list-style-type: decimal;
-          }
-
-          .editor-content .ProseMirror li {
-            margin: 0.5rem 0;
-          }
-
-          .editor-content .ProseMirror a {
-            color: #ef4444;
-            text-decoration: underline;
-          }
-
-          .editor-content .ProseMirror a:hover {
-            color: #f87171;
-          }
-
-          .editor-content .ProseMirror strong {
-            font-weight: bold;
-            color: white;
-          }
-
-          .editor-content .ProseMirror em {
-            font-style: italic;
-          }
-
-          .editor-content .ProseMirror u {
-            text-decoration: underline;
-          }
-
-          .editor-content .ProseMirror s {
-            text-decoration: line-through;
           }
 
           .toolbar button:disabled {

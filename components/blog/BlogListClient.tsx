@@ -8,12 +8,22 @@ interface BlogListClientProps {
   featuredPostSlug?: string;
 }
 
+function getPostText(post: BlogPost): string {
+  if (post.sections?.length) {
+    return post.sections
+      .map((section) => `${section.heading} ${section.description}`)
+      .join(' ')
+      .replace(/<[^>]*>/g, ' ');
+  }
+
+  return post.content.replace(/<[^>]*>/g, ' ');
+}
+
 // Helper function to calculate reading time
-function calculateReadingTime(content: string): number {
+function calculateReadingTime(post: BlogPost): number {
   const wordsPerMinute = 200;
-  const text = content.replace(/<[^>]*>/g, '');
-  const wordCount = text.split(/\s+/).length;
-  return Math.ceil(wordCount / wordsPerMinute);
+  const wordCount = getPostText(post).trim().split(/\s+/).filter(Boolean).length;
+  return Math.max(1, Math.ceil(wordCount / wordsPerMinute));
 }
 
 // Helper function to validate image URL
@@ -84,7 +94,7 @@ export default function BlogListClient({ posts, featuredPostSlug }: BlogListClie
                         {post.category}
                       </div>
                       <div className="absolute bottom-3 right-3 px-2 py-0.5 bg-black/55 backdrop-blur-sm rounded-full text-[10px] sm:text-xs text-white">
-                        {calculateReadingTime(post.content)} min read
+                        {calculateReadingTime(post)} min read
                       </div>
                     </div>
                     <div className="flex flex-1 flex-col justify-center p-4 sm:p-6 lg:p-7 min-h-0">
@@ -127,4 +137,3 @@ export default function BlogListClient({ posts, featuredPostSlug }: BlogListClie
     </>
   );
 }
-

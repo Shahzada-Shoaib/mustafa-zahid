@@ -1,10 +1,14 @@
 import connectDB from '@/lib/db/mongodb';
 import BlogPost from '@/lib/models/BlogPost';
+import type { BlogSection } from '@/lib/utils/blogContent';
+
+export type { BlogHeadingLevel, BlogSection } from '@/lib/utils/blogContent';
 
 export interface BlogPost {
   slug: string;
   title: string;
   content: string;
+  sections?: BlogSection[];
   image: string;
   date: string;
   author: string;
@@ -122,4 +126,3 @@ export async function getAllBlogSlugsWithDates(): Promise<{ slug: string; update
     return [];
   }
 }
-
