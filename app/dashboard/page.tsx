@@ -164,7 +164,7 @@ export default function DashboardPage() {
 
 
   return (
-    <div className="min-h-screen bg-[#0a0a0a] text-white">
+    <div className="admin-dashboard min-h-dvh bg-[#f7f5f2] text-zinc-900">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-12 py-8 sm:py-12">
         {/* Header */}
         <div className="mb-6 flex items-start justify-between gap-4 sm:mb-8">
@@ -172,18 +172,23 @@ export default function DashboardPage() {
           <h1 className="font-display text-3xl sm:text-4xl md:text-5xl font-bold mb-3 sm:mb-4">
             Admin <span className="text-gradient">Dashboard</span>
           </h1>
-          <p className="text-white/70 text-base sm:text-lg">
+          <p className="text-zinc-600 text-base sm:text-lg">
             Manage singers, qawwals, blog posts, classes, and collectibles
           </p>
           </div>
-          <button onClick={handleLogout} className="rounded-full border border-white/15 px-4 py-2 text-sm text-white/65 transition hover:border-red-500/50 hover:text-white">Logout</button>
+          <button
+            onClick={handleLogout}
+            className="min-h-[44px] rounded-full border border-stone-300 bg-white px-4 py-2 text-sm font-medium text-zinc-700 shadow-sm transition hover:border-red-200 hover:bg-red-50 hover:text-red-700 focus:outline-none focus-visible:ring-2 focus-visible:ring-red-600/25"
+          >
+            Logout
+          </button>
         </div>
 
         {/* Stats Cards */}
         <StatsCards onCardClick={handleCardClick} />
 
         {/* Tabs */}
-        <div className="flex gap-2 sm:gap-4 mb-6 sm:mb-8 border-b border-white/10 overflow-x-auto scrollbar-hide">
+        <div className="flex gap-2 sm:gap-4 mb-6 sm:mb-8 border-b border-stone-200 overflow-x-auto scrollbar-hide">
           <button
             onClick={() => {
               setActiveTab('singers');
@@ -191,8 +196,8 @@ export default function DashboardPage() {
             }}
             className={`px-4 sm:px-6 py-2.5 sm:py-3 font-semibold transition-all whitespace-nowrap min-h-[44px] touch-manipulation ${
               activeTab === 'singers'
-                ? 'text-red-500 border-b-2 border-red-500'
-                : 'text-white/60 hover:text-white/80 active:text-white'
+                ? 'text-red-700 border-b-2 border-red-700'
+                : 'text-zinc-500 hover:text-zinc-900 active:text-zinc-950'
             }`}
           >
             Singers
@@ -204,8 +209,8 @@ export default function DashboardPage() {
             }}
             className={`px-4 sm:px-6 py-2.5 sm:py-3 font-semibold transition-all whitespace-nowrap min-h-[44px] touch-manipulation ${
               activeTab === 'qawwals'
-                ? 'text-red-500 border-b-2 border-red-500'
-                : 'text-white/60 hover:text-white/80 active:text-white'
+                ? 'text-red-700 border-b-2 border-red-700'
+                : 'text-zinc-500 hover:text-zinc-900 active:text-zinc-950'
             }`}
           >
             Qawwals
@@ -217,8 +222,8 @@ export default function DashboardPage() {
             }}
             className={`px-4 sm:px-6 py-2.5 sm:py-3 font-semibold transition-all whitespace-nowrap min-h-[44px] touch-manipulation ${
               activeTab === 'blogs'
-                ? 'text-red-500 border-b-2 border-red-500'
-                : 'text-white/60 hover:text-white/80 active:text-white'
+                ? 'text-red-700 border-b-2 border-red-700'
+                : 'text-zinc-500 hover:text-zinc-900 active:text-zinc-950'
             }`}
           >
             Blogs
@@ -230,15 +235,15 @@ export default function DashboardPage() {
             }}
             className={`px-4 sm:px-6 py-2.5 sm:py-3 font-semibold transition-all whitespace-nowrap min-h-[44px] touch-manipulation ${
               activeTab === 'classes'
-                ? 'text-red-500 border-b-2 border-red-500'
-                : 'text-white/60 hover:text-white/80 active:text-white'
+                ? 'text-red-700 border-b-2 border-red-700'
+                : 'text-zinc-500 hover:text-zinc-900 active:text-zinc-950'
             }`}
           >
             Classes
           </button>
           <button
             onClick={() => { setActiveTab('products'); setViewMode('list'); }}
-            className={`px-4 sm:px-6 py-2.5 sm:py-3 font-semibold transition-all whitespace-nowrap min-h-[44px] touch-manipulation ${activeTab === 'products' ? 'text-red-500 border-b-2 border-red-500' : 'text-white/60 hover:text-white/80 active:text-white'}`}
+            className={`px-4 sm:px-6 py-2.5 sm:py-3 font-semibold transition-all whitespace-nowrap min-h-[44px] touch-manipulation ${activeTab === 'products' ? 'text-red-700 border-b-2 border-red-700' : 'text-zinc-500 hover:text-zinc-900 active:text-zinc-950'}`}
           >
             Art & Collectibles
           </button>
@@ -251,8 +256,8 @@ export default function DashboardPage() {
               onClick={() => setViewMode('list')}
               className={`px-4 py-2 rounded-lg transition-colors ${
                 viewMode === 'list'
-                  ? 'bg-red-600 text-white'
-                  : 'bg-white/5 text-white/60 hover:text-white'
+                  ? 'bg-red-700 text-white shadow-sm'
+                  : 'border border-stone-200 bg-white text-zinc-600 shadow-sm hover:bg-stone-100 hover:text-zinc-900'
               }`}
             >
               List View
@@ -265,8 +270,8 @@ export default function DashboardPage() {
               }}
               className={`px-4 py-2 rounded-lg transition-colors ${
                 viewMode === 'create'
-                  ? 'bg-red-600 text-white'
-                  : 'bg-white/5 text-white/60 hover:text-white'
+                  ? 'bg-red-700 text-white shadow-sm'
+                  : 'border border-stone-200 bg-white text-zinc-600 shadow-sm hover:bg-stone-100 hover:text-zinc-900'
               }`}
             >
               Create New
