@@ -104,10 +104,10 @@ export default function Header() {
 
   const navLinks = [
     { href: "/about", label: "About" },
-    { href: "/singers", label: "Singers" },
-    { href: "/qawwals", label: "Qawwals" },
+    // { href: "/singers", label: "Singers" },
+    // { href: "/qawwals", label: "Qawwals" },
     { href: "/blog", label: "Blog" },
-    { href: "/art-and-collectibles", label: "Art & Collectibles" },
+    // { href: "/art-and-collectibles", label: "Art & Collectibles" },
   ];
 
   return (
@@ -138,7 +138,7 @@ export default function Header() {
           <div className="hidden md:flex items-center gap-6 lg:gap-8">
 
             {/* Music Classes Dropdown */}
-            <div className="relative" ref={dropdownRef}>
+            {/* <div className="relative" ref={dropdownRef}>
               <button
                 onClick={() =>
                   setMusicClassesDropdownOpen(!musicClassesDropdownOpen)
@@ -178,7 +178,7 @@ export default function Header() {
                   ))}
                 </div>
               )}
-            </div>
+            </div> */}
 
             {navLinks.map((link) => (
               <Link

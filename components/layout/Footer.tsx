@@ -22,12 +22,12 @@ export default function Footer() {
           {/* Links */}
           <div className="flex flex-wrap items-center justify-center gap-3 sm:gap-4 md:gap-6 lg:gap-8">
             <a
-              href="https://kodekraft.services/"
+              href="https://www.softwaredads.com"
               target="_blank"
               rel="noopener noreferrer"
               className="text-white/70 hover:text-white text-xs sm:text-sm transition-colors py-2 px-2 min-h-[44px] flex items-center touch-manipulation"
             >
-              Powered by KodeKraft
+              Powered by Software Dads
             </a>
           </div>
 

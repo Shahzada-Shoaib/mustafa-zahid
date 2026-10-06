@@ -129,11 +129,6 @@ export default function Home() {
 
   const galleryImages = [
     {
-      src: "/mz-pic-9.jpg",
-      alt: "Mustafa Zahid Portrait - Thoughtful Expression",
-      category: "Portrait",
-    },
-    {
       src: "/mz-pic-10.jpg",
       alt: "Mustafa Zahid Portrait - Serious Expression",
       category: "Portrait",
@@ -153,11 +148,7 @@ export default function Home() {
       alt: "Mustafa Zahid Stage Performance with Microphone",
       category: "Live",
     },
-    {
-      src: "/mz-pic-2.JPG",
-      alt: "Mustafa Zahid Concert Performance",
-      category: "Concert",
-    },
+   
   ];
 
   const structuredData = {
@@ -706,7 +697,7 @@ export default function Home() {
                 <div className="relative w-full aspect-[2/3] rounded-4xl overflow-hidden">
                   <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent z-10"></div>
                   <Image
-                    src="/mz-pic-2.JPG"
+                    src="/mz-pic-2.jpg"
                     alt="Mustafa Zahid in recording studio - Professional Pakistani singer and songwriter available for booking"
                     fill
                     className="object-cover"
