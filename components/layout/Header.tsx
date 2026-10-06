@@ -270,7 +270,7 @@ export default function Header() {
           <div className="flex flex-col gap-1 sm:gap-2 py-3 sm:py-4 border-t border-white/10 bg-black/60 backdrop-blur-md rounded-b-2xl">
             {/* Music Classes Mobile Dropdown */}
             <div ref={mobileDropdownRef}>
-              <button
+              {/* <button
                 onClick={(e) => {
                   e.stopPropagation();
                   setMusicClassesDropdownOpen(!musicClassesDropdownOpen);
@@ -293,7 +293,7 @@ export default function Header() {
                     d="M19 9l-7 7-7-7"
                   />
                 </svg>
-              </button>
+              </button> */}
               {musicClassesDropdownOpen && (
                 <div className="pl-4 sm:pl-6 mt-1 sm:mt-2 space-y-1">
                   {musicClasses.map((classItem) => (
