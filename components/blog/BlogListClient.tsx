@@ -81,7 +81,7 @@ export default function BlogListClient({ posts, featuredPostSlug }: BlogListClie
                     href={`/blog/${encodeURIComponent(post.slug)}`}
                     className="group glass-card rounded-2xl sm:rounded-3xl overflow-hidden hover-lift flex flex-col sm:flex-row sm:items-stretch touch-manipulation border border-white/[0.06] outline-none focus-visible:ring-2 focus-visible:ring-red-500/80 focus-visible:ring-offset-2 focus-visible:ring-offset-[#0a0a0a]"
                   >
-                    <div className="relative aspect-[16/10] bg-black sm:aspect-auto sm:w-[min(42%,280px)] sm:min-h-[200px] sm:max-w-[300px] shrink-0 overflow-hidden">
+                    <div className="relative aspect-[16/10] bg-black  text-white sm:aspect-auto sm:w-[min(42%,280px)] sm:min-h-[200px] sm:max-w-[300px] shrink-0 overflow-hidden">
                       {/* <Image
                         src={getValidImageUrl(post.image)}
                         alt={post.title}
