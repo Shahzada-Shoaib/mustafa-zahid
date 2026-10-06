@@ -245,15 +245,15 @@ export default async function BlogPostPage({
           </Link>
 
           {/* Hero Image */}
-          <div className="relative aspect-[16/9] sm:aspect-[21/9] rounded-2xl sm:rounded-3xl overflow-hidden mb-6 sm:mb-8">
-            <Image
+          <div className="relative bg-black text-white aspect-[16/9] sm:aspect-[21/9] rounded-2xl sm:rounded-3xl overflow-hidden mb-6 sm:mb-8">
+            {/* <Image
               src={getValidImageUrl(post.image)}
               alt={post.title}
               fill
               className="object-cover"
               priority
               sizes="(max-width: 768px) 100vw, 1200px"
-            />
+            /> */}
             <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent" />
             <div className="absolute bottom-0 left-0 right-0 p-4 sm:p-6 lg:p-8 xl:p-12">
               <div className="max-w-4xl">
